@@ -1,0 +1,323 @@
+{"success":false,"error":{"type":"MongooseError","message":"Mongoose 5.x disallows passing a spread of operators to `Model.aggregate()`. Instead of `Model.aggregate({ $match }, { $skip })`, do `Model.aggregate([{ $match }, { $skip }])`","__route":"/api/book/allBooks","date":"0-25-2022 18:2"}}
+{"success":false,"error":{"type":"RangeError","message":"Invalid status code: undefined","__route":"/api/user/allUsers","date":"0-26-2022 9:54"}}
+{"success":false,"error":{"type":"RangeError","message":"Invalid status code: undefined","__route":"/api/user/allUsers","date":"0-26-2022 9:55"}}
+{"success":false,"error":{"type":"RangeError","message":"Invalid status code: undefined","__route":"/api/user/allUsers","date":"0-26-2022 9:55"}}
+{"success":false,"error":{"type":"RangeError","message":"Invalid status code: undefined","__route":"/api/user/allUsers","date":"0-26-2022 9:59"}}
+{"success":false,"error":{"type":"MongoError","message":"Invalid $project :: caused by :: FieldPath field names may not start with '$'.","__route":"/api/user/allUsers","date":"0-26-2022 10:3"}}
+{"success":false,"error":{"type":"TypeError","message":"Cannot read property '_id' of undefined","__route":"/api/user/editUserAccess","date":"0-26-2022 12:6"}}
+{"success":false,"error":{"type":"TypeError","message":"Cannot read property '_id' of undefined","__route":"/api/user/editUserAccess","date":"0-26-2022 12:9"}}
+{"success":false,"error":{"type":"TypeError","message":"Cannot read property '_id' of undefined","__route":"/api/user/editUserAccess","date":"0-26-2022 12:11"}}
+{"success":false,"error":{"type":"ReferenceError","message":"result is not defined","__route":"/api/user/editUserAccess","date":"0-26-2022 12:14"}}
+{"success":false,"error":{"type":"ReferenceError","message":"result is not defined","__route":"/api/user/editUserAccess","date":"0-26-2022 12:14"}}
+{"success":false,"error":{"type":"ReferenceError","message":"result is not defined","__route":"/api/user/editUserAccess","date":"0-26-2022 12:15"}}
+{"success":false,"error":{"type":"TypeError","message":"Cannot read property '_id' of undefined","__route":"/api/user/editUserAccess","date":"0-26-2022 12:16"}}
+{"success":false,"error":{"type":"ValidationError","message":"book validation failed: price: Path `price` is required.","__route":"/api/book/addBook","date":"0-26-2022 14:40"}}
+{"success":false,"error":{"type":"ValidationError","message":"book validation failed: price: Path `price` is required.","__route":"/api/book/addBook","date":"0-26-2022 14:41"}}
+{"success":false,"error":{"type":"ValidationError","message":"book validation failed: price: Path `price` is required.","__route":"/api/book/addBook","date":"0-26-2022 14:43"}}
+{"success":false,"error":{"type":"TypeError","message":"Book.insertOne is not a function","__route":"/api/book/addBook","date":"0-26-2022 14:50"}}
+{"success":false,"error":{"type":"ValidationError","message":"book validation failed: price: Path `price` is required.","__route":"/api/book/addBook","date":"0-26-2022 14:51"}}
+{"success":false,"error":{"type":"ValidationError","message":"book validation failed: price: Path `price` is required.","__route":"/api/book/addBook","date":"0-26-2022 14:54"}}
+{"success":false,"error":{"type":"ValidationError","message":"book validation failed: price: Path `price` is required.","__route":"/api/book/addBook","date":"0-26-2022 14:56"}}
+{"success":false,"error":{"type":"TypeError","message":"Book.insertOne is not a function","__route":"/api/book/addBook","date":"0-26-2022 15:8"}}
+{"success":false,"error":{"type":"ValidationError","message":"book validation failed: price: Path `price` is required.","__route":"/api/book/addBook","date":"0-26-2022 15:14"}}
+{"success":false,"error":{"type":"ValidationError","message":"book validation failed: price: Path `price` is required.","__route":"/api/book/addBook","date":"0-26-2022 15:16"}}
+{"success":false,"error":{"type":"Error","message":"Arguments must be aggregate pipeline operators","__route":"/api/book/allBooks","date":"0-26-2022 19:22"}}
+{"success":false,"error":{"type":"Error","message":"Arguments must be aggregate pipeline operators","__route":"/api/book/allBooks","date":"0-26-2022 19:24"}}
+{"success":false,"error":{"type":"Error","message":"Arguments must be aggregate pipeline operators","__route":"/api/book/allBooks","date":"0-26-2022 19:26"}}
+{"success":false,"error":{"type":"Error","message":"Arguments must be aggregate pipeline operators","__route":"/api/book/allBooks","date":"0-26-2022 19:27"}}
+{"success":false,"error":{"type":"Error","message":"Arguments must be aggregate pipeline operators","__route":"/api/book/allBooks","date":"0-26-2022 19:27"}}
+{"success":false,"error":{"type":"Error","message":"Arguments must be aggregate pipeline operators","__route":"/api/book/allBooks","date":"0-26-2022 19:30"}}
+{"success":false,"error":{"type":"ObjectParameterError","message":"Parameter \"filter\" to findOne() must be an object, got [object Object],[object Object]","__route":"/api/user/authenticate","date":"0-26-2022 23:20"}}
+{"success":false,"error":{"type":"MongooseError","message":"Mongoose 5.x disallows passing a spread of operators to `Model.aggregate()`. Instead of `Model.aggregate({ $match }, { $skip })`, do `Model.aggregate([{ $match }, { $skip }])`","__route":"/api/user/authenticate","date":"0-26-2022 23:21"}}
+{"success":false,"error":{"type":"RangeError","message":"Invalid status code: undefined","__route":"/api/user/authenticate","date":"0-27-2022 0:35"}}
+{"success":false,"error":{"type":"RangeError","message":"Invalid status code: undefined","__route":"/api/user/authenticate","date":"0-27-2022 0:35"}}
+{"success":false,"error":{"type":"TypeError","message":"Cannot read property '0' of undefined","__route":"/api/user/authenticate","date":"0-27-2022 1:5"}}
+{"success":false,"error":{"type":"Error","message":"error:0909006C:PEM routines:get_name:no start line","__route":"/api/user/authenticate","date":"2022-01-27T09:10:34.150Z"}}
+{"success":false,"error":{"type":"Error","message":"error:0909006C:PEM routines:get_name:no start line","__route":"/api/user/authenticate","date":"2022-01-27T09:10:36.970Z"}}
+{"success":false,"error":{"type":"Error","message":"error:0909006C:PEM routines:get_name:no start line","__route":"/api/user/authenticate","date":"2022-01-27T09:13:09.138Z"}}
+{"success":false,"error":{"type":"TypeError","message":"Cannot read property 'secure' of undefined","__route":"/api/book/allBooks","date":"2022-01-27T09:14:01.351Z"}}
+{"success":false,"error":{"type":"TypeError","message":"Cannot read property 'hasOwnProperty' of undefined","__route":"/api/book/allBooks","date":"2022-01-27T09:15:39.099Z"}}
+{"success":false,"error":{"type":"TypeError","message":"Cannot read property 'split' of undefined","__route":"/api/book/allBooks","date":"2022-01-27T09:24:21.160Z"}}
+{"success":false,"error":{"type":"TypeError","message":"Cannot read property 'split' of undefined","__route":"/api/book/allBooks","date":"2022-01-27T09:26:18.374Z"}}
+{"success":false,"error":{"type":"TypeError","message":"Cannot read property 'split' of undefined","__route":"/api/book/allBooks","date":"2022-01-27T09:48:11.044Z"}}
+{"success":false,"error":{"type":"JsonWebTokenError","message":"jwt malformed","__route":"/api/book/allBooks","date":"2022-01-27T09:51:27.443Z"}}
+{"success":false,"error":{"type":"JsonWebTokenError","message":"jwt malformed","__route":"/api/book/allBooks","date":"2022-01-27T09:51:46.104Z"}}
+{"success":false,"error":{"type":"JsonWebTokenError","message":"invalid token","__route":"/api/book/allBooks","date":"2022-01-27T09:51:56.656Z"}}
+{"success":false,"error":{"type":"JsonWebTokenError","message":"invalid token","__route":"/api/book/allBooks","date":"2022-01-27T10:26:15.780Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"req is not defined","__route":"/api/book/allBooks","date":"2022-01-27T11:15:45.671Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"req is not defined","__route":"/api/book/allBooks","date":"2022-01-27T11:18:26.476Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"req is not defined","__route":"/api/book/allBooks","date":"2022-01-27T11:20:33.022Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"req is not defined","__route":"/api/book/allBooks","date":"2022-01-27T11:21:12.767Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"req is not defined","__route":"/api/book/allBooks","date":"2022-01-27T11:26:54.731Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"req is not defined","__route":"/api/book/allBooks","date":"2022-01-27T11:26:57.503Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"req is not defined","__route":"/api/book/allBooks","date":"2022-01-27T11:27:09.635Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"req is not defined","__route":"/api/book/addBook","date":"2022-01-27T11:29:16.946Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"req is not defined","__route":"/api/book/allBooks","date":"2022-01-27T11:34:08.109Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"req is not defined","__route":"/api/book/allBooks","date":"2022-01-27T11:34:20.691Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"req is not defined","__route":"/api/book/allBooks","date":"2022-01-27T11:34:24.733Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"req is not defined","__route":"/api/book/allBooks","date":"2022-01-27T11:36:03.406Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"req is not defined","__route":"/api/book/addBook","date":"2022-01-27T11:36:25.330Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"req is not defined","__route":"/api/book/allBooks","date":"2022-01-27T11:37:56.490Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"req is not defined","__route":"/api/book/allBooks","date":"2022-01-27T11:47:23.830Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"req is not defined","__route":"/api/book/allBooks","date":"2022-01-27T12:38:40.017Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"req is not defined","__route":"/api/book/allBooks","date":"2022-01-27T12:40:31.162Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"req is not defined","__route":"/api/book/allBooks","date":"2022-01-27T12:46:30.265Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"req is not defined","__route":"/api/book/allBooks","date":"2022-01-27T12:47:32.332Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"req is not defined","__route":"/api/book/allBooks","date":"2022-01-27T12:47:48.040Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"req is not defined","__route":"/api/book/allBooks","date":"2022-01-27T12:49:51.785Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"req is not defined","__route":"/api/book/allBooks","date":"2022-01-27T13:24:16.754Z"}}
+{"success":false,"error":{"type":"SyntaxError","message":"Unexpected token x in JSON at position 2","__route":"/api/book/allBooks","date":"2022-01-27T13:29:10.614Z"}}
+{"success":false,"error":{"type":"SyntaxError","message":"Unexpected token x in JSON at position 2","__route":"/api/book/allBooks","date":"2022-01-27T13:29:12.369Z"}}
+{"success":false,"error":{"type":"SyntaxError","message":"Unexpected token x in JSON at position 2","__route":"/api/book/allBooks","date":"2022-01-27T13:31:24.289Z"}}
+{"success":false,"error":{"type":"SyntaxError","message":"Unexpected token x in JSON at position 2","__route":"/api/book/allBooks","date":"2022-01-27T13:33:54.768Z"}}
+{"success":false,"error":{"type":"SyntaxError","message":"Unexpected token x in JSON at position 2","__route":"/api/book/allBooks","date":"2022-01-27T13:34:05.079Z"}}
+{"success":false,"error":{"type":"SyntaxError","message":"Unexpected token u in JSON at position 0","__route":"/api/book/allBooks","date":"2022-01-27T13:56:52.380Z"}}
+{"success":false,"error":{"type":"SyntaxError","message":"Unexpected token u in JSON at position 0","__route":"/api/book/allBooks","date":"2022-01-27T13:56:54.452Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"res is not defined","__route":"/api/book/allBooks","date":"2022-01-27T14:04:59.840Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"res is not defined","__route":"/api/book/addBook","date":"2022-01-27T14:05:11.319Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"res is not defined","__route":"/api/user/allUsers","date":"2022-01-27T14:05:31.403Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"res is not defined","__route":"/api/book/allBooks","date":"2022-01-27T14:05:35.275Z"}}
+{"success":false,"error":{"type":"TypeError","message":"route does not exist","__route":"/api/user/editUserAccess","date":"2022-01-27T14:26:49.184Z"}}
+{"success":false,"error":{"type":"TypeError","message":"route does not exist","__route":"/api/user/editUserAccess","date":"2022-01-27T14:27:25.152Z"}}
+{"success":false,"error":{"type":"TypeError","message":"route does not exist","__route":"/api/user/editUserAccess","date":"2022-01-27T14:28:18.890Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"res is not defined","__route":"/api/book/allBooks","date":"2022-01-29T10:57:20.659Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"res is not defined","__route":"/api/book/allBooks","date":"2022-01-29T10:58:43.261Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"res is not defined","__route":"/api/book/allBooks","date":"2022-01-29T10:59:52.877Z"}}
+{"success":false,"error":{"type":"TypeError","message":"Cannot read property '_id' of undefined","__route":"/api/book/allBooks","date":"2022-01-29T11:02:16.600Z"}}
+{"success":false,"error":{"type":"TypeError","message":"Cannot read property '_id' of undefined","__route":"/api/book/allBooks","date":"2022-01-29T11:04:58.438Z"}}
+{"success":false,"error":{"type":"TypeError","message":"Cannot read property '_id' of undefined","__route":"/api/book/allBooks","date":"2022-01-29T11:07:30.224Z"}}
+{"success":false,"error":{"type":"TypeError","message":"Cannot read property '_id' of undefined","__route":"/api/book/allBooks","date":"2022-01-29T11:07:34.559Z"}}
+{"success":false,"error":{"type":"TypeError","message":"Cannot read property '_id' of undefined","__route":"/api/book/allBooks","date":"2022-01-29T11:07:44.736Z"}}
+{"success":false,"error":{"type":"TypeError","message":"Cannot read property '_id' of undefined","__route":"/api/book/allBooks","date":"2022-01-29T11:08:28.749Z"}}
+{"success":false,"error":{"type":"TypeError","message":"Cannot read property '_id' of undefined","__route":"/api/book/allBooks","date":"2022-01-29T11:09:48.173Z"}}
+{"success":false,"error":{"type":"JsonWebTokenError","message":"invalid token","__route":"/api/book/allBooks","date":"2022-01-29T11:10:50.940Z"}}
+{"success":false,"error":{"type":"JsonWebTokenError","message":"invalid token","__route":"/api/book/allBooks","date":"2022-01-29T11:11:16.969Z"}}
+{"success":false,"error":{"type":"JsonWebTokenError","message":"invalid token","__route":"/api/book/allBooks","date":"2022-01-29T11:11:58.031Z"}}
+{"success":false,"error":{"type":"JsonWebTokenError","message":"invalid token","__route":"/api/book/allBooks","date":"2022-01-29T11:21:23.987Z"}}
+{"success":false,"error":{"type":"JsonWebTokenError","message":"invalid token","__route":"/api/book/allBooks","date":"2022-01-29T11:21:38.346Z"}}
+{"success":false,"error":{"type":"JsonWebTokenError","message":"invalid token","__route":"/api/book/allBooks","date":"2022-01-29T11:21:55.342Z"}}
+{"success":false,"error":{"type":"JsonWebTokenError","message":"invalid token","__route":"/api/book/allBooks","date":"2022-01-29T11:22:05.208Z"}}
+{"success":false,"error":{"type":"JsonWebTokenError","message":"invalid token","__route":"/api/book/allBooks","date":"2022-01-29T11:22:33.261Z"}}
+{"success":false,"error":{"type":"TypeError","message":"route does not exist","__route":"/api/book/allBooks","date":"2022-01-29T11:22:40.382Z"}}
+{"success":false,"error":{"type":"TypeError","message":"query function does not exist","__route":"/api/book/allBooks","date":"2022-01-29T11:23:33.986Z"}}
+{"success":false,"error":{"type":"TypeError","message":"query function does not exist","__route":"/api/book/allBooks","date":"2022-01-29T11:25:02.578Z"}}
+{"success":false,"error":{"type":"JsonWebTokenError","message":"invalid token","__route":"/api/book/allBooks","date":"2022-01-29T11:25:38.487Z"}}
+{"success":false,"error":{"type":"TypeError","message":"Cannot read property '_id' of undefined","__route":"/api/book/allBooks","date":"2022-01-29T11:25:44.893Z"}}
+{"success":false,"error":{"type":"TypeError","message":"Cannot read property '_id' of undefined","__route":"/api/book/allBooks","date":"2022-01-29T11:27:20.858Z"}}
+{"success":false,"error":{"type":"TypeError","message":"Cannot read property '_id' of undefined","__route":"/api/book/allBooks","date":"2022-01-29T11:39:16.934Z"}}
+{"success":false,"error":{"type":"TypeError","message":"Cannot read property '_id' of undefined","__route":"/api/book/allBooks","date":"2022-01-29T11:39:21.621Z"}}
+{"success":false,"error":{"type":"TypeError","message":"Cannot read property '_id' of undefined","__route":"/api/book/allBooks","date":"2022-01-29T11:51:25.684Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"allowedRole is not defined","__route":"/api/book/allBooks","date":"2022-01-29T12:00:23.406Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"allowedRole is not defined","__route":"/api/book/allBooks","date":"2022-01-29T12:00:52.413Z"}}
+{"success":false,"error":{"__route":"/api/book/allBooks","date":"2022-01-29T12:05:08.080Z"}}
+{"success":false,"error":{"type":"Error","message":"xx","__route":"/api/book/allBooks","date":"2022-01-29T12:05:34.715Z"}}
+{"success":false,"error":{"type":"Error","message":"Authenticated user is not allowed to use this API","__route":"/api/book/allBooks","date":"2022-01-29T12:06:51.598Z"}}
+{"success":false,"error":{"type":"Error","message":"Authenticated user is not allowed to use this API","__route":"/api/book/allBooks","date":"2022-01-29T12:07:28.190Z"}}
+{"success":false,"error":{"type":"JsonWebTokenError","message":"invalid token","__route":"/api/book/allBooks","date":"2022-01-29T12:09:46.372Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"isAuthRoleAllowed is not defined","__route":"/api/book/allBooks","date":"2022-01-29T12:12:31.283Z"}}
+{"success":false,"error":{"__route":"/api/book/allBooks","date":"2022-01-29T12:12:42.870Z"}}
+{"success":false,"error":{"type":"Error","message":"xx","__route":"/api/book/allBooks","date":"2022-01-29T12:13:02.514Z"}}
+{"success":false,"error":{"type":"JsonWebTokenError","message":"invalid token","__route":"/api/book/allBooks","date":"2022-01-29T12:13:08.141Z"}}
+{"success":false,"error":{"type":"Error","message":"xx","__route":"/api/book/allBooks","date":"2022-01-29T12:13:12.166Z"}}
+{"success":false,"error":{"type":"Error","message":"API is not allowed to use","__route":"/api/book/allBooks","date":"2022-01-29T12:14:09.189Z"}}
+{"success":false,"error":{"type":"JsonWebTokenError","message":"invalid token","__route":"/api/book/allBooks","date":"2022-01-29T12:14:22.276Z"}}
+{"success":false,"error":{"type":"Error","message":"API is not allowed to use","__route":"/api/book/allBooks","date":"2022-01-29T12:14:26.655Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"req is not defined","__route":"/api/book/allBooks","date":"2022-01-29T12:15:22.106Z"}}
+{"success":false,"error":{"type":"Error","message":"API is not allowed to use","__route":"/api/book/allBooks","date":"2022-01-29T12:15:59.398Z"}}
+{"success":false,"error":{"type":"Error","message":"API is not allowed to use","__route":"/api/book/allBooks","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643425664},"date":"2022-01-29T12:17:03.650Z"}}
+{"success":false,"error":{"type":"Error","message":"API is not allowed to use","__route":"/api/book/allBooks","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643425664},"date":"2022-01-29T12:17:22.550Z"}}
+{"success":false,"error":{"type":"Error","message":"API is not allowed to use","__route":"/api/book/allBooks","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643425664},"date":"2022-01-29T12:37:01.645Z"}}
+{"success":false,"error":{"type":"Error","message":"API is not allowed to use","__route":"/api/book/allBooks","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643425664},"date":"2022-01-29T13:06:57.970Z"}}
+{"success":false,"error":{"type":"TypeError","message":"lib.accesschecker is not a function","__route":"/api/book/allBooks","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643425664},"date":"2022-01-29T13:07:08.973Z"}}
+{"success":false,"error":{"type":"Error","message":"API is not allowed to use","__route":"/api/book/allBooks","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643425664},"date":"2022-01-29T13:27:37.577Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted User Role","__route":"/api/book/allBooks","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643425664},"date":"2022-01-29T13:31:17.528Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/allBooks","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643425664},"date":"2022-01-29T13:31:52.652Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/allBooks","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643425664},"date":"2022-01-29T13:32:00.397Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/allBooks","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643425664},"date":"2022-01-29T13:32:21.984Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/allBooks","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643425664},"date":"2022-01-29T13:32:23.625Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/allBooks","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643425664},"date":"2022-01-29T13:32:45.785Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/allBooks","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643425664},"date":"2022-01-29T13:33:01.639Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/allBooks","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643425664},"date":"2022-01-29T13:33:46.956Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/allBooks","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643425664},"date":"2022-01-29T13:34:35.944Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/allBooks","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643434537},"date":"2022-01-29T13:35:38.040Z"}}
+{"success":false,"error":{"type":"TypeError","message":"lib.accesschecker is not a function","__route":"/api/book/allBooks","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643425664},"date":"2022-01-29T13:41:49.281Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/allBooks","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643425664},"date":"2022-01-29T13:42:55.887Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/allBooks","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643425664},"date":"2022-01-29T13:43:48.127Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/allBooks","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643425664},"date":"2022-01-29T13:52:09.234Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/allBooks","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643425664},"date":"2022-01-29T13:52:20.206Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/allBooks","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643425664},"date":"2022-01-29T13:52:42.434Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/allBooks","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643425664},"date":"2022-01-29T14:01:03.696Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/allBooks","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643425664},"date":"2022-01-29T14:04:44.506Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/allBooks","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643425664},"date":"2022-01-29T14:09:04.807Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/allBooks","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643425664},"date":"2022-01-29T14:38:14.384Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/allBooks","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643425664},"date":"2022-01-29T14:38:40.540Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/allBooks","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643425664},"date":"2022-01-29T14:38:58.543Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/allBooks","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643425664},"date":"2022-01-29T14:40:46.797Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/allBooks","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643425664},"date":"2022-01-29T14:40:47.218Z"}}
+{"success":false,"error":{"type":"TypeError","message":"Cannot read property 'hasOwnProperty' of undefined","__route":"/api/book/allBooks","date":"2022-01-29T14:41:10.987Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/allBooks","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643425664},"date":"2022-01-29T14:41:39.351Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/allBooks","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643425664},"date":"2022-01-29T14:44:17.300Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643438921},"date":"2022-01-29T14:59:38.385Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643438921},"date":"2022-01-29T14:59:39.753Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643438921},"date":"2022-01-29T14:59:59.649Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643438921},"date":"2022-01-29T15:01:18.513Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643438921},"date":"2022-01-29T15:01:50.290Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643438921},"date":"2022-01-29T15:13:26.219Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643438921},"date":"2022-01-29T15:14:26.747Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643438921},"date":"2022-01-29T15:14:47.551Z"}}
+{"success":false,"error":{"type":"ValidationError","message":"book validation failed: price: Path `price` is required., title: Path `title` is required.","date":"2022-01-29T15:15:28.942Z"}}
+{"success":false,"error":{"type":"ValidationError","message":"book validation failed: price: Path `price` is required., title: Path `title` is required.","date":"2022-01-29T15:15:34.281Z"}}
+{"success":false,"error":{"type":"ValidationError","message":"book validation failed: price: Path `price` is required., title: Path `title` is required.","date":"2022-01-29T15:16:13.484Z"}}
+{"success":false,"error":{"type":"ValidationError","message":"book validation failed: price: Path `price` is required., title: Path `title` is required.","date":"2022-01-29T15:20:18.677Z"}}
+{"success":false,"error":{"type":"ValidationError","message":"book validation failed: price: Path `price` is required., title: Path `title` is required.","date":"2022-01-29T15:21:13.820Z"}}
+{"success":false,"error":{"type":"ValidationError","message":"book validation failed: price: Path `price` is required., title: Path `title` is required.","date":"2022-01-29T15:21:56.958Z"}}
+{"success":false,"error":{"type":"ValidationError","message":"book validation failed: price: Path `price` is required., title: Path `title` is required.","date":"2022-01-29T15:22:10.987Z"}}
+{"success":false,"error":{"type":"TypeError","message":"Cannot read property 'oldData' of undefined","date":"2022-01-29T15:22:38.438Z"}}
+{"success":false,"error":{"type":"ValidationError","message":"book validation failed: price: Path `price` is required., title: Path `title` is required.","date":"2022-01-29T15:23:26.677Z"}}
+{"success":false,"error":{"type":"ValidationError","message":"book validation failed: price: Path `price` is required., title: Path `title` is required.","date":"2022-01-29T15:24:16.888Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643438921},"date":"2022-01-29T15:25:45.734Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643438921},"date":"2022-01-29T15:26:01.353Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643438921},"date":"2022-01-29T15:29:36.031Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643438921},"date":"2022-01-29T15:32:49.080Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643438921},"date":"2022-01-29T15:51:09.751Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643438921},"date":"2022-01-29T15:51:48.554Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643438921},"date":"2022-01-29T15:52:41.859Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643438921},"date":"2022-01-29T15:55:02.683Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643438921},"date":"2022-01-29T15:55:43.646Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643438921},"date":"2022-01-29T15:56:40.178Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643438921},"date":"2022-01-29T15:57:46.679Z"}}
+{"success":false,"error":{"type":"TypeError","message":"Cannot read property 'role' of undefined","__route":"/api/book/addBook","date":"2022-01-29T16:05:15.278Z"}}
+{"success":false,"error":{"type":"TypeError","message":"Cannot read property 'role' of undefined","__route":"/api/book/addBook","date":"2022-01-29T16:06:02.440Z"}}
+{"success":false,"error":{"type":"TypeError","message":"Cannot read property 'role' of undefined","__route":"/api/book/addBook","date":"2022-01-29T16:06:29.328Z"}}
+{"success":false,"error":{"type":"TypeError","message":"Cannot read property 'role' of undefined","__route":"/api/book/addBook","date":"2022-01-29T16:06:29.343Z"}}
+{"success":false,"error":{"type":"TypeError","message":"Cannot read property 'role' of undefined","__route":"/api/book/addBook","date":"2022-01-29T16:06:34.366Z"}}
+{"success":false,"error":{"type":"TypeError","message":"Cannot read property 'role' of undefined","__route":"/api/book/addBook","date":"2022-01-29T16:08:53.712Z"}}
+{"success":false,"error":{"type":"TypeError","message":"Cannot read property 'role' of undefined","__route":"/api/book/addBook","date":"2022-01-29T16:09:21.082Z"}}
+{"success":false,"error":{"type":"TypeError","message":"Cannot read property 'role' of undefined","__route":"/api/book/addBook","date":"2022-01-29T16:09:37.692Z"}}
+{"success":false,"error":{"type":"TypeError","message":"Cannot read property 'role' of undefined","__route":"/api/book/addBook","date":"2022-01-29T16:10:10.077Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643438921},"date":"2022-01-29T16:14:23.687Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643438921},"date":"2022-01-29T16:14:26.267Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","date":"2022-01-29T16:19:52.707Z"}}
+{"success":false,"error":{"type":"CastError","message":"Cast to Number failed for value \"NaN\" at path \"price\"","__route":"/api/book/editBook","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643438921},"date":"2022-01-29T16:20:02.206Z"}}
+{"success":false,"error":{"type":"CastError","message":"Cast to Number failed for value \"NaN\" at path \"price\"","__route":"/api/book/editBook","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643438921},"date":"2022-01-29T16:20:14.289Z"}}
+{"success":false,"error":{"type":"CastError","message":"Cast to Number failed for value \"NaN\" at path \"price\"","__route":"/api/book/editBook","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643438921},"date":"2022-01-29T16:24:51.336Z"}}
+{"success":false,"error":{"type":"CastError","message":"Cast to Number failed for value \"NaN\" at path \"price\"","__route":"/api/book/editBook","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643438921},"date":"2022-01-29T16:26:35.559Z"}}
+{"success":false,"error":{"type":"CastError","message":"Cast to Number failed for value \"NaN\" at path \"price\"","__route":"/api/book/editBook","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643438921},"date":"2022-01-29T16:27:18.220Z"}}
+{"success":false,"error":{"type":"CastError","message":"Cast to Number failed for value \"NaN\" at path \"price\"","__route":"/api/book/editBook","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643438921},"date":"2022-01-29T16:29:51.030Z"}}
+{"success":false,"error":{"type":"CastError","message":"Cast to Number failed for value \"NaN\" at path \"price\"","__route":"/api/book/editBook","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643438921},"date":"2022-01-29T16:30:33.842Z"}}
+{"success":false,"error":{"type":"CastError","message":"Cast to Number failed for value \"NaN\" at path \"price\"","__route":"/api/book/editBook","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643438921},"date":"2022-01-29T16:31:03.537Z"}}
+{"success":false,"error":{"type":"CastError","message":"Cast to Number failed for value \"NaN\" at path \"price\"","__route":"/api/book/editBook","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643438921},"date":"2022-01-29T16:31:57.868Z"}}
+{"success":false,"error":{"type":"CastError","message":"Cast to Number failed for value \"NaN\" at path \"price\"","__route":"/api/book/editBook","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643438921},"date":"2022-01-29T16:33:47.214Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","date":"2022-01-29T16:34:51.232Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","date":"2022-01-29T16:38:30.157Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","date":"2022-01-29T16:41:18.331Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","date":"2022-01-29T16:41:26.572Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","date":"2022-01-29T16:41:44.671Z"}}
+{"success":false,"error":{"type":"JsonWebTokenError","message":"invalid token","__route":"/api/book/deleteBook","date":"2022-01-29T16:44:08.667Z"}}
+{"success":false,"error":{"type":"JsonWebTokenError","message":"invalid token","__route":"/api/book/deleteBook","date":"2022-01-29T16:44:51.351Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","date":"2022-01-29T16:44:57.946Z"}}
+{"success":false,"error":{"type":"JsonWebTokenError","message":"invalid token","__route":"/api/book/deleteBook","date":"2022-01-29T16:45:25.198Z"}}
+{"success":false,"error":{"type":"JsonWebTokenError","message":"invalid token","__route":"/api/book/deleteBook","date":"2022-01-29T16:47:24.804Z"}}
+{"success":false,"error":{"type":"JsonWebTokenError","message":"invalid token","__route":"/api/book/deleteBook","date":"2022-01-29T16:47:46.493Z"}}
+{"success":false,"error":{"type":"JsonWebTokenError","message":"invalid token","__route":"/api/book/deleteBook","date":"2022-01-29T16:47:53.625Z"}}
+{"success":false,"error":{"type":"JsonWebTokenError","message":"invalid token","__route":"/api/book/deleteBook","date":"2022-01-29T16:48:01.087Z"}}
+{"success":false,"error":{"type":"JsonWebTokenError","message":"invalid token","__route":"/api/book/deleteBook","date":"2022-01-29T16:55:50.012Z"}}
+{"success":false,"error":{"type":"JsonWebTokenError","message":"invalid token","__route":"/api/book/deleteBook","date":"2022-01-29T16:55:51.217Z"}}
+{"success":false,"error":{"type":"JsonWebTokenError","message":"invalid token","__route":"/api/book/deleteBook","date":"2022-01-29T16:55:51.975Z"}}
+{"success":false,"error":{"type":"JsonWebTokenError","message":"invalid token","__route":"/api/book/deleteBook","date":"2022-01-29T16:55:52.524Z"}}
+{"success":false,"error":{"type":"JsonWebTokenError","message":"invalid token","__route":"/api/book/deleteBook","date":"2022-01-29T16:55:53.129Z"}}
+{"success":false,"error":{"type":"JsonWebTokenError","message":"invalid token","__route":"/api/book/deleteBook","date":"2022-01-29T16:55:53.588Z"}}
+{"success":false,"error":{"type":"JsonWebTokenError","message":"invalid token","__route":"/api/book/deleteBook","date":"2022-01-29T16:55:54.124Z"}}
+{"success":false,"error":{"type":"JsonWebTokenError","message":"invalid token","__route":"/api/book/deleteBook","date":"2022-01-29T16:55:54.544Z"}}
+{"success":false,"error":{"type":"JsonWebTokenError","message":"invalid token","__route":"/api/book/deleteBook","date":"2022-01-29T16:55:55.057Z"}}
+{"success":false,"error":{"type":"JsonWebTokenError","message":"invalid token","__route":"/api/book/deleteBook","date":"2022-01-29T16:55:55.610Z"}}
+{"success":false,"error":{"type":"JsonWebTokenError","message":"invalid token","__route":"/api/book/deleteBook","date":"2022-01-29T16:57:15.388Z"}}
+{"success":false,"error":{"type":"JsonWebTokenError","message":"invalid token","__route":"/api/book/deleteBook","date":"2022-01-29T16:57:16.409Z"}}
+{"success":false,"error":{"type":"JsonWebTokenError","message":"invalid token","__route":"/api/book/deleteBook","date":"2022-01-29T16:57:57.144Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","date":"2022-01-29T16:58:02.234Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","date":"2022-01-29T16:58:31.569Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","date":"2022-01-29T16:59:18.170Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","date":"2022-01-29T16:59:33.824Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","date":"2022-01-29T16:59:53.942Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","date":"2022-01-29T17:00:22.792Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","date":"2022-01-29T17:00:30.474Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","date":"2022-01-29T17:00:57.637Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","date":"2022-01-29T17:01:19.305Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","date":"2022-01-29T17:01:46.632Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","date":"2022-01-29T17:01:56.329Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","date":"2022-01-29T17:02:13.593Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","date":"2022-01-29T17:03:05.417Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","date":"2022-01-29T17:04:24.621Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","date":"2022-01-29T17:04:41.111Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","date":"2022-01-29T17:05:02.047Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","date":"2022-01-29T17:05:23.279Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","date":"2022-01-29T17:07:41.758Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","date":"2022-01-29T17:08:11.155Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","date":"2022-01-29T17:09:23.252Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","date":"2022-01-29T17:09:27.674Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","date":"2022-01-29T17:09:30.917Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","date":"2022-01-29T17:11:35.177Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/editBook","date":"2022-01-29T17:11:38.413Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/addBook","date":"2022-01-29T17:11:42.352Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/addBook","date":"2022-01-29T17:12:22.237Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/allBooks","date":"2022-01-29T17:14:32.633Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/addBook","date":"2022-01-29T17:15:03.940Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"ObjectId is not defined","__route":"/api/book/allBooks?_id=61f11c3e78a00d0f84df09e2","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643501961},"date":"2022-01-30T09:20:25.399Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"ObjectId is not defined","__route":"/api/book/allBooks?_id=61f11c3e78a00d0f84df09e2","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643501961},"date":"2022-01-30T09:22:04.465Z"}}
+{"success":false,"error":{"type":"JsonWebTokenError","message":"invalid token","__route":"/api/book/allBooks?_id=61f11c3e78a00d0f84df09e2","date":"2022-01-30T09:41:52.729Z"}}
+{"success":false,"error":{"type":"JsonWebTokenError","message":"invalid token","__route":"/api/book/allBooks?_id=61f11c3e78a00d0f84df09e2","date":"2022-01-30T09:42:19.994Z"}}
+{"success":false,"error":{"type":"JsonWebTokenError","message":"invalid token","__route":"/api/book/allBooks?_id=61f11c3e78a00d0f84df09e2","date":"2022-01-30T09:42:25.165Z"}}
+{"success":false,"error":{"type":"JsonWebTokenError","message":"invalid token","__route":"/api/book/allBooks?_id=61f11c3e78a00d0f84df09e2","date":"2022-01-30T09:42:34.985Z"}}
+{"success":false,"error":{"type":"JsonWebTokenError","message":"invalid token","__route":"/api/book/allBooks?_id=61f11c3e78a00d0f84df09e2","date":"2022-01-30T09:43:33.366Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/allBooks?_id=61f11c3e78a00d0f84df09e2","date":"2022-01-30T12:44:56.828Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/allBooks?_id=61f11c3e78a00d0f84df09e2","date":"2022-01-30T12:45:14.915Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/allBooks?_id=61f11c3e78a00d0f84df09e2","date":"2022-01-30T13:44:02.696Z"}}
+{"success":false,"error":{"type":"TypeError","message":"Cannot read property '_id' of undefined","__route":"/api/user/userInfo","date":"2022-01-30T13:53:45.251Z"}}
+{"success":false,"error":{"type":"TypeError","message":"Cannot read property '_id' of undefined","__route":"/api/user/userInfo","date":"2022-01-30T13:56:04.937Z"}}
+{"success":false,"error":{"type":"TypeError","message":"Cannot read property '_id' of undefined","__route":"/api/user/userInfo","date":"2022-01-30T13:56:11.146Z"}}
+{"success":false,"error":{"type":"TypeError","message":"Cannot read property '_id' of undefined","__route":"/api/user/userInfo","date":"2022-01-30T13:56:21.136Z"}}
+{"success":false,"error":{"type":"TypeError","message":"Cannot read property '_id' of undefined","__route":"/api/user/userInfo","date":"2022-01-30T13:56:38.256Z"}}
+{"success":false,"error":{"type":"TypeError","message":"Cannot read property '_id' of undefined","__route":"/api/user/userInfo","date":"2022-01-30T13:56:52.937Z"}}
+{"success":false,"error":{"type":"TypeError","message":"Cannot read property '_id' of undefined","__route":"/api/user/userInfo","date":"2022-01-30T13:57:35.164Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"result is not defined","__route":"/api/user/userInfo","account":{"_id":"61f0c2f5b0f822867a4b0d6e","email":"pdulaca@cloudpanda.ph","role":"user","isblock":false,"fullname":"Patrick Marck Dulaca","iat":1643523705},"date":"2022-01-30T16:24:55.299Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"result is not defined","__route":"/api/user/authenticate","date":"2022-01-30T16:25:01.654Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"result is not defined","__route":"/api/user/authenticate","date":"2022-01-30T16:25:05.844Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"result is not defined","__route":"/api/user/authenticate","date":"2022-01-30T16:25:15.619Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"result is not defined","__route":"/api/user/authenticate","date":"2022-01-30T16:25:52.138Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"result is not defined","__route":"/api/user/authenticate","date":"2022-01-30T16:25:52.523Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"result is not defined","__route":"/api/user/authenticate","date":"2022-01-30T16:25:52.724Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"result is not defined","__route":"/api/user/authenticate","date":"2022-01-30T16:32:08.453Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"result is not defined","__route":"/api/user/authenticate","date":"2022-01-30T16:33:48.371Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"result is not defined","__route":"/api/user/authenticate","date":"2022-01-30T16:33:50.800Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"result is not defined","__route":"/api/user/authenticate","date":"2022-01-30T16:34:52.487Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"result is not defined","__route":"/api/user/authenticate","date":"2022-01-30T16:34:53.628Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"result is not defined","__route":"/api/user/authenticate","date":"2022-01-30T16:39:44.111Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"result is not defined","__route":"/api/user/authenticate","date":"2022-01-30T16:40:03.321Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"result is not defined","__route":"/api/user/authenticate","date":"2022-01-30T16:40:05.087Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"result is not defined","__route":"/api/user/authenticate","date":"2022-01-30T16:40:05.319Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"result is not defined","__route":"/api/user/authenticate","date":"2022-01-30T16:40:05.534Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"result is not defined","__route":"/api/user/authenticate","date":"2022-01-30T16:40:05.791Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"result is not defined","__route":"/api/user/authenticate","date":"2022-01-30T16:41:18.344Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"result is not defined","__route":"/api/user/authenticate","date":"2022-01-30T16:41:18.702Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"result is not defined","__route":"/api/user/authenticate","date":"2022-01-30T16:41:18.916Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"result is not defined","__route":"/api/user/authenticate","date":"2022-01-30T16:41:49.672Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"result is not defined","__route":"/api/user/authenticate","date":"2022-01-30T16:42:47.439Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"result is not defined","__route":"/api/user/authenticate","date":"2022-01-30T16:43:30.187Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"result is not defined","__route":"/api/user/authenticate","date":"2022-01-30T18:24:44.148Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"result is not defined","__route":"/api/user/authenticate","date":"2022-01-30T18:25:56.333Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"result is not defined","__route":"/api/user/authenticate","date":"2022-01-30T18:27:01.846Z"}}
+{"success":false,"error":{"type":"ReferenceError","message":"result is not defined","__route":"/api/user/authenticate","date":"2022-01-30T18:28:02.277Z"}}
+{"success":false,"error":{"type":"TypeError","message":"Cannot read property '_id' of undefined","__route":"/api/user/userInfo","date":"2022-01-30T22:07:34.211Z"}}
+{"success":false,"error":{"type":"TypeError","message":"Cannot read property '_id' of undefined","__route":"/api/user/userInfo","date":"2022-01-30T22:07:40.984Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","date":"2022-01-30T22:08:59.159Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","date":"2022-01-30T22:10:53.785Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","date":"2022-02-02T23:15:23.010Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","date":"2022-02-02T23:16:51.637Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/editBook","date":"2022-02-02T23:16:56.830Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/addBook","date":"2022-02-02T23:17:01.431Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","date":"2022-02-03T10:09:35.236Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","date":"2022-02-03T10:09:51.230Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","date":"2022-02-03T10:09:57.852Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","date":"2022-02-03T10:10:15.875Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/editBook","date":"2022-02-03T10:10:22.628Z"}}
+{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","date":"2022-02-04T07:16:42.541Z"}}
