@@ -67,7 +67,7 @@ module.exports.verifyAccess = (account, options) => {
        options.strict._id = account._id;
        options.strict.isblock = false;
      
-       let allowed = await User.checkAccess(options.strict);
+       const allowed = await User.checkAccess(options.strict);
 
        if(allowed) resolve();
        else reject(new Error('Restricted'));
@@ -80,7 +80,7 @@ module.exports.getcurrentdate = () => {
 };
 
 module.exports.errorHandler = (error, req, callback) => {
-    let message = {
+    const message = {
         success: false, error: {
             type: error.name,
             message: error.message,

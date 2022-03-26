@@ -17,7 +17,7 @@ init.mongoose();
 app
     .use(cors())
 
-    .use(express.static(path.join(__dirname, './../client')))
+    .use(express.static(path.join(__dirname, '../sandbox-client/client')))
 
     .use(express.urlencoded({ extended: false }))
 
