@@ -320,6 +320,3 @@
 {"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","date":"2022-02-03T10:09:57.852Z"}}
 {"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","date":"2022-02-03T10:10:15.875Z"}}
 {"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/editBook","date":"2022-02-03T10:10:22.628Z"}}
-{"success":false,"error":{"type":"Error","message":"Restricted","__route":"/api/book/deleteBook","date":"2022-02-04T07:16:42.541Z"}}
-{"success":false,"error":{"type":"MongooseError","message":"Operation `users.aggregate()` buffering timed out after 10000ms","__route":"/api/user/allUsers","date":"2022-03-26T09:00:39.884Z"}}
-{"success":false,"error":{"type":"MongooseError","message":"Operation `users.aggregate()` buffering timed out after 10000ms","__route":"/api/user/allUsers","date":"2022-03-26T09:05:42.602Z"}}
