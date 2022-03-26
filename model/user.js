@@ -23,8 +23,6 @@ const
 
 module.exports.methods = {
 
-
-    // function
     userInfo: async (req, callback) => {
         const result = await User.aggregate([
             {
@@ -53,8 +51,6 @@ module.exports.methods = {
         callback({ success: true, data: result, code: 200 });
     },
 
-
-    // function
     allUsers: async (req, callback) => {
         const result = await User.aggregate([
             {
@@ -83,8 +79,6 @@ module.exports.methods = {
         callback({ success: true, data: result, code: 200 });
     },
 
-
-    // function
     authenticate: async (req, callback) => {
         console.log(req)
         const email = req.body.email;
@@ -124,8 +118,6 @@ module.exports.methods = {
         }
     },
 
-
-    // function
     editUserAccess: async (req, callback) => {
         console.log('booooooody', req.body)
         const id = req.body.editedSession._id;
@@ -144,13 +136,11 @@ module.exports.methods = {
         callback({ success: true, data: result, code: 201});
     },
 
-
-    // function
     checkAccess: async (properties) => {
         properties._id = ObjectId(properties._id);
 
         const accesschecker = { $match: properties}
-        console.log('prrrrrrroooooop', accesschecker)
+   console.log('prrrrrrroooooop', accesschecker)
         const result = await User.aggregate([
             accesschecker,
             {

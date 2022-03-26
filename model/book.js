@@ -69,7 +69,7 @@ module.exports.methods = {
         const newBook = new Book(data);
         const insert = await newBook.save();
 
-        callback({ success: true, data: insert, code: 200});
+        callback({ success: true, data: insert, code: 201});
     }
     
 };

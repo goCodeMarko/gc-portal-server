@@ -11,23 +11,7 @@ const
     query = require(`./../model/${base}`).methods;
 
 
-// PUT REQUEST SECTION
-router.put(root + 'editUserAccess', execute(query.editUserAccess, { 
-        secured: true 
-    })
-);
-// END
 
-
-// POST REQUEST SECTION
-router.post(root + 'authenticate', execute(query.authenticate, { 
-        secured: true 
-    })
-);
-// END
-
-
-// GET REQUEST SECTION
 router.get(root + 'userInfo', execute(query.userInfo, { 
         secured: true 
     })
@@ -37,8 +21,15 @@ router.get(root + 'allUsers', execute(query.allUsers, {
         secured: true 
     })
 );
-// END
 
+router.put(root + 'editUserAccess', execute(query.editUserAccess, { 
+        secured: true 
+    })
+);
 
+router.post(root + 'authenticate', execute(query.authenticate, { 
+        secured: true 
+    })
+);
 
 module.exports = router
