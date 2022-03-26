@@ -1,6 +1,7 @@
-logs/error.log
-logs
-logs/*
+logbook/error.log
+logbook
+logbook/*
+uploads/*
 node_modules
 node_modules/*
 
