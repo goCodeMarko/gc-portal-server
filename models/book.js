@@ -5,7 +5,7 @@ const
     base = path.basename(__filename).split('.').shift(),
     mongoose = require('mongoose'),
     { ObjectId } = require('mongodb'),
-    lib = require('./../library'),
+    lib = require('../library'),
 
 
     Book = mongoose.model(base, mongoose.Schema({
@@ -17,26 +17,37 @@ const
         datecreated: { type: Date, default: lib.getcurrentdate() }
     }));
 
-module.exports.methods = {
 
-    allBooks: async (req, callback) => {
-        const result = await Book.aggregate([
-            {
-                $match: {
-                    isdeleted: false
-                }
-            },
-            {
-                $sort: {
-                    'datecreated': -1
-                }
-            }
-        ]);
-        
-        callback({ success: true, data: result, code: 200});
-    },
+module.exports.getBooks =  async (req, callback) => {
+        console.log(req.query);
+        let MQLBuilder = [
+            { '$match': { 'isdeleted': false } }
+        ];
 
-    deleteBook: async (req, callback) => {
+        if (req.query.search){
+            MQLBuilder[0]['$match']['title'] = { '$regex': req.query.search, $options: 'i' } 
+        }
+
+        let bookCount = await Book.aggregate(MQLBuilder);
+
+        MQLBuilder.push(
+            { '$sort': { 'datecreated': -1 } },
+            { '$skip': +req.query.skip },
+            { '$limit': +req.query.limit }
+        );
+
+        let books = await Book.aggregate(MQLBuilder);
+
+        result = {
+            counts: bookCount.length,
+            pages: Math.ceil(bookCount.length / 2),
+            data: books
+        }
+
+        callback({ success: true, result: result, code: 200});
+};
+
+module.exports.deleteBook = async (req, callback) => {
         const id = req.body.id;
         const result = await Book.updateOne(
             { _id : id },
@@ -45,10 +56,11 @@ module.exports.methods = {
 
         callback({ success: true, data: result, code: 200});
         
-    },
+};
 
-    editBook: async (req, callback) => {
+module.exports.editBook = async (req, callback) => {
         const id = req.body.oldData._id;
+        console.log(req.body)
         const result = await Book.updateOne(
             { _id : id },
             { 
@@ -62,16 +74,16 @@ module.exports.methods = {
         )
 
         callback({ success: true, data: result, code: 201});
-    },
+}
 
-    addBook: async (req, callback) => {
-        const data = req.body;
-        const newBook = new Book(data);
-        const insert = await newBook.save();
+module.exports.addBook = async (req, callback) => {
+    const data = req.body;
+    const newBook = new Book(data);
+    const insert = await newBook.save();
 
-        callback({ success: true, data: insert, code: 201});
-    }
+    callback({ success: true, data: insert, code: 201});
+}
     
-};
+
 
 

@@ -1,38 +1,35 @@
 'use_strict';
 
 const
-    lib = require('../library'),
-    execute = lib.execute,
+    { execute } = require('../library'),
     path = require('path'),
-    base = path.basename(__filename).split('.').shift(),
+    base = path.basename(__filename, '.js'),
     express = require('express'),
     router = express.Router(),
-    url = `/api/${base}/`,
-    query = require(`./../model/${base}`).methods;
+    controller = require(`../controllers/${base}`);
 
 
-
-router.get(url + 'allBooks', execute(query.allBooks, { 
+router.get(`/api/${base}/getBooks`, execute(controller.getBooks, { 
         secured: true, 
         role: ['user']
-    })
-);
+    }
+));
 
-router.put(url + 'deleteBook', execute(query.deleteBook, { 
+router.put(`/api/${base}/deleteBook`, execute(controller.deleteBook, { 
         secured: true, 
         role: ['user'],
         strict: {  isallowedtodelete: true }
     }
 ));
 
-router.put(url + 'editBook', execute(query.editBook, { 
+router.put(`/api/${base}/editBook`, execute(controller.editBook, { 
         secured: true, 
         role: ['user'],
         strict: {  isallowedtoupdate: true }
     }
 ));
 
-router.post(url + 'addBook', execute(query.addBook, { 
+router.post(`/api/${base}/addBook`, execute(controller.addBook, { 
         secured: true, 
         role: ['user'],
         strict: {  isallowedtocreate: true }

@@ -1,26 +1,24 @@
 'use_strict';
 
-const { response } = require('express');
-const { resolve } = require('path');
-
 const
     mongoose = require('mongoose'),
     config = require('./../config'),
     path = require('path'),
     fs = require('fs'),
     jwt = require('jsonwebtoken'),
-    User = require(`./../model/user`).methods;
+    moment = require('moment'),
+    userController = require(`../controllers/user`),
+    cron = require('node-cron');
 
-
-
-module.exports.execute = (query, options = {}) => async (req, res) => {
+module.exports.execute = (controller, options = {}) => async (req, res) => {
     this.security(req, res, options, async (response) => {
         if(response.success){
             req.auth = response.account;
             try {
-                await query(req, (result) => res.status(result.code).send(result));     
-            } catch (error) {
-                this.errorHandler(error, req , (message) => res.status(200).send(message));
+                await controller(req, res, (result) => res.status(result.code).send(result));     
+            } 
+            catch (error) {
+                this.errorHandler(error, req , (message) => res.status(500).send(message));
             }
         }
     });
@@ -36,13 +34,16 @@ module.exports.security = async (req, res, options, callback) => {
             const token = req.headers['authorization'];
 
             if(token){
-                account = await jwt.verify(token, process.env.SECRET_KEY);
+                account = await jwt.verify(token, process.env.JWT_SECRET_KEY);
 
                 if(options.hasOwnProperty('role') && options.role.length){
                     await this.verifyRole(account.role, options.role);
                 } 
 
                 await this.verifyAccess(account, options); 
+            }else{
+                res.status(401).send({success: false, message: 'Missing token'});
+                return;
             }
         } 
     } catch (error) {
@@ -55,7 +56,8 @@ module.exports.security = async (req, res, options, callback) => {
 
 module.exports.verifyRole = (accountRole, allowedRoles) => {
     return new Promise((resolve, reject) => {
-        if(!allowedRoles.includes(accountRole)) reject(new Error('Restricted'));
+        if(!allowedRoles.includes(accountRole)) reject(new Error('Restricted (role)'));
+        console.log(1);
         resolve();
     })
 };
@@ -67,10 +69,10 @@ module.exports.verifyAccess = (account, options) => {
        options.strict._id = account._id;
        options.strict.isblock = false;
      
-       const allowed = await User.checkAccess(options.strict);
-
-       if(allowed) resolve();
-       else reject(new Error('Restricted'));
+       userController.checkAccess(options.strict, (isAllowed) =>{
+           if (isAllowed) resolve();
+           else reject(new Error('Restricted (access)'));
+       });
     })
 };
 
@@ -104,9 +106,19 @@ module.exports.write = (msg) => {
     fs.writeFileSync('./logbook/error.log', JSON.stringify(msg) + '\n', { flag: 'a' });
 };
 
+module.exports.requestLogger = (req, res, next) => {
+    const date = moment().format("MM-DD-YYYY HH:MM:SS");
+    const message = `${date}\t ${req.method}\t ${req.headers.origin}\t ${req.url}\t ${req.headers['user-agent']}`;
+    fs.writeFileSync('./logbook/requests.log', message + '\n', { flag: 'a' });
+    next();
+};
+
 module.exports.init = {
     mongoose: () => {
-        mongoose.connect(config.database, { "useUnifiedTopology": true, "useNewUrlParser": true }, () => {
+        mongoose.connect(config.database, { 
+            "useUnifiedTopology": true, 
+            "useNewUrlParser": true 
+        }, () => {
             switch (mongoose.connection.readyState) {
                 case 0:
                     console.log('\x1b[36m', `Unsuccessful Database Connection.`);
@@ -116,6 +128,22 @@ module.exports.init = {
                     break;
             }
         })
+    },
+
+    cron: () => {
+        cron.schedule('17 19 * * *', () => {
+            console.log('running a task every 17 19');
+        }, {
+            timezone: "Asia/Manila"
+        });
+
+        cron.schedule('* * * * *', () => {
+            console.log('running a task every minute');
+        }, {
+            timezone: "Asia/Manila"
+        });
+
+        console.log('\x1b[36m', `Cronjob(s) Activated...`);
     }
 };
 

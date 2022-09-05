@@ -1,0 +1,42 @@
+<div style="display: flex;align-items: center;justify-content: center;position: relative;">
+    <div>
+        <table cellpadding="0" cellspacing="0" border="0" style="text-align: center;width:100%;">
+            <tr style="text-align: center;">
+                <td>
+                    <img src='https://res.cloudinary.com/dhmkfau4h/image/upload/v1662251251/logo/Jollibee-logo-29FA57EDE1-seeklogo.com_j4kj0y.png'
+                                height="85" width="70" style="margin-bottom: .5em;"/>
+                    <b style="display: block;font-size:12;">Libertad Town Center</b>
+                    <b style="display: block;font-size:12;">Mabini cor. Libertad Sts, Bacolod,</b>
+                    <b style="display: block;font-size:12;">Negros Occidental</b>
+                </td>
+               
+            </tr>
+        </table>
+    </div>
+    <div style="position: absolute;right:0.1px;top:0.1px;">
+        <img src='http://res.cloudinary.com/dhmkfau4h/image/authenticated/s--PU7EaLml--/r_10/v1/qrcodes/yqdn9tfiypuyuvzlp3c4'
+            height="90" width="90" />
+    </div>
+</div>
+
+<div style="display: flex;align-items: center;justify-content: center;">
+    <div>
+        <table cellspacing="0" style="margin-top:5em;text-align: center;">
+            <thead>
+                <th style="padding:.3em;">Name</th>
+                <th>Age</th>
+                <th>sample</th>
+                <th>sample</th>
+
+            </thead>
+            {{#each data}}
+            <tr>
+                <td style="width: 100px;padding:.3em;">{{this.name}}</td>
+                <td style="width: 100px;">{{this.age}}</td>
+                <td style="width: 100px;">{{this.name}}</td>
+                <td style="width: 100px;">{{this.name}}</td>
+            </tr>
+            {{/each}}
+        </table>
+    </div>
+</div>
