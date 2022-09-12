@@ -1,0 +1,106 @@
+<head>
+    <style>
+        body {
+            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .d-block {
+            display: block;
+        }
+
+        .center-table {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .header {
+            position: relative;
+        }
+
+        .header .qrcode {
+            position: absolute;
+            right:0.001px;
+            top:0.001px;
+        }
+        .header .document-title{
+            margin-top:1em;
+        }
+        .header .logo-text b{
+            display: block;
+            width: 200px;
+        }
+        .header .document-title b {
+            font-size: 56px;
+        }
+        .header .linebreak {
+            margin-top: 1em;
+            border: 1px solid green;
+            border-radius: 10px;
+        }
+
+        .body th{
+            margin-bottom: 1em !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <table cellpadding="0" cellspacing="0" border="0" class="table" style="width:100%;">
+            <tr>
+                <td>
+                    <table cellpadding="0" cellspacing="0" border="0" class="center-table" style="width: 15%;">
+                        <tr class="text-center">
+                            <td>
+                                <img src='https://res.cloudinary.com/dhmkfau4h/image/upload/v1662440493/logo/Bacolod_jkq086.png'
+                                    height="100" width="100" />
+                            </td>
+                            <td class="logo-text">
+                                <b style="font-size:8px;">REPUBLIC OF THE PHILIPPINES</b>
+                                <b style="font-size:12px;">CITY GOVERNMENT</b>
+                                <b style="font-size:25px;">BACOLOD</b>
+                                <b style="font-size:12px;">OFFICE OF THE CITY MAYOR</b>
+                                <b style="font-size:12px;">PERMIT AND LICENSE DIVISION</b>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <div class="qrcode">
+            <img src={{qrcodeURL}} height="100" width="100" />
+        </div>
+
+        <hr class="linebreak">
+
+        <table cellpadding="0" cellspacing="0" border="0" class="document-title" style="width:100%;">
+            <tr class="text-center">
+                <td>
+                    <b>MAYOR'S PERMIT</b>
+                </td>
+            </tr>
+        </table>
+    </div>
+    
+    <div class="body">
+            <table cellspacing="0" style="margin-top:5em;text-align: center;font-size:14;">
+                <thead>
+                    {{#each columns}}
+                    <th>{{this}}</th>
+                    {{/each}}
+                </thead>
+                {{#each data}}
+                <tr>
+                    <td style="width: 100px; padding:.3em;">{{this.author}}</td>
+                    <td style="width: 100px;">{{this.stocks}}</td>
+                    <td style="width: 100px;">{{this.title}}</td>
+                    <td style="width: 100px;">{{this.price}}</td>
+                </tr>
+                {{/each}}
+            </table>
+    </div>
+</body>

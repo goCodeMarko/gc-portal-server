@@ -1,7 +1,6 @@
 logbook/error.log
 logbook
 logbook/*
-uploads/*
 node_modules
 node_modules/*
 .env

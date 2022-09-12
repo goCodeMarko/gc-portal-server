@@ -6,7 +6,7 @@ const
     express = require('express'),
     morgan = require('morgan'),
     cors = require('cors'),
-    { init, requestLogger } = require('./library'),
+    { init, requestLogger } = require('./helpers/padayon'),
     path = require('path'),
     routes = require('./routes'),
     app = express(),

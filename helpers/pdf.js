@@ -1,19 +1,25 @@
 const
+    padayon = require('./padayon'),
+    path = require('path'),
     pdf = require("pdf-creator-node"),
-    cloudinary = require('./../utils/cloudinary'),
+    cloudinary = require('./../helpers/cloudinary'),
     moment = require('moment'),
     fs = require("fs");
 
 
 module.exports.generate = async (set) => {
-    
-    const result = setupPDF(set);
+    set.filename = padayon.uniqueId({ fileExtension: 'pdf' });
+    const result = await setupPDF(set);
+
     const file = await pdf.create(result.document, result.options);
 
     const cloud = await cloudinary.uploader.upload(file.filename, {
         folder: set?.cloudinaryFolder ? set.cloudinaryFolder : '',
         type: "authenticated"
     });
+
+    //Removes the newly copied file
+    fs.rmSync(path.join(__dirname, '..', 'xfiles', set.filename));
 
     const details = {
         public_id: cloud.public_id,
@@ -26,23 +32,31 @@ module.exports.generate = async (set) => {
 }
 
 
-function setupPDF(set) {
+async function setupPDF(set) {
     if (!set.hasOwnProperty('format') || !set.format) set.format = 'A5';
     if (!set.hasOwnProperty('data') || !set.data) set.data = [];
+    if (!set.hasOwnProperty('columns') || !set.columns) set.columns = [];
     if (!set.hasOwnProperty('template') || !set.template) set.template = '';
 
     const template = fs.readFileSync(set.template, 'utf8');
     const options = {
         format: set.format,
         orientation: 'portrait',
-        border: '3mm',
+        border: {
+            top: '6mm',        
+            right: '6mm',
+            bottom: '6mm',
+            left: '6mm'
+        }
     };
+
+    //Creates a copy of xfiles/base.pdf with unique file name
+    fs.copyFileSync(path.join(__dirname, '..', 'xfiles', 'base.pdf'), path.join(__dirname, '..', 'xfiles', set.filename));
+
     const document = {
         html: template,
-        data: {
-            data: set.data
-        },
-        path: 'template/output.pdf',
+        data: set.data,
+        path: 'xfiles/' + set.filename,
         type: ''
     };
 

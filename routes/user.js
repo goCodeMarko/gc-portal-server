@@ -1,13 +1,13 @@
 'use_strict';
 
 const
-    { execute } = require('../library'),
+    { execute } = require('../helpers/padayon'),
     path = require('path'),
     base = path.basename(__filename, '.js'),
     express = require('express'),
     router = express.Router(),
     controller = require(`../controllers/user`),
-    upload = require('./../utils/multer');
+    upload = require('./../helpers/multer');
 
 
 router.get(`/api/${base}/getUser`, execute(controller.getUser, { 
@@ -53,8 +53,14 @@ router.get(`/api/${base}/getFile`, upload.single('image'),
     })
 );
 
-router.get(`/api/${base}/downloadPDF`, upload.single('image'),
+router.get(`/api/${base}/downloadPDF`,
     execute(controller.downloadPDF, {
+        secured: true
+    })
+);
+
+router.get(`/api/${base}/downloadExcel`,    
+    execute(controller.downloadExcel, {
         secured: true
     })
 );

@@ -6,7 +6,6 @@ const
 
 module.exports.getBooks = (req, res, callback) => {
     bookModel.getBooks(req, (result) => {
-        console.log('getBooks', result)
         callback(result);
     });
 };

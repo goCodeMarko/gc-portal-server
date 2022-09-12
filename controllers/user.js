@@ -1,129 +1,232 @@
 const { Console } = require('console');
+const { start } = require('repl');
 
 const
+    padayon = require('../helpers/padayon'),
     path = require('path'),
     base = path.basename(__filename, '.js'),
     model = require(`./../models/${base}`),
+    bookController = require(`./../controllers/book`),
     bcrypt = require('bcrypt'),
     jwt = require('jsonwebtoken'),
-    qrcode = require('./../utils/qrcode'),
-    PDFDocument = require('pdfkit'),
+    qrcode = require('./../helpers/qrcode'),
+    pdf = require('./../helpers/pdf'),
+    excel = require('./../helpers/excel'),
+    moment = require('moment'),
     fs = require('fs'),
-    pdf = require('./../utils/pdf'),
-    cloudinary = require('./../utils/cloudinary');
+    xl = require('excel4node'),
+    cloudinary = require('./../helpers/cloudinary');
+let $global = { success: true, data: [], message: '', code: 200 };
 
 
-module.exports.getUser = (req, res, callback) => {
-    model.getUser(req, (result) => {
-        callback(result);
-    });
+
+module.exports.getUser = async (req, res) => {
+    try {
+        await model.getUser(req, res, (result) => {
+            $global.data = result;
+        });
+    } catch (error) {
+        padayon.errorHandler('Controller::User::getUser', error, req, res )
+    } finally {
+        return $global;
+    }
 };
 
-module.exports.getUsers = (req, res, callback) => {
-    model.getUsers(req, (result) => {
-        callback(result);
-    });
+module.exports.getUsers = async (req, res) => {
+    try {
+        await model.getUsers(req, res, (result) => {
+            $global.data = result;
+        });
+    } catch (error) {
+        padayon.errorHandler('Controller::User::getUsers', error, req, res)
+    } finally {
+        return $global;
+    }
 };
 
-module.exports.authenticate = (req, res, callback) => {
-    model.authenticate(req, (result) => {
-        if (result.length) {
-            //account exists
-            if (result[0].isblock) {
-                //blocked account
-                callback({ success: false, data: [], code: 200, message: 'Your account has been block' });
+module.exports.authenticate = async (req, res) => {
+    try {
+        await model.authenticate(req, res, (result) => {
+            console.log('erwerwerew', result)
+            if (result.length) {
+                //account exists
+                if (result[0].isblock) {
+                    //blocked account
+                    $global.success = false;
+                    $global.message = 'Your account has been block'
+                    
+                } else {
+                    //log in success
+                    const token = jwt.sign(result[0], process.env.JWT_SECRET_KEY, { expiresIn: '1d' });
+
+                    // set token as cookie
+                    res.cookie('xxxx', token, { 
+                        httpOnly: true, 
+                        maxAge: 86400000 
+                    });
+
+                    $global.data = { token, account: result[0] }
+                }
             } else {
-                //log in success
-                const token = jwt.sign(result[0], process.env.JWT_SECRET_KEY, { expiresIn: '1d' });
+                //account does'nt exists
 
-                //set token as cookie
-                res.cookie('xxxx', token, { 
-                    httpOnly: true, 
-                    maxAge: 86400000 
-                });
+                $global.success = false;
+                $global.message = 'Username or Password is incorrect';
 
-                callback({ success: true, data: { token, account: result[0] }, code: 200 });
             }
-        } else {
-            //account does'nt exists
-            callback({ success: false, data: [], code: 200, message: 'Username or Password is incorrect' });
-        }
-    });
+        });
+    } catch (error) {
+        padayon.errorHandler('Controller::User::authenticate', error, req, res)
+    } finally {
+        return $global;
+    }
 };
 
-module.exports.updateUserAccess = (req, res, callback) => {
-    model.updateUserAccess(req, (result) => {
-        callback(result);
-    });
+module.exports.updateUserAccess = async (req, res) => {
+    try {
+        await model.updateUserAccess(req, res, (result) => {
+            $global.data = result;
+        });
+    } catch (error) {
+        padayon.errorHandler('Controller::User::updateUserAccess', error, req, res)
+    } finally {
+        return $global;
+    }
 };
 
-module.exports.checkAccess = (properties, callback) => {
-    model.checkAccess(properties, (result) => {
-        callback(result.data);
-    });
+module.exports.checkAccess = async (properties, req, res) => {
+    try {
+        await model.checkAccess(properties, req, res, (result) => {
+            // console.log(result)
+            $global.data = result;
+        });
+    } catch (error) {
+        padayon.errorHandler('Controller::User::checkAccess', error, req, res)
+    } finally {
+        return $global;
+    }
 };
 
-module.exports.saveFile = async (req, res, callback) => {
-    const upload = await cloudinary.uploader.upload(req.file.path, { 
-        folder: 'profile_pictures',
-        type: "authenticated",
-        allowed_formats: ['pdf', 'jpg', 'jpeg', 'png']
-    });
+module.exports.saveFile = async (req, res) => {
+    try {
+        const upload = await cloudinary.uploader.upload(req.file.path, {
+            folder: 'profile_pictures',
+            type: 'authenticated',
+            resource_type: 'auto'
+            // allowed_formats: ['pdf', 'jpg', 'jpeg', 'png', 'xls', 'xlsx']
+        });
 
-    callback({ success: true, data: upload, code: 200, message: ''});
+        $global.data = upload;
+    } catch (error) {
+        padayon.errorHandler('Controller::User::saveFile', error, req, res)
+    } finally {
+        return $global;
+    }
 };
 
-module.exports.generateQR = async (req, res, callback) => {
-    const result = await qrcode.generate();
+module.exports.generateQR = async (req, res) => {
+    try {
+        const result = await qrcode.generate();
 
-    callback({ success: true, data: result, code: 200});
+        $global.data = result;
+    } catch (error) {
+        padayon.errorHandler('Controller::User::generateQR', error, req, res)
+    } finally {
+        return $global;
+    }
 }
 
-module.exports.getFile = async (req, res, callback) => {
-    const public_id = req.query.public_id;
-    const file = await cloudinary.image(public_id, {
-        sign_url: true, 
-        type: "authenticated",
-        transformation: {
-            radius: 10
-        }
-    });
+module.exports.getFile = async (req, res) => {
+    try {
+        const public_id = req.query.public_id;
+
+        const url = await fetchFile(public_id, {
+            sign_url: true,
+            type: "authenticated",
+            transformation: {
+                radius: 10
+            }
+        });
+
+        $global.data = url;
+    } catch (error) {
+        padayon.errorHandler('Controller::User::getFile', error, req, res)
+    } finally {
+        return $global;
+    }
+}
+
+module.exports.downloadPDF = async (req, res) => {
+    try {
+        const public_id = req.query.public_id;
+        const qrcodeURL = await fetchFile(public_id, {
+            sign_url: true,
+            type: "authenticated",
+            transformation: {
+                radius: 10
+            }
+        });
+
+        let books = await bookController.getBooks(req, res);
+
+        let options = {
+            template: 'templates/unknown_report.html',
+            cloudinaryFolder: 'unknown_reports',
+            format: 'Legal',
+            data: {
+                data: books.data.data,
+                columns: ['AUTHOR', 'STOCKS', 'TITLE', 'PRICE'],
+                qrcodeURL
+            }
+        };
+        
+        const result = await pdf.generate(options);
+
+        $global.data = result;
+    } catch (error) {
+        console.log(error);
+        padayon.errorHandler('Controller::User::downloadPDF', error, req, res)
+    } finally {
+        return $global;
+    }
+}
+
+
+module.exports.downloadExcel = async (req, res) => {
+  
+    try {
+        let books = await bookController.getBooks(req, res);
+
+        const details = await excel.generate({
+            sheetName: 'Sheet#1',
+            header: {
+                start: 'A1',
+                title: 'Unknown Report'
+            },
+            table: {
+                start: 'A4',
+                fields: ['AUTHOR', 'STOCKS', 'TITLE', 'PRICE'],
+                data: books.data.data,
+                dataKeys: ['author', 'stocks', 'title', 'price']
+            }
+        });
+        console.log(details);
+        $global.data = details;
+
+    } catch (error) {
+        console.log(error);
+        padayon.errorHandler('Controller::User::downloadExcel', error, req, res)
+    } finally {
+
+        return $global;
+    }
+}
+
+async function fetchFile(public_id, options) {
+    const file = await cloudinary.image(public_id, options);
     const start = file.indexOf("'") + 1;
     const end = file.lastIndexOf("'");
     const url = file.slice(start, end);
-    callback({ success: true, data: url, code: 200 });
-}
 
-module.exports.downloadPDF = async (req, res, callback) => {
-    const options = {
-        template: 'template/qrcode/qrcode.html',
-        cloudinaryFolder: 'pdf_files',
-        format: 'A5',
-        data: [
-            {
-                name: "Shyam",
-                age: "26",
-                name: "Shyam",
-                name: "Shyam",
-
-            },
-            {
-                name: "Navjot",
-                age: "26",
-                name: "Shyam",
-                name: "Shyam",
-
-            },
-            {
-                name: "Vitthal",
-                age: "26",
-                name: "Shyam",
-                name: "Shyam",
-
-            },
-        ]
-    }
-    const result = await pdf.generate(options);
-
-    callback({ success: true, data: result, code: 200 });
+    return url;
 }
