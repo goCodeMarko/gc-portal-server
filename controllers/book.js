@@ -13,7 +13,7 @@ module.exports.getBooks = async (req, res) => {
         await model.getBooks(req, res, (result) => {
             $global.data = result;
         });
-    } catch (error) {;
+    } catch (error) {
         padayon.errorHandler('Controller::Book::getBooks', error, req, res)
     }finally{
         return $global;

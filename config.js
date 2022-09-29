@@ -1,18 +1,22 @@
-'use_strict';
+require('dotenv').config();
 
-require('dotenv').config()
-const
-    SERVER_HOSTNAME = process.env.SERVER_HOSTNAME || 'localhost',
-    SERVER_PORT = process.env.SERVER_PORT || 3000,
-    SERVER = {
-        hostname: SERVER_HOSTNAME,
-        port: SERVER_PORT
-    },
-    // DB = process.env.DB_URL,
-    DB = 'mongodb://localhost/bookstore_local',    
-    config = {
-        server: SERVER,
-        database: DB
-    };
+const SERVER = {
+    hostname:   process.env.SERVER_HOSTNAME || 'localhost',
+    port:       process.env.SERVER_PORT     || 3000
+};
+const CLOUDINARY = {
+    name:       process.env.CLOUDINARY_CLOUD_NAME,
+    key:        process.env.CLOUDINARY_API_KEY,
+    secret:     process.env.CLOUDINARY_API_SECRET
+}
+const DB = process.env.DB_URL || 'mongodb://localhost/bookstore_local';  
+
+
+
+const config = {
+    server:     SERVER,
+    database:   DB,
+    cloudinary: CLOUDINARY
+};
 
 module.exports = config;

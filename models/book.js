@@ -10,12 +10,12 @@ const
 let $global = { queryResult: null };
 
 Book = mongoose.model(base, mongoose.Schema({
-    title:          { type: String, required: true },
-    author:         { type: String, default: 0, required: true },
-    price:          { type: Number, required: true },
-    stocks:         { type: Number, default:0, required: true },
-    isdeleted:      { type: Boolean, default: false },
-    datecreated:    { type: Date, default: new Date()}
+    title:          { type: String,     required: true              },
+    author:         { type: String,     default: 0, required: true  },
+    price:          { type: Number,     required: true              },
+    stocks:         { type: Number,     default:0, required: true   },
+    isdeleted:      { type: Boolean,    default: false              },
+    datecreated:    { type: Date,       default: new Date()         }
 }));
 
 

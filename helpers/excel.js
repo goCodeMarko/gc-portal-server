@@ -14,7 +14,6 @@ module.exports.generate = async (set) => {
     const filename = padayon.uniqueId({ fileExtension: 'xlsx' });
     wb.createStyle(set.table.thStyle);
     wb.createStyle(set.table.tdStyle);
-    console.log(set);
 
     const title = xl.getExcelRowCol(set.header.start);
     ws.cell(title.row, title.col).string(set.header.title);
@@ -39,7 +38,6 @@ module.exports.generate = async (set) => {
         col: cellStartTH.col,
         maxCol: fieldname.data.length
     }
-    console.log('tabledata', tabledata);
     for (let i = 0; i < tabledata.data.length; i++) {
         const maxLoop = tabledata.maxCol - 1;
 

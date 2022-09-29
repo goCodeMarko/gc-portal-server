@@ -12,9 +12,6 @@ const
     qrcode = require('./../helpers/qrcode'),
     pdf = require('./../helpers/pdf'),
     excel = require('./../helpers/excel'),
-    moment = require('moment'),
-    fs = require('fs'),
-    xl = require('excel4node'),
     cloudinary = require('./../helpers/cloudinary');
 let $global = { success: true, data: [], message: '', code: 200 };
 
@@ -47,7 +44,6 @@ module.exports.getUsers = async (req, res) => {
 module.exports.authenticate = async (req, res) => {
     try {
         await model.authenticate(req, res, (result) => {
-            console.log('erwerwerew', result)
             if (result.length) {
                 //account exists
                 if (result[0].isblock) {
@@ -210,7 +206,6 @@ module.exports.downloadExcel = async (req, res) => {
                 dataKeys: ['author', 'stocks', 'title', 'price']
             }
         });
-        console.log(details);
         $global.data = details;
 
     } catch (error) {
