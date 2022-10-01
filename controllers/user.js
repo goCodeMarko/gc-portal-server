@@ -61,6 +61,9 @@ module.exports.authenticate = async (req, res) => {
                         maxAge: 86400000 
                     });
 
+                    $global.success = true;
+                    $global.message = '';
+
                     $global.data = { token, account: result[0] }
                 }
             } else {
