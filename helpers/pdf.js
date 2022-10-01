@@ -47,6 +47,12 @@ async function setupPDF(set) {
             right: '6mm',
             bottom: '6mm',
             left: '6mm'
+        },
+        timeout: 180000,
+        childProcessOptions: {
+            env: {
+                OPENSSL_CONF: '/dev/null',
+            }
         }
     };
 

@@ -9,7 +9,6 @@ const
     moment = require('moment'),
     userController = require(`../controllers/user`),
     { v4: uuidv4 } = require('uuid');
-const { off } = require('process');
     cron = require('node-cron');
 
 
@@ -111,7 +110,7 @@ module.exports.verifyAccess = (account, options ,req ,res) =>  {
 module.exports.requestLogger = (req, res, next) => {
     const date = moment().format("MM-DD-YYYY HH:MM:SS");
     const message = `${date}\t ${req.method}\t ${req.headers.origin}\t ${req.url}\t ${req.headers['user-agent']}`;
-    fs.writeFileSync('./logbook/requests.log', message + '\n', { flag: 'a' });
+    // fs.writeFileSync('./logbook/requests.log', message + '\n', { flag: 'a' });
     next();
 };
 

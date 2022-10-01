@@ -14,7 +14,8 @@ const
     server = require('http').createServer(app),
     fs = require('fs'),
     fsPromise = require('fs').promises,
-    cookieParser = require('cookie-parser');
+    cookieParser = require('cookie-parser'),
+    clientFolder = config.server.type == 'local' ? 'sandbox-client/client' : 'public';
 
 init.mongoose();
 init.cron();
@@ -26,7 +27,7 @@ app
 
     .use(cors())
 
-    .use(express.static(path.join(__dirname, '/sandbox-client/client')))
+    .use(express.static(path.join(__dirname, clientFolder)))
 
     .use(express.urlencoded({ extended: false }))
 
@@ -34,7 +35,13 @@ app
 
     .use(morgan('dev'))
     
-    .use(routes);
+    .use(routes)
+
+if (clientFolder == 'public'){
+    app.get('*', (req, res) => {
+        res.sendFile(path.join(__dirname, './public/index.html'));
+    });
+}
 
 
 server.listen(config.server.port, () => {
