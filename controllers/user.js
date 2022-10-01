@@ -96,7 +96,7 @@ module.exports.updateUserAccess = async (req, res) => {
 module.exports.checkAccess = async (properties, req, res) => {
     try {
         await model.checkAccess(properties, req, res, (result) => {
-            // console.log(result)
+            $global.success = result.length ? true : false;
             $global.data = result;
         });
     } catch (error) {

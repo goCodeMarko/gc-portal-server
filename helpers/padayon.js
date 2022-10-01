@@ -21,6 +21,8 @@ module.exports.execute = (controller, options = {}) => async (req, res) => {
                 res.status(data.code).send(data);
             } catch (error) {
             }    
+        } else {
+            res.status(200).send({ success: false, message: response.message });
         }
     });
 };
@@ -54,8 +56,7 @@ module.exports.errorHandler = (area, error, req, res) => {
 };
 
 module.exports.security = async (req, res, options, callback) => {
-    let success = true;
-    let account;
+    let response = { success: true, message: '', account: {} };
     try {
         if(!options.hasOwnProperty('secured')) options.secured = true;
 
@@ -63,13 +64,19 @@ module.exports.security = async (req, res, options, callback) => {
             const token = req.headers['authorization'];
 
             if(token){
-                account = await jwt.verify(token, process.env.JWT_SECRET_KEY);
+                let account = await jwt.verify(token, process.env.JWT_SECRET_KEY);
+                response.account = account;
 
                 if(options.hasOwnProperty('role') && options.role.length){
                     await this.verifyRole(account.role, options.role);
                 } 
 
-                await this.verifyAccess(account, options ,req, res); 
+                const access = await this.verifyAccess(account, options ,req, res); 
+
+                if (!access) {
+                    response.success = false;
+                    response.message = 'Restricted';
+                }
             }else{
                 res.status(401).send({success: false, message: 'Missing token'});
                 return;
@@ -81,7 +88,7 @@ module.exports.security = async (req, res, options, callback) => {
         this.errorHandler('Padayon::Utils::security', error, req ,res);
     }
  
-    callback({account, success})  
+    callback(response)  
 };
 
 module.exports.verifyRole = (accountRole, allowedRoles) => {
@@ -101,8 +108,8 @@ module.exports.verifyAccess = (account, options ,req ,res) =>  {
         
        let result = await userController.checkAccess(options.strict, req, res);
         
-        if (result.data) resolve();
-        else reject(new Error('Error in verifyAccess'));
+        if (result.success) resolve(true);
+        else resolve(false);
     })
 };
 
