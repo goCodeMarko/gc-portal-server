@@ -9,8 +9,8 @@ const CLOUDINARY = {
     key:        process.env.CLOUDINARY_API_KEY,
     secret:     process.env.CLOUDINARY_API_SECRET
 }
-const DB = process.env.MONGODB  || 'mongodb://localhost/bookstore_local'
-const TYPE = process.env.TYPE   || 'local'
+const DB = process.env.ATLAS_URI  || 'mongodb://localhost/bookstore_local'
+const TYPE = process.env.TYPE || 'dev'
 
 const config = {
     server: SERVER,

@@ -1,6 +1,3 @@
-const { Console } = require('console');
-const { start } = require('repl');
-
 const
     padayon = require('../helpers/padayon'),
     path = require('path'),
@@ -12,6 +9,7 @@ const
     qrcode = require('./../helpers/qrcode'),
     pdf = require('./../helpers/pdf'),
     excel = require('./../helpers/excel'),
+    papaparse = require('./../helpers/papaparse'),
     cloudinary = require('./../helpers/cloudinary');
 let $global = { success: true, data: [], message: '', code: 200 };
 
@@ -29,6 +27,8 @@ module.exports.getUser = async (req, res) => {
     }
 };
 
+
+
 module.exports.getUsers = async (req, res) => {
     try {
         await model.getUsers(req, res, (result) => {
@@ -40,6 +40,8 @@ module.exports.getUsers = async (req, res) => {
         return $global;
     }
 };
+
+
 
 module.exports.authenticate = async (req, res) => {
     try {
@@ -81,6 +83,8 @@ module.exports.authenticate = async (req, res) => {
     }
 };
 
+
+
 module.exports.updateUserAccess = async (req, res) => {
     try {
         await model.updateUserAccess(req, res, (result) => {
@@ -92,6 +96,8 @@ module.exports.updateUserAccess = async (req, res) => {
         return $global;
     }
 };
+
+
 
 module.exports.checkAccess = async (properties, req, res) => {
     try {
@@ -105,6 +111,8 @@ module.exports.checkAccess = async (properties, req, res) => {
         return $global;
     }
 };
+
+
 
 module.exports.saveFile = async (req, res) => {
     try {
@@ -123,6 +131,8 @@ module.exports.saveFile = async (req, res) => {
     }
 };
 
+
+
 module.exports.generateQR = async (req, res) => {
     try {
         const result = await qrcode.generate();
@@ -134,6 +144,8 @@ module.exports.generateQR = async (req, res) => {
         return $global;
     }
 }
+
+
 
 module.exports.getFile = async (req, res) => {
     try {
@@ -155,6 +167,8 @@ module.exports.getFile = async (req, res) => {
     }
 }
 
+
+
 module.exports.downloadPDF = async (req, res) => {
     try {
         const public_id = req.query.public_id;
@@ -168,18 +182,17 @@ module.exports.downloadPDF = async (req, res) => {
 
         let books = await bookController.getBooks(req, res);
 
-        let options = {
-            template: 'templates/unknown_report.html',
-            cloudinaryFolder: 'unknown_reports',
-            format: 'Legal',
+        let args = {
             data: {
-                data: books.data.data,
-                columns: ['AUTHOR', 'STOCKS', 'TITLE', 'PRICE'],
-                qrcodeURL
-            }
+                th: ['AUTHOR', 'STOCKS', 'TITLE', 'PRICE'],
+                td: books.data.data,
+                qrcode: qrcodeURL
+            },
+            template: 'unknown_report',
+            cloudinaryFolder: 'unknown_reports',
         };
         
-        const result = await pdf.generate(options);
+        const result = await pdf.generate(args);
 
         $global.data = result;
     } catch (error) {
@@ -189,10 +202,18 @@ module.exports.downloadPDF = async (req, res) => {
         return $global;
     }
 }
+async function fetchFile(public_id, options) {
+    const file = await cloudinary.image(public_id, options);
+    const start = file.indexOf("'") + 1;
+    const end = file.lastIndexOf("'");
+    const url = file.slice(start, end);
+
+    return url;
+}
+
 
 
 module.exports.downloadExcel = async (req, res) => {
-  
     try {
         let books = await bookController.getBooks(req, res);
 
@@ -215,16 +236,19 @@ module.exports.downloadExcel = async (req, res) => {
         console.log(error);
         padayon.errorHandler('Controller::User::downloadExcel', error, req, res)
     } finally {
-
         return $global;
     }
 }
 
-async function fetchFile(public_id, options) {
-    const file = await cloudinary.image(public_id, options);
-    const start = file.indexOf("'") + 1;
-    const end = file.lastIndexOf("'");
-    const url = file.slice(start, end);
+module.exports.downloadCSV = async(req, res) => {
+    try {
+        let books = await bookController.getBooks(req, res);
+        papaparse.generate();
+    } catch (error) {
+        console.log(error);
+        padayon.errorHandler('Controller::User::downloadCSV', error, req, res)
+    } finally {
 
-    return url;
+        return $global;
+    }
 }

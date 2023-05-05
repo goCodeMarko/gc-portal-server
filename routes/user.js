@@ -65,5 +65,11 @@ router.get(`/api/${base}/downloadExcel`,
     })
 );
 
+router.get(`/api/${base}/downloadCSV`,
+    execute(controller.downloadCSV, {
+        secured: true
+    })
+);
+
 
 module.exports = router

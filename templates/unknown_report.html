@@ -35,10 +35,10 @@
         }
         .header .logo-text b{
             display: block;
-            width: 200px;
+            width: 220px;
         }
         .header .document-title b {
-            font-size: 56px;
+            font-size: 48px;
         }
         .header .linebreak {
             margin-top: 1em;
@@ -61,14 +61,14 @@
                         <tr class="text-center">
                             <td>
                                 <img src='https://res.cloudinary.com/dhmkfau4h/image/upload/v1662440493/logo/Bacolod_jkq086.png'
-                                    height="100" width="100" />
+                                    height="120" width="120" />
                             </td>
                             <td class="logo-text">
-                                <b style="font-size:8px;">REPUBLIC OF THE PHILIPPINES</b>
-                                <b style="font-size:12px;">CITY GOVERNMENT</b>
-                                <b style="font-size:25px;">BACOLOD</b>
-                                <b style="font-size:12px;">OFFICE OF THE CITY MAYOR</b>
-                                <b style="font-size:12px;">PERMIT AND LICENSE DIVISION</b>
+                                <b style="font-size:10px;">REPUBLIC OF THE PHILIPPINES</b>
+                                <b style="font-size:14px;">CITY GOVERNMENT</b>
+                                <b style="font-size:27px;">BACOLOD</b>
+                                <b style="font-size:14px;">OFFICE OF THE CITY MAYOR</b>
+                                <b style="font-size:14px;">PERMIT AND LICENSE DIVISION</b>
                             </td>
                         </tr>
                     </table>
@@ -76,7 +76,7 @@
             </tr>
         </table>
         <div class="qrcode">
-            <img src={{qrcodeURL}} height="100" width="100" />
+            <img src={{qrcode}} height="100" width="100" />
         </div>
 
         <hr class="linebreak">
@@ -93,11 +93,11 @@
     <div class="body">
             <table cellspacing="0" style="margin-top:5em;text-align: center;font-size:14;">
                 <thead>
-                    {{#each columns}}
+                    {{#each th}}
                     <th>{{this}}</th>
                     {{/each}}
                 </thead>
-                {{#each data}}
+                {{#each td}}
                 <tr>
                     <td style="width: 100px; padding:.3em;">{{this.author}}</td>
                     <td style="width: 100px;">{{this.stocks}}</td>

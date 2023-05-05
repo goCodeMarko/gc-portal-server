@@ -4,22 +4,21 @@ const
     pdf = require("pdf-creator-node"),
     cloudinary = require('./../helpers/cloudinary'),
     moment = require('moment'),
-    fs = require("fs");
+    fsPromises = require("fs/promises");
 
 
-module.exports.generate = async (set) => {
-    set.filename = padayon.uniqueId({ fileExtension: 'pdf' });
-    const result = await setupPDF(set);
-
+module.exports.generate = async (args) => {
+    console.time('timer')
+    args.filename = padayon.uniqueId({ fileExtension: 'pdf' });
+    const result = await setupPDF(args);
     const file = await pdf.create(result.document, result.options);
-
     const cloud = await cloudinary.uploader.upload(file.filename, {
-        folder: set?.cloudinaryFolder ? set.cloudinaryFolder : '',
+        folder: args.cloudinaryFolder ? args.cloudinaryFolder : 'random',
         type: "authenticated"
     });
 
     //Removes the newly copied file
-    fs.rmSync(path.join(__dirname, '..', 'xfiles', set.filename));
+    await fsPromises.unlink(path.join(__dirname, '..', 'xfiles', args.filename));
 
     const details = {
         public_id: cloud.public_id,
@@ -27,23 +26,17 @@ module.exports.generate = async (set) => {
         created_at: moment().format('MM-DD-YYYY_hh-mm-ss'),
         format: cloud.format
     }
-
+    console.timeEnd('timer')
     return details;
 }
 
 
-async function setupPDF(set) {
-    if (!set.hasOwnProperty('format') || !set.format) set.format = 'A5';
-    if (!set.hasOwnProperty('data') || !set.data) set.data = [];
-    if (!set.hasOwnProperty('columns') || !set.columns) set.columns = [];
-    if (!set.hasOwnProperty('template') || !set.template) set.template = '';
-
-    const template = fs.readFileSync(set.template, 'utf8');
+async function setupPDF(args) {
     const options = {
-        format: set.format,
+        format: 'Legal',
         orientation: 'portrait',
         border: {
-            top: '6mm',        
+            top: '6mm',
             right: '6mm',
             bottom: '6mm',
             left: '6mm'
@@ -55,16 +48,23 @@ async function setupPDF(set) {
             }
         }
     };
-
+  
+    const template = await fsPromises.readFile(`templates${String.fromCharCode(47)}${args.template}.html`, 'utf8');
+    console.log('template', Buffer.from(template))
     //Creates a copy of xfiles/base.pdf with unique file name
-    fs.copyFileSync(path.join(__dirname, '..', 'xfiles', 'base.pdf'), path.join(__dirname, '..', 'xfiles', set.filename));
+    const 
+        srcFile = path.join(__dirname, '..', 'xfiles', 'base.pdf'),
+        destFile = path.join(__dirname, '..', 'xfiles', args.filename);
+
+    await fsPromises.copyFile(srcFile, destFile)
 
     const document = {
         html: template,
-        data: set.data,
-        path: 'xfiles/' + set.filename,
+        data: args.data,
+        path: 'xfiles/' + args.filename,
+        cloudinaryFolder: args.cloudinaryFolder || 'random',
+        filename: args.filename,
         type: ''
     };
-
     return { options, document }
 }

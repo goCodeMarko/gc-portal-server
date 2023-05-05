@@ -8,29 +8,29 @@ const
 
 
 module.exports.generate = async (set) => {
-    set = await setupOptions(set);
-    const wb = new xl.Workbook();                 //creates workbook
-    const ws = wb.addWorksheet(set.sheetName);    //creates worksheet on the workbook
+    const option = await setupOptions(set);
+    const wb = new xl.Workbook();                           //creates workbook
+    const ws = wb.addWorksheet(option.sheetName);           //creates worksheet on the workbook
     const filename = padayon.uniqueId({ fileExtension: 'xlsx' });
-    wb.createStyle(set.table.thStyle);
-    wb.createStyle(set.table.tdStyle);
+    wb.createStyle(option.table.thStyle);
+    wb.createStyle(option.table.tdStyle);
 
-    const title = xl.getExcelRowCol(set.header.start);
-    ws.cell(title.row, title.col).string(set.header.title);
+    const title = xl.getExcelRowCol(option.header.start);
+    ws.cell(title.row, title.col).string(option.header.title);
 
     // for the fieldnames
-    const cellStartTH = xl.getExcelRowCol(set.table.start);
+    const cellStartTH = xl.getExcelRowCol(option.table.start);
     const fieldname = {
-        data: set.table.fields,
+        data: option.table.fields,
         row: cellStartTH.row,
         col: cellStartTH.col
     }
-    for (let i = 0; i < fieldname.data.length; i++) {
-        ws.cell(fieldname.row, fieldname.col).string(fieldname.data[i]).style(set.table.thStyle);
-        fieldname.col++;
-    }
 
-    // for the data
+    fieldname.data.forEach((item) => {
+        ws.cell(fieldname.row, fieldname.col).string(item).style(option.table.thStyle);
+        fieldname.col++;
+    });
+
     const tabledata = {
         data: set.table.data,
         dataKeys: set.table.dataKeys,
@@ -38,6 +38,7 @@ module.exports.generate = async (set) => {
         col: cellStartTH.col,
         maxCol: fieldname.data.length
     }
+  
     for (let i = 0; i < tabledata.data.length; i++) {
         const maxLoop = tabledata.maxCol - 1;
 
@@ -46,10 +47,10 @@ module.exports.generate = async (set) => {
 
             switch (typeof data) {
                 case 'number':
-                    ws.cell(tabledata.row, tabledata.col).number(data).style(set.table.tdStyle);
+                    ws.cell(tabledata.row, tabledata.col).number(data).style(option.table.tdStyle);
                     break;
                 default:
-                    ws.cell(tabledata.row, tabledata.col).string(data).style(set.table.tdStyle);
+                    ws.cell(tabledata.row, tabledata.col).string(data).style(option.table.tdStyle);
                     break;
             }
 
@@ -64,7 +65,7 @@ module.exports.generate = async (set) => {
 
     //creates buffer of the work book
     const buffer = await wb.writeToBuffer();
-
+    
     //Writes the buffer on the newly copied excel file
     fs.writeFileSync(path.join(__dirname, '..', 'xfiles', filename), buffer, function (err) {
         if (err) {
@@ -93,63 +94,41 @@ module.exports.generate = async (set) => {
 
 
 async function setupOptions(set) {
-    if (!set.hasOwnProperty('sheetName') || !set.sheetName){
-        set.sheetName = 'Sheet 1';  
-    } 
-
-    if (!set.hasOwnProperty('table') || !set.table) {
-        set.table = {}
-    } 
-    if (!set.table.hasOwnProperty('start') || !set.table.start) {
-        set.table.start = 'A3'
-    }
-    if (!set.table.hasOwnProperty('fields') || !set.table.fields) {
-        set.table.fields = []
-    }
-    if (!set.table.hasOwnProperty('data') || !set.table.data) {
-        set.table.data = []
-    }
-    if (!set.table.hasOwnProperty('dataKeys') || !set.table.dataKeys) {
-        set.table.dataKeys = []
-    }
-    if (!set.table.hasOwnProperty('thStyle') || !set.table.thStyle) {
-        set.table.thStyle = {
-            alignment: {
-                horizontal: ['center'],
+    const option = {
+        sheetName: set.sheetName || 'Sheet 1',
+        header: {
+            start: set.header.start || 'A1',
+            title: set.header.title
+        },
+        table: {
+            start: set.table.start || 'A4',
+            fields: set.table.fields || [],
+            data: set.table.data || [],
+            dataKeys: set.table.dataKeys || [],
+            thStyle: set.table.thStyle || {
+                alignment: {
+                    horizontal: ['center'],
+                },
+                font: {
+                    color: '#ffffff',
+                },
+                fill: {
+                    type: 'pattern',
+                    patternType: 'solid',
+                    fgColor: '#ff8100'
+                }
             },
-            font: {
-                color: '#ffffff',
-            },
-            fill: {
-                type: 'pattern',
-                patternType: 'solid',
-                fgColor: '#ff8100'
-            }
-        }
-    }
-    if (!set.table.hasOwnProperty('tdStyle') || !set.tdStyle) {
-        set.table.tdStyle = {
-            alignment: {
-                horizontal: ['center'],
-            },
-            font: {
-                color: '#000000',
-                size: 12,
+            tdStyle: set.table.tdStyle || {
+                alignment: {
+                    horizontal: ['center'],
+                },
+                font: {
+                    color: '#000000',
+                    size: 12,
+                }
             }
         }
     }
 
-    if (!set.hasOwnProperty('header') || !set.header) {
-        set.header = {}
-    } 
-
-    if (!set.header.hasOwnProperty('start') || !set.header.start) {
-        set.header.start = 'A1'
-    }
-
-    if (!set.header.hasOwnProperty('title') || !set.header.title) {
-        set.header.title = ''
-    }
-
-    return set;
+    return option;
 }

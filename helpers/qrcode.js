@@ -26,7 +26,7 @@ async function uploadQRCode(code) {
 
 async function createQRCodeImg(code) {
     //create canvas for qr
-    const qrCodecanvas = createCanvas(164, 164);
+    const qrCodecanvas = createCanvas(264, 264); // 164
     const qrCodeContext = qrCodecanvas.getContext("2d");
 
     //insert qrcode image on the qr canvas
@@ -46,19 +46,17 @@ async function createQRCodeImg(code) {
     );
 
     //styling the logo canvas
-    const logo = await loadImage('https://res.cloudinary.com/dhmkfau4h/image/upload/v1662440493/logo/Bacolod_jkq086.png', {
-        quality: 100
-    });
+    const logo = await loadImage('https://res.cloudinary.com/dhmkfau4h/image/upload/v1662440493/logo/Bacolod_jkq086.png');
     
-    const logoCanvas = createCanvas(51, 52);
+    const logoCanvas = createCanvas(500, 500);
     const logoContext = logoCanvas.getContext('2d');
     logoContext.fillStyle = 'rgba(255, 255, 255, 0.8)';
     logoContext.fillRect(0, 0, logoCanvas.width, logoCanvas.height);
-    logoContext.drawImage(logo, 6, 6, 40, 40);
+    logoContext.drawImage(logo, 6, 6, 490, 490);
 
     //inserts the logo on qrcode canvas
-    qrCodeContext.drawImage(logoCanvas, 62, 60, 40, 40);
-    
+    qrCodeContext.drawImage(logoCanvas, 60, 60, 45, 45);
+    // const base64 = logoCanvas.toDataURL("image/png");
     const base64 = qrCodecanvas.toDataURL("image/png");
 
     return base64;
