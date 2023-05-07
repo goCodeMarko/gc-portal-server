@@ -1,7 +1,7 @@
 const
     padayon = require('./padayon'),
     path = require('path'),
-    pdf = require("pdf-creator-node"),
+    //pdf = require("pdf-creator-node"),
     cloudinary = require('./../helpers/cloudinary'),
     moment = require('moment'),
     fsPromises = require("fs/promises");
