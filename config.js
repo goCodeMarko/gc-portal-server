@@ -1,4 +1,4 @@
-require('dotenv').config();
+// require('dotenv').config();
 
 const SERVER = {
     hostname:   process.env.HOST || 'localhost',
