@@ -22,7 +22,6 @@
     "node-cron": "^3.0.2",
     "papaparse": "^5.4.1",
     "pdf-creator-node": "^2.3.5",
-    "phantomjs-prebuilt": "^2.1.16",
     "qrcode": "^1.5.1",
     "streamifier": "^0.1.1",
     "uuid": "^9.0.0"
