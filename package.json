@@ -36,5 +36,8 @@
     "dev": "nodemon server"
   },
   "author": "Patrick Marck D. Dulaca",
-  "license": "ISC"
+  "license": "ISC",
+  "engines": {
+    "node": "16.16.0"
+  }
 }
