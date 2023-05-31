@@ -49,20 +49,20 @@ module.exports.authenticate = async (req, res) => {
             if (result.length) {
                 //account exists
                 if (result[0].isblock) {
+                    console.log(3)
                     //blocked account
                     $global.success = false;
                     $global.message = 'Your account has been block'
                     
                 } else {
+                    console.log(process.env.JWT_PRIVATE_KEY)
                     //log in success
-                    const token = jwt.sign(result[0], process.env.JWT_SECRET_KEY, { expiresIn: '1d' });
-
+                    const token = jwt.sign(result[0], process.env.JWT_PRIVATE_KEY, { expiresIn: '1d' });
                     // set token as cookie
                     res.cookie('xxxx', token, { 
                         httpOnly: true, 
                         maxAge: 86400000 
                     });
-
                     $global.success = true;
                     $global.message = '';
 
@@ -70,11 +70,11 @@ module.exports.authenticate = async (req, res) => {
                 }
             } else {
                 //account does'nt exists
-
                 $global.success = false;
                 $global.message = 'Username or Password is incorrect';
 
             }
+            console.log(4)
         });
     } catch (error) {
         padayon.errorHandler('Controller::User::authenticate', error, req, res)
@@ -182,17 +182,13 @@ module.exports.downloadPDF = async (req, res) => {
 
         let books = await bookController.getBooks(req, res);
 
-        let args = {
-            data: {
-                th: ['AUTHOR', 'STOCKS', 'TITLE', 'PRICE'],
-                td: books.data.data,
-                qrcode: qrcodeURL
-            },
-            template: 'unknown_report',
-            cloudinaryFolder: 'unknown_reports',
-        };
-        
-        const result = await pdf.generate(args);
+        const result = await pdf.generate('unknown_report', {
+            name: 'Patric Marck Dulaca',
+            th: ['AUTHOR', 'STOCKS', 'TITLE', 'PRICE'],
+            td: books.data.data,
+            qrcode: qrcodeURL
+        });
+
 
         $global.data = result;
     } catch (error) {

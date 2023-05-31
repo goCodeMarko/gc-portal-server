@@ -56,15 +56,16 @@ module.exports.errorHandler = (area, error, req, res) => {
 };
 
 module.exports.security = async (req, res, options, callback) => {
+    console.log(res.cookie)
     let response = { success: true, message: '', account: {} };
     try {
         if(!options.hasOwnProperty('secured')) options.secured = true;
-
+        console.log('options.secured', options.secured)
         if(options.secured){
             const token = req.headers['authorization'];
 
             if(token){
-                let account = await jwt.verify(token, process.env.JWT_SECRET_KEY);
+                let account = await jwt.verify(token, process.env.JWT_PRIVATE_KEY);
                 response.account = account;
 
                 if(options.hasOwnProperty('role') && options.role.length){

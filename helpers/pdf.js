@@ -1,24 +1,37 @@
 const
     padayon = require('./padayon'),
-    path = require('path'),
-    //pdf = require("pdf-creator-node"),
     cloudinary = require('./../helpers/cloudinary'),
     moment = require('moment'),
-    fsPromises = require("fs/promises");
+    fsPromises = require("fs/promises"),
+    path = require('path'),
+    puppeteer = require('puppeteer'),
+    hbs = require('handlebars');
 
 
-module.exports.generate = async (args) => {
-    console.time('timer')
-    args.filename = padayon.uniqueId({ fileExtension: 'pdf' });
-    const result = await setupPDF(args);
-    const file = await pdf.create(result.document, result.options);
-    const cloud = await cloudinary.uploader.upload(file.filename, {
-        folder: args.cloudinaryFolder ? args.cloudinaryFolder : 'random',
+module.exports.generate = async (template, data) => {
+    console.time('time');
+    const browser = await puppeteer.launch({ headless: 'new' });
+    const page = await browser.newPage();
+    const filename = padayon.uniqueId({ fileExtension: 'pdf' });
+    const html = await compile(template, data);
+
+    await page.setContent(html);
+
+    const pdf = await page.pdf({
+        path: `xfiles/${filename}`,
+        format: 'Legal',
+        orientation: 'portrait'
+    });
+
+    await browser.close();
+
+    const cloud = await cloudinary.uploader.upload(path.join(process.cwd(), 'xfiles', filename), {
+        folder: 'random',
         type: "authenticated"
     });
 
-    //Removes the newly copied file
-    await fsPromises.unlink(path.join(__dirname, '..', 'xfiles', args.filename));
+    //Removes the file
+    await fsPromises.unlink(path.join(process.cwd(), 'xfiles', filename));
 
     const details = {
         public_id: cloud.public_id,
@@ -26,45 +39,14 @@ module.exports.generate = async (args) => {
         created_at: moment().format('MM-DD-YYYY_hh-mm-ss'),
         format: cloud.format
     }
-    console.timeEnd('timer')
+    console.timeEnd('time');
     return details;
 }
 
+async function compile(templateData, data) {
+    const filePath = path.join(process.cwd(), 'templates', `${templateData}.hbs`);
 
-async function setupPDF(args) {
-    const options = {
-        format: 'Legal',
-        orientation: 'portrait',
-        border: {
-            top: '6mm',
-            right: '6mm',
-            bottom: '6mm',
-            left: '6mm'
-        },
-        timeout: 180000,
-        childProcessOptions: {
-            env: {
-                OPENSSL_CONF: '/dev/null',
-            }
-        }
-    };
-  
-    const template = await fsPromises.readFile(`templates${String.fromCharCode(47)}${args.template}.html`, 'utf8');
-    console.log('template', Buffer.from(template))
-    //Creates a copy of xfiles/base.pdf with unique file name
-    const 
-        srcFile = path.join(__dirname, '..', 'xfiles', 'base.pdf'),
-        destFile = path.join(__dirname, '..', 'xfiles', args.filename);
+    const html = await fsPromises.readFile(filePath, 'utf-8');
 
-    await fsPromises.copyFile(srcFile, destFile)
-
-    const document = {
-        html: template,
-        data: args.data,
-        path: 'xfiles/' + args.filename,
-        cloudinaryFolder: args.cloudinaryFolder || 'random',
-        filename: args.filename,
-        type: ''
-    };
-    return { options, document }
+    return hbs.compile(html)(data);
 }
