@@ -131,6 +131,30 @@ module.exports.saveFile = async (req, res) => {
     }
 };
 
+module.exports.saveMultipleFiles = async (req, res) => {
+    try {
+        const uploads = [];
+        for (const file of req.files) {
+            const { path } = file;
+
+            const upload = await cloudinary.uploader.upload(path, {
+                folder: 'profile_pictures',
+                type: 'authenticated',
+                resource_type: 'auto'
+                // allowed_formats: ['pdf', 'jpg', 'jpeg', 'png', 'xls', 'xlsx']
+            });
+
+            uploads.push(upload);
+        }
+
+        $global.data = uploads;
+    } catch (error) {
+        padayon.errorHandler('Controller::User::saveMultipleFiles', error, req, res)
+    } finally {
+        return $global;
+    }
+};
+
 
 
 module.exports.generateQR = async (req, res) => {

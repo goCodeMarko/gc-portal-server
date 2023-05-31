@@ -4,9 +4,8 @@ const
 
 module.exports = multer({
     storage: multer.diskStorage({}),
-
-    fileFilter: (req, file, callback) =>{
-        console.log('file',file);
+    fileFilter: (req, file, callback) => {
+        console.log('file', file);
         callback(null, true);
     }
 })

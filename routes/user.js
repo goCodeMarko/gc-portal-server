@@ -7,7 +7,7 @@ const
     express = require('express'),
     router = express.Router(),
     controller = require(`../controllers/user`),
-    upload = require('./../helpers/multer');
+    multer = require('./../helpers/multer');
 
 
 router.get(`/api/${base}/getUser`, execute(controller.getUser, { 
@@ -35,19 +35,25 @@ router.post(`/api/${base}/checkAccess`, execute(controller.checkAccess, {
     })
 );
 
-router.post(`/api/${base}/saveFile`, upload.single('image'), 
+router.post(`/api/${base}/saveFile`, multer.single('image'), 
         execute(controller.saveFile, {
-        secured: true
+        secured: false
     })
 );
 
-router.get(`/api/${base}/generateQR`, upload.single('image'),
+router.post(`/api/${base}/saveMultipleFiles`, multer.array('photos', 2),
+    execute(controller.saveMultipleFiles, {
+        secured: false
+    })
+);
+
+router.get(`/api/${base}/generateQR`, multer.single('image'),
     execute(controller.generateQR, {
         secured: true
     })
 );
 
-router.get(`/api/${base}/getFile`, upload.single('image'),
+router.get(`/api/${base}/getFile`, multer.single('image'),
     execute(controller.getFile, {
         secured: true
     })
