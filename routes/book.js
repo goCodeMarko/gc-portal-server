@@ -1,40 +1,45 @@
-'use_strict';
+"use_strict";
 
-const
-    { execute } = require('../helpers/padayon'),
-    path = require('path'),
-    base = path.basename(__filename, '.js'),
-    express = require('express'),
-    router = express.Router(),
-    controller = require(`../controllers/${base}`);
+const { execute } = require("../services/padayon"),
+  path = require("path"),
+  base = path.basename(__filename, ".js"),
+  express = require("express"),
+  router = express.Router(),
+  controller = require(`../controllers/${base}`);
 
+router.get(
+  `/api/${base}/getBooks`,
+  execute(controller.getBooks, {
+    secured: true,
+    role: ["user"],
+  })
+); //---------done
 
-router.get(`/api/${base}/getBooks`, execute(controller.getBooks, { 
-        secured: true, 
-        role: ['user']
-    }
-));
+router.put(
+  `/api/${base}/deleteBook/:id`,
+  execute(controller.deleteBook, {
+    secured: true,
+    role: ["user"],
+    strict: { isallowedtodelete: true },
+  })
+); //---------done
 
-router.put(`/api/${base}/deleteBook`, execute(controller.deleteBook, { 
-        secured: true, 
-        role: ['user'],
-        strict: {  isallowedtodelete: true }
-    }
-));
+router.put(
+  `/api/${base}/updateBook/:id`,
+  execute(controller.updateBook, {
+    secured: true,
+    role: ["user"],
+    strict: { isallowedtoupdate: true },
+  })
+); //---------done
 
-router.put(`/api/${base}/editBook`, execute(controller.editBook, { 
-        secured: true, 
-        role: ['user'],
-        strict: {  isallowedtoupdate: true }
-    }
-));
-
-router.post(`/api/${base}/addBook`, execute(controller.addBook, { 
-        secured: true, 
-        role: ['user'],
-        strict: {  isallowedtocreate: true }
-    }
-));
-
+router.post(
+  `/api/${base}/addBook`,
+  execute(controller.addBook, {
+    secured: true,
+    role: ["user"],
+    strict: { isallowedtocreate: true },
+  })
+); //---------done
 
 module.exports = router;

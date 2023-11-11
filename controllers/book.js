@@ -1,59 +1,96 @@
-const
-    padayon = require('../helpers/padayon'),
-    path = require('path'),
-    base = path.basename(__filename, '.js'),
-    model = require(`./../models/${base}`);
-let $global = { success: true, data: [], message: '', code: 200};
-
-
-
+const padayon = require("../services/padayon"),
+  path = require("path"),
+  base = path.basename(__filename, ".js"),
+  _ = require("lodash"),
+  { bookDTO } = require("../services/dto"),
+  model = require(`./../models/${base}`);
 
 module.exports.getBooks = async (req, res) => {
-    try {
-        await model.getBooks(req, res, (result) => {
-            $global.data = result;
-        });
-    } catch (error) {
-        padayon.errorHandler('Controller::Book::getBooks', error, req, res)
-    }finally{
-        return $global;
-    }
-}; 
+  try {
+    let response = { success: true, code: 200 };
+
+    await model.getBooks(req, res, (result) => {
+      response.data = result;
+    });
+    return response;
+  } catch (error) {
+    padayon.ErrorHandler("Controller::Book::getBooks", error, req, res);
+  }
+};
 
 module.exports.deleteBook = async (req, res, callback) => {
-    try {
-        await model.deleteBook(req, res, (result) => {
-            $global.data = result;
-        });
-    } catch (error) {
-        ;
-        padayon.errorHandler('Controller::Book::deleteBook', error, req, res)
-    } finally {
-        return $global;
-    }
-}; 
+  try {
+    let response = { success: true, code: 200 };
 
-module.exports.editBook = async (req, res) => {
-    try {
-        await model.editBook(req, res, (result) => {
-            $global.data = result;
-        });
-    } catch (error) {
-        ;
-        padayon.errorHandler('Controller::Book::editBook', error, req, res)
-    } finally {
-        return $global;
-    }
-}; 
+    req.fnParams = {
+      bookId: req.params?.id,
+    };
+
+    await model.deleteBook(req, res, (result) => {
+      if (_.isEmpty(result) || !_.isEqual(result.nModified, 1))
+        throw new padayon.BadRequestException(
+          "The updated QR Code is not reflected in user's acccount. Please try again."
+        );
+
+      response.data = result;
+    });
+    return response;
+  } catch (error) {
+    padayon.ErrorHandler("Controller::Book::deleteBook", error, req, res);
+  }
+}; //---------done
+
+module.exports.updateBook = async (req, res) => {
+  try {
+    let response = { success: true, code: 200 };
+
+    const body = {
+      title: req?.body?.title,
+      author: req?.body?.author,
+      price: req?.body?.price,
+      stocks: req?.body?.stocks,
+    };
+
+    await bookDTO.validateAsync(body);
+
+    req.fnParams = {
+      ...body,
+      _id: req?.params?.id,
+    };
+
+    await model.updateBook(req, res, (result) => {
+      if (_.isEmpty(result) || !_.isEqual(result.n, 1))
+        throw new padayon.BadRequestException("Book not found.");
+      response.data = result;
+    });
+    return response;
+  } catch (error) {
+    padayon.ErrorHandler("Controller::Book::updateBook", error, req, res);
+  }
+}; //---------done
 
 module.exports.addBook = async (req, res) => {
-    try {
-        await model.addBook(req, res, (result) => {
-            $global.data = result;
-        });
-    } catch (error) {
-        padayon.errorHandler('Controller::Book::addBook', error, req, res)
-    } finally {
-        return $global;
-    }
-}; 
+  try {
+    let response = { success: true, code: 201 };
+
+    const body = {
+      title: req?.body?.title,
+      author: req?.body?.author,
+      price: req?.body?.price,
+      stocks: req?.body?.stocks,
+    };
+
+    await bookDTO.validateAsync(body);
+
+    req.fnParams = {
+      ...body,
+    };
+
+    await model.addBook(req, res, (result) => {
+      response.data = result;
+    });
+    return response;
+  } catch (error) {
+    padayon.ErrorHandler("Controller::Book::addBook", error, req, res);
+  }
+}; //---------done

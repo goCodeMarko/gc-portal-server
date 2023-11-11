@@ -1,10 +1,12 @@
 {
-  "name": "sandbox-client",
+  "name": "sandbox-server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "axios": "^1.6.1",
     "bcrypt": "^5.0.1",
+    "body-parser": "^1.20.2",
     "canvas": "^2.9.3",
     "cloudinary": "^1.31.0",
     "cookie-parser": "^1.4.6",
@@ -13,9 +15,12 @@
     "excel4node": "^1.8.2",
     "express": "^4.17.1",
     "handlebars": "^4.7.7",
+    "joi": "^17.11.0",
     "jsonwebtoken": "^8.5.1",
     "latest-version": "^7.0.0",
+    "lodash": "^4.17.21",
     "moment": "^2.29.4",
+    "moment-timezone": "^0.5.43",
     "mongodb": "^3.6.3",
     "mongoose": "^5.11.8",
     "morgan": "^1.10.0",
@@ -33,7 +38,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server",
-    "dev": "nodemon server"
+    "start:local": "set NODE_ENV=local && nodemon server",
+    "start:dev": "NODE_ENV=dev && node server"
   },
   "author": "Patrick Marck D. Dulaca",
   "license": "ISC"

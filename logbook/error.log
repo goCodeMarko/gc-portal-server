@@ -1008,3 +1008,358 @@
 {"success":false,"error":{"area":"Controller::User::saveMultipleFiles","message":"Cannot read properties of undefined (reading 'path')","type":"TypeError","__route":"/api/user/saveMultipleFiles","date":"05-31-2023 04:27 PM"}}
 {"success":false,"error":{"area":"Controller::User::saveMultipleFiles","message":"Cannot read properties of undefined (reading 'path')","type":"TypeError","__route":"/api/user/saveMultipleFiles","date":"05-31-2023 04:28 PM"}}
 {"success":false,"error":{"area":"Controller::User::saveMultipleFiles","message":"Cannot read properties of undefined (reading 'path')","type":"TypeError","__route":"/api/user/saveMultipleFiles","date":"05-31-2023 04:28 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"jwt malformed","type":"JsonWebTokenError","__route":"/api/book/getBooks","date":"10-15-2023 05:27 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"jwt malformed","type":"JsonWebTokenError","__route":"/api/book/getBooks","date":"10-15-2023 05:28 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"jwt malformed","type":"JsonWebTokenError","__route":"/api/book/getBooks","date":"10-15-2023 05:30 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"invalid token","type":"JsonWebTokenError","__route":"/api/book/getBooks","date":"10-15-2023 05:32 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"invalid token","type":"JsonWebTokenError","__route":"/api/book/getBooks","date":"10-15-2023 05:32 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"invalid token","type":"JsonWebTokenError","__route":"/api/book/getBooks","date":"10-15-2023 05:33 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"invalid token","type":"JsonWebTokenError","__route":"/api/book/getBooks","date":"10-15-2023 05:34 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"invalid token","type":"JsonWebTokenError","__route":"/api/book/getBooks","date":"10-15-2023 05:35 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"invalid token","type":"JsonWebTokenError","__route":"/api/book/getBooks","date":"10-15-2023 05:36 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"invalid token","type":"JsonWebTokenError","__route":"/api/book/getBooks","date":"10-15-2023 05:37 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"invalid token","type":"JsonWebTokenError","__route":"/api/book/getBooks","date":"10-15-2023 05:46 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"invalid token","type":"JsonWebTokenError","__route":"/api/book/getBooks","date":"10-15-2023 05:46 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"invalid token","type":"JsonWebTokenError","__route":"/api/book/getBooks","date":"10-15-2023 05:47 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"invalid token","type":"JsonWebTokenError","__route":"/api/book/getBooks","date":"10-15-2023 05:48 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"invalid token","type":"JsonWebTokenError","__route":"/api/book/getBooks","date":"10-15-2023 05:49 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"invalid token","type":"JsonWebTokenError","__route":"/api/book/getBooks","date":"10-15-2023 06:02 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"invalid token","type":"JsonWebTokenError","__route":"/api/book/getBooks","date":"10-15-2023 06:06 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"invalid token","type":"JsonWebTokenError","__route":"/api/book/getBooks","date":"10-15-2023 06:07 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"invalid token","type":"JsonWebTokenError","__route":"/api/book/getBooks","date":"10-15-2023 06:08 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"invalid token","type":"JsonWebTokenError","__route":"/api/book/getBooks","date":"10-15-2023 06:08 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"invalid token","type":"JsonWebTokenError","__route":"/api/book/getBooks","date":"10-15-2023 06:09 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"Error in verifyRole","type":"Error","__route":"/api/book/getBooks","date":"10-15-2023 06:10 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"Error in verifyRole","type":"Error","__route":"/api/book/getBooks","date":"10-15-2023 06:18 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"Error in verifyRole","type":"Error","__route":"/api/book/getBooks","date":"10-15-2023 06:20 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"invalid token","type":"JsonWebTokenError","__route":"/api/book/getBooks","date":"10-15-2023 06:27 PM"}}
+{"success":false,"error":{"area":"Controller::User::checkAccess","message":"Cannot read properties of null (reading 'length')","type":"TypeError","__route":"/api/book/getBooks","date":"10-15-2023 06:45 PM"}}
+{"success":false,"error":{"area":"Controller::User::checkAccess","message":"padayon is not defined","type":"ReferenceError","__route":"/api/book/getBooks","date":"10-15-2023 06:47 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"Cannot set headers after they are sent to the client","type":"Error","__route":"/api/book/getBooks","date":"10-15-2023 06:47 PM"}}
+{"success":false,"error":{"area":"Controller::User::checkAccess","message":"padayon is not defined","type":"ReferenceError","__route":"/api/book/getBooks","date":"10-15-2023 06:48 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"Cannot set headers after they are sent to the client","type":"Error","__route":"/api/book/getBooks","date":"10-15-2023 06:48 PM"}}
+{"success":false,"error":{"area":"Controller::User::checkAccess","message":"padayon is not defined","type":"ReferenceError","__route":"/api/book/getBooks","date":"10-15-2023 06:49 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"Cannot set headers after they are sent to the client","type":"Error","__route":"/api/book/getBooks","date":"10-15-2023 06:49 PM"}}
+{"success":false,"error":{"area":"Controller::User::checkAccess","message":"padayon is not defined","type":"ReferenceError","__route":"/api/book/getBooks","date":"10-15-2023 06:50 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"Cannot set headers after they are sent to the client","type":"Error","__route":"/api/book/getBooks","date":"10-15-2023 06:50 PM"}}
+{"success":false,"error":{"area":"Controller::User::checkAccess","message":"padayon is not defined","type":"ReferenceError","__route":"/api/book/getBooks","date":"10-15-2023 06:51 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"Cannot set headers after they are sent to the client","type":"Error","__route":"/api/book/getBooks","date":"10-15-2023 06:51 PM"}}
+{"success":false,"error":{"area":"Controller::User::checkAccess","message":"padayon is not defined","type":"ReferenceError","__route":"/api/book/getBooks","date":"10-15-2023 06:52 PM"}}
+{"success":false,"error":{"area":"Controller::User::checkAccess","message":"padayon is not defined","type":"ReferenceError","__route":"/api/book/getBooks","date":"10-15-2023 09:09 PM"}}
+{"success":false,"error":{"area":"Controller::User::checkAccess","message":"padayon is not defined","type":"ReferenceError","__route":"/api/book/getBooks","date":"10-15-2023 09:09 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"Cannot set headers after they are sent to the client","type":"Error","__route":"/api/book/getBooks","date":"10-15-2023 09:09 PM"}}
+{"success":false,"error":{"area":"Controller::User::checkAccess","message":"padayon is not defined","type":"ReferenceError","__route":"/api/book/getBooks","date":"10-15-2023 09:10 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"Cannot set headers after they are sent to the client","type":"Error","__route":"/api/book/getBooks","date":"10-15-2023 09:10 PM"}}
+{"success":false,"error":{"area":"Controller::User::checkAccess","message":"padayon is not defined","type":"ReferenceError","__route":"/api/book/getBooks","date":"10-15-2023 09:10 PM"}}
+{"success":false,"error":{"area":"Controller::User::checkAccess","message":"padayon is not defined","type":"ReferenceError","__route":"/api/book/getBooks","date":"10-15-2023 09:11 PM"}}
+{"success":false,"error":{"area":"Controller::User::checkAccess","message":"padayon is not defined","type":"ReferenceError","__route":"/api/book/getBooks","date":"10-15-2023 09:14 PM"}}
+{"success":false,"error":{"area":"Controller::User::checkAccess","message":"padayon is not defined","type":"ReferenceError","__route":"/api/book/getBooks","date":"10-15-2023 09:19 PM"}}
+{"success":false,"error":{"area":"Model::User::checkAccess","message":"accesschecker is not defined","type":"ReferenceError","__route":"/api/book/getBooks","date":"10-15-2023 09:20 PM"}}
+{"success":false,"error":{"area":"Model::User::checkAccess","message":"matchQuery is not defined","type":"ReferenceError","__route":"/api/book/getBooks","date":"10-15-2023 10:16 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"Cannot set headers after they are sent to the client","type":"Error","__route":"/api/book/getBooks","date":"10-15-2023 10:16 PM"}}
+{"success":false,"error":{"area":"Model::User::checkAccess","message":"unknown top level operator: $match. If you have a field name that starts with a '$' symbol, consider using $getField or $setField.","type":"MongoError","__route":"/api/book/getBooks","date":"10-15-2023 10:38 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"Cannot set headers after they are sent to the client","type":"Error","__route":"/api/book/getBooks","date":"10-15-2023 10:38 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"Cannot read properties of undefined (reading 'split')","type":"TypeError","__route":"/api/book/addBook","date":"10-15-2023 10:42 PM"}}
+{"success":false,"error":{"area":"Model::Book::addBook","message":"book validation failed: price: Path `price` is required., title: Path `title` is required.","type":"ValidationError","__route":"/api/book/addBook","date":"10-15-2023 10:42 PM"}}
+{"success":false,"error":{"area":"Controller::Book::addBook","message":"Cannot set headers after they are sent to the client","type":"Error","__route":"/api/book/addBook","date":"10-15-2023 10:42 PM"}}
+{"success":false,"error":{"area":"Model::Book::addBook","message":"book validation failed: price: Path `price` is required., title: Path `title` is required.","type":"ValidationError","__route":"/api/book/addBook","date":"10-15-2023 10:43 PM"}}
+{"success":false,"error":{"area":"Controller::Book::addBook","message":"Cannot set headers after they are sent to the client","type":"Error","__route":"/api/book/addBook","date":"10-15-2023 10:43 PM"}}
+{"success":false,"error":{"area":"Model::Book::addBook","message":"book validation failed: price: Path `price` is required., title: Path `title` is required.","type":"ValidationError","__route":"/api/book/addBook","date":"10-15-2023 10:43 PM"}}
+{"success":false,"error":{"area":"Controller::Book::addBook","message":"Cannot set headers after they are sent to the client","type":"Error","__route":"/api/book/addBook","date":"10-15-2023 10:43 PM"}}
+{"success":false,"error":{"area":"Model::Book::addBook","message":"book validation failed: price: Path `price` is required., title: Path `title` is required.","type":"ValidationError","__route":"/api/book/addBook","date":"10-15-2023 10:44 PM"}}
+{"success":false,"error":{"area":"Controller::Book::addBook","message":"Cannot set headers after they are sent to the client","type":"Error","__route":"/api/book/addBook","date":"10-15-2023 10:44 PM"}}
+{"success":false,"error":{"area":"Model::Book::addBook","message":"book validation failed: price: Path `price` is required., title: Path `title` is required.","type":"ValidationError","__route":"/api/book/addBook","date":"10-15-2023 10:46 PM"}}
+{"success":false,"error":{"area":"Controller::Book::addBook","message":"Cannot set headers after they are sent to the client","type":"Error","__route":"/api/book/addBook","date":"10-15-2023 10:46 PM"}}
+{"success":false,"error":{"area":"Model::Book::addBook","message":"book validation failed: price: Path `price` is required., title: Path `title` is required.","type":"ValidationError","__route":"/api/book/addBook","date":"10-15-2023 10:47 PM"}}
+{"success":false,"error":{"area":"Controller::Book::addBook","message":"Cannot set headers after they are sent to the client","type":"Error","__route":"/api/book/addBook","date":"10-15-2023 10:47 PM"}}
+{"success":false,"error":{"area":"Model::Book::addBook","message":"book validation failed: price: Path `price` is required., title: Path `title` is required.","type":"ValidationError","__route":"/api/book/addBook","date":"10-15-2023 10:47 PM"}}
+{"success":false,"error":{"area":"Controller::Book::addBook","message":"Cannot set headers after they are sent to the client","type":"Error","__route":"/api/book/addBook","date":"10-15-2023 10:47 PM"}}
+{"success":false,"error":{"area":"Model::Book::addBook","message":"book validation failed: price: Path `price` is required., title: Path `title` is required.","type":"ValidationError","__route":"/api/book/addBook","date":"10-15-2023 10:48 PM"}}
+{"success":false,"error":{"area":"Model::Book::addBook","message":"book validation failed: price: Path `price` is required., title: Path `title` is required.","type":"ValidationError","__route":"/api/book/addBook","date":"10-15-2023 10:49 PM"}}
+{"success":false,"error":{"area":"Model::Book::addBook","message":"book validation failed: price: Path `price` is required., title: Path `title` is required.","type":"ValidationError","__route":"/api/book/addBook","date":"10-15-2023 10:50 PM"}}
+{"success":false,"error":{"area":"Model::Book::addBook","message":"book validation failed: price: Path `price` is required., title: Path `title` is required.","type":"ValidationError","__route":"/api/book/addBook","date":"10-15-2023 10:58 PM"}}
+{"success":false,"error":{"area":"Model::Book::addBook","message":"book validation failed: price: Path `price` is required., title: Path `title` is required.","type":"ValidationError","__route":"/api/book/addBook","date":"10-15-2023 10:59 PM"}}
+{"success":false,"error":{"area":"Model::Book::addBook","message":"book validation failed: price: Path `price` is required., title: Path `title` is required.","type":"ValidationError","__route":"/api/book/addBook","date":"10-15-2023 10:59 PM"}}
+{"success":false,"error":{"area":"Model::Book::addBook","message":"book validation failed: price: Path `price` is required., title: Path `title` is required.","type":"ValidationError","__route":"/api/book/addBook","date":"10-15-2023 10:59 PM"}}
+{"success":false,"error":{"area":"Model::Book::addBook","message":"book validation failed: price: Path `price` is required., title: Path `title` is required.","type":"ValidationError","__route":"/api/book/addBook","date":"11-07-2023 11:19 AM"}}
+{"success":false,"error":{"area":"Model::Book::addBook","message":"book validation failed: price: Path `price` is required., title: Path `title` is required.","type":"ValidationError","__route":"/api/book/addBook","date":"11-07-2023 05:14 PM"}}
+{"success":false,"error":{"area":"Model::Book::addBook","message":"book validation failed: price: Path `price` is required., title: Path `title` is required.","type":"ValidationError","__route":"/api/book/addBook","date":"11-07-2023 05:15 PM"}}
+{"success":false,"error":{"area":"Model::Book::addBook","message":"book validation failed: price: Path `price` is required., title: Path `title` is required.","type":"ValidationError","__route":"/api/book/addBook","date":"11-07-2023 05:40 PM"}}
+{"success":false,"error":{"area":"Model::Book::addBook","message":"book validation failed: price: Path `price` is required., title: Path `title` is required.","type":"ValidationError","__route":"/api/book/addBook","date":"11-07-2023 05:40 PM"}}
+{"success":false,"error":{"area":"Controller::Book::addBook","message":"Invalid status code: undefined","type":"RangeError","__route":"/api/book/addBook","date":"11-07-2023 05:44 PM"}}
+{"success":false,"error":{"area":"Services::Padayon::execute","message":"Invalid status code: undefined","type":"RangeError","__route":"/api/book/addBook","date":"11-07-2023 05:46 PM"}}
+{"success":false,"error":{"area":"Controller::Book::addBook","message":"\"author\" is not allowed","type":"ValidationError","__route":"/api/book/addBook","date":"11-07-2023 06:25 PM"}}
+{"success":false,"error":{"area":"Services::Padayon::execute","message":"Cannot set headers after they are sent to the client","type":"Error","__route":"/api/book/addBook","date":"11-07-2023 06:25 PM"}}
+{"success":false,"error":{"area":"Controller::Book::addBook","message":"\"author\" is not allowed","type":"ValidationError","__route":"/api/book/addBook","date":"11-07-2023 06:27 PM"}}
+{"success":false,"error":{"area":"Services::Padayon::execute","message":"Cannot set headers after they are sent to the client","type":"Error","__route":"/api/book/addBook","date":"11-07-2023 06:27 PM"}}
+{"success":false,"error":{"area":"Controller::Book::addBook","message":"\"author\" is not allowed","type":"ValidationError","__route":"/api/book/addBook","date":"11-07-2023 06:30 PM"}}
+{"success":false,"error":{"area":"Services::Padayon::execute","message":"Cannot set headers after they are sent to the client","type":"Error","__route":"/api/book/addBook","date":"11-07-2023 06:30 PM"}}
+{"success":false,"error":{"area":"Controller::Book::addBook","message":"\"author\" is not allowed","type":"ValidationError","__route":"/api/book/addBook","date":"11-07-2023 06:31 PM"}}
+{"success":false,"error":{"area":"Services::Padayon::execute","message":"Cannot set headers after they are sent to the client","type":"Error","__route":"/api/book/addBook","date":"11-07-2023 06:31 PM"}}
+{"success":false,"error":{"area":"Controller::Book::addBook","message":"\"author\" is not allowed","type":"ValidationError","__route":"/api/book/addBook","date":"11-07-2023 06:37 PM"}}
+{"success":false,"error":{"area":"Services::Padayon::execute","message":"Cannot set headers after they are sent to the client","type":"Error","__route":"/api/book/addBook","date":"11-07-2023 06:37 PM"}}
+{"success":false,"error":{"area":"Controller::Book::addBook","message":"value is not defined","type":"ReferenceError","__route":"/api/book/addBook","date":"11-07-2023 06:40 PM"}}
+{"success":false,"error":{"area":"Services::Padayon::execute","message":"Cannot set headers after they are sent to the client","type":"Error","__route":"/api/book/addBook","date":"11-07-2023 06:40 PM"}}
+{"success":false,"error":{"area":"Controller::Book::addBook","message":"\"author\" is not allowed","type":"ValidationError","__route":"/api/book/addBook","date":"11-07-2023 06:42 PM"}}
+{"success":false,"error":{"area":"Services::Padayon::execute","message":"Cannot set headers after they are sent to the client","type":"Error","__route":"/api/book/addBook","date":"11-07-2023 06:42 PM"}}
+{"success":false,"error":{"area":"Model::Book::addBook","message":"book validation failed: title: Path `title` is required.","type":"ValidationError","__route":"/api/book/addBook","date":"11-07-2023 06:43 PM"}}
+{"success":false,"error":{"area":"Services::Padayon::execute","message":"Cannot set headers after they are sent to the client","type":"Error","__route":"/api/book/addBook","date":"11-07-2023 06:43 PM"}}
+{"success":false,"error":{"area":"Model::Book::addBook","message":"book validation failed: title: Path `title` is required.","type":"ValidationError","__route":"/api/book/addBook","date":"11-07-2023 06:43 PM"}}
+{"success":false,"error":{"area":"Services::Padayon::execute","message":"Cannot set headers after they are sent to the client","type":"Error","__route":"/api/book/addBook","date":"11-07-2023 06:43 PM"}}
+{"success":false,"error":{"area":"Model::Book::addBook","message":"book validation failed: title: Path `title` is required.","type":"ValidationError","__route":"/api/book/addBook","date":"11-07-2023 06:46 PM"}}
+{"success":false,"error":{"area":"Services::Padayon::execute","message":"Cannot set headers after they are sent to the client","type":"Error","__route":"/api/book/addBook","date":"11-07-2023 06:46 PM"}}
+{"success":false,"error":{"area":"Model::Book::addBook","message":"book validation failed: title: Path `title` is required.","type":"ValidationError","__route":"/api/book/addBook","date":"11-07-2023 06:48 PM"}}
+{"success":false,"error":{"area":"Services::Padayon::execute","message":"Cannot set headers after they are sent to the client","type":"Error","__route":"/api/book/addBook","date":"11-07-2023 06:48 PM"}}
+{"success":false,"error":{"area":"Model::Book::addBook","message":"book validation failed: title: Path `title` is required.","type":"ValidationError","__route":"/api/book/addBook","date":"11-07-2023 06:49 PM"}}
+{"success":false,"error":{"area":"Services::Padayon::execute","message":"Cannot set headers after they are sent to the client","type":"Error","__route":"/api/book/addBook","date":"11-07-2023 06:49 PM"}}
+{"success":false,"error":{"area":"Controller::Book::addBook","message":"value is not defined","type":"ReferenceError","__route":"/api/book/addBook","date":"11-07-2023 06:50 PM"}}
+{"success":false,"error":{"area":"Services::Padayon::execute","message":"Cannot set headers after they are sent to the client","type":"Error","__route":"/api/book/addBook","date":"11-07-2023 06:50 PM"}}
+{"success":false,"error":{"area":"Model::Book::addBook","message":"book validation failed: title: Path `title` is required.","type":"ValidationError","__route":"/api/book/addBook","date":"11-07-2023 06:50 PM"}}
+{"success":false,"error":{"area":"Services::Padayon::execute","message":"Cannot set headers after they are sent to the client","type":"Error","__route":"/api/book/addBook","date":"11-07-2023 06:50 PM"}}
+{"success":false,"error":{"area":"Model::Book::addBook","message":"book validation failed: title: Path `title` is required.","type":"ValidationError","__route":"/api/book/addBook","date":"11-07-2023 08:56 PM"}}
+{"success":false,"error":{"area":"Model::Book::addBook","message":"book validation failed: title: Path `title` is required.","type":"ValidationError","__route":"/api/book/addBook","date":"11-07-2023 08:56 PM"}}
+{"success":false,"error":{"area":"Model::Book::addBook","message":"book validation failed: title: Path `title` is required.","type":"ValidationError","__route":"/api/book/addBook","date":"11-07-2023 08:57 PM"}}
+{"success":false,"error":{"area":"Services::Padayon::execute","message":"Cannot set headers after they are sent to the client","type":"Error","__route":"/api/book/addBook","date":"11-07-2023 08:57 PM"}}
+{"success":false,"error":{"area":"Model::Book::addBook","message":"book validation failed: title: Path `title` is required.","type":"ValidationError","__route":"/api/book/addBook","date":"11-07-2023 08:58 PM"}}
+{"success":false,"error":{"area":"Model::Book::addBook","message":"book validation failed: title: Path `title` is required.","type":"ValidationError","__route":"/api/book/addBook","date":"11-07-2023 08:58 PM"}}
+{"success":false,"error":{"area":"Model::Book::addBook","message":"book validation failed: title: Path `title` is required., author: Path `author` is required.","type":"ValidationError","__route":"/api/book/addBook","date":"11-07-2023 08:58 PM"}}
+{"success":false,"error":{"area":"Controller::Book::addBook","message":"\"title\" is required","type":"ValidationError","__route":"/api/book/addBook","date":"11-07-2023 09:03 PM"}}
+{"success":false,"error":{"area":"Model::Book::addBook","message":"book validation failed: price: Path `price` is required.","type":"ValidationError","__route":"/api/book/addBook","date":"11-07-2023 09:27 PM"}}
+{"success":false,"error":{"area":"Model::Book::addBook","message":"book validation failed: price: Cast to Number failed for value \"w\" (type string) at path \"price\"","type":"ValidationError","__route":"/api/book/addBook","date":"11-07-2023 09:27 PM"}}
+{"success":false,"error":{"area":"Controller::Book::addBook","message":"\"title\" is required","type":"ValidationError","__route":"/api/book/addBook","date":"11-07-2023 09:28 PM"}}
+{"success":false,"error":{"area":"Model::Book::addBook","message":"book validation failed: price: Cast to Number failed for value \"1200.99w\" (type string) at path \"price\"","type":"ValidationError","__route":"/api/book/addBook","date":"11-07-2023 09:28 PM"}}
+{"success":false,"error":{"area":"Controller::Book::addBook","message":"'price' should be a type of 'number'","type":"ValidationError","__route":"/api/book/addBook","date":"11-07-2023 09:37 PM"}}
+{"success":false,"error":{"area":"Controller::Book::addBook","message":"\"price\" should be a type of \"number\"","type":"ValidationError","__route":"/api/book/addBook","date":"11-07-2023 09:37 PM"}}
+{"success":false,"error":{"area":"Controller::Book::addBook","message":"\"price\" should be a type of \"number\"","type":"ValidationError","__route":"/api/book/addBook","date":"11-07-2023 09:38 PM"}}
+{"success":false,"error":{"area":"Controller::Book::addBook","message":"\"price\" is required","type":"ValidationError","__route":"/api/book/addBook","date":"11-07-2023 09:38 PM"}}
+{"success":false,"error":{"area":"Controller::Book::addBook","message":"\"price\" should be a type of \"number\"","type":"ValidationError","__route":"/api/book/addBook","date":"11-07-2023 09:39 PM"}}
+{"success":false,"error":{"area":"Controller::Book::addBook","message":"\"price\" must be an integer","type":"ValidationError","__route":"/api/book/addBook","date":"11-07-2023 09:41 PM"}}
+{"success":false,"error":{"area":"Controller::Book::addBook","message":"\"price\" must be an integer","type":"ValidationError","__route":"/api/book/addBook","date":"11-07-2023 09:41 PM"}}
+{"success":false,"error":{"area":"Controller::Book::addBook","message":"\"stocks\" must be an integer","type":"ValidationError","__route":"/api/book/addBook","date":"11-07-2023 09:43 PM"}}
+{"success":false,"error":{"area":"Controller::Book::addBook","message":"addBookSchema is not defined","type":"ReferenceError","__route":"/api/book/addBook","date":"11-07-2023 09:52 PM"}}
+{"success":false,"error":{"area":"Controller::Book::addBook","message":"\"stocks\" must be an integer","type":"ValidationError","__route":"/api/book/addBook","date":"11-07-2023 09:52 PM"}}
+{"success":false,"error":{"area":"Controller::Book::addBook","message":"\"stocks\" must be an integer","type":"ValidationError","__route":"/api/book/addBook","date":"11-07-2023 09:54 PM"}}
+{"success":false,"error":{"area":"Controller::Book::addBook","message":"\"stocks\" must be an integer","type":"ValidationError","__route":"/api/book/addBook","date":"11-07-2023 09:58 PM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"fs is not defined","type":"ReferenceError","__route":"/api/user/downloadExcel","date":"11-07-2023 10:23 PM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"buffer is not defined","type":"ReferenceError","__route":"/api/user/downloadExcel","date":"11-07-2023 10:36 PM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"readStream.send is not a function","type":"TypeError","__route":"/api/user/downloadExcel","date":"11-07-2023 10:58 PM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"readStream.send is not a function","type":"TypeError","__route":"/api/user/downloadExcel","date":"11-07-2023 10:59 PM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"dest.on is not a function","type":"TypeError","__route":"/api/user/downloadExcel","date":"11-07-2023 10:59 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"jwt expired","type":"TokenExpiredError","__route":"/api/user/generateQR","date":"11-08-2023 02:49 PM"}}
+{"success":false,"error":{"area":"Model::User::generateQR","message":"Cannot read properties of undefined (reading '_id')","type":"TypeError","__route":"/api/user/generateQR","date":"11-08-2023 02:49 PM"}}
+{"success":false,"error":{"area":"Controller::User::generateQR","message":"Cannot set headers after they are sent to the client","type":"Error","__route":"/api/user/generateQR","date":"11-08-2023 02:49 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"jwt expired","type":"TokenExpiredError","__route":"/api/user/generateQR","date":"11-08-2023 02:51 PM"}}
+{"success":false,"error":{"area":"Model::User::generateQR","message":"Cannot read properties of undefined (reading '_id')","type":"TypeError","__route":"/api/user/generateQR","date":"11-08-2023 02:51 PM"}}
+{"success":false,"error":{"area":"Controller::User::generateQR","message":"Cannot set headers after they are sent to the client","type":"Error","__route":"/api/user/generateQR","date":"11-08-2023 02:51 PM"}}
+{"success":false,"error":{"area":"Model::User::generateQR","message":"Cannot read properties of undefined (reading '_id')","type":"TypeError","__route":"/api/user/generateQR","date":"11-08-2023 02:52 PM"}}
+{"success":false,"error":{"area":"Model::User::generateQR","message":"result is not defined","type":"ReferenceError","__route":"/api/user/generateQR","date":"11-08-2023 02:53 PM"}}
+{"success":false,"error":{"area":"Model::User::generateQR","message":"result is not defined","type":"ReferenceError","__route":"/api/user/generateQR","date":"11-08-2023 02:56 PM"}}
+{"success":false,"error":{"area":"Model::User::generateQR","message":"result is not defined","type":"ReferenceError","__route":"/api/user/generateQR","date":"11-08-2023 03:21 PM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"buffer is not defined","type":"ReferenceError","__route":"/api/user/fileDownload/123","date":"11-08-2023 04:18 PM"}}
+{"success":false,"error":{"area":"Model::User::generateQR","message":"result is not defined","type":"ReferenceError","__route":"/api/user/generateQR","date":"11-08-2023 04:21 PM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"Cannot find module 'axios'\nRequire stack:\n- D:\\Documents\\sandbox-server-dev\\controllers\\user.js\n- D:\\Documents\\sandbox-server-dev\\services\\padayon.js\n- D:\\Documents\\sandbox-server-dev\\server.js","type":"Error","__route":"/api/user/fileDownload/123","date":"11-09-2023 10:24 AM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"Request failed with status code 404","type":"AxiosError","__route":"/api/user/fileDownload/123","date":"11-09-2023 10:34 AM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"Request failed with status code 404","type":"AxiosError","__route":"/api/user/fileDownload/123","date":"11-09-2023 10:36 AM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"Request failed with status code 404","type":"AxiosError","__route":"/api/user/fileDownload/123","date":"11-09-2023 10:41 AM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"cloudinary.resources is not a function","type":"TypeError","__route":"/api/user/fileDownload/123","date":"11-09-2023 10:50 AM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"connect ECONNREFUSED 127.0.0.1:80","type":"Error","__route":"/api/user/fileDownload/123","date":"11-09-2023 10:54 AM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","__route":"/api/user/fileDownload/123","date":"11-09-2023 10:54 AM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","__route":"/api/user/fileDownload/123","date":"11-09-2023 11:34 AM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","__route":"/api/user/fileDownload/123","date":"11-09-2023 11:37 AM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","__route":"/api/user/fileDownload/123","date":"11-09-2023 11:39 AM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","__route":"/api/user/fileDownload/123","date":"11-09-2023 11:42 AM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","__route":"/api/user/fileDownload/123","date":"11-09-2023 11:43 AM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","__route":"/api/user/fileDownload/123","date":"11-09-2023 11:43 AM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","__route":"/api/user/fileDownload/123","date":"11-09-2023 12:20 PM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"connect ECONNREFUSED 127.0.0.1:80","type":"Error","__route":"/api/user/fileDownload/123","date":"11-09-2023 12:38 PM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"connect ECONNREFUSED 127.0.0.1:80","type":"Error","__route":"/api/user/fileDownload/123","date":"11-09-2023 12:39 PM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"connect ECONNREFUSED 127.0.0.1:80","type":"Error","__route":"/api/user/fileDownload/123","date":"11-09-2023 12:41 PM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"connect ECONNREFUSED 127.0.0.1:80","type":"Error","__route":"/api/user/fileDownload/123","date":"11-09-2023 12:42 PM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"connect ECONNREFUSED 127.0.0.1:80","type":"Error","__route":"/api/user/fileDownload/123","date":"11-09-2023 12:42 PM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"connect ECONNREFUSED 127.0.0.1:80","type":"Error","__route":"/api/user/fileDownload/123","date":"11-09-2023 01:05 PM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"connect ECONNREFUSED 127.0.0.1:80","type":"Error","__route":"/api/user/fileDownload/123","date":"11-09-2023 01:06 PM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"connect ECONNREFUSED 127.0.0.1:80","type":"Error","__route":"/api/user/fileDownload/123","date":"11-09-2023 01:07 PM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"connect ECONNREFUSED 127.0.0.1:80","type":"Error","__route":"/api/user/fileDownload/123","date":"11-09-2023 01:46 PM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"Cannot access 'cloudinary' before initialization","type":"ReferenceError","__route":"/api/user/fileDownload/123","date":"11-09-2023 01:52 PM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"connect ECONNREFUSED 127.0.0.1:80","type":"Error","__route":"/api/user/fileDownload/123","date":"11-09-2023 01:54 PM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","__route":"/api/user/fileDownload/123","date":"11-09-2023 02:02 PM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","__route":"/api/user/fileDownload/123","date":"11-09-2023 02:03 PM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","__route":"/api/user/fileDownload/123","date":"11-09-2023 02:04 PM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"cloudinary.resource is not a function","type":"TypeError","__route":"/api/user/fileDownload/123","date":"11-09-2023 02:05 PM"}}
+{"success":false,"error":{"area":"Model::User::generateQR","message":"result is not defined","type":"ReferenceError","__route":"/api/user/generateQR","date":"11-09-2023 02:06 PM"}}
+{"success":false,"error":{"area":"Model::User::generateQR","message":"result is not defined","type":"ReferenceError","__route":"/api/user/generateQR","date":"11-09-2023 02:08 PM"}}
+{"success":false,"error":{"area":"Model::User::generateQR","message":"result is not defined","type":"ReferenceError","__route":"/api/user/generateQR","date":"11-09-2023 02:09 PM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","__route":"/api/user/fileDownload/123","date":"11-09-2023 02:10 PM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"True is not defined","type":"ReferenceError","__route":"/api/user/fileDownload/123","date":"11-09-2023 02:14 PM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","__route":"/api/user/fileDownload/123","date":"11-09-2023 02:18 PM"}}
+{"success":false,"error":{"area":"Model::User::generateQR","message":"result is not defined","type":"ReferenceError","__route":"/api/user/generateQR","date":"11-09-2023 02:37 PM"}}
+{"success":false,"error":{"area":"Model::User::generateQR","message":"result is not defined","type":"ReferenceError","__route":"/api/user/generateQR","date":"11-09-2023 02:44 PM"}}
+{"success":false,"error":{"area":"Model::User::generateQR","message":"result is not defined","type":"ReferenceError","__route":"/api/user/generateQR","date":"11-09-2023 02:48 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"jwt expired","type":"TokenExpiredError","__route":"/api/user/generateQR","date":"11-09-2023 04:06 PM"}}
+{"success":false,"error":{"area":"Model::User::generateQR","message":"result is not defined","type":"ReferenceError","__route":"/api/user/generateQR","date":"11-09-2023 04:06 PM"}}
+{"success":false,"error":{"area":"Controller::User::generateQR","message":"Cannot set headers after they are sent to the client","type":"Error","__route":"/api/user/generateQR","date":"11-09-2023 04:06 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"jwt expired","type":"TokenExpiredError","__route":"/api/user/generateQR","date":"11-09-2023 04:33 PM"}}
+{"success":false,"error":{"area":"Model::User::generateQR","message":"result is not defined","type":"ReferenceError","__route":"/api/user/generateQR","date":"11-09-2023 04:33 PM"}}
+{"success":false,"error":{"area":"Controller::User::generateQR","message":"Cannot set headers after they are sent to the client","type":"Error","__route":"/api/user/generateQR","date":"11-09-2023 04:33 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"jwt expired","type":"TokenExpiredError","__route":"/api/user/generateQR","date":"11-09-2023 04:40 PM"}}
+{"success":false,"error":{"area":"Model::User::generateQR","message":"result is not defined","type":"ReferenceError","__route":"/api/user/generateQR","date":"11-09-2023 04:40 PM"}}
+{"success":false,"error":{"area":"Controller::User::generateQR","message":"Cannot set headers after they are sent to the client","type":"Error","__route":"/api/user/generateQR","date":"11-09-2023 04:40 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"jwt expired","type":"TokenExpiredError","__route":"/api/user/generateQR","date":"11-09-2023 04:40 PM"}}
+{"success":false,"error":{"area":"Model::User::generateQR","message":"result is not defined","type":"ReferenceError","__route":"/api/user/generateQR","date":"11-09-2023 04:40 PM"}}
+{"success":false,"error":{"area":"Controller::User::generateQR","message":"Cannot set headers after they are sent to the client","type":"Error","__route":"/api/user/generateQR","date":"11-09-2023 04:40 PM"}}
+{"success":false,"error":{"area":"Model::User::generateQR","message":"result is not defined","type":"ReferenceError","__route":"/api/user/generateQR","date":"11-09-2023 04:41 PM"}}
+{"success":false,"error":{"area":"Controller::User::generateQR","message":"result is not defined","type":"ReferenceError","__route":"/api/user/generateQR","date":"11-09-2023 06:16 PM"}}
+{"success":false,"error":{"area":"Controller::User::generateQR","message":"result is not defined","type":"ReferenceError","__route":"/api/user/generateQR","date":"11-09-2023 06:17 PM"}}
+{"success":false,"error":{"area":"Controller::User::downloadPDF","__route":"/api/user/downloadPDF","date":"11-09-2023 06:45 PM"}}
+{"success":false,"error":{"area":"Controller::User::downloadPDF","message":"cloud is not defined","type":"ReferenceError","__route":"/api/user/downloadPDF","date":"11-09-2023 06:48 PM"}}
+{"success":false,"error":{"area":"Controller::User::downloadPDF","message":"The \"path\" argument must be of type string. Received an instance of Buffer","type":"TypeError","__route":"/api/user/downloadPDF","date":"11-09-2023 07:10 PM"}}
+{"success":false,"error":{"area":"Controller::User::downloadPDF","message":"The \"path\" argument must be of type string. Received an instance of Buffer","type":"TypeError","__route":"/api/user/downloadPDF","date":"11-09-2023 07:18 PM"}}
+{"success":false,"error":{"area":"Controller::User::downloadPDF","message":"xxx.closed is not a function","type":"TypeError","__route":"/api/user/downloadPDF","date":"11-09-2023 07:32 PM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"filename is not defined","type":"ReferenceError","__route":"/api/user/downloadExcel","date":"11-09-2023 10:00 PM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"filename is not defined","type":"ReferenceError","__route":"/api/user/downloadExcel","date":"11-09-2023 10:05 PM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"fileExtension is not defined","type":"ReferenceError","__route":"/api/user/downloadExcel","date":"11-09-2023 10:05 PM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"fileExtension is not defined","type":"ReferenceError","__route":"/api/user/downloadExcel","date":"11-09-2023 10:08 PM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"Cannot read properties of undefined (reading 'hasOwnProperty')","type":"TypeError","__route":"/api/user/downloadExcel","date":"11-09-2023 10:09 PM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"fileExtension is not defined","type":"ReferenceError","__route":"/api/user/downloadExcel","date":"11-09-2023 10:09 PM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"fileExtension is not defined","type":"ReferenceError","__route":"/api/user/downloadExcel","date":"11-09-2023 10:11 PM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"fileExtension is not defined","type":"ReferenceError","__route":"/api/user/downloadExcel","date":"11-09-2023 10:11 PM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"fileExtension is not defined","type":"ReferenceError","__route":"/api/user/downloadExcel","date":"11-09-2023 10:14 PM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"format is not defined","type":"ReferenceError","__route":"/api/user/downloadExcel","date":"11-09-2023 10:16 PM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"format is not defined","type":"ReferenceError","__route":"/api/user/downloadExcel","date":"11-09-2023 10:19 PM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"format is not defined","type":"ReferenceError","__route":"/api/user/downloadExcel","date":"11-09-2023 10:20 PM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"format is not defined","type":"ReferenceError","__route":"/api/user/downloadExcel","date":"11-09-2023 10:22 PM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"ext is not defined","type":"ReferenceError","__route":"/api/user/downloadExcel","date":"11-09-2023 10:23 PM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"ext2 is not defined","type":"ReferenceError","__route":"/api/user/downloadExcel","date":"11-09-2023 10:24 PM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"formatx is not defined","type":"ReferenceError","__route":"/api/user/downloadExcel","date":"11-09-2023 10:24 PM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"formatx is not defined","type":"ReferenceError","__route":"/api/user/downloadExcel","date":"11-09-2023 10:28 PM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"formatx is not defined","type":"ReferenceError","__route":"/api/user/downloadExcel","date":"11-09-2023 10:30 PM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"formatx is not defined","type":"ReferenceError","__route":"/api/user/downloadExcel","date":"11-09-2023 10:31 PM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"formatxxx is not defined","type":"ReferenceError","__route":"/api/user/downloadExcel","date":"11-09-2023 10:32 PM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"formatxxx is not defined","type":"ReferenceError","__route":"/api/user/downloadExcel","date":"11-09-2023 10:33 PM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"No books found","type":"Error","__route":"/api/user/downloadExcel","date":"11-09-2023 10:38 PM"}}
+{"success":false,"error":{"message":"No books were found","type":"BadRequestException"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"res is not defined","type":"ReferenceError","__route":"/api/user/downloadExcel","date":"11-10-2023 10:35 AM"}}
+{"success":false,"error":{"message":"No books were found","type":"BadRequestException"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"res is not defined","type":"ReferenceError","__route":"/api/user/downloadExcel","date":"11-10-2023 10:36 AM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"BadRequestException is not a constructor","type":"TypeError","__route":"/api/user/downloadExcel","date":"11-10-2023 10:46 AM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"BadRequestException is not a constructor","type":"TypeError","__route":"/api/user/downloadExcel","date":"11-10-2023 10:47 AM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"BadRequestException is not a constructor","type":"TypeError","__route":"/api/user/downloadExcel","date":"11-10-2023 10:48 AM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"BadRequestException is not a constructor","type":"TypeError","__route":"/api/user/downloadExcel","date":"11-10-2023 10:54 AM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"BadRequestException is not a constructor","type":"TypeError","__route":"/api/user/downloadExcel","date":"11-10-2023 10:57 AM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"BadRequestException is not a constructor","type":"TypeError","__route":"/api/user/downloadExcel","date":"11-10-2023 10:58 AM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"BadRequestException is not a constructor","type":"TypeError","__route":"/api/user/downloadExcel","date":"11-10-2023 10:58 AM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"No books were found","type":"Error","__route":"/api/user/downloadExcel","date":"11-10-2023 10:59 AM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"No books were found","type":"Error","__route":"/api/user/downloadExcel","date":"11-10-2023 11:01 AM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"No books were found","type":"Error","__route":"/api/user/downloadExcel","date":"11-10-2023 11:02 AM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"No books were found","type":"BadRequestException","__route":"/api/user/downloadExcel","date":"11-10-2023 11:03 AM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"No books were found","type":"BadRequestException","__route":"/api/user/downloadExcel","date":"11-10-2023 11:04 AM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"No books were found","type":"BadRequestException","__route":"/api/user/downloadExcel","date":"11-10-2023 11:04 AM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"No books were found","type":"BadRequestException","__route":"/api/user/downloadExcel","date":"11-10-2023 11:08 AM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"No books were found","type":"BadRequestException","__route":"/api/user/downloadExcel","date":"11-10-2023 11:08 AM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"There were no books found.","type":"BadRequestException","__route":"/api/user/downloadExcel","date":"11-10-2023 11:12 AM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"Cannot read properties of undefined (reading 'toUpperCase')","type":"TypeError","__route":"/api/user/downloadExcel","date":"11-10-2023 11:20 AM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"Cannot read properties of undefined (reading 'toUpperCase')","type":"TypeError","__route":"/api/user/downloadExcel","date":"11-10-2023 11:21 AM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"Cannot read properties of undefined (reading 'toUpperCase')","type":"TypeError","__route":"/api/user/downloadExcel","date":"11-10-2023 11:22 AM"}}
+{"success":false,"error":{"area":"Controller::User::generateQR","message":"moment.tz is not a function","type":"TypeError","__route":"/api/user/generateQR","date":"11-10-2023 11:49 AM"}}
+{"success":false,"error":{"area":"Controller::User::generateQR","message":"timeInManila.format is not a function","type":"TypeError","__route":"/api/user/generateQR","date":"11-10-2023 11:57 AM"}}
+{"success":false,"error":{"area":"Controller::User::generateQR","message":"Assignment to constant variable.","type":"TypeError","__route":"/api/user/generateQR","date":"11-10-2023 12:16 PM"}}
+{"success":false,"error":{"area":"Controller::User::generateQR","message":"Invalid QR Code generation.","type":"BadRequestException","__route":"/api/user/generateQR","date":"11-10-2023 12:16 PM"}}
+{"success":false,"error":{"area":"Controller::User::generateQR","message":"Invalid QR Code generation.","type":"BadRequestException","__route":"/api/user/generateQR","date":"11-10-2023 12:17 PM"}}
+{"success":false,"error":{"area":"Model::User::generateQR","message":"Argument passed in must be a single String of 12 bytes or a string of 24 hex characters","type":"Error","__route":"/api/user/generateQR","date":"11-10-2023 12:25 PM"}}
+{"success":false,"error":{"area":"Model::User::generateQR","message":"Argument passed in must be a single String of 12 bytes or a string of 24 hex characters","type":"Error","__route":"/api/user/generateQR","date":"11-10-2023 12:26 PM"}}
+{"success":false,"error":{"area":"Controller::User::generateQR","message":"The updated QR Code is not reflected in user's acccount","type":"BadRequestException","__route":"/api/user/generateQR","date":"11-10-2023 12:36 PM"}}
+{"success":false,"error":{"area":"Controller::User::generateQR","message":"The updated QR Code is not reflected in user's acccount. Please try again","type":"BadRequestException","__route":"/api/user/generateQR","date":"11-10-2023 12:42 PM"}}
+{"success":false,"error":{"area":"Controller::User::generateQR","message":"The updated QR Code is not reflected in user's acccount. Please try again","type":"BadRequestException","__route":"/api/user/generateQR","date":"11-10-2023 12:43 PM"}}
+{"success":false,"error":{"area":"Controller::User::generateQR","message":"The updated QR Code is not reflected in user's acccount. Please try again","type":"BadRequestException","__route":"/api/user/generateQR","date":"11-10-2023 12:48 PM"}}
+{"success":false,"error":{"area":"Controller::User::generateQR","message":"The updated QR Code is not reflected in user's acccount. Please try again","type":"BadRequestException","__route":"/api/user/generateQR","date":"11-10-2023 12:48 PM"}}
+{"success":false,"error":{"area":"Model::User::getUser","message":"Argument passed in must be a single String of 12 bytes or a string of 24 hex characters","type":"Error","__route":"/api/user/getUser/652bafc08854e557722dea2","date":"11-10-2023 12:57 PM"}}
+{"success":false,"error":{"area":"Controller::User::getUser","message":"No user found","type":"BadRequestException","__route":"/api/user/getUser/652bafc08854e557722dea2d","date":"11-10-2023 01:00 PM"}}
+{"success":false,"error":{"area":"Controller::User::generateQR","message":"Invalid QR Code generation.","type":"BadRequestException","__route":"/api/user/generateQR","date":"11-10-2023 01:03 PM"}}
+{"success":false,"error":{"area":"Controller::User::generateQR","message":"Invalid QR Code generation.","type":"BadRequestException","__route":"/api/user/generateQR","date":"11-10-2023 01:04 PM"}}
+{"success":false,"error":{"area":"Model::User::updateUserAccess","message":"Cannot read properties of undefined (reading '_id')","type":"TypeError","__route":"/api/user/updateUserAccess","date":"11-10-2023 02:57 PM"}}
+{"success":false,"error":{"area":"Model::User::updateUserAccess","message":"Cannot read properties of undefined (reading '_id')","type":"TypeError","__route":"/api/user/updateUserAccess/652bafc08854e557722dea2e","date":"11-10-2023 03:01 PM"}}
+{"success":false,"error":{"area":"Model::User::updateUserAccess","message":"Cannot read properties of undefined (reading '_id')","type":"TypeError","__route":"/api/user/updateUserAccess/652bafc08854e557722dea2e","date":"11-10-2023 03:07 PM"}}
+{"success":false,"error":{"area":"Controller::User::updateUserAccess","message":"\"isallowedtocreate\" should be a type of \"boolean\"","type":"ValidationError","__route":"/api/user/updateUserAccess/652bafc08854e557722dea2e","date":"11-10-2023 03:10 PM"}}
+{"success":false,"error":{"area":"Controller::User::updateUserAccess","message":"\"isallowedtocreate\" should be a type of \"boolean\"","type":"ValidationError","__route":"/api/user/updateUserAccess/652bafc08854e557722dea2e","date":"11-10-2023 03:10 PM"}}
+{"success":false,"error":{"area":"Controller::User::updateUserAccess","message":"\"isallowedtocreate\" should be a type of \"boolean\"","type":"ValidationError","__route":"/api/user/updateUserAccess/652bafc08854e557722dea2e","date":"11-10-2023 03:10 PM"}}
+{"success":false,"error":{"area":"Controller::User::updateUserAccess","message":"Unsuccessful user access update","type":"BadRequestException","__route":"/api/user/updateUserAccess/652bafc08854e557722dea2e","date":"11-10-2023 03:16 PM"}}
+{"success":false,"error":{"area":"Controller::User::authenticate","message":"Invalid Credentials","type":"UnauthorizedException","__route":"/api/user/authenticate","date":"11-10-2023 03:34 PM"}}
+{"success":false,"error":{"area":"Controller::User::authenticate","message":"Invalid Credentials","type":"UnauthorizedException","__route":"/api/user/authenticate","date":"11-10-2023 03:36 PM"}}
+{"success":false,"error":{"area":"Controller::User::authenticate","message":"Your account has been block","type":"ForbiddenException","__route":"/api/user/authenticate","date":"11-10-2023 03:39 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"You do not have privileges to perform this action.","type":"ForbiddenException","__route":"/api/user/generateQR","date":"11-10-2023 03:42 PM"}}
+{"success":false,"error":{"area":"Controller::User::authenticate","message":"Invalid Credentials","type":"UnauthorizedException","__route":"/api/user/authenticate","date":"11-10-2023 07:49 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"You do not have privileges to perform this action.","type":"ForbiddenException","__route":"/api/user/generateQR","date":"11-10-2023 07:49 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"You do not have privileges to perform this action.","type":"ForbiddenException","__route":"/api/user/generateQR","date":"11-10-2023 07:50 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"You do not have privileges to perform this action.","type":"ForbiddenException","__route":"/api/user/generateQR","date":"11-10-2023 07:52 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"You do not have privileges to perform this action.","type":"ForbiddenException","__route":"/api/user/generateQR","date":"11-10-2023 07:53 PM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"There were no books found.","type":"BadRequestException","__route":"/api/user/downloadExcel","date":"11-10-2023 07:54 PM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"There were no books found.","type":"BadRequestException","__route":"/api/user/downloadExcel","date":"11-10-2023 07:54 PM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"There were no books found.","type":"BadRequestException","__route":"/api/user/downloadExcel","date":"11-10-2023 07:54 PM"}}
+{"success":false,"error":{"area":"Controller::User::authenticate","message":"Your account has been block","type":"ForbiddenException","__route":"/api/user/authenticate","date":"11-10-2023 07:55 PM"}}
+{"success":false,"error":{"area":"Controller::User::authenticate","message":"Your account has been block","type":"ForbiddenException","__route":"/api/user/authenticate","date":"11-10-2023 07:55 PM"}}
+{"success":false,"error":{"area":"Controller::User::authenticate","message":"Your account has been block","type":"ForbiddenException","__route":"/api/user/authenticate","date":"11-10-2023 07:55 PM"}}
+{"success":false,"error":{"area":"Controller::User::authenticate","message":"Your account has been block","type":"ForbiddenException","__route":"/api/user/authenticate","date":"11-10-2023 07:55 PM"}}
+{"success":false,"error":{"area":"Controller::User::authenticate","message":"Your account has been block","type":"ForbiddenException","__route":"/api/user/authenticate","date":"11-10-2023 07:55 PM"}}
+{"success":false,"error":{"area":"Controller::User::authenticate","message":"Invalid Credentials","type":"UnauthorizedException","__route":"/api/user/authenticate","date":"11-10-2023 07:55 PM"}}
+{"success":false,"error":{"area":"Controller::User::authenticate","message":"Invalid Credentials","type":"UnauthorizedException","__route":"/api/user/authenticate","date":"11-10-2023 07:55 PM"}}
+{"success":false,"error":{"area":"Controller::User::authenticate","message":"Invalid Credentials","type":"UnauthorizedException","__route":"/api/user/authenticate","date":"11-10-2023 07:55 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"You do not have privileges to perform this action.","type":"ForbiddenException","__route":"/api/user/generateQR","date":"11-10-2023 07:55 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"You do not have privileges to perform this action.","type":"ForbiddenException","__route":"/api/user/generateQR","date":"11-10-2023 07:56 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"You do not have privilege to perform this action.","type":"ForbiddenException","__route":"/api/user/generateQR","date":"11-10-2023 07:57 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"You do not have privilege to perform this action.","type":"ForbiddenException","__route":"/api/user/generateQR","date":"11-10-2023 08:08 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"You do not have privilege to perform this action.","type":"ForbiddenException","__route":"/api/user/generateQR","date":"11-10-2023 08:08 PM"}}
+{"success":false,"error":{"area":"Controller::User::authenticate","message":"Your account has been block","type":"ForbiddenException","__route":"/api/user/authenticate","date":"11-10-2023 08:09 PM"}}
+{"success":false,"error":{"area":"Controller::User::authenticate","message":"Your account has been block","type":"ForbiddenException","__route":"/api/user/authenticate","date":"11-10-2023 08:09 PM"}}
+{"success":false,"error":{"area":"Controller::User::authenticate","message":"Your account has been block","type":"ForbiddenException","__route":"/api/user/authenticate","date":"11-10-2023 08:09 PM"}}
+{"success":false,"error":{"area":"Controller::User::authenticate","message":"Your account has been block","type":"ForbiddenException","__route":"/api/user/authenticate","date":"11-10-2023 08:09 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"You do not have privilege to perform this action.","type":"ForbiddenException","__route":"/api/user/generateQR","date":"11-10-2023 08:09 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"You do not have privilege to perform this action.","type":"ForbiddenException","__route":"/api/user/generateQR","date":"11-10-2023 08:12 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"You do not have privilege to perform this action.","type":"ForbiddenException","__route":"/api/user/generateQR","date":"11-10-2023 08:14 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"You do not have privilege to perform this action.","type":"ForbiddenException","__route":"/api/user/generateQR","date":"11-10-2023 08:15 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"You do not have privilege to perform this action.","type":"ForbiddenException","__route":"/api/user/generateQR","date":"11-10-2023 08:15 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"You do not have privilege to perform this action.","type":"ForbiddenException","__route":"/api/user/generateQR","date":"11-10-2023 08:17 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"You do not have privilege to perform this action.","type":"ForbiddenException","__route":"/api/user/generateQR","date":"11-10-2023 08:21 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"You do not have privilege to perform this action.","type":"ForbiddenException","__route":"/api/user/generateQR","date":"11-10-2023 08:22 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"You do not have privilege to perform this action.","type":"ForbiddenException","__route":"/api/user/generateQR","date":"11-10-2023 08:27 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"You do not have privilege to perform this action.","type":"ForbiddenException","__route":"/api/user/generateQR","date":"11-10-2023 08:27 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"You do not have privilege to perform this action.","type":"ForbiddenException","__route":"/api/user/generateQR","date":"11-10-2023 08:29 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"You do not have privilege to perform this action.","type":"ForbiddenException","__route":"/api/user/generateQR","date":"11-10-2023 08:29 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"You do not have privilege to perform this action.","type":"ForbiddenException","__route":"/api/user/generateQR","date":"11-10-2023 08:31 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"You do not have privilege to perform this action.","type":"ForbiddenException","__route":"/api/user/generateQR","date":"11-10-2023 08:31 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"No credentials found.","type":"UnauthorizedException","__route":"/api/user/generateQR","date":"11-10-2023 08:32 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"No credentials found.","type":"UnauthorizedException","__route":"/api/user/generateQR","date":"11-10-2023 08:32 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"No token found.","type":"UnauthorizedException","__route":"/api/user/generateQR","date":"11-10-2023 08:32 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"No token found.","type":"UnauthorizedException","__route":"/api/user/generateQR","date":"11-10-2023 08:32 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"You do not have privilege to perform this action.","type":"ForbiddenException","__route":"/api/user/generateQR","date":"11-10-2023 08:32 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"invalid signature","type":"JsonWebTokenError","__route":"/api/user/generateQR","date":"11-10-2023 08:33 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"You do not have privilege to perform this action.","type":"ForbiddenException","__route":"/api/user/generateQR","date":"11-10-2023 08:33 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"this.verifyAccess is not a function","type":"TypeError","__route":"/api/user/getUsers","date":"11-10-2023 10:05 PM"}}
+{"success":false,"error":{"area":"Controller::User::verifyAccessControl","message":"properties is not defined","type":"ReferenceError","date":"11-10-2023 10:05 PM"}}
+{"success":false,"error":{"area":"Controller::User::verifyAccessControl","message":"properties is not defined","type":"ReferenceError","date":"11-10-2023 10:06 PM"}}
+{"success":false,"error":{"area":"Controller::User::verifyAccessControl","message":"properties is not defined","type":"ReferenceError","__route":"/api/user/getUsers","date":"11-10-2023 10:07 PM"}}
+{"success":false,"error":{"area":"Controller::User::verifyAccessControl","message":"qweqwe is not defined","type":"ReferenceError","__route":"/api/user/getUsers","date":"11-10-2023 10:10 PM"}}
+{"success":false,"error":{"area":"Controller::User::verifyAccessControl","message":"qweqwe is not defined","type":"ReferenceError","__route":"/api/user/getUsers","date":"11-10-2023 10:14 PM"}}
+{"success":false,"error":{"area":"Controller::User::verifyAccessControl","message":"qweqwe is not defined","type":"ReferenceError","__route":"/api/user/getUsers","date":"11-10-2023 10:14 PM"}}
+{"success":false,"error":{"area":"Controller::User::verifyAccessControl","message":"qweqwe is not defined","type":"ReferenceError","__route":"/api/user/getUsers","date":"11-10-2023 10:15 PM"}}
+{"success":false,"error":{"area":"Controller::User::verifyAccessControl","message":"qweqwe is not defined","type":"ReferenceError","__route":"/api/user/getUsers","date":"11-10-2023 10:15 PM"}}
+{"success":false,"error":{"area":"Model::User::verifyAccessControl","message":"qweqwe is not defined","type":"ReferenceError","__route":"/api/user/getUsers","date":"11-10-2023 10:15 PM"}}
+{"success":false,"error":{"area":"Model::User::verifyAccessControl","message":"qweqwe is not defined","type":"ReferenceError","__route":"/api/user/getUsers","date":"11-10-2023 10:16 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"You do not have privilege to perform this action.","type":"ForbiddenException","__route":"/api/user/getUsers","date":"11-10-2023 10:16 PM"}}
+{"success":false,"error":{"area":"Model::User::verifyAccessControl","message":"qweqwe is not defined","type":"ReferenceError","__route":"/api/user/getUsers","date":"11-10-2023 10:16 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"You do not have privilege to perform this action.","type":"ForbiddenException","__route":"/api/user/getUsers","date":"11-10-2023 10:16 PM"}}
+{"success":false,"error":{"area":"Model::User::verifyAccessControl","message":"qweqwe is not defined","type":"ReferenceError","__route":"/api/user/getUsers","date":"11-10-2023 10:17 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"You do not have privilege to perform this action.","type":"ForbiddenException","__route":"/api/user/getUsers","date":"11-10-2023 10:17 PM"}}
+{"success":false,"error":{"area":"Model::User::verifyAccessControl","message":"qweqwe is not defined","type":"ReferenceError","__route":"/api/user/getUsers","date":"11-10-2023 10:17 PM"}}
+{"success":false,"error":{"area":"Model::User::verifyAccessControl","message":"qweqwe is not defined","type":"ReferenceError","__route":"/api/user/getUsers","date":"11-10-2023 10:21 PM"}}
+{"success":false,"error":{"area":"Controller::User::verifyAccessControl","message":"qeqwewq is not defined","type":"ReferenceError","__route":"/api/user/getUsers","date":"11-10-2023 10:22 PM"}}
+{"success":false,"error":{"area":"Controller::User::verifyAccessControl","message":"qweqwe is not defined","type":"ReferenceError","__route":"/api/user/getUsers","date":"11-10-2023 10:23 PM"}}
+{"success":false,"error":{"area":"Controller::User::verifyAccessControl","message":"qweqwe is not defined","type":"ReferenceError","__route":"/api/user/getUsers","date":"11-10-2023 10:24 PM"}}
+{"success":false,"error":{"area":"Controller::User::verifyAccessControl","message":"ww","type":"BadRequestException","__route":"/api/user/getUsers","date":"11-10-2023 10:25 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"No token found.","type":"UnauthorizedException","__route":"/api/book/deleteBook/654a019f4bc69a631853b7b4","date":"11-11-2023 07:27 AM"}}
+{"success":false,"error":{"area":"Controller::Book::deleteBook","message":"_ is not defined","type":"ReferenceError","__route":"/api/book/deleteBook/654a019f4bc69a631853b7b4","date":"11-11-2023 07:27 AM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"You do not have privilege to perform this action.","type":"ForbiddenException","__route":"/api/book/addBook","date":"11-11-2023 07:43 AM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"You do not have privilege to perform this action.","type":"ForbiddenException","__route":"/api/book/addBook","date":"11-11-2023 07:44 AM"}}
+{"success":false,"error":{"area":"Controller::Book::addBook","message":"\"stocks\" must be an integer","type":"ValidationError","__route":"/api/book/addBook","date":"11-11-2023 09:47 AM"}}
+{"success":false,"error":{"area":"Model::Book::deleteBook","message":"Argument passed in must be a single String of 12 bytes or a string of 24 hex characters","type":"Error","__route":"/api/book/deleteBook/654a3f13f4f32c3dec5bd175654edf71b5a8e373500c2956","date":"11-11-2023 10:41 AM"}}
+{"success":false,"error":{"area":"Controller::Book::updateBook","message":"\"_id\" is not allowed","type":"ValidationError","__route":"/api/book/updateBook/654edf71b5a8e373500c2956","date":"11-11-2023 10:44 AM"}}
+{"success":false,"error":{"area":"Controller::User::downloadExcel","message":"There were no books found.","type":"BadRequestException","__route":"/api/user/downloadExcel","date":"11-11-2023 05:01 PM"}}
