@@ -265,9 +265,13 @@ module.exports.downloadPDF = async (req, res) => {
       qrcode:
         "https://res.cloudinary.com/dhmkfau4h/image/upload/v1699527474/qr_codes/gyopmlrwkmoqcam2jxao.png",
     });
-
+    console.log(222222222, pdfReadStream);
     pdfReadStream.on("data", (chunk) => {
       writeStream.write(chunk);
+    });
+
+    pdfReadStream.on("error", (err) => {
+      console.log(324234234, err);
     });
 
     pdfReadStream.on("close", () => {
