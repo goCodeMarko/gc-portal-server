@@ -8,25 +8,30 @@ const padayon = require("./padayon"),
 
 module.exports.generate = async (template, data) => {
   console.log(1);
-  const browser = await puppeteer.launch({ headless: "new" });
-  console.log(2);
-  const page = await browser.newPage();
-  console.log(3);
-  // const filename = padayon.uniqueId({ fileExtension: "pdf" });
-  const html = await compile(template, data);
-  console.log(4);
-  await page.setContent(html);
-  console.log(5);
-  const pdfReadStream = await page.createPDFStream({
-    format: "Legal",
-    orientation: "portrait",
-  });
-  console.log(6);
-  pdfReadStream.on("close", async () => {
-    await browser.close();
-  });
-  console.log(7);
-  return pdfReadStream;
+  try {
+    const browser = await puppeteer.launch({ headless: "new" });
+    console.log(2);
+    const page = await browser.newPage();
+    console.log(3);
+    // const filename = padayon.uniqueId({ fileExtension: "pdf" });
+    const html = await compile(template, data);
+    console.log(4);
+    await page.setContent(html);
+    console.log(5);
+    const pdfReadStream = await page.createPDFStream({
+      format: "Legal",
+      orientation: "portrait",
+    });
+    console.log(6);
+    pdfReadStream.on("close", async () => {
+      await browser.close();
+    });
+    console.log(7);
+    return pdfReadStream;
+  } catch (error) {
+    console.log(34534543, error);
+  }
+
   // const cloud = await cloudinary.uploader.upload(buffer, {
   //   folder: "random",
   //   type: "authenticated",
