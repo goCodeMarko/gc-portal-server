@@ -1363,3 +1363,14 @@
 {"success":false,"error":{"area":"Model::Book::deleteBook","message":"Argument passed in must be a single String of 12 bytes or a string of 24 hex characters","type":"Error","__route":"/api/book/deleteBook/654a3f13f4f32c3dec5bd175654edf71b5a8e373500c2956","date":"11-11-2023 10:41 AM"}}
 {"success":false,"error":{"area":"Controller::Book::updateBook","message":"\"_id\" is not allowed","type":"ValidationError","__route":"/api/book/updateBook/654edf71b5a8e373500c2956","date":"11-11-2023 10:44 AM"}}
 {"success":false,"error":{"area":"Controller::User::downloadExcel","message":"There were no books found.","type":"BadRequestException","__route":"/api/user/downloadExcel","date":"11-11-2023 05:01 PM"}}
+{"success":false,"error":{"area":"Controller::User::downloadPDF","message":"buffer is not defined","type":"ReferenceError","__route":"/api/user/downloadPDF","date":"11-11-2023 09:25 PM"}}
+{"success":false,"error":{"area":"Controller::User::downloadPDF","message":"Cannot set headers after they are sent to the client","type":"Error","__route":"/api/user/downloadPDF","date":"11-11-2023 09:50 PM"}}
+{"success":false,"error":{"area":"Controller::User::downloadPDF","message":"Cannot set headers after they are sent to the client","type":"Error","__route":"/api/user/downloadPDF","date":"11-11-2023 09:51 PM"}}
+{"success":false,"error":{"area":"Controller::User::downloadPDF","message":"Cannot set headers after they are sent to the client","type":"Error","__route":"/api/user/downloadPDF","date":"11-11-2023 09:52 PM"}}
+{"success":false,"error":{"area":"Controller::User::downloadPDF","message":"readStream.on is not a function","type":"TypeError","__route":"/api/user/downloadPDF","date":"11-12-2023 08:57 AM"}}
+{"success":false,"error":{"area":"Controller::User::downloadPDF","message":"readStreamx.on is not a function","type":"TypeError","__route":"/api/user/downloadPDF","date":"11-12-2023 08:58 AM"}}
+{"success":false,"error":{"area":"Controller::User::downloadPDF","message":"readStreamx.on is not a function","type":"TypeError","__route":"/api/user/downloadPDF","date":"11-12-2023 08:58 AM"}}
+{"success":false,"error":{"area":"Controller::User::downloadPDF","message":"readStreamx.on is not a function","type":"TypeError","__route":"/api/user/downloadPDF","date":"11-12-2023 09:00 AM"}}
+{"success":false,"error":{"area":"Controller::User::downloadPDF","message":"buffer is not defined","type":"ReferenceError","__route":"/api/user/downloadPDF","date":"11-12-2023 09:00 AM"}}
+{"success":false,"error":{"area":"Controller::User::downloadPDF","message":"Cannot access 'res' before initialization","type":"ReferenceError","__route":"/api/user/downloadPDF","date":"11-12-2023 09:10 AM"}}
+{"success":false,"error":{"area":"Controller::User::downloadPDF","message":"Cannot access 'res' before initialization","type":"ReferenceError","__route":"/api/user/downloadPDF","date":"11-12-2023 09:10 AM"}}

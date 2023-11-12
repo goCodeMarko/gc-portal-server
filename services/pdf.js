@@ -14,15 +14,16 @@ module.exports.generate = async (template, data) => {
 
   await page.setContent(html);
 
-  const buffer = await page.pdf({
+  const pdfReadStream = await page.createPDFStream({
     format: "Legal",
     orientation: "portrait",
   });
 
-  await browser.close();
+  pdfReadStream.on("close", async () => {
+    await browser.close();
+  });
 
-  console.log(345345345, buffer);
-
+  return pdfReadStream;
   // const cloud = await cloudinary.uploader.upload(buffer, {
   //   folder: "random",
   //   type: "authenticated",
@@ -48,7 +49,8 @@ module.exports.generate = async (template, data) => {
   //   url: cloud.secure_url,
   //   format: cloud.format,
   // };
-  return buffer;
+
+  // return buffer;
 };
 
 async function compile(templateData, data) {

@@ -251,7 +251,14 @@ module.exports.downloadPDF = async (req, res) => {
 
     let books = await bookController.getBooks(req, res);
 
-    const buffer = await pdf.generate("unknown_report", {
+    const filename = padayon.uniqueId({ fileExt: "pdf" });
+
+    const writeStream = res.writeHead(200, {
+      "Content-Type": "application/pdf", // Set the appropriate content type
+      "Content-Disposition": `attachment; filename=${filename}`, // Change the filename as needed
+    });
+
+    const pdfReadStream = await pdf.generate("unknown_report", {
       name: "Patric Marck Dulaca",
       th: ["AUTHOR", "STOCKS", "TITLE", "PRICE"],
       td: books.data.data,
@@ -259,19 +266,13 @@ module.exports.downloadPDF = async (req, res) => {
         "https://res.cloudinary.com/dhmkfau4h/image/upload/v1699527474/qr_codes/gyopmlrwkmoqcam2jxao.png",
     });
 
-    const filename = padayon.uniqueId({ fileExtension: "pdf" });
-
-    res.writeHead(200, {
-      "Content-Type": "application/pdf", // Set the appropriate content type
-      "Content-Disposition": `attachment; filename=${filename}`, // Change the filename as needed
+    pdfReadStream.on("data", (chunk) => {
+      writeStream.write(chunk);
     });
 
-    // Create a Readable stream from the buffer
-    const readStream = new stream.PassThrough();
-    readStream.end(buffer);
-
-    readStream.pipe(res);
-    return response;
+    pdfReadStream.on("close", () => {
+      res.end();
+    });
   } catch (error) {
     padayon.ErrorHandler("Controller::User::downloadPDF", error, req, res);
   }

@@ -25,7 +25,6 @@ module.exports.getBooks = async (req, res, callback) => {
   try {
     let response = {};
     let MQLBuilder = [{ $match: { isDeleted: false } }];
-    console.log(3345345, req?.query?.search);
     if (req?.query?.search) {
       MQLBuilder[0]["$match"]["title"] = {
         $regex: req.query.search,
@@ -40,7 +39,6 @@ module.exports.getBooks = async (req, res, callback) => {
       { $skip: +req?.query?.skip || 0 },
       { $limit: +req?.query?.limit || 10 }
     );
-    console.log("-------MQLBuilder", MQLBuilder);
     let books = await Book.aggregate(MQLBuilder);
 
     response = {
