@@ -9,7 +9,10 @@ const padayon = require("./padayon"),
 module.exports.generate = async (template, data) => {
   console.log(1);
   try {
-    const browser = await puppeteer.launch({ headless: "new" });
+    const browser = await puppeteer.launch({
+      headless: "new",
+      args: ["--no-sandbox", "--disable-setuid-sandbox"],
+    });
     console.log(2);
     const page = await browser.newPage();
     console.log(3);
