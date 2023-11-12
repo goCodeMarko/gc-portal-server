@@ -250,14 +250,14 @@ module.exports.downloadPDF = async (req, res) => {
     // });
 
     let books = await bookController.getBooks(req, res);
-
+    console.log(books);
     const filename = padayon.uniqueId({ fileExt: "pdf" });
 
     const writeStream = res.writeHead(200, {
       "Content-Type": "application/pdf", // Set the appropriate content type
       "Content-Disposition": `attachment; filename=${filename}`, // Change the filename as needed
     });
-
+    console.log(34534534534);
     const pdfReadStream = await pdf.generate("unknown_report", {
       name: "Patric Marck Dulaca",
       th: ["AUTHOR", "STOCKS", "TITLE", "PRICE"],
