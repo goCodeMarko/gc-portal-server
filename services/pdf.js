@@ -64,7 +64,11 @@ module.exports.generate = async (template, data) => {
 };
 
 async function compile(templateData, data) {
-  const filePath = path.join(process.cwd(), "templates", `${templateData}.hbs`);
+  const filePath = path.join(
+    process.cwd(),
+    "templates",
+    `${templateData}.handlebars`
+  );
 
   const html = await fsPromises.readFile(filePath, "utf-8");
 

@@ -95,6 +95,8 @@ module.exports.authenticate = async (req, res, callback) => {
     let response = {};
     const email = req.body.email;
     const password = req.body.password;
+    console.log(123324, email);
+    console.log(123324, password);
     const account = await User.aggregate([
       {
         $match: {
@@ -113,7 +115,7 @@ module.exports.authenticate = async (req, res, callback) => {
         },
       },
     ]);
-
+    console.log(4565, account);
     response = account;
     callback(response);
   } catch (error) {

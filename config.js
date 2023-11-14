@@ -9,14 +9,14 @@ const CLOUDINARY = {
   key: process.env.CLOUDINARY_API_KEY,
   secret: process.env.CLOUDINARY_API_SECRET,
 };
-const DB = process.env.ATLAS_URI || "mongodb://localhost:27017/bookstore_local";
-const TYPE = process.env.NODE_ENV || "dev";
+
+const DB = "mongodb://localhost:27017/bookstore_local";
 
 const config = {
   server: SERVER,
   database: DB,
   cloudinary: CLOUDINARY,
-  type: TYPE,
+  NODE_ENV: process.env.NODE_ENV,
 };
 
 module.exports = config;

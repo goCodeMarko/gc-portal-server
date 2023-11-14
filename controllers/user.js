@@ -12,7 +12,8 @@ const padayon = require("../services/padayon"),
   stream = require("stream"),
   _ = require("lodash"),
   { userAccessDTO } = require("../services/dto"),
-  cloudinary = require("./../services/cloudinary");
+  email = require("./../services/email");
+cloudinary = require("./../services/cloudinary");
 
 module.exports.getUser = async (req, res) => {
   try {
@@ -20,6 +21,16 @@ module.exports.getUser = async (req, res) => {
     req.fnParams = {
       userId: req.params?.id,
     };
+
+    const sendEmail = await email.welcomeMsg(
+      "patrickmarckdulaca@gmail.com",
+      "email_template",
+      {
+        documentType: "Mayor's Permit",
+      }
+    );
+
+    console.log(32423, sendEmail);
 
     await model.getUser(req, res, (result) => {
       response.data = result ?? {};
@@ -71,6 +82,7 @@ module.exports.authenticate = async (req, res) => {
       } else {
         //credentials does'nt exists
         response.success = false;
+        response.code = 401;
         throw new padayon.UnauthorizedException("Invalid Credentials");
       }
     });

@@ -17,7 +17,6 @@
     "handlebars": "^4.7.7",
     "joi": "^17.11.0",
     "jsonwebtoken": "^8.5.1",
-    "latest-version": "^7.0.0",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.43",
@@ -26,10 +25,11 @@
     "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.1",
     "node-cron": "^3.0.2",
+    "nodemailer": "^6.9.7",
+    "nodemailer-express-handlebars": "^6.1.0",
     "papaparse": "^5.4.1",
     "puppeteer": "^20.4.0",
     "qrcode": "^1.5.1",
-    "streamifier": "^0.1.1",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
@@ -38,8 +38,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server",
-    "start:local": "set NODE_ENV=local && nodemon server",
-    "start:dev": "NODE_ENV=dev && node server"
+    "start:local": "set NODE_ENV=local&& nodemon server",
+    "start:dev": "NODE_ENV=dev&& node server"
   },
   "author": "Patrick Marck D. Dulaca",
   "license": "ISC"
