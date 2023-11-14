@@ -265,7 +265,7 @@ module.exports.downloadPDF = async (req, res) => {
 
     const filename = padayon.uniqueId({ fileExt: "pdf" });
 
-    const writeStream = res.writeHead(200, {
+    res.writeHead(200, {
       "Content-Type": "application/pdf", // Set the appropriate content type
       "Content-Disposition": `attachment; filename=${filename}`, // Change the filename as needed
     });
@@ -279,11 +279,11 @@ module.exports.downloadPDF = async (req, res) => {
     });
 
     pdfReadStream.on("data", (chunk) => {
-      writeStream.write(chunk);
+      res.write(chunk);
     });
 
     pdfReadStream.on("error", (err) => {
-      console.log(324234234, err);
+      throw new Error("Failed during PDF file download");
     });
 
     pdfReadStream.on("close", () => {
@@ -292,7 +292,7 @@ module.exports.downloadPDF = async (req, res) => {
   } catch (error) {
     padayon.ErrorHandler("Controller::User::downloadPDF", error, req, res);
   }
-};
+}; //---------done
 async function fetchFile(public_id, options) {
   const file = await cloudinary.image(public_id, options);
   const start = file.indexOf("'") + 1;

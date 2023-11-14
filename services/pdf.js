@@ -29,10 +29,14 @@ module.exports.generate = async (template, data) => {
       await browser.close();
     });
 
+    pdfReadStream.on("error", async () => {
+      await browser.close();
+    });
+
     return pdfReadStream;
   } catch (error) {
-    console.log(34534543, error);
-  }
+    padayon.ErrorHandler("Controller::User::downloadPDF", error, req, res);
+  } //---------done
 
   // const cloud = await cloudinary.uploader.upload(buffer, {
   //   folder: "random",
@@ -66,6 +70,7 @@ module.exports.generate = async (template, data) => {
 async function compile(templateData, data) {
   const filePath = path.join(
     process.cwd(),
+    "assets",
     "templates",
     `${templateData}.handlebars`
   );
