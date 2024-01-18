@@ -43,7 +43,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server",
     "start:local": "set NODE_ENV=local&& nodemon server",
-    "start:dev": "export NODE_ENV = dev"
+    "start:dev": "NODE_ENV=development"
   },
   "author": "Patrick Marck D. Dulaca",
   "license": "ISC"
