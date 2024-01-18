@@ -8,23 +8,24 @@ const padayon = require("./padayon"),
 
 module.exports.generate = async (template, data) => {
   try {
+    console.log(8);
     const browser = await puppeteer.launch({
       headless: "new",
       args: ["--no-sandbox", "--disable-setuid-sandbox"],
     });
-
+    console.log(9);
     const page = await browser.newPage();
-
+    console.log(10);
     // const filename = padayon.uniqueId({ fileExtension: "pdf" });
     const html = await compile(template, data);
-
+    console.log(11);
     await page.setContent(html);
-
+    console.log(12);
     const pdfReadStream = await page.createPDFStream({
       format: "Legal",
       orientation: "portrait",
     });
-
+    console.log(13);
     pdfReadStream.on("close", async () => {
       await browser.close();
     });
