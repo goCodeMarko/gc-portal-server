@@ -2,7 +2,7 @@
   "name": "sandbox-server",
   "version": "1.0.0",
   "engines": {
-    "node": "16.20.0",
+    "node": "20.9.0",
     "npm": "8.19.4"
   },
   "description": "",
@@ -43,7 +43,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server",
     "start:local": "set NODE_ENV=local&& nodemon server",
-    "start:dev": "set NODE_ENV=dev&& node server"
+    "start:dev": "NODE_ENV=dev&& node server"
   },
   "author": "Patrick Marck D. Dulaca",
   "license": "ISC"
