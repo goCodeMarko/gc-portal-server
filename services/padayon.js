@@ -14,12 +14,15 @@ const mongoose = require("mongoose"),
 module.exports.execute =
   (controller, options = {}) =>
   async (req, res) => {
+    console.log(4444);
     this.security(req, res, options, async (response) => {
+      console.log(1111);
       if (response.success) {
         req.auth = response.account;
         try {
+          console.log(2222);
           let data = await controller(req, res);
-
+          console.log(3333);
           const code = data?.code ?? 200;
           const message = data ?? {};
 
@@ -63,11 +66,11 @@ module.exports.security = async (req, res, options, callback) => {
     if (!_.has(options, "secured")) options.secured = true;
 
     if (options.secured) {
-      const token = req.headers["authorization"]?.split(" ")[1];
-      const cookie = req.headers["cookie"];
+      // const token = req.headers["authorization"]?.split(" ")[1];
+      const { jwt_token } = req.cookies;
 
-      if (!_.isEmpty(token)) {
-        let account = jwt.verify(token, process.env.JWT_PRIVATE_KEY);
+      if (!_.isEmpty(jwt_token)) {
+        let account = jwt.verify(jwt_token, process.env.JWT_PRIVATE_KEY);
 
         response.account = account;
 
@@ -164,6 +167,8 @@ module.exports.Init = {
       {
         useUnifiedTopology: true,
         useNewUrlParser: true,
+        useCreateIndex: true,
+        useFindAndModify: false,
       },
       () => {
         switch (mongoose.connection.readyState) {

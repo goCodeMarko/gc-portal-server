@@ -48,11 +48,6 @@ module.exports.welcomeMsg = async (recipient, template, data = {}) => {
         cid: "email_banner",
       },
       {
-        filename: "email_new_bg.png",
-        path: process.cwd() + "/assets/images/email_new_bg.png",
-        cid: "email_new_bg",
-      },
-      {
         filename: "facebook-icon.png",
         path: process.cwd() + "/assets/images/icons/facebook-icon.png",
         cid: "facebook-icon",
@@ -66,10 +61,6 @@ module.exports.welcomeMsg = async (recipient, template, data = {}) => {
         filename: "youtube-icon.png",
         path: process.cwd() + "/assets/images/icons/youtube-icon.png",
         cid: "youtube-icon",
-      },
-      {
-        filename: "email_banner.png",
-        path: process.cwd() + "/assets/images/email_banner.png",
       },
     ],
     context: {

@@ -30,12 +30,10 @@ module.exports.getUser = async (req, res) => {
       }
     );
 
-    console.log(32423, sendEmail);
-
     await model.getUser(req, res, (result) => {
       response.data = result ?? {};
     });
-    return response;
+    return {};
   } catch (error) {
     padayon.ErrorHandler("Controller::User::getUser", error, req, res);
   }
@@ -74,8 +72,6 @@ module.exports.authenticate = async (req, res) => {
             httpOnly: true,
             maxAge: 86400000,
           });
-          response.success = true;
-          response.message = "";
 
           response.data = { token, account: result[0] };
         }
@@ -364,11 +360,9 @@ module.exports.fileDownload = async (req, res) => {
       { resource_type: "image", type: "authenticated" }
     );
 
-    console.log("---------123", cloud);
     // const response = await axios.get(cloud, {
     //   responseType: "arraybuffer",
     // });
-    // console.log("---------2", response.data);
     // if (response.status === 200) {
     //   imageBuffer = Buffer.from(response.data, "binary");
     // } else {
