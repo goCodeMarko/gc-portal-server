@@ -256,16 +256,16 @@ module.exports.downloadPDF = async (req, res) => {
     //     radius: 10,
     //   },
     // });
-
+    console.log(1);
     let books = await bookController.getBooks(req, res);
-
+    console.log(2);
     const filename = padayon.uniqueId({ fileExt: "pdf" });
-
+    console.log(3);
     res.writeHead(200, {
       "Content-Type": "application/pdf", // Set the appropriate content type
       "Content-Disposition": `attachment; filename=${filename}`, // Change the filename as needed
     });
-
+    console.log(4);
     const pdfReadStream = await pdf.generate("unknown_report", {
       name: "Patric Marck Dulaca",
       th: ["AUTHOR", "STOCKS", "TITLE", "PRICE"],
@@ -273,15 +273,15 @@ module.exports.downloadPDF = async (req, res) => {
       qrcode:
         "https://res.cloudinary.com/dhmkfau4h/image/upload/v1699527474/qr_codes/gyopmlrwkmoqcam2jxao.png",
     });
-
+    console.log(5);
     pdfReadStream.on("data", (chunk) => {
       res.write(chunk);
     });
-
+    console.log(6);
     pdfReadStream.on("error", (err) => {
       throw new Error("Failed during PDF file download");
     });
-
+    console.log(7);
     pdfReadStream.on("close", () => {
       res.end();
     });
