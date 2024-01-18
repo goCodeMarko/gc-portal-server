@@ -3,4 +3,5 @@ logbook
 logbook/*
 node_modules
 node_modules/*
+.puppeteerrc.cjs
 .env
