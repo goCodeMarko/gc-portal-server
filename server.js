@@ -61,5 +61,7 @@
       "\x1b[36m",
       `You're now listening on port http://${config.server.hostname}:${config.server.port}/`
     );
+
+    console.log(11111, process.env.NODE_ENV);
   });
 })();
