@@ -1,7 +1,7 @@
 const nodemailer = require("nodemailer");
 const hbs = require("nodemailer-express-handlebars");
 
-const testEnv = ["local", "dev"];
+const testEnv = ["local", "development"];
 const isTestMode = testEnv.includes(process.env.NODE_ENV) ? true : false;
 const subjectAppendedText = isTestMode ? " **FOR TESTING PURPOSES ONLY**" : "";
 
