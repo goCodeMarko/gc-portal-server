@@ -16,6 +16,13 @@ router.get(
 ); //---------done
 
 router.get(
+  `/api/${base}/getAuthUser`,
+  execute(controller.getUser, {
+    secured: true,
+  })
+); //---------done
+
+router.get(
   `/api/${base}/getUsers`,
   execute(controller.getUsers, {
     secured: true,

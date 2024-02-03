@@ -25,13 +25,21 @@ module.exports.getUser = async (req, res) => {
       userId: req.params?.id,
     };
 
-    // const sendEmail = await email.welcomeMsg(
-    //   "patrickmarckdulaca@gmail.com",
-    //   "email_template",
-    //   {
-    //     documentType: "Mayor's Permit",
-    //   }
-    // );
+    await model.getUser(req, res, (result) => {
+      response.data = result ?? {};
+    });
+    return response;
+  } catch (error) {
+    padayon.ErrorHandler("Controller::User::getUser", error, req, res);
+  }
+};
+
+module.exports.getAuthUser = async (req, res) => {
+  try {
+    let response = { success: true, code: 200 };
+    req.fnParams = {
+      userId: req.auth?._id,
+    };
 
     await model.getUser(req, res, (result) => {
       response.data = result ?? {};
@@ -190,6 +198,14 @@ module.exports.saveMultipleFiles = async (req, res) => {
 
 module.exports.generateQR = async (req, res) => {
   try {
+    const sendEmail = await email.welcomeMsg(
+      "patrickmarckdulaca@gmail.com",
+      "email_template",
+      {
+        documentType: "Mayor's Permit",
+      }
+    );
+
     const response = { success: true, code: 200 };
     let user;
     console.log(1);
