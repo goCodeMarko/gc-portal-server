@@ -17,7 +17,7 @@ router.get(
 
 router.get(
   `/api/${base}/getAuthUser`,
-  execute(controller.getUser, {
+  execute(controller.getAuthUser, {
     secured: true,
   })
 ); //---------done
