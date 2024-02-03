@@ -8,6 +8,7 @@ const padayon = require("../services/padayon"),
 
 module.exports.generate = async (user) => {
   console.log(4);
+  console.log(443, user);
   if (_.isEmpty(user.barcode?.publicId)) {
     throw new padayon.BadRequestException("There's no barcode found.");
   }
