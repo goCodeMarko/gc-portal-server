@@ -59,6 +59,20 @@ router.put(
   })
 ); //---------done
 
+router.put(
+  `/api/${base}/generateIdCard`,
+  execute(controller.generateIdCard, {
+    secured: true,
+  })
+); //---------done
+
+router.put(
+  `/api/${base}/generateBarcode`,
+  execute(controller.generateBarcode, {
+    secured: true,
+  })
+); //---------done
+
 // router.get(
 //   `/api/${base}/getFile`,
 //   multer.single("image"),
@@ -70,14 +84,14 @@ router.put(
 router.get(
   `/api/${base}/downloadPDF`,
   execute(controller.downloadPDF, {
-    secured: false,
+    secured: true,
   })
 );
 
 router.get(
   `/api/${base}/downloadExcel`,
   execute(controller.downloadExcel, {
-    secured: false,
+    secured: true,
   })
 ); //---------done
 

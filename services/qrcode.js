@@ -2,48 +2,54 @@ const { createCanvas, loadImage } = require("canvas"),
   QRCode = require("qrcode"),
   moment = require("moment"),
   momentTz = require("moment-timezone"),
-  cloudinary = require("./../services/cloudinary").uploader;
+  cloudinary = require("./../services/cloudinary"),
+  _ = require("lodash");
 
-module.exports.generate = async () => {
-  const datetime = moment().locale("jp").format("MMDDYYYYHHmmss");
-  // Parse input considering as London tz
-  //   var timeInLondon = momentTz.tz(new Date(), "Asia/Manila");
-  // Converting input to Manila
-  //   var timeInManila = timeInLondon.tz("Asia/Manila");
-  //   console.log(1231321, timeInManila);
-  // Show result
-  //   console.log(234243, timeInManila.format("YYYY-MM-DD HH:mm:ss"));
+module.exports.generate = async (user) => {
+  const datetime = moment().locale("tl-ph").format("MDYYHHmmssSSS");
+  console.log(453, user);
+  const user_creation_timestamp = _.toUpper(user._id.toString().slice(0, 8));
+  const text_output = `Q${datetime}${user_creation_timestamp}`;
 
-  //   console.log(3453453534, datetime);
-  const code = "C-" + datetime + "000001";
-  const result = uploadQRCode(code);
+  const result = uploadQRCode(text_output, user);
 
   return result;
 };
 
-async function uploadQRCode(code) {
-  const qrCodeBase64 = await createQRCodeImg(code);
+async function uploadQRCode(text_output, user) {
+  const qrCodeBase64 = await createQRCodeImg(text_output, user);
 
-  //uploads the qr code image on the cloudinary
-  const upload = await cloudinary.upload(qrCodeBase64, {
+  // uploads the qr code image on the cloudinary
+  const upload = await cloudinary.uploader.upload(qrCodeBase64, {
     folder: "qr_codes",
-    // type: "authenticated",
   });
-  console.log("---cloudinary upload details", upload);
   return upload;
 }
 
-async function createQRCodeImg(code) {
+async function createQRCodeImg(text_output) {
+  const w_qrcode = 800,
+    h_qrcode = 800,
+    logo_url =
+      "https://res.cloudinary.com/dhmkfau4h/image/upload/v1706758355/logo/icons8-user-male-300_1_uhqivq.png",
+    x_logo = 245,
+    y_logo = 245,
+    w_logo = 300,
+    h_logo = 300;
+
   //create canvas for qr
-  const qrCodecanvas = createCanvas(264, 264); // 164
+  const qrCodecanvas = createCanvas(w_qrcode, h_qrcode); // 164
   const qrCodeContext = qrCodecanvas.getContext("2d");
 
   //insert qrcode image on the qr canvas
-  QRCode.toCanvas(qrCodecanvas, code, {
+  QRCode.toCanvas(qrCodecanvas, text_output, {
     errorCorrectionLevel: "H",
     version: 4,
-    type: "image/jpeg",
+    type: "image/png",
     quality: 1,
+    maskPattern: 7,
+    margin: 3,
+    scale: 8,
+    width: w_qrcode,
     color: {
       dark: "#000",
       light: "#ffffff",
@@ -51,19 +57,20 @@ async function createQRCodeImg(code) {
   });
 
   //styling the logo canvas
-  const logo = await loadImage(
-    "https://res.cloudinary.com/dhmkfau4h/image/upload/v1662440493/logo/Bacolod_jkq086.png"
-  );
+  const logo_image = await loadImage(logo_url);
 
+  /*
   const logoCanvas = createCanvas(500, 500);
   const logoContext = logoCanvas.getContext("2d");
+  logoContext.alpha = true;
   logoContext.fillStyle = "rgba(255, 255, 255, 0.8)";
   logoContext.fillRect(0, 0, logoCanvas.width, logoCanvas.height);
   logoContext.drawImage(logo, 6, 6, 490, 490);
+  */
 
   //inserts the logo on qrcode canvas
-  qrCodeContext.drawImage(logoCanvas, 60, 60, 45, 45);
-  // const base64 = logoCanvas.toDataURL("image/png");
+  qrCodeContext.drawImage(logo_image, x_logo, y_logo, w_logo, h_logo);
+
   const base64 = qrCodecanvas.toDataURL("image/png");
 
   return base64;

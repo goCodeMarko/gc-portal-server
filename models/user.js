@@ -19,6 +19,30 @@ User = mongoose.model(
       publicId: { type: String, maxlength: 100, required: true },
       format: { type: String, maxlength: 25, required: true },
       url: { type: String, maxlength: 150, required: true },
+      text_output: { type: String, maxlength: 150, required: true },
+    },
+    barcode: {
+      publicId: { type: String, maxlength: 100, required: true },
+      format: { type: String, maxlength: 25, required: true },
+      url: { type: String, maxlength: 150, required: true },
+      text_output: { type: String, maxlength: 150, required: true },
+    },
+    id_card: {
+      front: {
+        publicId: { type: String, maxlength: 100, required: true },
+        format: { type: String, maxlength: 25, required: true },
+        url: { type: String, maxlength: 150, required: true },
+      },
+      back: {
+        publicId: { type: String, maxlength: 100, required: true },
+        format: { type: String, maxlength: 25, required: true },
+        url: { type: String, maxlength: 150, required: true },
+      },
+    },
+    profile_picture: {
+      publicId: { type: String, maxlength: 100, required: true },
+      format: { type: String, maxlength: 25, required: true },
+      url: { type: String, maxlength: 150, required: true },
     },
     isallowedtodelete: { type: Boolean, default: true },
     isallowedtocreate: { type: Boolean, default: true },
@@ -30,6 +54,7 @@ User = mongoose.model(
 module.exports.getUser = async (req, res, callback) => {
   try {
     const { userId } = req.fnParams;
+    console.log(70, userId);
     let response = {};
     const [result] = await User.aggregate([
       {
@@ -44,10 +69,16 @@ module.exports.getUser = async (req, res, callback) => {
           fullname: {
             $concat: ["$firstname", " ", "$lastname"],
           },
+          firstname: 1,
+          lastname: 1,
           isallowedtodelete: 1,
           isallowedtocreate: 1,
           isallowedtoupdate: 1,
           isblock: 1,
+          id_card: 1,
+          barcode: 1,
+          qrcode: 1,
+          profile_picture: 1,
         },
       },
     ]);
@@ -173,6 +204,64 @@ module.exports.generateQR = async (req, res, callback) => {
     callback(response);
   } catch (error) {
     padayon.ErrorHandler("Model::User::generateQR", error, req, res);
+  }
+}; //---------done
+
+module.exports.generateIdCard = async (req, res, callback) => {
+  try {
+    let response = {};
+    const { front_card, back_card, _id } = req.fnParams;
+
+    const result = await User.updateOne(
+      { _id: ObjectId(_id) },
+      {
+        $set: {
+          id_card: {
+            front: {
+              url: front_card?.secure_url,
+              publicId: front_card?.public_id,
+              format: front_card?.format,
+            },
+            back: {
+              url: back_card?.secure_url,
+              publicId: back_card?.public_id,
+              format: back_card?.format,
+            },
+          },
+        },
+      }
+    );
+
+    response = result;
+    callback(response);
+  } catch (error) {
+    padayon.ErrorHandler("Model::User::generateIdCard", error, req, res);
+  }
+}; //---------done
+
+module.exports.generateBarcode = async (req, res, callback) => {
+  try {
+    let response = {};
+    const { secure_url, public_id, format, _id, text_output } = req.fnParams;
+
+    const result = await User.updateOne(
+      { _id: ObjectId(_id) },
+      {
+        $set: {
+          barcode: {
+            publicId: public_id,
+            url: secure_url,
+            format: format,
+            text_output: text_output,
+          },
+        },
+      }
+    );
+
+    response = result;
+    callback(response);
+  } catch (error) {
+    padayon.ErrorHandler("Model::User::generateBarcode", error, req, res);
   }
 }; //---------done
 

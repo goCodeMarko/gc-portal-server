@@ -23,30 +23,79 @@ Book = mongoose.model(
 
 module.exports.getBooks = async (req, res, callback) => {
   try {
-    let response = {};
-    let MQLBuilder = [{ $match: { isDeleted: false } }];
-    if (req?.query?.search) {
-      MQLBuilder[0]["$match"]["title"] = {
-        $regex: req.query.search,
+    const MQLBuilder = [
+      { $match: { isDeleted: false } },
+      { $sort: { createdAt: -1 } },
+    ];
+    const skip = req.query.skip ? Number(req.query.skip) : 0;
+    const limit = req.query.limit ? Number(req.query.limit) : null;
+    const searchText = req.query.searchText;
+    const searchBy = req.query.searchBy;
+    const sortBy = req.query.sortBy;
+    const sortType = req.query.sortType === "desc" ? -1 : 1;
+
+    if (searchText) {
+      MQLBuilder[0]["$match"][searchBy] = {
+        $regex: searchText,
         $options: "i",
       };
     }
 
-    let bookCount = await Book.aggregate(MQLBuilder);
+    if (sortBy !== "createdAt") {
+      MQLBuilder.push({ $sort: { sortBy: sortType } });
+    }
 
     MQLBuilder.push(
-      { $sort: { createdAt: -1 } },
-      { $skip: +req?.query?.skip || 0 },
-      { $limit: +req?.query?.limit || 10 }
-    );
-    let books = await Book.aggregate(MQLBuilder);
+      {
+        $facet: {
+          total: [
+            {
+              $count: "groups",
+            },
+          ],
+          data: [
+            {
+              $addFields: {
+                _id: "$_id",
+              },
+            },
+          ],
+        },
+      },
+      { $unwind: "$total" },
+      {
+        $project: {
+          items: {
+            $slice: [
+              "$data",
+              skip,
+              {
+                $ifNull: [limit, "$total.groups"],
+              },
+            ],
+          },
+          meta: {
+            total: "$total.groups",
+            limit: {
+              $literal: limit,
+            },
 
-    response = {
-      counts: bookCount.length,
-      pages: Math.ceil(bookCount.length / 2),
-      data: books,
-    };
-    callback(response);
+            page: {
+              $literal: skip / limit + 1,
+            },
+            pages: {
+              $ceil: {
+                $divide: ["$total.groups", limit],
+              },
+            },
+          },
+        },
+      }
+    );
+
+    const books = await Book.aggregate(MQLBuilder);
+
+    callback(...books);
   } catch (error) {
     padayon.ErrorHandler("Model::Book::getBooks", error, req, res);
   }

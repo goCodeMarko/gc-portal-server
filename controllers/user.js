@@ -6,34 +6,37 @@ const padayon = require("../services/padayon"),
   bcrypt = require("bcrypt"),
   jwt = require("jsonwebtoken"),
   qrcode = require("./../services/qrcode"),
+  barcode = require("./../services/barcode"),
   pdf = require("./../services/pdf"),
   excel = require("./../services/excel"),
   papaparse = require("./../services/papaparse"),
   stream = require("stream"),
   _ = require("lodash"),
   { userAccessDTO } = require("../services/dto"),
-  email = require("./../services/email");
-cloudinary = require("./../services/cloudinary");
+  email = require("./../services/email"),
+  id_card = require("./../services/id_card"),
+  cloudinary = require("./../services/cloudinary");
 
 module.exports.getUser = async (req, res) => {
   try {
+    console.log(2345234, req.params);
     let response = { success: true, code: 200 };
     req.fnParams = {
       userId: req.params?.id,
     };
 
-    const sendEmail = await email.welcomeMsg(
-      "patrickmarckdulaca@gmail.com",
-      "email_template",
-      {
-        documentType: "Mayor's Permit",
-      }
-    );
+    // const sendEmail = await email.welcomeMsg(
+    //   "patrickmarckdulaca@gmail.com",
+    //   "email_template",
+    //   {
+    //     documentType: "Mayor's Permit",
+    //   }
+    // );
 
     await model.getUser(req, res, (result) => {
       response.data = result ?? {};
     });
-    return {};
+    return response;
   } catch (error) {
     padayon.ErrorHandler("Controller::User::getUser", error, req, res);
   }
@@ -68,10 +71,10 @@ module.exports.authenticate = async (req, res) => {
           });
 
           // set token as cookie
-          res.cookie("jwt_token", token, {
-            httpOnly: true,
-            maxAge: 86400000,
-          });
+          // res.cookie("jwt_token", token, {
+          //   httpOnly: true,
+          //   maxAge: 86400000,
+          // });
 
           response.data = { token, account: result[0] };
         }
@@ -187,23 +190,36 @@ module.exports.saveMultipleFiles = async (req, res) => {
 
 module.exports.generateQR = async (req, res) => {
   try {
-    let response = { success: true, code: 200 };
-    let generatedQR = await qrcode.generate();
-
+    const response = { success: true, code: 200 };
+    let user;
+    console.log(1);
+    req.fnParams = {
+      userId: req.auth?._id,
+    };
+    console.log(2);
+    await model.getUser(req, res, (result) => {
+      if (_.isEmpty(result))
+        throw new padayon.BadRequestException("No user found!");
+      console.log(9999999, result);
+      user = result;
+    });
+    console.log(3);
+    const generatedQR = await qrcode.generate(user);
+    console.log(3434534, generatedQR);
     if (
       _.isEmpty(generatedQR?.secure_url) ||
       _.isEmpty(generatedQR?.public_id) ||
       _.isEmpty(generatedQR?.format)
     )
       throw new padayon.BadRequestException("Invalid QR Code generation.");
-
+    console.log(4);
     req.fnParams = {
       secure_url: generatedQR.secure_url,
       public_id: generatedQR.public_id,
       format: generatedQR.format,
       _id: req.auth?._id,
     };
-
+    console.log(5);
     await model.generateQR(req, res, (result) => {
       if (_.isEmpty(result) || !_.isEqual(result.nModified, 1))
         throw new padayon.BadRequestException(
@@ -216,9 +232,118 @@ module.exports.generateQR = async (req, res) => {
         format: generatedQR.format,
       };
     });
+    console.log(6);
     return response;
   } catch (error) {
     padayon.ErrorHandler("Controller::User::generateQR", error, req, res);
+  }
+}; //---------done
+
+module.exports.generateIdCard = async (req, res) => {
+  try {
+    const response = { success: true, code: 200 };
+    let user;
+    console.log(1);
+    req.fnParams = {
+      userId: req.auth?._id,
+    };
+    console.log(2);
+    await model.getUser(req, res, (result) => {
+      if (_.isEmpty(result))
+        throw new padayon.BadRequestException("No user found!");
+      user = result;
+    });
+    console.log(3);
+    const generatedIdCard = await id_card.generate(user);
+    console.log(4);
+    if (
+      _.isEmpty(generatedIdCard.front_card?.secure_url) ||
+      _.isEmpty(generatedIdCard.front_card?.public_id) ||
+      _.isEmpty(generatedIdCard.front_card?.format) ||
+      _.isEmpty(generatedIdCard.back_card?.secure_url) ||
+      _.isEmpty(generatedIdCard.back_card?.public_id) ||
+      _.isEmpty(generatedIdCard.back_card?.format)
+    )
+      throw new padayon.BadRequestException("Invalid ID Card generation.");
+    console.log(5);
+    req.fnParams = {
+      front_card: {
+        secure_url: generatedIdCard.front_card?.secure_url,
+        public_id: generatedIdCard.front_card?.public_id,
+        format: generatedIdCard.front_card?.format,
+      },
+      back_card: {
+        secure_url: generatedIdCard.back_card?.secure_url,
+        public_id: generatedIdCard.back_card?.public_id,
+        format: generatedIdCard.back_card?.format,
+      },
+      _id: req.auth?._id,
+    };
+    console.log(6);
+    await model.generateIdCard(req, res, (result) => {
+      if (_.isEmpty(result) || !_.isEqual(result.nModified, 1)) {
+        throw new padayon.BadRequestException(
+          "The updated ID Card is not reflected in user's acccount. Please try again."
+        );
+      }
+
+      response.data = {
+        front_card: {
+          secure_url: generatedIdCard.front_card?.secure_url,
+          public_id: generatedIdCard.front_card?.public_id,
+          format: generatedIdCard.front_card?.format,
+        },
+        back_card: {
+          secure_url: generatedIdCard.back_card?.secure_url,
+          public_id: generatedIdCard.back_card?.public_id,
+          format: generatedIdCard.back_card?.format,
+        },
+      };
+    });
+    return response;
+  } catch (error) {
+    padayon.ErrorHandler("Controller::User::generateIdCard", error, req, res);
+  }
+}; //---------done
+
+module.exports.generateBarcode = async (req, res) => {
+  try {
+    const response = { success: true, code: 200 };
+    const generatedBarcode = await barcode.generate(req.auth._id);
+    console.log(23423423, generatedBarcode);
+    if (
+      _.isEmpty(generatedBarcode?.secure_url) ||
+      _.isEmpty(generatedBarcode?.public_id) ||
+      _.isEmpty(generatedBarcode?.format) ||
+      _.isEmpty(generatedBarcode?.text_output)
+    )
+      throw new padayon.BadRequestException("Invalid Barcode generation.");
+
+    req.fnParams = {
+      secure_url: generatedBarcode.secure_url,
+      public_id: generatedBarcode.public_id,
+      format: generatedBarcode.format,
+      text_output: generatedBarcode.text_output,
+      _id: req.auth?._id,
+    };
+
+    await model.generateBarcode(req, res, (result) => {
+      if (_.isEmpty(result) || !_.isEqual(result.nModified, 1))
+        throw new padayon.BadRequestException(
+          "The updated Barcode is not reflected in user's acccount. Please try again."
+        );
+
+      response.data = {
+        url: generatedBarcode.secure_url,
+        bytes: generatedBarcode.bytes,
+        format: generatedBarcode.format,
+        text_output: generatedBarcode.text_output,
+      };
+    });
+    return response;
+  } catch (error) {
+    console.log(2222222, error);
+    padayon.ErrorHandler("Controller::User::generateBarcode", error, req, res);
   }
 }; //---------done
 
@@ -256,8 +381,8 @@ module.exports.downloadPDF = async (req, res) => {
     //     radius: 10,
     //   },
     // });
-    let books = await bookController.getBooks(req, res);
-
+    const books = await bookController.getBooks(req, res);
+    console.log(23432, books);
     const filename = padayon.uniqueId({ fileExt: "pdf" });
 
     res.writeHead(200, {
@@ -268,7 +393,7 @@ module.exports.downloadPDF = async (req, res) => {
     const pdfReadStream = await pdf.generate("unknown_report", {
       name: "Patric Marck Dulaca",
       th: ["AUTHOR", "STOCKS", "TITLE", "PRICE"],
-      td: books.data.data,
+      td: books?.data?.items,
       qrcode:
         "https://res.cloudinary.com/dhmkfau4h/image/upload/v1699527474/qr_codes/gyopmlrwkmoqcam2jxao.png",
     });
@@ -302,7 +427,7 @@ module.exports.downloadExcel = async (req, res) => {
     let response = { success: true, code: 200 };
     const books = await bookController.getBooks(req, res);
 
-    if (_.size(books.data?.data) === 0)
+    if (_.size(books.data?.items) === 0)
       throw new padayon.BadRequestException("There were no books found.");
 
     const buffer = await excel.generate({
@@ -314,7 +439,7 @@ module.exports.downloadExcel = async (req, res) => {
       table: {
         start: "A4",
         fields: ["AUTHOR", "STOCKS", "TITLE", "PRICE"],
-        data: books.data.data,
+        data: books.data.items,
         dataKeys: ["author", "stocks", "title", "price"],
       },
     });

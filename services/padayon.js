@@ -14,15 +14,12 @@ const mongoose = require("mongoose"),
 module.exports.execute =
   (controller, options = {}) =>
   async (req, res) => {
-    console.log(4444);
     this.security(req, res, options, async (response) => {
-      console.log(1111);
       if (response.success) {
         req.auth = response.account;
         try {
-          console.log(2222);
           let data = await controller(req, res);
-          console.log(3333);
+
           const code = data?.code ?? 200;
           const message = data ?? {};
 
@@ -41,6 +38,20 @@ module.exports.write = (msg) => {
   fs.writeFileSync("./logbook/error.log", JSON.stringify(msg) + "\n", {
     flag: "a",
   });
+};
+
+module.exports.ErrorHandler2 = (area, error) => {
+  const message = {
+    success: false,
+    error: {
+      area,
+      message: error.message,
+      type: error.name,
+      __route: req.url,
+      date,
+    },
+  };
+  res.status(statusCode).send(message);
 };
 
 module.exports.ErrorHandler = (area, error, req, res) => {
@@ -64,11 +75,13 @@ module.exports.security = async (req, res, options, callback) => {
   let response = { success: true, message: "", account: {} };
   try {
     if (!_.has(options, "secured")) options.secured = true;
-
+    console.log(2222222222222);
     if (options.secured) {
-      // const token = req.headers["authorization"]?.split(" ")[1];
-      const { jwt_token } = req.cookies;
-
+      const raw = _.split(req.headers["authorization"], " ");
+      const jwt_token = raw[1];
+      console.log(_.split(req.headers["authorization"], " "));
+      // const { jwt_token } = req.cookies;
+      console.log(2342323, jwt_token);
       if (!_.isEmpty(jwt_token)) {
         let account = jwt.verify(jwt_token, process.env.JWT_PRIVATE_KEY);
 
