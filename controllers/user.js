@@ -384,20 +384,21 @@ module.exports.downloadPDF = async (req, res) => {
     const books = await bookController.getBooks(req, res);
     console.log(23432, books);
     const filename = padayon.uniqueId({ fileExt: "pdf" });
-
+    console.log(1);
     res.writeHead(200, {
       "Content-Type": "application/pdf", // Set the appropriate content type
       "Content-Disposition": `attachment; filename=${filename}`, // Change the filename as needed
     });
-
+    console.log(2);
     const pdfReadStream = await pdf.generate("unknown_report", {
       name: "Patric Marck Dulaca",
       th: ["AUTHOR", "STOCKS", "TITLE", "PRICE"],
       td: books?.data?.items,
       qrcode:
-        "https://res.cloudinary.com/dhmkfau4h/image/upload/v1699527474/qr_codes/gyopmlrwkmoqcam2jxao.png",
+        "https://res.cloudinary.com/dhmkfau4h/image/upload/v1706952611/qr_codes/gjs6hxrjmyagkp0ydq1h.png",
     });
-
+    console.log(3, pdfReadStream);
+    console.log(3);
     pdfReadStream.on("data", (chunk) => {
       res.write(chunk);
     });
