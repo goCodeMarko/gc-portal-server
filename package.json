@@ -42,11 +42,10 @@
     "nodemon": "^2.0.6"
   },
   "scripts": {
-    "preinstall": "npm install pm2 -g",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "NODE_ENV=development&&node server",
     "start:local": "set NODE_ENV=local&& nodemon server",
-    "start:dev": "NODE_ENV=development&&pm2-runtime server.js -i max"
+    "start:dev": "NODE_ENV=development&&pm2-runtime start ecosystem.config.js --env production"
   },
   "author": "Patrick Marck D. Dulaca",
   "license": "ISC"
