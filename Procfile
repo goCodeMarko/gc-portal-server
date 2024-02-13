@@ -1,1 +1,1 @@
-web: pm2 start server.js -i max
+web: npm run start:dev
