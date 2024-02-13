@@ -25,15 +25,25 @@ module.exports.deleteBook = async (req, res, callback) => {
     req.fnParams = {
       bookId: req.params?.id,
     };
-
     await model.deleteBook(req, res, (result) => {
       if (_.isEmpty(result) || !_.isEqual(result.nModified, 1))
         throw new padayon.BadRequestException(
-          "The updated QR Code is not reflected in user's acccount. Please try again."
+          "Unsuccessful book deletion. Please try again."
         );
 
       response.data = result;
     });
+
+    req.query = {
+      ...req.body,
+      skip: req.body.limit - 1,
+      limit: 1,
+    };
+    console.log(3333, req.query);
+    await model.getBooks(req, res, (result) => {
+      response.data = result;
+    });
+
     return response;
   } catch (error) {
     padayon.ErrorHandler("Controller::Book::deleteBook", error, req, res);

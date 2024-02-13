@@ -20,6 +20,8 @@
   Init.Mongoose();
   Init.CronJobs();
 
+  console.log("server", process.pid);
+
   app
     .use(requestLogger)
 
@@ -31,7 +33,11 @@
     .use(bodyParser.urlencoded({ extended: true }))
     .use(cookieParser())
 
-    .use(morgan("dev"))
+    .use(
+      morgan(
+        ":method :url :status :res[content-length]- :remote-addr - :remote-user [:date[clf]] - :response-time ms"
+      )
+    )
 
     .use(routes)
 
@@ -61,6 +67,7 @@
       "\x1b[36m",
       `You're now listening on port http://${config.server.hostname}:${config.server.port}/`
     );
+    console.log("PID", process.pid);
 
     console.log(11111, process.env.NODE_ENV);
   });

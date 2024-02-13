@@ -28,11 +28,11 @@ module.exports.getBooks = async (req, res, callback) => {
       { $sort: { createdAt: -1 } },
     ];
     const skip = req.query.skip ? Number(req.query.skip) : 0;
-    const limit = req.query.limit ? Number(req.query.limit) : null;
+    const limit = req.query.limit ? Number(req.query.limit) : 10;
     const searchText = req.query.searchText;
     const searchBy = req.query.searchBy;
-    const sortBy = req.query.sortBy;
-    const sortType = req.query.sortType === "desc" ? -1 : 1;
+    const sortBy = req.query.sortBy ?? "createdAt";
+    const sortType = req.query.sortType === "asc" ? 1 : -1;
 
     if (searchText) {
       MQLBuilder[0]["$match"][searchBy] = {

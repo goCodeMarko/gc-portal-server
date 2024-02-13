@@ -33,9 +33,10 @@
     "nodemailer": "^6.9.7",
     "nodemailer-express-handlebars": "^6.1.0",
     "papaparse": "^5.4.1",
+    "pm2": "^5.3.1",
     "puppeteer": "^20.4.0",
-    "qrcode": "^1.5.1",
-    "uuid": "^9.0.0"
+    "puppeteer-cluster": "^0.23.0",
+    "qrcode": "^1.5.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.6"

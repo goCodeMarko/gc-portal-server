@@ -54,7 +54,7 @@ User = mongoose.model(
 module.exports.getUser = async (req, res, callback) => {
   try {
     const { userId } = req.fnParams;
-    console.log(70, userId);
+
     let response = {};
     const [result] = await User.aggregate([
       {
@@ -141,6 +141,7 @@ module.exports.authenticate = async (req, res, callback) => {
           fullname: {
             $concat: ["$firstname", " ", "$lastname"],
           },
+          profile_picture: 1,
           isblock: 1,
         },
       },

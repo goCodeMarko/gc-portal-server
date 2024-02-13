@@ -75,13 +75,10 @@ module.exports.security = async (req, res, options, callback) => {
   let response = { success: true, message: "", account: {} };
   try {
     if (!_.has(options, "secured")) options.secured = true;
-    console.log(2222222222222);
     if (options.secured) {
       const raw = _.split(req.headers["authorization"], " ");
       const jwt_token = raw[1];
-      console.log(_.split(req.headers["authorization"], " "));
       // const { jwt_token } = req.cookies;
-      console.log(2342323, jwt_token);
       if (!_.isEmpty(jwt_token)) {
         let account = jwt.verify(jwt_token, process.env.JWT_PRIVATE_KEY);
 

@@ -19,7 +19,6 @@ const padayon = require("../services/padayon"),
 
 module.exports.getUser = async (req, res) => {
   try {
-    console.log(2345234, req.params);
     let response = { success: true, code: 200 };
     req.fnParams = {
       userId: req.params?.id,
@@ -388,6 +387,7 @@ module.exports.getFile = async (req, res) => {
 
 module.exports.downloadPDF = async (req, res) => {
   try {
+    console.log("---------------------------999999");
     let response = { success: true, code: 200 };
     // const public_id = req.query.public_id;
     // const qrcodeURL = await fetchFile(public_id, {
@@ -398,23 +398,22 @@ module.exports.downloadPDF = async (req, res) => {
     //   },
     // });
     const books = await bookController.getBooks(req, res);
-    console.log(23432, books);
+
     const filename = padayon.uniqueId({ fileExt: "pdf" });
-    console.log(1);
+
     res.writeHead(200, {
       "Content-Type": "application/pdf", // Set the appropriate content type
       "Content-Disposition": `attachment; filename=${filename}`, // Change the filename as needed
     });
-    console.log(2);
+    const user = await this.getAuthUser(req, res);
+
     const pdfReadStream = await pdf.generate("unknown_report", {
-      name: "Patric Marck Dulaca",
+      name: user.data?.firstname + " " + user.data?.lastname,
       th: ["AUTHOR", "STOCKS", "TITLE", "PRICE"],
       td: books?.data?.items,
-      qrcode:
-        "https://res.cloudinary.com/dhmkfau4h/image/upload/v1706952611/qr_codes/gjs6hxrjmyagkp0ydq1h.png",
+      qrcode: user.data?.qrcode?.url,
     });
-    console.log(3, pdfReadStream);
-    console.log(3);
+
     pdfReadStream.on("data", (chunk) => {
       res.write(chunk);
     });
