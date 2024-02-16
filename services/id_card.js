@@ -7,9 +7,6 @@ const padayon = require("../services/padayon"),
   cloudinary = require("./../services/cloudinary");
 
 module.exports.generate = async (user) => {
-  console.log(4);
-  console.log(443, user.profile_picture);
-  console.log(777, user.profile_picture?.publicId);
   if (_.isEmpty(user.barcode?.publicId)) {
     throw new padayon.BadRequestException("There's no barcode found.");
   }
@@ -17,14 +14,13 @@ module.exports.generate = async (user) => {
   if (_.isEmpty(user.profile_picture?.publicId)) {
     throw new padayon.BadRequestException("There's no profile picture found.");
   }
-  console.log(5);
+
   const frontCardbase64 = await createFrontCardImg(user);
-  console.log(6);
+
   const backCardbase64 = await createBackCardImg(user);
-  console.log(7);
+
   const uploads = await uploadIdCards(frontCardbase64, backCardbase64);
 
-  console.log(11111111111111, uploads);
   return uploads;
 };
 
@@ -40,8 +36,6 @@ async function uploadIdCards(frontCardbase64, backCardbase64) {
 }
 
 async function createFrontCardImg(user) {
-  console.log(1111, user);
-
   const w_card_template = 1011,
     h_card_template = 639,
     template_url =

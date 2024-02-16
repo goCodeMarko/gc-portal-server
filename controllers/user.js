@@ -256,21 +256,22 @@ module.exports.generateQR = async (req, res) => {
 
 module.exports.generateIdCard = async (req, res) => {
   try {
+    console.log("PID: ", process.pid);
     const response = { success: true, code: 200 };
     let user;
-    console.log(1);
+
     req.fnParams = {
       userId: req.auth?._id,
     };
-    console.log(2);
+
     await model.getUser(req, res, (result) => {
       if (_.isEmpty(result))
         throw new padayon.BadRequestException("No user found!");
       user = result;
     });
-    console.log(3);
+
     const generatedIdCard = await id_card.generate(user);
-    console.log(4);
+
     if (
       _.isEmpty(generatedIdCard.front_card?.secure_url) ||
       _.isEmpty(generatedIdCard.front_card?.public_id) ||
@@ -280,7 +281,7 @@ module.exports.generateIdCard = async (req, res) => {
       _.isEmpty(generatedIdCard.back_card?.format)
     )
       throw new padayon.BadRequestException("Invalid ID Card generation.");
-    console.log(5);
+
     req.fnParams = {
       front_card: {
         secure_url: generatedIdCard.front_card?.secure_url,
@@ -294,7 +295,7 @@ module.exports.generateIdCard = async (req, res) => {
       },
       _id: req.auth?._id,
     };
-    console.log(6);
+
     await model.generateIdCard(req, res, (result) => {
       if (_.isEmpty(result) || !_.isEqual(result.nModified, 1)) {
         throw new padayon.BadRequestException(
@@ -323,6 +324,7 @@ module.exports.generateIdCard = async (req, res) => {
 
 module.exports.generateBarcode = async (req, res) => {
   try {
+    console.log("PID: ", process.pid);
     const response = { success: true, code: 200 };
     const generatedBarcode = await barcode.generate(req.auth._id);
     console.log(23423423, generatedBarcode);
@@ -387,7 +389,7 @@ module.exports.getFile = async (req, res) => {
 
 module.exports.downloadPDF = async (req, res) => {
   try {
-    console.log("---------------------------999999");
+    console.log("PID: ", process.pid);
     let response = { success: true, code: 200 };
     // const public_id = req.query.public_id;
     // const qrcodeURL = await fetchFile(public_id, {
@@ -400,13 +402,11 @@ module.exports.downloadPDF = async (req, res) => {
     const books = await bookController.getBooks(req, res);
 
     const filename = padayon.uniqueId({ fileExt: "pdf" });
-
     res.writeHead(200, {
       "Content-Type": "application/pdf", // Set the appropriate content type
       "Content-Disposition": `attachment; filename=${filename}`, // Change the filename as needed
     });
     const user = await this.getAuthUser(req, res);
-
     const pdfReadStream = await pdf.generate("unknown_report", {
       name: user.data?.firstname + " " + user.data?.lastname,
       th: ["AUTHOR", "STOCKS", "TITLE", "PRICE"],
@@ -440,6 +440,7 @@ async function fetchFile(public_id, options) {
 
 module.exports.downloadExcel = async (req, res) => {
   try {
+    console.log("PID: ", process.pid);
     let response = { success: true, code: 200 };
     const books = await bookController.getBooks(req, res);
 

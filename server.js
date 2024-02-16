@@ -35,7 +35,8 @@
 
     .use(
       morgan(
-        ":method :url :status :res[content-length]- :remote-addr - :remote-user [:date[clf]] - :response-time ms"
+        `${process.pid}` +
+          ":method :url :status :res[content-length]- :remote-addr - :remote-user [:date[clf]] - :response-time ms"
       )
     )
 
@@ -67,8 +68,5 @@
       "\x1b[36m",
       `You're now listening on port http://${config.server.hostname}:${config.server.port}/`
     );
-    console.log("PID", process.pid);
-
-    console.log(11111, process.env.NODE_ENV);
   });
 })();
