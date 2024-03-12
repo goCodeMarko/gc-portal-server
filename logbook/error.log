@@ -1730,3 +1730,9 @@
 {"success":false,"error":{"area":"Padayon::Utils::security","message":"No token found.","type":"UnauthorizedException","__route":"/api/user/getUser/652bafc08854e557722dea2e","date":"02-03-2024 11:30 AM"}}
 {"success":false,"error":{"area":"Padayon::Utils::security","message":"No token found.","type":"UnauthorizedException","__route":"/api/user/getUser/652bafc08854e557722dea2e","date":"02-03-2024 11:31 AM"}}
 {"success":false,"error":{"area":"Padayon::Utils::security","message":"No token found.","type":"UnauthorizedException","__route":"/api/user/getUser/652bafc08854e557722dea2e","date":"02-03-2024 11:31 AM"}}
+{"success":false,"error":{"area":"Model::User::authenticate","message":"Invalid Credentials","type":"UnauthorizedException","__route":"/api/user/authenticate","date":"03-05-2024 10:28 AM"}}
+{"success":false,"error":{"area":"Model::User::authenticate","message":"Invalid Credentials","type":"UnauthorizedException","__route":"/api/user/authenticate","date":"03-05-2024 10:28 AM"}}
+{"success":false,"error":{"area":"Model::User::authenticate","message":"Invalid Credentials","type":"UnauthorizedException","__route":"/api/user/authenticate","date":"03-05-2024 10:28 AM"}}
+{"success":false,"error":{"area":"Model::User::authenticate","message":"Invalid Credentials","type":"UnauthorizedException","__route":"/api/user/authenticate","date":"03-05-2024 10:29 AM"}}
+{"success":false,"error":{"area":"Model::User::authenticate","message":"Invalid Credentials","type":"UnauthorizedException","__route":"/api/user/authenticate","date":"03-05-2024 10:29 AM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"No token found.","type":"UnauthorizedException","__route":"/api/user/downloadExcel","date":"03-12-2024 11:50 AM"}}

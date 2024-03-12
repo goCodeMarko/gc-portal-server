@@ -14,20 +14,19 @@
     fsPromise = require("fs").promises,
     cookieParser = require("cookie-parser"),
     bodyParser = require("body-parser"),
-    clientFolder =
-      config.server.type == "local" ? "sandbox-client/client" : "public";
+    passportSetup = require("./services/passport");
+  // clientFolder =
+  //   config.server.type == "local" ? "sandbox-client/client" : "public";
 
   Init.Mongoose();
   Init.CronJobs();
-
-  console.log("server", process.pid);
 
   app
     .use(requestLogger)
 
     .use(cors())
 
-    .use(express.static(path.join(__dirname, clientFolder)))
+    // .use(express.static(path.join(__dirname, clientFolder)))
 
     .use(bodyParser.json())
     .use(bodyParser.urlencoded({ extended: true }))
@@ -35,8 +34,9 @@
 
     .use(
       morgan(
-        `${process.pid}` +
-          ":method :url :status :res[content-length]- :remote-addr - :remote-user [:date[clf]] - :response-time ms"
+        " :method :url :status " +
+          `pid: ${process.pid}` +
+          " :remote-addr - :remote-user [:date[clf]] - :response-time ms"
       )
     )
 

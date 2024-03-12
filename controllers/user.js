@@ -98,6 +98,66 @@ module.exports.authenticate = async (req, res) => {
   }
 }; //---------done
 
+module.exports.getUsers = async (req, res) => {
+  try {
+    let response = { success: true, code: 200 };
+    await model.getUsers(req, res, (result) => {
+      response.data = result;
+    });
+    return response;
+  } catch (error) {
+    padayon.ErrorHandler("Controller::User::getUsers", error, req, res);
+  }
+};
+
+module.exports.authenticate = async (req, res) => {
+  try {
+    let response = { success: true, code: 200 };
+    await model.authenticate(req, res, (result) => {
+      //checks if credentials exists
+      if (_.size(result)) {
+        //checks if user account is blocked
+        if (result[0].isblock) {
+          response.success = false;
+          throw new padayon.ForbiddenException("Your account has been block");
+        } else {
+          //if not blocked then generate token
+          const token = jwt.sign(result[0], process.env.JWT_PRIVATE_KEY, {
+            expiresIn: "1d",
+          });
+
+          // set token as cookie
+          // res.cookie("jwt_token", token, {
+          //   httpOnly: true,
+          //   maxAge: 86400000,
+          // });
+
+          response.data = { token, account: result[0] };
+        }
+      } else {
+        //credentials does'nt exists
+        response.success = false;
+        response.code = 401;
+        throw new padayon.UnauthorizedException("Invalid Credentials");
+      }
+    });
+    return response;
+  } catch (error) {
+    padayon.ErrorHandler("Controller::User::authenticate", error, req, res);
+  }
+}; //---------done
+
+module.exports.googleRedirect = async (req, res) => {
+  try {
+    let response = { success: true, code: 200 };
+    console.log(req.query);
+    console.log("345345345");
+    return response;
+  } catch (error) {
+    padayon.ErrorHandler("Controller::User::googleRedirect", error, req, res);
+  }
+}; //---------done
+
 module.exports.updateUserAccess = async (req, res) => {
   try {
     let response = { success: true, code: 200 };

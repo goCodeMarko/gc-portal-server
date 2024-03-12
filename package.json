@@ -33,8 +33,10 @@
     "nodemailer": "^6.9.7",
     "nodemailer-express-handlebars": "^6.1.0",
     "papaparse": "^5.4.1",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0",
     "pm2": "^5.3.1",
-    "puppeteer": "^20.4.0",
+    "puppeteer": "^21.3.7",
     "puppeteer-cluster": "^0.23.0",
     "qrcode": "^1.5.1"
   },

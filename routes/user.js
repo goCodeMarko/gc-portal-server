@@ -6,6 +6,7 @@ const { execute } = require("../services/padayon"),
   express = require("express"),
   router = express.Router(),
   controller = require(`../controllers/user`),
+  passport = require("passport"),
   multer = require("./../services/multer");
 
 router.get(
@@ -42,6 +43,19 @@ router.post(
     secured: false,
   })
 ); //---------done
+
+router.get(
+  `/api/${base}/authenticate/google`,
+  passport.authenticate("google", { scope: ["profile"] })
+);
+router.get(
+  `/api/${base}/google/redirect`,
+  passport.authenticate("google", {
+    successRedirect: "http://localhost:4888/login?g=1",
+    failureRedirect: "http://localhost:4888/login?g=0",
+    session: false,
+  })
+);
 
 router.post(
   `/api/${base}/saveFile`,
