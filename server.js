@@ -19,7 +19,7 @@
   //   config.server.type == "local" ? "sandbox-client/client" : "public";
 
   Init.Mongoose();
-  Init.CronJobs();
+  //Init.CronJobs();
 
   app
     .use(requestLogger)
