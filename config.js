@@ -2,7 +2,7 @@ require("dotenv").config();
 
 const SERVER = {
   hostname: process.env.HOST || "localhost",
-  port: process.env.PORT || 3000,
+  port: process.env.PORT || 3001,
 };
 const CLOUDINARY = {
   name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -10,7 +10,7 @@ const CLOUDINARY = {
   secret: process.env.CLOUDINARY_API_SECRET,
 };
 
-const DB = "mongodb://localhost:27017/bookstore_local"; //process.env.ATLAS_URI;
+const DB = "mongodb://localhost:27017/gc-portal"; //process.env.ATLAS_URI;
 
 const config = {
   server: SERVER,
