@@ -10,7 +10,7 @@ const CLOUDINARY = {
   secret: process.env.CLOUDINARY_API_SECRET,
 };
 
-const DB = "mongodb://localhost:27017/bookstore_local"; //process.env.ATLAS_URI;
+const DB = process.env.ATLAS_URI;
 
 const config = {
   server: SERVER,
