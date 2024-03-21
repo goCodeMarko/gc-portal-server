@@ -36,7 +36,6 @@ module.exports.addTransaction = async (req, res) => {
       await cashinDTO.validateAsync(joi);
       body = joi;
     } else if (body.type === 2) {
-      console.log(34534534, body);
       //cashout
       const joi = {
         type: body.type,
@@ -58,12 +57,10 @@ module.exports.addTransaction = async (req, res) => {
       cloudinaryImg = await cloudinary.uploader.upload(body.snapshot, {
         folder: "cashout",
       });
-    console.log(8888);
     req.fnParams = {
       ...body,
       snapshot: cloudinaryImg?.secure_url,
     };
-    console.log(1111111111, req.fnParams);
     await model.addTransaction(req, res, (result) => {
       response.data = result;
     });
@@ -77,3 +74,21 @@ module.exports.addTransaction = async (req, res) => {
     );
   }
 }; //---------done
+
+module.exports.getCashOuts = async (req, res) => {
+  try {
+    let response = { success: true, code: 200 };
+
+    await model.getCashOuts(req, res, (result) => {
+      response.data = result;
+    });
+    return response;
+  } catch (error) {
+    padayon.ErrorHandler(
+      "Controller::Transaction::getCashOuts",
+      error,
+      req,
+      res
+    );
+  }
+};

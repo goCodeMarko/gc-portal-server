@@ -40,54 +40,53 @@ module.exports.userAccessDTO = Joi.object({
 
 module.exports.cashoutDTO = Joi.object({
   type: Joi.number().min(1).max(2).required().messages({
-    "number.base": `string should be a type of number`,
+    "number.base": `Type should be a type of number`,
   }),
   snapshot: Joi.string().required().messages({
-    "string.base": `"snapshot" should be a type of "string"`,
-    "number.base": `"amount" should be a type of "number"`,
-    "number.empty": `"amount" cannot be an empty field`,
+    "string.base": `Snapshot should be a type of string`,
+    "satring.empty": `Snapshot cannot be an empty field`,
   }),
   amount: Joi.number().required().messages({
-    "number.base": `"amount" should be a type of "number"`,
-    "number.empty": `"amount" cannot be an empty field`,
+    "number.base": `Amount should be a type of number`,
+    "number.empty": `Amount cannot be an empty field`,
   }),
   fee: Joi.number().required().messages({
-    "number.base": `"fee" should be a type of "number"`,
-    "number.empty": `"fee" cannot be an empty field`,
+    "number.base": `Fee should be a type of number`,
+    "number.empty": `Fee cannot be an empty field`,
   }),
   fee_payment_is_gcash: Joi.boolean().required().messages({
-    "number.base": `"fee payment type" should be a type of "boolean"`,
-    "number.empty": `"fee payment type" cannot be an empty field`,
+    "number.base": `Fee payment type should be a type of boolean`,
+    "number.empty": `Fee payment type cannot be an empty field`,
   }),
-  note: Joi.string().messages({
-    "string.base": `"note" should be a type of "string"`,
+  note: Joi.string().allow("").optional().messages({
+    "string.base": `Note should be a type of string`,
   }),
 });
 
 module.exports.cashinDTO = Joi.object({
   type: Joi.number().min(1).max(2).required().messages({
-    "number.base": `string should be a type of number`,
+    "number.base": `Type should be a type of number`,
   }),
   amount: Joi.number().required().messages({
-    "number.base": `"amount" should be a type of "number"`,
-    "number.empty": `"amount" cannot be an empty field`,
+    "number.base": `Amount should be a type of number`,
+    "number.empty": `Amount cannot be an empty field`,
   }),
   phone_number: Joi.string()
     .regex(/^09\d{9}$/)
     .required()
     .messages({
-      "string.pattern.base": `"phone number" format should be like this 09XXXXXXXXXX`,
-      "string.empty": `"phone number" cannot be an empty field`,
+      "string.pattern.base": `Phone number format should be like this 09XXXXXXXXXX`,
+      "string.empty": `Phone number cannot be an empty field`,
     }),
   fee: Joi.number().required().messages({
-    "number.base": `"fee" should be a type of "number"`,
-    "number.empty": `"fee" cannot be an empty field`,
+    "number.base": `Fee should be a type of number`,
+    "number.empty": `Fee cannot be an empty field`,
   }),
   fee_payment_is_gcash: Joi.boolean().required().messages({
-    "number.base": `"fee payment type" should be a type of "boolean"`,
-    "number.empty": `"fee payment type" cannot be an empty field`,
+    "number.base": `Fee payment type should be a type of boolean`,
+    "number.empty": `Fee payment type cannot be an empty field`,
   }),
-  note: Joi.string().messages({
-    "string.base": `"note" should be a type of "string"`,
+  note: Joi.string().allow("").optional().messages({
+    "string.base": `Note should be a type of string`,
   }),
 });

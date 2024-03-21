@@ -16,4 +16,12 @@ router.post(
   })
 ); //---------done
 
+router.get(
+  `/api/${base}/getCashOuts`,
+  execute(controller.getCashOuts, {
+    secured: true,
+    role: ["frontliner"],
+  })
+); //---------done
+
 module.exports = router;
