@@ -4,6 +4,7 @@ const padayon = require("../services/padayon"),
   _ = require("lodash"),
   { cashinDTO, cashoutDTO } = require("../services/dto"),
   model = require(`./../models/${base}`),
+  email = require("./../services/email"),
   cloudinary = require("./../services/cloudinary");
 
 module.exports.addTransaction = async (req, res) => {
@@ -61,8 +62,18 @@ module.exports.addTransaction = async (req, res) => {
       ...body,
       snapshot: cloudinaryImg?.secure_url,
     };
-    await model.addTransaction(req, res, (result) => {
+    await model.addTransaction(req, res, async (result) => {
       response.data = result;
+
+      if (result) {
+        const sendEmail = await email.welcomeMsg(
+          "patrickmarckdulaca@gmail.com",
+          "email_template",
+          {
+            documentType: "Mayor's Permit",
+          }
+        );
+      }
     });
     return response;
   } catch (error) {
