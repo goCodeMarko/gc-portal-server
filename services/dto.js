@@ -58,7 +58,7 @@ module.exports.cashoutDTO = Joi.object({
     "number.base": `Fee payment type should be a type of boolean`,
     "number.empty": `Fee payment type cannot be an empty field`,
   }),
-  note: Joi.string().allow("").optional().messages({
+  note: Joi.allow("").optional().messages({
     "string.base": `Note should be a type of string`,
   }),
 });
@@ -86,7 +86,7 @@ module.exports.cashinDTO = Joi.object({
     "number.base": `Fee payment type should be a type of boolean`,
     "number.empty": `Fee payment type cannot be an empty field`,
   }),
-  note: Joi.string().allow("").optional().messages({
+  note: Joi.allow("").optional().messages({
     "string.base": `Note should be a type of string`,
   }),
 });

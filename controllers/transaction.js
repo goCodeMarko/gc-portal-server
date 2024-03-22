@@ -65,14 +65,24 @@ module.exports.addTransaction = async (req, res) => {
     await model.addTransaction(req, res, async (result) => {
       response.data = result;
 
-      if (result) {
-        const sendEmail = await email.welcomeMsg(
-          "patrickmarckdulaca@gmail.com",
-          "email_template",
-          {
-            documentType: "Mayor's Permit",
-          }
-        );
+      if (result && body.type === 2) {
+        await email.notify("patrickmarckdulaca@gmail.com", "cashout_template", {
+          header: `CASH OUT`,
+          banner: "cashout_banner",
+          amount: result.amount,
+          fee: result.fee,
+          note: result.note,
+          snapshot: result.snapshot,
+        });
+      } else if (result && body.type === 1) {
+        await email.notify("patrickmarckdulaca@gmail.com", "cashin_template", {
+          header: `CASH IN`,
+          banner: "cashin_banner",
+          phone_number: result.phone_number,
+          amount: result.amount,
+          fee: result.fee,
+          note: result.note,
+        });
       }
     });
     return response;
@@ -97,6 +107,24 @@ module.exports.getCashOuts = async (req, res) => {
   } catch (error) {
     padayon.ErrorHandler(
       "Controller::Transaction::getCashOuts",
+      error,
+      req,
+      res
+    );
+  }
+};
+
+module.exports.getCashIns = async (req, res) => {
+  try {
+    let response = { success: true, code: 200 };
+
+    await model.getCashIns(req, res, (result) => {
+      response.data = result;
+    });
+    return response;
+  } catch (error) {
+    padayon.ErrorHandler(
+      "Controller::Transaction::getCashIns",
       error,
       req,
       res

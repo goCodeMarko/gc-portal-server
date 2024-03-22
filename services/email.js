@@ -3,7 +3,7 @@ const hbs = require("nodemailer-express-handlebars");
 
 const testEnv = ["local", "development"];
 const isTestMode = testEnv.includes(process.env.NODE_ENV) ? true : false;
-const subjectAppendedText = isTestMode ? " **FOR TESTING PURPOSES ONLY**" : "";
+// const subjectAppendedText = isTestMode ? " **FOR TESTING PURPOSES ONLY**" : "";
 
 const username = isTestMode
   ? process.env.NODEMAILER_TEST_EMAIL
@@ -22,8 +22,9 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-module.exports.welcomeMsg = async (recipient, template, data = {}) => {
+module.exports.notify = async (recipient, template, data = {}) => {
   //const emailTemplateSource = fs.readFileSync(path.join(__dirname, "/template.hbs"), "utf8")
+  console.log("xxx", template);
   transporter.use(
     "compile",
     hbs({
@@ -39,12 +40,12 @@ module.exports.welcomeMsg = async (recipient, template, data = {}) => {
   const mail = {
     from: username,
     to: recipient,
-    subject: "Welcome" + subjectAppendedText,
+    subject: data.header,
     template: template,
     attachments: [
       {
         filename: "email_banner.png",
-        path: process.cwd() + "/assets/images/email_banner.png",
+        path: process.cwd() + `/assets/images/${data.banner}.png`,
         cid: "email_banner",
       },
       {

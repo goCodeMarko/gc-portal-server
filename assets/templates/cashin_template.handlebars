@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title></title>
+		<style>
+			hr{
+				height:1em;
+			}
+			.left,.right {
+				padding:1px 0.5em;
+				background:#fff;
+				float:right;
+			}
+			.left {
+				float:left;
+				clear:both;
+				font-weight: bold;
+			}
+			.tb_count {
+				width: 90%;
+				margin-left:5%;
+				margin-right:5%;
+				border-collapse: collapse;
+				padding: 0 3vmin 0 3.5vmin;
+				font-size:13px;
+			}
+			.tb_td {
+				border: 1px solid black;
+				width: 50%;
+				padding: 0.25rem;
+			}
+		</style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.2.3/jquery.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        $('#copyBtn').click(function(){
+
+            var text = $("#phone_number").get(0)
+            var selection = window.getSelection();
+            var range = document.createRange();
+            range.selectNodeContents(text);
+            selection.removeAllRanges();
+            selection.addRange(range);
+            //add to clipboard.
+            document.execCommand('copy');
+        })
+
+      });
+    </script>
+	</head>
+	
+	<body
+        style="
+          font-family: Arial, Helvetica, sans-serif;
+          font-size: 13px;
+          padding: 0;
+          margin: 0;
+          background-size: cover;
+          background-position: top;
+          background-repeat: no-repeat;
+          background-color:#ffffff;
+          background-size: contain;
+        "
+      >
+      
+		<table style="width: 100%; border-collapse: collapse;">
+          <tbody>
+            <tr>
+              <td style="padding: 0 15px">
+                <table
+                  style="
+                    width: 100%;
+                    max-width: 700px;
+                    margin: 0 auto;
+                    border-collapse: collapse;
+                    border-collapse: collapse;
+                    background-color: #ffffff;
+                    border-top-left-radius: 30px;
+                    border-top-right-radius: 30px;
+                    max-height: 100px;
+					          margin-top:50px;
+                  ">
+                  <tbody>
+                    <tr style="border: 0">
+                      <td style="text-align: center; padding: 0px; ">
+                        <img style="width: 100%;" src="cid:email_banner" alt="">
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+          </tbody>
+    </table>
+		<table style="width: 100%; border-collapse: collapse">
+			<tbody>
+				<tr>
+					<td style="padding: 0 15px">
+						<table
+							style="
+								width: 100%;
+								max-width: 700px;
+								margin: 0 auto;
+								border-collapse: collapse;
+								border-collapse: collapse;
+								background-color: #ffffff;
+								margin-bottom:30px;
+							"
+						>
+							<tbody>
+								<tr style="border: 0;">
+									<td style="margin-bottom:30px;">
+										<table style="width: 100%">
+										<tbody>
+                                         
+										</table>
+                                        <table style="width: 100%">
+                                            <tbody>
+                                                <div style="
+                                                    font-weight: 400;
+                                                    font-size: 12px;
+                                                    line-height: 34px;
+                                                    align-items: left;
+                                                    text-align: left;
+                                                    color: #000000;
+                                                    background-color: #ffffff;
+                                                    padding: 0 30px 30px 30px;
+                                                ">
+                                                  <b style="display: block;">Phone Number: {{phone_number}}</b>
+                                                  <b style="display: block;">Amount: {{amount}}</b>
+                                                  <b style="display: block;">Fee: {{fee}}</b>
+                                                  <b style="display: block;">Note: {{note}}</b>                                         
+                                                </div>
+                                            </tbody>
+                                        </table>
+                                        <table style="
+                                            width: 100%;
+                                            background-color: #90AC8E;
+                                            "
+                                        >
+                                            <tbody style="
+                                                    background-color: #90AC8E;
+                                                    margin-bottom:30px;
+                                                "
+                                            >
+                                                <div style="
+                                                    font-style: normal;
+                                                    font-weight: 600;
+                                                    font-size: 28px;
+                                                    line-height: 34px;
+                                                    text-align: center;
+                                                    font-style: normal;
+                                                    font-weight: 600;
+                                                    font-size: 12px;
+                                                    align-items: center;
+                                                    background-color: #90AC8E;
+                                                    color: #ffffff;
+                                                    text-align: center;
+                                                    padding-top: 1em;
+                                                ">Note: This is an auto-generated email. Please do not reply to this email thread.</div>
+                                 
+                                                <div style="
+                                                    justify-content: center !important;
+                                                    background-color: #90AC8E;
+                                                    padding-bottom: 1em;
+                                                    border-radius: 20px 20px 20px 20px;
+                                                    text-align:center !important;
+                                                ">
+                                                    <a href="" target="_blank" style="
+                                                        display: inline-flex !important;
+                                                    ">
+                                                        <span style="
+                                                            width: 30px;
+                                                            height: 30px;
+                                                            background: url('cid:facebook-icon');
+                                                            background-size: contain;
+                                                            margin: .5em;
+                                                            "
+                                                        ></span>
+                                                    </a>
+                                                    <a href="" target="_blank" style="
+                                                        display: inline-flex !important;
+                                                    ">
+                                                        <span style="
+                                                            width: 30px;
+                                                            height: 30px;
+                                                            background: url('cid:youtube-icon');
+                                                            background-size: contain;
+                                                            margin: .5em;
+                                                            "
+                                                        ></span>
+                                                    </a>
+                                                    <a href="" target="_blank" style="
+                                                        display: inline-flex !important;
+                                                    ">
+                                                        <span style="
+                                                            width: 30px;
+                                                            height: 30px;
+                                                            background: url('cid:instagram-icon');
+                                                            background-size: contain;
+                                                            margin: .5em;
+                                                            "
+                                                        ></span>
+                                                    </a>
+                                                </div>
+                                            </tbody>
+                                        </table>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</body>
+</html>

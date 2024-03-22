@@ -24,4 +24,12 @@ router.get(
   })
 ); //---------done
 
+router.get(
+  `/api/${base}/getCashIns`,
+  execute(controller.getCashIns, {
+    secured: true,
+    role: ["frontliner"],
+  })
+); //---------done
+
 module.exports = router;
