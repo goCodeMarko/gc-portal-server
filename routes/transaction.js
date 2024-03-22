@@ -11,7 +11,7 @@ router.post(
   `/api/${base}/addTransaction`,
   execute(controller.addTransaction, {
     secured: true,
-    role: ["frontliner"],
+    role: ["frontliner", "admin"],
     strict: { isallowedtocreate: true },
   })
 ); //---------done
@@ -20,7 +20,7 @@ router.get(
   `/api/${base}/getCashOuts`,
   execute(controller.getCashOuts, {
     secured: true,
-    role: ["frontliner"],
+    role: ["frontliner", "admin"],
   })
 ); //---------done
 
@@ -28,7 +28,7 @@ router.get(
   `/api/${base}/getCashIns`,
   execute(controller.getCashIns, {
     secured: true,
-    role: ["frontliner"],
+    role: ["frontliner", "admin"],
   })
 ); //---------done
 
