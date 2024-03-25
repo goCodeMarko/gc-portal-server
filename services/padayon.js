@@ -115,8 +115,7 @@ module.exports.security = async (req, res, options, callback) => {
 
 module.exports.verifyRole = (accountRole, allowedRoles) => {
   return new Promise((resolve, reject) => {
-    if (!allowedRoles.includes(accountRole))
-      reject(new Error("Error in verifyRole"));
+    if (!allowedRoles.includes(accountRole)) reject(new Error("Restricted"));
 
     resolve();
   });

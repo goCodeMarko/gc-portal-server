@@ -5,7 +5,8 @@ const { execute } = require("../services/padayon"),
   base = path.basename(__filename, ".js"),
   express = require("express"),
   router = express.Router(),
-  controller = require(`../controllers/${base}`);
+  controller = require(`../controllers/${base}`),
+  multer = require("./../services/multer");
 
 router.post(
   `/api/${base}/addTransaction`,
@@ -13,6 +14,15 @@ router.post(
     secured: true,
     role: ["frontliner", "admin"],
     strict: { isallowedtocreate: true },
+  })
+); //---------done
+
+router.put(
+  `/api/${base}/updateTransactionStatus`,
+  multer.single("screenshot"),
+  execute(controller.updateTransactionStatus, {
+    secured: true,
+    role: ["frontliner", "admin"],
   })
 ); //---------done
 

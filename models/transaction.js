@@ -25,6 +25,25 @@ Transaction = mongoose.model(
   )
 );
 
+module.exports.findTransaction = async (req, res) => {
+  try {
+    let response = {};
+    const { trans_id } = req.fnParams;
+
+    const transaction = await Transaction.findOne({ _id: ObjectId(trans_id) });
+
+    response = transaction;
+    return response;
+  } catch (error) {
+    padayon.ErrorHandler(
+      "Model::Transaction::findTransaction",
+      error,
+      req,
+      res
+    );
+  }
+}; //---------done
+
 module.exports.addTransaction = async (req, res, callback) => {
   try {
     let response = {};
@@ -37,6 +56,32 @@ module.exports.addTransaction = async (req, res, callback) => {
     callback(response);
   } catch (error) {
     padayon.ErrorHandler("Model::Transaction::addTransaction", error, req, res);
+  }
+}; //---------done
+
+module.exports.updateTransactionStatus = async (req, res, callback) => {
+  try {
+    let response = {};
+    const { status, trans_id, screenshot } = req.fnParams;
+    const result = await Transaction.updateOne(
+      { _id: ObjectId(trans_id) },
+      {
+        $set: {
+          status,
+          snapshot: screenshot ? screenshot : "",
+        },
+      }
+    );
+
+    response = result;
+    callback(response);
+  } catch (error) {
+    padayon.ErrorHandler(
+      "Model::User::updateTransactionStatus",
+      error,
+      req,
+      res
+    );
   }
 }; //---------done
 

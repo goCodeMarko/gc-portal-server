@@ -90,3 +90,33 @@ module.exports.cashinDTO = Joi.object({
     "string.base": `Note should be a type of string`,
   }),
 });
+
+module.exports.updateTransactionStatusDTO = Joi.object({
+  status: Joi.number().disallow(null).required().messages({
+    "number.base": `Status should be a type of number`,
+    "number.empty": `Status cannot be an empty`,
+    "number.disallow": "Status cannot be an empty",
+  }),
+  trans_id: Joi.string().disallow(null).required().messages({
+    "string.base": `Transaction id should be a type of string`,
+    "string.empty": `Transaction id cannot be an empty`,
+    "string.disallow": "Transaction id cannot be an empty",
+  }),
+});
+
+module.exports.approveCashinDTO = Joi.object({
+  status: Joi.number().disallow(null).required().messages({
+    "number.base": `Status should be a type of number`,
+    "number.empty": `Status cannot be an empty`,
+    "number.disallow": "Status cannot be an empty",
+  }),
+  trans_id: Joi.string().disallow(null).required().messages({
+    "string.base": `Transaction id should be a type of string`,
+    "string.empty": `Transaction id cannot be an empty`,
+    "string.disallow": "Transaction id cannot be an empty",
+  }),
+  screenshot: Joi.string().disallow(null).required().messages({
+    "string.base": `Screenshot should be a type of string`,
+    "string.empty": `Screenshot cannot be an empty`,
+  }),
+});

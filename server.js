@@ -29,7 +29,7 @@
     // .use(express.static(path.join(__dirname, clientFolder)))
 
     .use(bodyParser.json({ limit: "500kb" }))
-    .use(bodyParser.urlencoded({ limit: "500kb", extended: true }))
+    .use(bodyParser.urlencoded({ limit: "500kb", extended: false }))
     .use(cookieParser())
 
     .use(

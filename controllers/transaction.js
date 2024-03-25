@@ -2,7 +2,12 @@ const padayon = require("../services/padayon"),
   path = require("path"),
   base = path.basename(__filename, ".js"),
   _ = require("lodash"),
-  { cashinDTO, cashoutDTO } = require("../services/dto"),
+  {
+    cashinDTO,
+    cashoutDTO,
+    updateTransactionStatusDTO,
+    approveCashinDTO,
+  } = require("../services/dto"),
   model = require(`./../models/${base}`),
   email = require("./../services/email"),
   cloudinary = require("./../services/cloudinary");
@@ -89,6 +94,70 @@ module.exports.addTransaction = async (req, res) => {
   } catch (error) {
     padayon.ErrorHandler(
       "Controller::Transaction::addTransaction",
+      error,
+      req,
+      res
+    );
+  }
+}; //---------done
+
+module.exports.updateTransactionStatus = async (req, res) => {
+  try {
+    let response = { success: true, code: 201 };
+    let body = {
+      status: Number(req.body?.status),
+      trans_id: req.query?.trans_id,
+      type: Number(req.body.type),
+    };
+
+    if ([2, 3].includes(body.status) && req.auth?.role === "frontliner") {
+      throw new padayon.BadRequestException("Restricted");
+    }
+
+    if (body.status === 2 && body.type === 1) {
+      const joi = {
+        status: body.status,
+        trans_id: body.trans_id,
+        screenshot: req.file?.path,
+      };
+
+      await approveCashinDTO.validateAsync(joi);
+
+      const upload = await cloudinary.uploader.upload(req.file.path, {
+        folder: "profile_pictures",
+        type: "authenticated",
+        resource_type: "auto",
+        // allowed_formats: ['pdf', 'jpg', 'jpeg', 'png', 'xls', 'xlsx']
+      });
+
+      body = { ...joi, screenshot: upload.secure_url };
+    } else {
+      const joi = {
+        status: body.status,
+        trans_id: body.trans_id,
+      };
+
+      await updateTransactionStatusDTO.validateAsync(joi);
+      body = joi;
+    }
+
+    req.fnParams = {
+      ...body,
+    };
+
+    const transaction = await model.findTransaction(req, res);
+
+    if (!transaction) {
+      throw new padayon.BadRequestException("No transaction found");
+    }
+
+    await model.updateTransactionStatus(req, res, async (result) => {
+      response.data = result;
+    });
+    return response;
+  } catch (error) {
+    padayon.ErrorHandler(
+      "Controller::Transaction::updateTransactionStatus",
       error,
       req,
       res
