@@ -38,7 +38,8 @@
     "pm2": "^5.3.1",
     "puppeteer": "^21.3.7",
     "puppeteer-cluster": "^0.23.0",
-    "qrcode": "^1.5.1"
+    "qrcode": "^1.5.1",
+    "socket.io": "^4.7.5"
   },
   "devDependencies": {
     "nodemon": "^2.0.6"

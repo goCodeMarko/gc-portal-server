@@ -14,6 +14,7 @@
     fsPromise = require("fs").promises,
     cookieParser = require("cookie-parser"),
     bodyParser = require("body-parser"),
+    socketIo = require("socket.io"),
     passportSetup = require("./services/passport");
   // clientFolder =
   //   config.server.type == "local" ? "sandbox-client/client" : "public";
@@ -21,11 +22,30 @@
   Init.Mongoose();
   //Init.CronJobs();
 
+  module.exports.io = require("socket.io")(server, {
+    cors: {
+      origin: "http://localhost:4888",
+      methods: ["GET", "POST"],
+    },
+  });
+
+  this.io.on("connection", (socket) => {
+    const socketId = socket.id;
+    console.log(`A client id ${socketId} connected`);
+
+    socket.on("message", (message) => {
+      // Broadcast the message to all sockets except the sender
+      socket.broadcast.emit("message", message);
+    });
+
+    socket.on("disconnect", () => {
+      console.log("A client disconnected");
+    });
+  });
+
   app
     .use(requestLogger)
-
     .use(cors())
-
     // .use(express.static(path.join(__dirname, clientFolder)))
 
     .use(bodyParser.json({ limit: "500kb" }))
