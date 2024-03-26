@@ -24,7 +24,7 @@
 
   module.exports.io = require("socket.io")(server, {
     cors: {
-      origin: "http://localhost:4888",
+      origin: "*",
       methods: ["GET", "POST"],
     },
   });
