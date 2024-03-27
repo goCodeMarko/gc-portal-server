@@ -63,14 +63,15 @@ module.exports.updateTransactionStatus = async (req, res, callback) => {
   try {
     let response = {};
     const { status, trans_id, screenshot } = req.fnParams;
-    const result = await Transaction.updateOne(
+    const result = await Transaction.findOneAndUpdate(
       { _id: ObjectId(trans_id) },
       {
         $set: {
           status,
           snapshot: screenshot ? screenshot : "",
         },
-      }
+      },
+      { new: true }
     );
 
     response = result;
