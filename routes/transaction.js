@@ -9,6 +9,24 @@ const { execute } = require("../services/padayon"),
   multer = require("./../services/multer");
 
 router.post(
+  `/api/${base}/createTransaction`,
+  execute(controller.createTransaction, {
+    secured: true,
+    role: ["admin"],
+    strict: { isallowedtocreate: true },
+  })
+); //---------done
+
+router.get(
+  `/api/${base}/getTransaction`,
+  execute(controller.getTransaction, {
+    secured: true,
+    role: ["frontliner", "admin"],
+    strict: { isallowedtocreate: true },
+  })
+); //---------done
+
+router.post(
   `/api/${base}/addTransaction`,
   execute(controller.addTransaction, {
     secured: true,

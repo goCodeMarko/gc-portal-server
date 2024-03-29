@@ -61,6 +61,11 @@ module.exports.cashoutDTO = Joi.object({
   note: Joi.allow("").optional().messages({
     "string.base": `Note should be a type of string`,
   }),
+  trans_id: Joi.string().disallow(null).required().messages({
+    "string.base": `Transaction id should be a type of string`,
+    "string.empty": `Transaction id cannot be an empty`,
+    "string.disallow": "Transaction id cannot be an empty",
+  }),
 });
 
 module.exports.cashinDTO = Joi.object({
@@ -88,6 +93,11 @@ module.exports.cashinDTO = Joi.object({
   }),
   note: Joi.allow("").optional().messages({
     "string.base": `Note should be a type of string`,
+  }),
+  trans_id: Joi.string().disallow(null).required().messages({
+    "string.base": `Transaction id should be a type of string`,
+    "string.empty": `Transaction id cannot be an empty`,
+    "string.disallow": "Transaction id cannot be an empty",
   }),
 });
 
@@ -119,4 +129,26 @@ module.exports.approveCashinDTO = Joi.object({
     "string.base": `Screenshot should be a type of string`,
     "string.empty": `Screenshot cannot be an empty`,
   }),
+});
+
+module.exports.createTransactionDTO = Joi.object({
+  gcash: Joi.number().disallow(null).required().messages({
+    "number.base": `Gcash should be a type of number`,
+    "number.empty": `Gcash cannot be an empty`,
+    "number.disallow": "Gcash cannot be an empty",
+  }),
+  cash_on_hand: Joi.number().disallow(null).required().messages({
+    "number.base": `Gcash should be a type of number`,
+    "number.empty": `Gcash cannot be an empty`,
+    "number.disallow": "Gcash cannot be an empty",
+  }),
+  gcashNumber: Joi.string()
+    .regex(/^09\d{9}$/)
+    .required()
+    .messages({
+      "string.pattern.base": `Phone number format should be like this 09XXXXXXXXXX`,
+      "string.empty": `Phone number cannot be an empty field`,
+    }),
+  cashout: Joi.array().items(Joi.string()).empty(),
+  cashin: Joi.array().items(Joi.string()).empty(),
 });

@@ -7,10 +7,84 @@ const padayon = require("../services/padayon"),
     cashoutDTO,
     updateTransactionStatusDTO,
     approveCashinDTO,
+    createTransactionDTO,
   } = require("../services/dto"),
   model = require(`./../models/${base}`),
   email = require("./../services/email"),
   cloudinary = require("./../services/cloudinary");
+
+module.exports.createTransaction = async (req, res) => {
+  try {
+    let response = { success: true, code: 201 };
+
+    let body = {
+      gcash: req?.body?.gcash,
+      cash_on_hand: req?.body?.cash_on_hand,
+      gcashNumber: req?.body?.gcashNumber,
+      cashout: [],
+      cashin: [],
+    };
+
+    // if (_.isNil(body.type))
+    //   throw new padayon.BadRequestException("Missing transaction type");
+
+    const joi = {
+      gcash: body.gcash,
+      cash_on_hand: body.cash_on_hand,
+      gcashNumber: body.gcashNumber,
+      cashout: [],
+      cashin: [],
+    };
+
+    await createTransactionDTO.validateAsync(joi);
+    body = joi;
+
+    req.fnParams = {
+      ...body,
+    };
+
+    await model.createTransaction(req, res, async (result) => {
+      response.data = result;
+    });
+    return response;
+  } catch (error) {
+    padayon.ErrorHandler(
+      "Controller::Transaction::createTransaction",
+      error,
+      req,
+      res
+    );
+  }
+}; //---------done
+
+module.exports.getTransaction = async (req, res) => {
+  try {
+    let response = { success: true, code: 200 };
+
+    let body = {
+      id: req.query?.id,
+    };
+
+    req.fnParams = {
+      ...body,
+    };
+
+    const result = await model.getTransaction(req, res);
+    if (!result) {
+      throw new padayon.BadRequestException("No transaction found");
+    }
+
+    response.data = result;
+    return response;
+  } catch (error) {
+    padayon.ErrorHandler(
+      "Controller::Transaction::getTransaction",
+      error,
+      req,
+      res
+    );
+  }
+};
 
 module.exports.addTransaction = async (req, res) => {
   try {
@@ -24,6 +98,7 @@ module.exports.addTransaction = async (req, res) => {
       fee_payment_is_gcash: req?.body?.fee_payment_is_gcash,
       snapshot: req?.body?.snapshot,
       note: req?.body?.note,
+      trans_id: req.query?.trans_id,
     };
 
     if (_.isNil(body.type))
@@ -38,6 +113,7 @@ module.exports.addTransaction = async (req, res) => {
         fee: body.fee,
         fee_payment_is_gcash: body.fee_payment_is_gcash,
         note: body.note,
+        trans_id: body.trans_id,
       };
       await cashinDTO.validateAsync(joi);
       body = joi;
@@ -51,8 +127,9 @@ module.exports.addTransaction = async (req, res) => {
         fee_payment_is_gcash:
           body.fee_payment_is_gcash?.toLowerCase() === "true",
         note: body.note,
+        trans_id: body.trans_id,
       };
-      console.log("joi", joi);
+
       await cashoutDTO.validateAsync(joi);
       body = joi;
     }
