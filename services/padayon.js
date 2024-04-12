@@ -16,6 +16,8 @@ module.exports.execute =
   async (req, res) => {
     this.security(req, res, options, async (response) => {
       if (response.success) {
+        req.timezone = req.headers["timezone"] ?? "Asia/Manila";
+
         req.auth = response.account;
         try {
           let data = await controller(req, res);

@@ -102,6 +102,9 @@ module.exports.cashinDTO = Joi.object({
 });
 
 module.exports.updateTransactionStatusDTO = Joi.object({
+  type: Joi.number().min(1).max(2).required().messages({
+    "number.base": `Type should be a type of number`,
+  }),
   status: Joi.number().disallow(null).required().messages({
     "number.base": `Status should be a type of number`,
     "number.empty": `Status cannot be an empty`,
@@ -111,10 +114,18 @@ module.exports.updateTransactionStatusDTO = Joi.object({
     "string.base": `Transaction id should be a type of string`,
     "string.empty": `Transaction id cannot be an empty`,
     "string.disallow": "Transaction id cannot be an empty",
+  }),
+  cid: Joi.string().disallow(null).required().messages({
+    "string.base": `Cash id should be a type of string`,
+    "string.empty": `Cash id cannot be an empty`,
+    "string.disallow": "Cash id cannot be an empty",
   }),
 });
 
 module.exports.approveCashinDTO = Joi.object({
+  type: Joi.number().min(1).max(2).required().messages({
+    "number.base": `Type should be a type of number`,
+  }),
   status: Joi.number().disallow(null).required().messages({
     "number.base": `Status should be a type of number`,
     "number.empty": `Status cannot be an empty`,
@@ -124,6 +135,11 @@ module.exports.approveCashinDTO = Joi.object({
     "string.base": `Transaction id should be a type of string`,
     "string.empty": `Transaction id cannot be an empty`,
     "string.disallow": "Transaction id cannot be an empty",
+  }),
+  cid: Joi.string().disallow(null).required().messages({
+    "string.base": `Cash id should be a type of string`,
+    "string.empty": `Cash id cannot be an empty`,
+    "string.disallow": "Cash id cannot be an empty",
   }),
   screenshot: Joi.string().disallow(null).required().messages({
     "string.base": `Screenshot should be a type of string`,
@@ -132,6 +148,10 @@ module.exports.approveCashinDTO = Joi.object({
 });
 
 module.exports.createTransactionDTO = Joi.object({
+  date: Joi.date().required().iso().messages({
+    "date.base": `Date should be a type of iso`,
+    "date.empty": `Date cannot be an empty`,
+  }),
   gcash: Joi.number().disallow(null).required().messages({
     "number.base": `Gcash should be a type of number`,
     "number.empty": `Gcash cannot be an empty`,

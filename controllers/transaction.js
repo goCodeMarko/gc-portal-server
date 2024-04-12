@@ -11,6 +11,7 @@ const padayon = require("../services/padayon"),
   } = require("../services/dto"),
   model = require(`./../models/${base}`),
   email = require("./../services/email"),
+  moment = require("moment-timezone"),
   cloudinary = require("./../services/cloudinary");
 
 module.exports.createTransaction = async (req, res) => {
@@ -18,20 +19,26 @@ module.exports.createTransaction = async (req, res) => {
     let response = { success: true, code: 201 };
 
     let body = {
-      gcash: req?.body?.gcash,
-      cash_on_hand: req?.body?.cash_on_hand,
-      gcashNumber: req?.body?.gcashNumber,
+      gcash: req.body?.gcash,
+      cash_on_hand: req.body?.cash_on_hand,
+      gcashNumber: req.body?.gcashNumber,
+      date: req.body?.date,
       cashout: [],
       cashin: [],
     };
 
-    // if (_.isNil(body.type))
-    //   throw new padayon.BadRequestException("Missing transaction type");
+    // Convert local time to UTC using the client's timezone
+    const dateTime = moment
+      .tz(body.date, "YYYY-MM-DDTHH:mm:ss", req.timezone)
+      .utc();
+    const dateUTC = dateTime.toISOString();
+    body.date = dateUTC;
 
     const joi = {
       gcash: body.gcash,
       cash_on_hand: body.cash_on_hand,
       gcashNumber: body.gcashNumber,
+      date: body.date,
       cashout: [],
       cashin: [],
     };
@@ -62,7 +69,8 @@ module.exports.getTransaction = async (req, res) => {
     let response = { success: true, code: 200 };
 
     let body = {
-      id: req.query?.id,
+      startDate: req.query?.startDate,
+      endDate: req.query?.endDate,
     };
 
     req.fnParams = {
@@ -70,9 +78,6 @@ module.exports.getTransaction = async (req, res) => {
     };
 
     const result = await model.getTransaction(req, res);
-    if (!result) {
-      throw new padayon.BadRequestException("No transaction found");
-    }
 
     response.data = result;
     return response;
@@ -95,7 +100,8 @@ module.exports.addTransaction = async (req, res) => {
       phone_number: req?.body?.phone_number,
       amount: req?.body?.amount,
       fee: req?.body?.fee,
-      fee_payment_is_gcash: req?.body?.fee_payment_is_gcash,
+      fee_payment_is_gcash:
+        req?.body?.fee_payment_is_gcash?.toLowerCase() === "true",
       snapshot: req?.body?.snapshot,
       note: req?.body?.note,
       trans_id: req.query?.trans_id,
@@ -124,8 +130,7 @@ module.exports.addTransaction = async (req, res) => {
         snapshot: body.snapshot,
         amount: body.amount,
         fee: body.fee,
-        fee_payment_is_gcash:
-          body.fee_payment_is_gcash?.toLowerCase() === "true",
+        fee_payment_is_gcash: body.fee_payment_is_gcash,
         note: body.note,
         trans_id: body.trans_id,
       };
@@ -143,6 +148,7 @@ module.exports.addTransaction = async (req, res) => {
     req.fnParams = {
       ...body,
       snapshot: cloudinaryImg?.secure_url,
+      date: req.body?.date,
     };
     await model.addTransaction(req, res, async (result) => {
       response.data = result;
@@ -181,12 +187,14 @@ module.exports.addTransaction = async (req, res) => {
 module.exports.updateTransactionStatus = async (req, res) => {
   try {
     let response = { success: true, code: 201 };
+    console.log(111111111, req.query);
     let body = {
       status: Number(req.body?.status),
       trans_id: req.query?.trans_id,
-      type: Number(req.body.type),
+      cid: req.query?.cid,
+      type: Number(req.body?.type),
     };
-
+    console.log(34534534, body);
     if ([2, 3].includes(body.status) && req.auth?.role === "frontliner") {
       throw new padayon.BadRequestException("Restricted");
     }
@@ -194,8 +202,10 @@ module.exports.updateTransactionStatus = async (req, res) => {
     if (body.status === 2 && body.type === 1) {
       const joi = {
         status: body.status,
+        cid: body.cid,
         trans_id: body.trans_id,
         screenshot: req.file?.path,
+        type: body.type,
       };
 
       await approveCashinDTO.validateAsync(joi);
@@ -211,7 +221,9 @@ module.exports.updateTransactionStatus = async (req, res) => {
     } else {
       const joi = {
         status: body.status,
+        cid: body.cid,
         trans_id: body.trans_id,
+        type: body.type,
       };
 
       await updateTransactionStatusDTO.validateAsync(joi);
@@ -246,9 +258,13 @@ module.exports.getCashOuts = async (req, res) => {
   try {
     let response = { success: true, code: 200 };
 
-    await model.getCashOuts(req, res, (result) => {
-      response.data = result;
-    });
+    const result = await model.getCashOuts(req, res);
+    response.data = result;
+
+    // if (_.size(result) === 0) {
+    //   response.data = [];
+    // }
+
     return response;
   } catch (error) {
     padayon.ErrorHandler(
@@ -264,9 +280,14 @@ module.exports.getCashIns = async (req, res) => {
   try {
     let response = { success: true, code: 200 };
 
-    await model.getCashIns(req, res, (result) => {
-      response.data = result;
-    });
+    const result = await model.getCashIns(req, res);
+    console.log(435345, result);
+    response.data = result;
+
+    // if (_.size(result) === 0) {
+    //   response.data = [];
+    // }
+
     return response;
   } catch (error) {
     padayon.ErrorHandler(

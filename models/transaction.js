@@ -5,44 +5,36 @@ const { ObjectId } = require("mongodb");
 const padayon = require("../services/padayon"),
   path = require("path"),
   base = path.basename(__filename).split(".").shift(),
+  moment = require("moment-timezone"),
   mongoose = require("mongoose");
+
+const CashSchema = new mongoose.Schema(
+  {
+    type: { type: Number, required: true, lowercase: true }, // 1-cashin 2-cashout
+    phone_number: { type: String },
+    amount: { type: Number, default: 0 },
+    fee: { type: Number, default: 0 },
+    fee_payment_is_gcash: { type: Boolean, default: false },
+    snapshot: { type: String, default: "" },
+    status: { type: Number, required: true, lowercase: true, default: 1 }, // 1-pending, 2-approved 3-failed 4-cancelled
+    note: { type: String, default: "" },
+    isDeleted: { type: Boolean, default: false },
+    date: { type: Date },
+  },
+  { timestamps: true }
+);
 
 Transaction = mongoose.model(
   base,
   mongoose.Schema(
     {
+      date: { type: Date },
       gcash: { type: Number, default: 0 },
       cash_on_hand: { type: Number, default: 0 },
       gcashNumber: { type: String },
       report: { type: String, default: "" },
-      cashout: [
-        {
-          type: { type: Number, required: true, lowercase: true }, // 1-cashin 2-cashout
-          phone_number: { type: String },
-          amount: { type: Number, default: 0 },
-          fee: { type: Number, default: 0 },
-          fee_payment_is_gcash: { type: Boolean, default: false },
-          snapshot: { type: String, default: "" },
-          status: { type: Number, required: true, lowercase: true, default: 1 }, // 1-pending, 2-approved 3-failed 4-cancelled
-          note: { type: String, default: "" },
-          isDeleted: { type: Boolean, default: false },
-        },
-        { timestamps: true },
-      ],
-      cashin: [
-        {
-          type: { type: Number, required: true, lowercase: true }, // 1-cashin 2-cashout
-          phone_number: { type: String },
-          amount: { type: Number, default: 0 },
-          fee: { type: Number, default: 0 },
-          fee_payment_is_gcash: { type: Boolean, default: false },
-          snapshot: { type: String, default: "" },
-          status: { type: Number, required: true, lowercase: true, default: 1 }, // 1-pending, 2-approved 3-failed 4-cancelled
-          note: { type: String, default: "" },
-          isDeleted: { type: Boolean, default: false },
-        },
-        { timestamps: true },
-      ],
+      cashout: [CashSchema],
+      cashin: [CashSchema],
       isDeleted: { type: Boolean, default: false },
     },
     { timestamps: true }
@@ -71,11 +63,183 @@ module.exports.findTransaction = async (req, res) => {
 module.exports.getTransaction = async (req, res) => {
   try {
     let response = {};
-    const { id } = req.fnParams;
+    const { startDate, endDate } = req.fnParams;
 
-    const transaction = await Transaction.findOne({ _id: ObjectId(id) }).select(
-      "gcash cash_on_hand report _id gcashNumber createdAt"
-    );
+    // Convert local time to UTC using the client's timezone
+    const utcStartDateTime = moment
+      .tz(startDate, "YYYY-MM-DDTHH:mm:ss", req.timezone)
+      .utc();
+    const utcEndDateTime = moment
+      .tz(endDate, "YYYY-MM-DDTHH:mm:ss", req.timezone)
+      .utc();
+    const startDateUTC = utcStartDateTime.toISOString();
+    const endDateUTC = utcEndDateTime.toISOString();
+    console.log(45, startDateUTC);
+    console.log(45, endDateUTC);
+    const [transaction] = await Transaction.aggregate([
+      {
+        $match: {
+          isDeleted: false,
+          date: {
+            $gte: new Date(startDateUTC),
+            $lte: new Date(endDateUTC),
+          },
+        },
+      },
+      {
+        $project: {
+          date: 1,
+          gcash: 1,
+          runbal_gcash: {
+            $sum: [
+              "$gcash",
+              {
+                $reduce: {
+                  input: {
+                    $filter: {
+                      input: "$cashin",
+                      as: "ci",
+                      cond: { $eq: ["$$ci.status", 2] },
+                    },
+                  },
+                  initialValue: {
+                    $reduce: {
+                      input: {
+                        $filter: {
+                          input: "$cashin",
+                          as: "ci",
+                          cond: {
+                            $and: [
+                              { $eq: ["$$ci.fee_payment_is_gcash", true] },
+                              { $eq: ["$$ci.status", 2] },
+                            ],
+                          },
+                        },
+                      },
+                      initialValue: {
+                        $reduce: {
+                          input: {
+                            $filter: {
+                              input: "$cashout",
+                              as: "co",
+                              cond: { $eq: ["$$co.status", 2] },
+                            },
+                          },
+                          initialValue: {
+                            $reduce: {
+                              input: {
+                                $filter: {
+                                  input: "$cashout",
+                                  as: "co",
+                                  cond: {
+                                    $and: [
+                                      {
+                                        $eq: [
+                                          "$$co.fee_payment_is_gcash",
+                                          true,
+                                        ],
+                                      },
+                                      { $eq: ["$$co.status", 2] },
+                                    ],
+                                  },
+                                },
+                              },
+                              initialValue: 0,
+                              in: { $sum: ["$$value", "$$this.fee"] },
+                            },
+                          },
+                          in: { $sum: ["$$value", "$$this.amount"] },
+                        },
+                      },
+                      in: { $sum: ["$$value", "$$this.fee"] },
+                    },
+                  },
+                  in: { $subtract: ["$$value", "$$this.amount"] },
+                },
+              },
+            ],
+          },
+          cash_on_hand: 1,
+          runbal_cash_on_hand: {
+            $sum: [
+              "$cash_on_hand",
+              {
+                $reduce: {
+                  input: {
+                    $filter: {
+                      input: "$cashin",
+                      as: "ci",
+                      cond: { $eq: ["$$ci.status", 2] },
+                    },
+                  },
+                  initialValue: {
+                    $reduce: {
+                      input: {
+                        $filter: {
+                          input: "$cashin",
+                          as: "ci",
+                          cond: {
+                            $and: [
+                              { $eq: ["$$ci.fee_payment_is_gcash", false] },
+                              { $eq: ["$$ci.status", 2] },
+                            ],
+                          },
+                        },
+                      },
+                      initialValue: {
+                        $reduce: {
+                          input: {
+                            $filter: {
+                              input: "$cashout",
+                              as: "co",
+                              cond: { $eq: ["$$co.status", 2] },
+                            },
+                          },
+                          initialValue: {
+                            $reduce: {
+                              input: {
+                                $filter: {
+                                  input: "$cashout",
+                                  as: "co",
+                                  cond: {
+                                    $and: [
+                                      {
+                                        $eq: [
+                                          "$$co.fee_payment_is_gcash",
+                                          false,
+                                        ],
+                                      },
+                                      { $eq: ["$$co.status", 2] },
+                                    ],
+                                  },
+                                },
+                              },
+                              initialValue: 0,
+                              in: { $sum: ["$$value", "$$this.fee"] },
+                            },
+                          },
+                          in: { $subtract: ["$$value", "$$this.amount"] },
+                        },
+                      },
+                      in: { $sum: ["$$value", "$$this.fee"] },
+                    },
+                  },
+                  in: { $sum: ["$$value", "$$this.amount"] },
+                },
+              },
+            ],
+          },
+          report: 1,
+          isDeleted: 1,
+          gcashNumber: 1,
+          createdAt: 1,
+          cashin: 1,
+          cashout: 1,
+        },
+      },
+    ]);
+
+    console.log(3534);
 
     response = transaction;
     return response;
@@ -104,12 +268,8 @@ module.exports.createTransaction = async (req, res, callback) => {
   }
 }; //---------done
 
-module.exports.getCashOuts = async (req, res, callback) => {
+module.exports.getCashOuts = async (req, res) => {
   try {
-    const MQLBuilder = [
-      { $match: { isDeleted: false, type: 2 } },
-      { $sort: { createdAt: -1 } },
-    ];
     const skip = req.query.skipCount ? Number(req.query.skipCount) : 0;
     const limit = req.query.limit ? Number(req.query.limit) : 10;
     const searchText = req.query.searchText;
@@ -117,16 +277,44 @@ module.exports.getCashOuts = async (req, res, callback) => {
     const sortBy = req.query.sortBy ?? "createdAt";
     const sortType = req.query.sortType === "asc" ? 1 : -1;
 
-    if (searchText) {
-      MQLBuilder[0]["$match"][searchBy] = {
-        $regex: searchText,
-        $options: "i",
-      };
-    }
+    const MQLBuilder = [
+      { $match: { _id: ObjectId(req.query?.transaction_id) } },
+      { $unwind: { path: "$cashout" } },
+      {
+        $project: {
+          amount: {
+            $cond: {
+              if: "$cashout.fee_payment_is_gcash",
+              then: { $sum: ["$cashout.amount", "$cashout.fee"] },
+              else: "$cashout.amount",
+            },
+          },
+          fee: "$cashout.fee",
+          fee_payment_is_gcash: "$cashout.fee_payment_is_gcash",
+          snapshot: "$cashout.snapshot",
+          status: "$cashout.status",
+          note: "$cashout.note",
+          isDeleted: "$cashout.isDeleted",
+          _id: "$cashout._id",
+          type: "$cashout.type",
+          phone_number: "$cashout.phone_number",
+          createdAt: "$cashout.createdAt",
+          updatedAt: "$cashout.updatedAt",
+        },
+      },
+      { $match: { isDeleted: false, type: 2 } },
+    ];
 
-    if (sortBy !== "createdAt") {
-      MQLBuilder.push({ $sort: { sortBy: sortType } });
-    }
+    let searchCriteria = {};
+    searchCriteria[searchBy] = {
+      $regex: searchText,
+      $options: "i",
+    };
+    if (searchText) MQLBuilder.push({ $match: searchCriteria });
+
+    let sortCriteria = {};
+    sortCriteria[sortBy] = sortType;
+    MQLBuilder.push({ $sort: sortCriteria });
 
     MQLBuilder.push(
       {
@@ -176,9 +364,9 @@ module.exports.getCashOuts = async (req, res, callback) => {
       }
     );
 
-    const cashouts = await Transaction.aggregate(MQLBuilder);
+    const [cashouts] = await Transaction.aggregate(MQLBuilder);
 
-    callback(...cashouts);
+    return cashouts;
   } catch (error) {
     padayon.ErrorHandler("Model::Transaction::getCashOuts", error, req, res);
   }
@@ -188,15 +376,21 @@ module.exports.addTransaction = async (req, res, callback) => {
   try {
     let response = {};
     const body = req.fnParams;
-    console.log(12312321, body);
-    const result = await Transaction.findOneAndUpdate(
+
+    const result = await Transaction.findByIdAndUpdate(
       { _id: ObjectId(body.trans_id) },
       body.type === 1
         ? { $push: { cashin: body } }
-        : { $push: { cashout: body } }
+        : { $push: { cashout: body } },
+      { new: true }
     );
-
-    response = result;
+    console.log(3333, result);
+    const cash =
+      body.type === 1
+        ? result.cashin[result.cashin.length - 1]
+        : result.cashout[result.cashout.length - 1];
+    console.log(888, cash);
+    response = cash;
     callback(response);
   } catch (error) {
     padayon.ErrorHandler("Model::Transaction::addTransaction", error, req, res);
@@ -206,18 +400,28 @@ module.exports.addTransaction = async (req, res, callback) => {
 module.exports.updateTransactionStatus = async (req, res, callback) => {
   try {
     let response = {};
-    const { status, trans_id, screenshot } = req.fnParams;
-    const result = await Transaction.findOneAndUpdate(
-      { _id: ObjectId(trans_id) },
-      {
-        $set: {
-          status,
-          snapshot: screenshot ? screenshot : "",
-        },
-      },
-      { new: true }
-    );
+    const { status, cid, trans_id, screenshot, type } = req.fnParams;
+    console.log(33, type);
+    const set =
+      type === 1
+        ? {
+            $set: {
+              "cashin.$[elem].status": status,
+              "cashin.$[elem].snapshot": screenshot ? screenshot : "",
+            },
+          }
+        : { $set: { "cashout.$[elem].status": status } };
 
+    const result = await Transaction.updateOne(
+      { _id: ObjectId(trans_id) },
+      set,
+      {
+        arrayFilters: [{ "elem._id": ObjectId(cid) }],
+        multi: true,
+      }
+    );
+    console.log(5645645645645646456, result);
+    console.log(5645645645645646456, result);
     response = result;
     callback(response);
   } catch (error) {
@@ -230,109 +434,54 @@ module.exports.updateTransactionStatus = async (req, res, callback) => {
   }
 }; //---------done
 
-module.exports.getCashOuts = async (req, res, callback) => {
+module.exports.getCashIns = async (req, res) => {
   try {
-    const MQLBuilder = [
-      { $match: { isDeleted: false, type: 2 } },
-      { $sort: { createdAt: -1 } },
-    ];
     const skip = req.query.skipCount ? Number(req.query.skipCount) : 0;
     const limit = req.query.limit ? Number(req.query.limit) : 10;
     const searchText = req.query.searchText;
     const searchBy = req.query.searchBy;
     const sortBy = req.query.sortBy ?? "createdAt";
     const sortType = req.query.sortType === "asc" ? 1 : -1;
-
-    if (searchText) {
-      MQLBuilder[0]["$match"][searchBy] = {
-        $regex: searchText,
-        $options: "i",
-      };
-    }
-
-    if (sortBy !== "createdAt") {
-      MQLBuilder.push({ $sort: { sortBy: sortType } });
-    }
-
-    MQLBuilder.push(
-      {
-        $facet: {
-          total: [
-            {
-              $count: "groups",
-            },
-          ],
-          data: [
-            {
-              $addFields: {
-                _id: "$_id",
-              },
-            },
-          ],
-        },
-      },
-      { $unwind: "$total" },
+    const MQLBuilder = [
+      { $match: { _id: ObjectId(req.query?.transaction_id) } },
+      { $unwind: { path: "$cashin" } },
       {
         $project: {
-          items: {
-            $slice: [
-              "$data",
-              skip,
-              {
-                $ifNull: [limit, "$total.groups"],
-              },
-            ],
-          },
-          meta: {
-            total: "$total.groups",
-            limit: {
-              $literal: limit,
-            },
-
-            page: {
-              $literal: skip / limit + 1,
-            },
-            pages: {
-              $ceil: {
-                $divide: ["$total.groups", limit],
-              },
+          amount: {
+            $cond: {
+              if: "$cashin.fee_payment_is_gcash",
+              then: { $subtract: ["$cashin.amount", "$cashin.fee"] },
+              else: "$cashin.amount",
             },
           },
+          fee: "$cashin.fee",
+          fee_payment_is_gcash: "$cashin.fee_payment_is_gcash",
+          snapshot: "$cashin.snapshot",
+          status: "$cashin.status",
+          note: "$cashin.note",
+          isDeleted: "$cashin.isDeleted",
+          _id: "$cashin._id",
+          type: "$cashin.type",
+          phone_number: "$cashin.phone_number",
+          createdAt: "$cashin.createdAt",
+          updatedAt: "$cashin.updatedAt",
         },
-      }
-    );
-
-    const cashouts = await Transaction.aggregate(MQLBuilder);
-
-    callback(...cashouts);
-  } catch (error) {
-    padayon.ErrorHandler("Model::Transaction::getCashOuts", error, req, res);
-  }
-};
-
-module.exports.getCashIns = async (req, res, callback) => {
-  try {
-    const MQLBuilder = [
+      },
       { $match: { isDeleted: false, type: 1 } },
-      { $sort: { createdAt: -1 } },
     ];
-    const skip = req.query.skipCount ? Number(req.query.skipCount) : 0;
-    const limit = req.query.limit ? Number(req.query.limit) : 10;
-    const searchText = req.query.searchText;
-    const searchBy = req.query.searchBy;
-    const sortBy = req.query.sortBy ?? "createdAt";
-    const sortType = req.query.sortType === "asc" ? 1 : -1;
 
+    let searchCriteria = {};
+    searchCriteria[searchBy] = {
+      $regex: searchText,
+      $options: "i",
+    };
     if (searchText) {
-      MQLBuilder[0]["$match"][searchBy] = {
-        $regex: searchText,
-        $options: "i",
-      };
+      MQLBuilder.push({ $match: searchCriteria });
     }
 
-    if (sortBy !== "createdAt") {
-      MQLBuilder.push({ $sort: { sortBy: sortType } });
-    }
+    let sortCriteria = {};
+    sortCriteria[sortBy] = sortType;
+    MQLBuilder.push({ $sort: sortCriteria });
 
     MQLBuilder.push(
       {
@@ -382,9 +531,9 @@ module.exports.getCashIns = async (req, res, callback) => {
       }
     );
 
-    const cashouts = await Transaction.aggregate(MQLBuilder);
+    const [cashins] = await Transaction.aggregate(MQLBuilder);
 
-    callback(...cashouts);
+    return cashins;
   } catch (error) {
     padayon.ErrorHandler("Model::Transaction::getCashIns", error, req, res);
   }
