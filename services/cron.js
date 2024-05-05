@@ -5,10 +5,11 @@ const checkDatabase = () => {
 };
 
 module.exports.run = () => {
+
   cron.schedule(
-    "17 19 * * *",
+    "50 14 * * *",
     () => {
-      console.log("running a task every 17 19");
+      console.log("running a task every 14 50");
     },
     {
       timezone: "Asia/Manila",

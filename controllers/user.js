@@ -12,7 +12,7 @@ const padayon = require("../services/padayon"),
   papaparse = require("./../services/papaparse"),
   stream = require("stream"),
   _ = require("lodash"),
-  { userAccessDTO } = require("../services/dto"),
+  { userAccessDTO, userDTO } = require("../services/dto"),
   email = require("./../services/email"),
   id_card = require("./../services/id_card"),
   cloudinary = require("./../services/cloudinary");
@@ -536,6 +536,33 @@ module.exports.downloadExcel = async (req, res) => {
     padayon.ErrorHandler("Controller::User::downloadExcel", error, req, res);
   }
 };
+
+module.exports.addUser = async (req, res) => {
+  try {
+    let response = { success: true, code: 201 };
+    const hashedPassword = await bcrypt.hash(req.body.password, 11);
+    const body = {
+      email: req.body.email,
+      password: hashedPassword,
+    
+    };
+
+    await userDTO.validateAsync(body);
+
+    req.fnParams = {
+      email: req.body.email,
+      password: hashedPassword,
+    };
+
+    await model.addUser(req, res, (result) => {
+      response.data = result ?? {};
+    });
+    return response;
+  } catch (error) {
+    padayon.ErrorHandler("Controller::User::addUser", error, req, res);
+  }
+};
+
 
 // module.exports.downloadCSV = async (req, res) => {
 //   try {

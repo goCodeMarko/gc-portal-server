@@ -36,6 +36,14 @@ router.post(
 ); //---------done
 
 router.put(
+  `/api/${base}/updateCICO`,
+  execute(controller.updateCICO, {
+    secured: true,
+    role: ["frontliner", "admin"],
+  })
+); //---------done
+
+router.put(
   `/api/${base}/updateTransactionStatus`,
   multer.single("screenshot"),
   execute(controller.updateTransactionStatus, {

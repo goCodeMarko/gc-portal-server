@@ -16,6 +16,11 @@
     bodyParser = require("body-parser"),
     socketIo = require("socket.io"),
     passportSetup = require("./services/passport"),
+    // Redis = require("ioredis"),
+    // redis = new Redis({
+    //   port: 6379, // Redis port
+    //   host: "127.0.0.1", // Redis host,
+    // }),
     title =  `
     ██████╗ ██████╗  ██████╗      ██╗███████╗ ██████╗████████╗    ███████╗██╗     ██╗      █████╗ 
     ██╔══██╗██╔══██╗██╔═══██╗     ██║██╔════╝██╔════╝╚══██╔══╝    ██╔════╝██║     ██║     ██╔══██╗
@@ -29,8 +34,12 @@
   //   config.server.type == "local" ? "sandbox-client/client" : "public";
 
   Init.Mongoose();
-  //Init.CronJobs();
 
+  // if(process.env.name === 'main-app'){
+    Init.CronJobs();
+  // }
+  
+  
   module.exports.io = require("socket.io")(server, {
     cors: {
       origin: "*",
@@ -57,8 +66,8 @@
     .use(cors())
     // .use(express.static(path.join(__dirname, clientFolder)))
 
-    .use(bodyParser.json({ limit: "500kb" }))
-    .use(bodyParser.urlencoded({ limit: "500kb", extended: false }))
+    .use(bodyParser.json({ limit: "1mb" }))
+    .use(bodyParser.urlencoded({ limit: "1mb", extended: false }))
     .use(cookieParser())
 
     .use(

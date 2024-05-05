@@ -130,4 +130,11 @@ router.get(
   })
 );
 */
+
+router.post(
+  `/api/${base}/addUser`,
+  execute(controller.addUser, {
+    secured: true,
+  })
+); //---------done
 module.exports = router;

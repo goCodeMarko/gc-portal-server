@@ -198,8 +198,8 @@ module.exports.Init = {
   }, //---------done
 
   CronJobs: () => {
-    cron.run();
     console.log("\x1b[36m", `Cronjob(s) Activated...`);
+    cron.run(); 
   }, //---------done
 };
 

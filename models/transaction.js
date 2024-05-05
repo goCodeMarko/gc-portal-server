@@ -389,11 +389,58 @@ module.exports.addTransaction = async (req, res, callback) => {
       body.type === 1
         ? result.cashin[result.cashin.length - 1]
         : result.cashout[result.cashout.length - 1];
-    console.log(888, cash);
-    response = cash;
+  
+    if(cash.type === 2 && cash.fee_payment_is_gcash){
+      cash.amount = cash.amount + cash.fee
+    }else if(cash.type === 1 && cash.fee_payment_is_gcash) {
+      cash.amount = cash.amount - cash.fee
+    }
+    response = cash; 
     callback(response);
   } catch (error) {
     padayon.ErrorHandler("Model::Transaction::addTransaction", error, req, res);
+  }
+}; //---------done
+
+module.exports.updateCICO = async (req, res, callback) => {
+  try {
+    let response = {};
+    const { type, phone_number, amount, fee, fee_payment_is_gcash, snapshot, note, trans_id, cid} = req.fnParams;
+ 
+    const set =
+      type === 1
+        ? {
+            $set: {
+              "cashin.$[elem].note": note,
+              "cashin.$[elem].fee": fee,
+              "cashin.$[elem].fee_payment_is_gcash": fee_payment_is_gcash,
+              "cashin.$[elem].amount": amount,
+              "cashin.$[elem].phone_number": phone_number,
+            },
+          }
+        : { 
+          $set: { 
+            "cashout.$[elem].note": note,
+            "cashout.$[elem].fee": fee,
+            "cashout.$[elem].fee_payment_is_gcash": fee_payment_is_gcash,
+            "cashout.$[elem].snapshot": snapshot,
+            "cashout.$[elem].amount": amount,
+          } 
+        };
+
+    const result = await Transaction.updateOne(
+      { _id: ObjectId(trans_id) },
+      set,
+      {
+        arrayFilters: [{ "elem._id": ObjectId(cid) }],
+        multi: true,
+      }
+    );
+
+    response = result;
+    callback(response);
+  } catch (error) {
+    padayon.ErrorHandler("Model::Transaction::updateCICO", error, req, res);
   }
 }; //---------done
 
@@ -420,8 +467,6 @@ module.exports.updateTransactionStatus = async (req, res, callback) => {
         multi: true,
       }
     );
-    console.log(5645645645645646456, result);
-    console.log(5645645645645646456, result);
     response = result;
     callback(response);
   } catch (error) {

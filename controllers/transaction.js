@@ -184,6 +184,88 @@ module.exports.addTransaction = async (req, res) => {
   }
 }; //---------done
 
+module.exports.updateCICO = async (req, res) => {
+  try {
+    let response = { success: true, code: 201 };
+
+    let body = {
+      type: req?.body?.type, // 0-cashin 1-cashout
+      phone_number: req?.body?.phone_number,
+      amount: req?.body?.amount,
+      fee: req?.body?.fee,
+      fee_payment_is_gcash:
+        req?.body?.fee_payment_is_gcash?.toLowerCase() === "true",
+      snapshot: req?.body?.snapshot,
+      note: req?.body?.note,
+      trans_id: req.query?.trans_id,
+      cid: req.query?.cid,
+    };
+
+    if (_.isNil(body.type))
+      throw new padayon.BadRequestException("Missing transaction type");
+
+    if (body.type === 1) {
+      //cashin
+      const joi = {
+        type: body.type,
+        amount: body.amount,
+        phone_number: body.phone_number,
+        fee: body.fee,
+        fee_payment_is_gcash: body.fee_payment_is_gcash,
+        note: body.note,
+        trans_id: body.trans_id,
+      };
+      await cashinDTO.validateAsync(joi);
+      body = {...body, ...joi};
+    } else if (body.type === 2) {
+      //cashout
+      const joi = {
+        type: body.type,
+        snapshot: body.snapshot,
+        amount: body.amount,
+        fee: body.fee,
+        fee_payment_is_gcash: body.fee_payment_is_gcash,
+        note: body.note,
+        trans_id: body.trans_id,
+      };
+    
+      await cashoutDTO.validateAsync(joi);
+    
+      body = {...body, ...joi};
+    } 
+   
+    // // uploads the qr code image on the cloudinary
+    let cloudinaryImg;
+
+    req.fnParams = {
+      ...body,
+      date: req.body?.date,
+    };
+
+    if (!_.isEmpty(body.snapshot) && body.snapshot.slice(0,4) === 'data'){ //body.snapshot.slice(0,4) === 'data' the image is in base64 meaning this is a new image and not yet uploaded to cloudinary
+      cloudinaryImg = await cloudinary.uploader.upload(body.snapshot, {
+        folder: "cashout",
+      });
+      req.fnParams.snapshot = cloudinaryImg?.secure_url
+    }else {
+      req.fnParams.snapshot = body.snapshot
+    }
+
+    await model.updateCICO(req, res, async (result) => {
+      response.data = result;
+    });
+
+    return response;
+  } catch (error) {
+    padayon.ErrorHandler(
+      "Controller::Transaction::updateCICO",
+      error,
+      req,
+      res
+    );
+  }
+}; //---------done
+
 module.exports.updateTransactionStatus = async (req, res) => {
   try {
     let response = { success: true, code: 201 };

@@ -4,45 +4,47 @@ const path = require("path"),
   base = path.basename(__filename).split(".").shift(),
   mongoose = require("mongoose"),
   padayon = require("../services/padayon"),
+  bcrypt = require("bcrypt"),
+  _ = require('lodash'),
   { ObjectId } = require("mongodb");
 
 User = mongoose.model(
   base,
   mongoose.Schema({
     email: { type: String, maxlength: 50, required: true },
-    password: { type: String, maxlength: 50 },
+    password: { type: String, maxlength: 100, required: true },
     role: { type: String, maxlength: 20, default: "user" },
-    firstname: { type: String, maxlength: 50, required: true },
+    firstname: { type: String, maxlength: 50 },
     middlename: { type: String, maxlength: 50 },
-    lastname: { type: String, maxlength: 50, required: true },
+    lastname: { type: String, maxlength: 50 },
     qrcode: {
-      publicId: { type: String, maxlength: 100, required: true },
-      format: { type: String, maxlength: 25, required: true },
-      url: { type: String, maxlength: 150, required: true },
-      text_output: { type: String, maxlength: 150, required: true },
+      publicId: { type: String, maxlength: 100 },
+      format: { type: String, maxlength: 25 },
+      url: { type: String, maxlength: 150 },
+      text_output: { type: String, maxlength: 150 },
     },
     barcode: {
-      publicId: { type: String, maxlength: 100, required: true },
-      format: { type: String, maxlength: 25, required: true },
-      url: { type: String, maxlength: 150, required: true },
-      text_output: { type: String, maxlength: 150, required: true },
+      publicId: { type: String, maxlength: 100 },
+      format: { type: String, maxlength: 25 },
+      url: { type: String, maxlength: 150 },
+      text_output: { type: String, maxlength: 150 },
     },
     id_card: {
       front: {
-        publicId: { type: String, maxlength: 100, required: true },
-        format: { type: String, maxlength: 25, required: true },
-        url: { type: String, maxlength: 150, required: true },
+        publicId: { type: String, maxlength: 100 },
+        format: { type: String, maxlength: 25 },
+        url: { type: String, maxlength: 150 },
       },
       back: {
-        publicId: { type: String, maxlength: 100, required: true },
-        format: { type: String, maxlength: 25, required: true },
-        url: { type: String, maxlength: 150, required: true },
+        publicId: { type: String, maxlength: 100 },
+        format: { type: String, maxlength: 25 },
+        url: { type: String, maxlength: 150 },
       },
     },
     profile_picture: {
-      publicId: { type: String, maxlength: 100, required: true },
-      format: { type: String, maxlength: 25, required: true },
-      url: { type: String, maxlength: 150, required: true },
+      publicId: { type: String, maxlength: 100 },
+      format: { type: String, maxlength: 25 },
+      url: { type: String, maxlength: 150 },
     },
     isallowedtodelete: { type: Boolean, default: true },
     isallowedtocreate: { type: Boolean, default: true },
@@ -127,11 +129,10 @@ module.exports.authenticate = async (req, res, callback) => {
     const email = req.body.email;
     const password = req.body.password;
 
-    const account = await User.aggregate([
+    let account = await User.aggregate([
       {
         $match: {
-          email: email,
-          password: password,
+          email: email
         },
       },
       {
@@ -141,12 +142,21 @@ module.exports.authenticate = async (req, res, callback) => {
           fullname: {
             $concat: ["$firstname", " ", "$lastname"],
           },
+          password: 1,
           profile_picture: 1,
           isblock: 1,
         },
       },
     ]);
 
+    if(_.size(account)){
+      const bcryptResult = await bcrypt.compare(password, account[0].password);
+
+      if(!bcryptResult) account = null;
+      else delete account[0].password;
+      
+    }
+    
     response = account;
     callback(response);
   } catch (error) {
@@ -282,5 +292,20 @@ module.exports.verifyAccessControl = async (req, res, callback) => {
     callback(response);
   } catch (error) {
     padayon.ErrorHandler("Model::User::verifyAccessControl", error, req, res);
+  }
+}; //---------done
+
+module.exports.addUser = async (req, res, callback) => {
+  try {
+    let response = {};
+    const body = req.fnParams;
+
+    const newUser = new User(body);
+    const result = await newUser.save();
+
+    response = result;
+    callback(response);
+  } catch (error) {
+    padayon.ErrorHandler("Model::User::addUser", error, req, res);
   }
 }; //---------done

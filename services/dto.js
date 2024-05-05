@@ -172,3 +172,15 @@ module.exports.createTransactionDTO = Joi.object({
   cashout: Joi.array().items(Joi.string()).empty(),
   cashin: Joi.array().items(Joi.string()).empty(),
 });
+
+
+module.exports.userDTO = Joi.object({
+  email: Joi.string().email().required().messages({
+    "string.base": `"email" should be a type of "email"`,
+    "string.empty": `"email" cannot be an empty field`,
+  }),
+  password: Joi.string().required().messages({
+    "number.base": `"password" should be a type of "string"`,
+    "number.empty": `"password" cannot be an empty field`,
+  })
+});
