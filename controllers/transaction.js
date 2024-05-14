@@ -381,6 +381,7 @@ module.exports.getCashIns = async (req, res) => {
 module.exports.generateReport = async (req, res) => {
   try {
     let response = { success: true, code: 200 };
+    console.log('--------1')
     const transactionDetails = await this.getTransaction(req, res);
     const cashout =  transactionDetails.data.cashout.filter(c => c.status === 2);
     const cashin =  transactionDetails.data.cashin.filter(c => c.status === 2);
@@ -393,7 +394,7 @@ module.exports.generateReport = async (req, res) => {
     //   "Content-Type": "application/pdf", // Set the appropriate content type
     //   "Content-Disposition": `attachment; filename=${filename}.pdf`, // Change the filename as needed
     // });
-
+    console.log('--------2')
     const pdfBuffer = await pdf.generate("report_transaction", {
       name: 'Patrick Marck Dulaca',
       thCO: ["Time", "Amount", "Fee"],
@@ -419,7 +420,7 @@ module.exports.generateReport = async (req, res) => {
         content: pdfBuffer
       }]
     }); 
-
+    console.log('--------3')
     // res.write(pdfBuffer);
     // res.end();
     // pdfBuffer.on("data", (chunk) => {
