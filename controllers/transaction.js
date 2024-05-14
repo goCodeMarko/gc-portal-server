@@ -408,7 +408,6 @@ module.exports.generateReport = async (req, res) => {
       cash_on_hand: transactionDetails.data?.cash_on_hand,
       runbal_cash_on_hand: transactionDetails.data?.runbal_cash_on_hand
     });
-    console.log(34234, req.auth)
     const transDate = moment.utc(transactionDetails.data?.date).tz(req.timezone).format('MMM DD, YYYY');
     await email.notify( req.auth?.email, "send_report_template", {
       header: `GCASH DAILY REPORT`,
