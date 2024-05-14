@@ -7,3 +7,4 @@ node_modules/*
 config
 .env
 ecosystem.config.js
+package-lock.json
