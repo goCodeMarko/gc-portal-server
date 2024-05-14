@@ -11,6 +11,7 @@ module.exports.generate = async (template, data) => {
   try {
     console.log('--------2.1')
       const browser = await puppeteer.launch({
+        executablePath: process.env.CHROMIUM_PATH || '/usr/bin/chromium-browser',
         headless: true,
         args: [
           "--disable-features=IsolateOrigins",
