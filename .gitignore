@@ -3,7 +3,6 @@ logbook
 logbook/*
 node_modules
 node_modules/*
-.puppeteerrc.cjs
 .env
 ecosystem-prod.config.js
 ecosystem-uat.config.js

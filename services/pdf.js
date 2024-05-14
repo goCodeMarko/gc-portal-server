@@ -10,7 +10,6 @@ const padayon = require("./padayon"),
 module.exports.generate = async (template, data) => {
   try {
       const browser = await puppeteer.launch({
-        executablePath: '/usr/bin/chromium-browser',
         headless: true,
         args: [
           "--disable-features=IsolateOrigins",
