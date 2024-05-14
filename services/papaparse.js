@@ -14,6 +14,4 @@ module.exports.generate = async (prop) => {
             console.log("Row errors:", results.errors);
         }
     });
-
-    console.log(csv)
 }

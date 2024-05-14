@@ -1,8 +1,5 @@
 const padayon = require("../services/padayon"),
-  { createCanvas, loadImage } = require("canvas"),
-  QRCode = require("qrcode"),
-  moment = require("moment"),
-  momentTz = require("moment-timezone"),
+  { createCanvas, loadImage } = require("@napi-rs/canvas"),
   _ = require("lodash"),
   cloudinary = require("./../services/cloudinary");
 

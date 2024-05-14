@@ -84,7 +84,6 @@ module.exports.getUser = async (req, res, callback) => {
         },
       },
     ]);
-
     response = result;
     callback(response);
   } catch (error) {
@@ -98,7 +97,7 @@ module.exports.getUsers = async (req, res, callback) => {
     const result = await User.aggregate([
       {
         $match: {
-          role: "user",
+          role: "admin",
         },
       },
       {
@@ -108,10 +107,16 @@ module.exports.getUsers = async (req, res, callback) => {
           fullname: {
             $concat: ["$firstname", " ", "$lastname"],
           },
+          firstname: 1,
+          lastname: 1,
           isallowedtodelete: 1,
           isallowedtocreate: 1,
           isallowedtoupdate: 1,
           isblock: 1,
+          id_card: 1,
+          barcode: 1,
+          qrcode: 1,
+          profile_picture: 1,
         },
       },
     ]);

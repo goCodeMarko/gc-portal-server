@@ -1,6 +1,6 @@
 const nodemailer = require("nodemailer");
 const hbs = require("nodemailer-express-handlebars");
-
+const _ = require("lodash");
 const testEnv = ["local", "development"];
 const isTestMode = testEnv.includes(process.env.NODE_ENV) ? true : false;
 // const subjectAppendedText = isTestMode ? " **FOR TESTING PURPOSES ONLY**" : "";
@@ -23,8 +23,6 @@ const transporter = nodemailer.createTransport({
 });
 
 module.exports.notify = async (recipient, template, data = {}) => {
-  //const emailTemplateSource = fs.readFileSync(path.join(__dirname, "/template.hbs"), "utf8")
-  console.log("xxx", template);
   transporter.use(
     "compile",
     hbs({
@@ -63,12 +61,18 @@ module.exports.notify = async (recipient, template, data = {}) => {
         path: process.cwd() + "/assets/images/icons/youtube-icon.png",
         cid: "youtube-icon",
       },
+     
     ],
     context: {
       ...data,
     },
   };
-  const result = await transporter.sendMail(mail);
+
+  if(_.size(data.attachments)){
+    mail.attachments.push(...data.attachments)
+  }
+  
+  const result = await transporter.sendMail(mail);  
 
   return result;
 };

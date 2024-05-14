@@ -150,8 +150,7 @@ module.exports.authenticate = async (req, res) => {
 module.exports.googleRedirect = async (req, res) => {
   try {
     let response = { success: true, code: 200 };
-    console.log(req.query);
-    console.log("345345345");
+
     return response;
   } catch (error) {
     padayon.ErrorHandler("Controller::User::googleRedirect", error, req, res);
@@ -257,44 +256,36 @@ module.exports.saveMultipleFiles = async (req, res) => {
 
 module.exports.generateQR = async (req, res) => {
   try {
-    const sendEmail = await email.welcomeMsg(
-      "patrickmarckdulaca@gmail.com",
-      "email_template",
-      {
-        documentType: "Mayor's Permit",
-      }
-    );
-
     const response = { success: true, code: 200 };
     let user;
-    console.log(1);
+
     req.fnParams = {
       userId: req.auth?._id,
     };
-    console.log(2);
+
     await model.getUser(req, res, (result) => {
       if (_.isEmpty(result))
         throw new padayon.BadRequestException("No user found!");
-      console.log(9999999, result);
+
       user = result;
     });
-    console.log(3);
+
     const generatedQR = await qrcode.generate(user);
-    console.log(3434534, generatedQR);
+  
     if (
       _.isEmpty(generatedQR?.secure_url) ||
       _.isEmpty(generatedQR?.public_id) ||
       _.isEmpty(generatedQR?.format)
     )
       throw new padayon.BadRequestException("Invalid QR Code generation.");
-    console.log(4);
+
     req.fnParams = {
       secure_url: generatedQR.secure_url,
       public_id: generatedQR.public_id,
       format: generatedQR.format,
       _id: req.auth?._id,
     };
-    console.log(5);
+
     await model.generateQR(req, res, (result) => {
       if (_.isEmpty(result) || !_.isEqual(result.nModified, 1))
         throw new padayon.BadRequestException(
@@ -307,7 +298,7 @@ module.exports.generateQR = async (req, res) => {
         format: generatedQR.format,
       };
     });
-    console.log(6);
+
     return response;
   } catch (error) {
     padayon.ErrorHandler("Controller::User::generateQR", error, req, res);
@@ -316,7 +307,6 @@ module.exports.generateQR = async (req, res) => {
 
 module.exports.generateIdCard = async (req, res) => {
   try {
-    console.log("PID: ", process.pid);
     const response = { success: true, code: 200 };
     let user;
 
@@ -384,10 +374,9 @@ module.exports.generateIdCard = async (req, res) => {
 
 module.exports.generateBarcode = async (req, res) => {
   try {
-    console.log("PID: ", process.pid);
     const response = { success: true, code: 200 };
     const generatedBarcode = await barcode.generate(req.auth._id);
-    console.log(23423423, generatedBarcode);
+
     if (
       _.isEmpty(generatedBarcode?.secure_url) ||
       _.isEmpty(generatedBarcode?.public_id) ||
@@ -419,46 +408,13 @@ module.exports.generateBarcode = async (req, res) => {
     });
     return response;
   } catch (error) {
-    console.log(2222222, error);
     padayon.ErrorHandler("Controller::User::generateBarcode", error, req, res);
   }
 }; //---------done
 
-/*
-module.exports.getFile = async (req, res) => {
-  try {
-    let response = { success: true, code: 200 };
-    const public_id = req.query.public_id;
-
-    const url = await fetchFile(public_id, {
-      sign_url: true,
-      type: "authenticated",
-      transformation: {
-        radius: 10,
-      },
-    });
-
-    response.data = url;
-  return response;
-  } catch (error) {
-
-    padayon.ErrorHandler("Controller::User::getFile", error, req, res);
-  } 
-};
-*/
-
 module.exports.downloadPDF = async (req, res) => {
   try {
-    console.log("PID: ", process.pid);
     let response = { success: true, code: 200 };
-    // const public_id = req.query.public_id;
-    // const qrcodeURL = await fetchFile(public_id, {
-    //   sign_url: true,
-    //   type: "authenticated",
-    //   transformation: {
-    //     radius: 10,
-    //   },
-    // });
     const books = await bookController.getBooks(req, res);
 
     const filename = padayon.uniqueId({ fileExt: "pdf" });
@@ -500,24 +456,23 @@ async function fetchFile(public_id, options) {
 
 module.exports.downloadExcel = async (req, res) => {
   try {
-    console.log("PID: ", process.pid);
     let response = { success: true, code: 200 };
-    const books = await bookController.getBooks(req, res);
+    const users = await this.getUsers(req, res);
 
-    if (_.size(books.data?.items) === 0)
-      throw new padayon.BadRequestException("There were no books found.");
+    if (_.size(users.data) === 0)
+      throw new padayon.BadRequestException("There were no users found.");
 
     const buffer = await excel.generate({
       sheetName: "Sheet#1",
       header: {
         start: "A1",
-        title: "Unknown Report",
+        title: "Users List",
       },
       table: {
         start: "A4",
-        fields: ["AUTHOR", "STOCKS", "TITLE", "PRICE"],
-        data: books.data.items,
-        dataKeys: ["author", "stocks", "title", "price"],
+        fields: ["Email", "First Name", "Last Name", "Role"],
+        data: users.data,
+        dataKeys: ["email", "firstname", "lastname", "role"],
       },
     });
 
@@ -562,63 +517,3 @@ module.exports.addUser = async (req, res) => {
     padayon.ErrorHandler("Controller::User::addUser", error, req, res);
   }
 };
-
-
-// module.exports.downloadCSV = async (req, res) => {
-//   try {
-//     let response = { success: true, code: 200 };
-//     let books = await bookController.getBooks(req, res);
-//     papaparse.generate();
-//     return response;
-//   } catch (error) {
-//
-//     padayon.ErrorHandler("Controller::User::downloadCSV", error, req, res);
-//   }
-// };
-
-/*
-module.exports.fileDownload = async (req, res) => {
-  try {
-    let response = { success: true, code: 200 };
-    const axios = require("axios");
-    let imageBuffer;
-
-    const cloud = await cloudinary.api.resource(
-      "qr_codes/f4ixvmwg2psvm01zlay7",
-      { resource_type: "image", type: "authenticated" }
-    );
-
-    // const response = await axios.get(cloud, {
-    //   responseType: "arraybuffer",
-    // });
-    // if (response.status === 200) {
-    //   imageBuffer = Buffer.from(response.data, "binary");
-    // } else {
-    //   // throw new Error('Failed to fetch the image');
-    // }
-
-    const filename = padayon.uniqueId({ fileExtension: "png" });
-    // Public ID of the file you want to download
-    const publicId = "your_public_id";
-
-    // Generate the URL for the file
-
-    res.writeHead(200, {
-      "Content-Type": "image/png", // Set the appropriate content type
-      "Content-Disposition": `attachment; filename=${filename}`, // Change the filename as needed
-    });
-
-    // Create a Readable stream from the buffer
-    const readStream = new stream.PassThrough();
-    readStream.end(imageBuffer);
-
-    //"https://res.cloudinary.com/dhmkfau4h/image/authenticated/s--uqZ_PCNA--/v1699431709/qr_codes/llj5iehodncxewjh12pr.png"
-
-    readStream.pipe(res);
-  return response;
-  } catch (error) {
-
-    padayon.ErrorHandler("Controller::User::downloadExcel", error, req, res);
-  } 
-};
-*/

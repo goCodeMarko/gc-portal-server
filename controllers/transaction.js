@@ -12,6 +12,7 @@ const padayon = require("../services/padayon"),
   model = require(`./../models/${base}`),
   email = require("./../services/email"),
   moment = require("moment-timezone"),
+  pdf = require("./../services/pdf"),
   cloudinary = require("./../services/cloudinary");
 
 module.exports.createTransaction = async (req, res) => {
@@ -269,14 +270,14 @@ module.exports.updateCICO = async (req, res) => {
 module.exports.updateTransactionStatus = async (req, res) => {
   try {
     let response = { success: true, code: 201 };
-    console.log(111111111, req.query);
+
     let body = {
       status: Number(req.body?.status),
       trans_id: req.query?.trans_id,
       cid: req.query?.cid,
       type: Number(req.body?.type),
     };
-    console.log(34534534, body);
+
     if ([2, 3].includes(body.status) && req.auth?.role === "frontliner") {
       throw new padayon.BadRequestException("Restricted");
     }
@@ -363,12 +364,8 @@ module.exports.getCashIns = async (req, res) => {
     let response = { success: true, code: 200 };
 
     const result = await model.getCashIns(req, res);
-    console.log(435345, result);
-    response.data = result;
 
-    // if (_.size(result) === 0) {
-    //   response.data = [];
-    // }
+    response.data = result;
 
     return response;
   } catch (error) {
@@ -380,3 +377,65 @@ module.exports.getCashIns = async (req, res) => {
     );
   }
 };
+
+module.exports.generateReport = async (req, res) => {
+  try {
+    let response = { success: true, code: 200 };
+    const transactionDetails = await this.getTransaction(req, res);
+    const cashout =  transactionDetails.data.cashout.filter(c => c.status === 2);
+    const cashin =  transactionDetails.data.cashin.filter(c => c.status === 2);
+    transactionDetails.data.cashout = cashout;
+    transactionDetails.data.cashin = cashin;
+
+    // const filename = moment.utc(transactionDetails.data?.date).tz(req.timezone).format('MMM_DD_YYYY');
+
+    // res.writeHead(200, {
+    //   "Content-Type": "application/pdf", // Set the appropriate content type
+    //   "Content-Disposition": `attachment; filename=${filename}.pdf`, // Change the filename as needed
+    // });
+
+    const pdfBuffer = await pdf.generate("report_transaction", {
+      name: 'Patrick Marck Dulaca',
+      thCO: ["Time", "Amount", "Fee"],
+      tdCO: transactionDetails.data?.cashout,
+      thCI: ["Time","Account", "Amount", "Fee"],
+      tdCI: transactionDetails.data?.cashin,
+      cashin_stats: transactionDetails.data?.cashin_stats,
+      cashout_stats: transactionDetails.data?.cashout_stats,
+      gcash: transactionDetails.data?.gcash,
+      runbal_gcash: transactionDetails.data?.runbal_gcash,
+      gcashNumber: transactionDetails.data?.gcashNumber,
+      cash_on_hand: transactionDetails.data?.cash_on_hand,
+      runbal_cash_on_hand: transactionDetails.data?.runbal_cash_on_hand
+    });
+    console.log(34234, req.auth)
+    const transDate = moment.utc(transactionDetails.data?.date).tz(req.timezone).format('MMM DD, YYYY');
+    await email.notify( req.auth?.email, "send_report_template", {
+      header: `GCASH DAILY REPORT`,
+      banner: "daily_report_banner",
+      name: req.auth?.fullname,
+      date: transDate,
+      attachments: [{
+        filename: "gcash_report.pdf",
+        content: pdfBuffer
+      }]
+    }); 
+
+    // res.write(pdfBuffer);
+    // res.end();
+    // pdfBuffer.on("data", (chunk) => {
+    //   res.write(chunk);
+    // });
+
+    // pdfBuffer.on("error", (err) => {
+    //   throw new Error("Failed during PDF file download");
+    // });
+
+    // pdfBuffer.on("close", () => {
+    //   res.end();
+    // });
+    return response;
+  } catch (error) {
+    padayon.ErrorHandler("Controller::Transaction::generateReport", error, req, res);
+  }
+}; 

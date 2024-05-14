@@ -12,7 +12,6 @@ passport.use(
     },
     (req, token, refreshToken, profile, done) => {
       //passport callback function
-      console.log(11111111111, profile);
 
       if (true) {
         return done(null, profile);

@@ -74,8 +74,7 @@ module.exports.getTransaction = async (req, res) => {
       .utc();
     const startDateUTC = utcStartDateTime.toISOString();
     const endDateUTC = utcEndDateTime.toISOString();
-    console.log(45, startDateUTC);
-    console.log(45, endDateUTC);
+
     const [transaction] = await Transaction.aggregate([
       {
         $match: {
@@ -235,11 +234,195 @@ module.exports.getTransaction = async (req, res) => {
           createdAt: 1,
           cashin: 1,
           cashout: 1,
-        },
-      },
+          cashout_stats: {
+            total_amount: {
+              $reduce: {
+                  input: {
+                    $filter: {
+                      input: "$cashout",
+                      as: "co",
+                      cond: { $eq: ["$$co.status", 2] },
+                    }
+                  },
+                  initialValue: 0,
+                  in: { $sum: ["$$value", "$$this.amount"] },
+              } 
+            }, 
+            gcash_fee: {
+              $reduce: {
+                  input: {
+                    $filter: {
+                      input: "$cashout",
+                      as: "co",
+                      cond: { $and : [ { $eq: ["$$co.status", 2] }, { $eq: ["$$co.fee_payment_is_gcash", true] } ] },
+                    }
+                  },
+                  initialValue: 0,
+                  in: { $sum: ["$$value", "$$this.fee"] },
+              } 
+            }, 
+            cash_fee: {
+              $reduce: {
+                  input: {
+                    $filter: {
+                      input: "$cashout",
+                      as: "co",
+                      cond: { $and : [ { $eq: ["$$co.status", 2] }, { $eq: ["$$co.fee_payment_is_gcash", false] } ] },
+                    }
+                  },
+                  initialValue: 0,
+                  in: { $sum: ["$$value", "$$this.fee"] },
+              } 
+            }, 
+            pending: {
+                $reduce: {
+                  input: {
+                    $filter: {
+                      input: "$cashout",
+                      as: "co",
+                      cond: { $eq: ["$$co.status", 1] },
+                    }
+                  },
+                  initialValue: 0,
+                  in: { $sum: ["$$value", 1] },
+                } 
+            },
+            approved: {
+              $reduce: {
+                input: {
+                  $filter: {
+                    input: "$cashout",
+                    as: "co",
+                    cond: { $eq: ["$$co.status", 2] },
+                  }
+                },
+                initialValue: 0,
+                in: { $sum: ["$$value", 1] },
+              } 
+           },
+           failed: {
+              $reduce: {
+                input: {
+                  $filter: {
+                    input: "$cashout",
+                    as: "co",
+                    cond: { $eq: ["$$co.status", 3] },
+                  }
+                },
+                initialValue: 0,
+                in: { $sum: ["$$value", 1] },
+              } 
+            },
+            cancelled: {
+              $reduce: {
+                input: {
+                  $filter: {
+                    input: "$cashout",
+                    as: "co",
+                    cond: { $eq: ["$$co.status", 4] },
+                  }
+                },
+                initialValue: 0,
+                in: { $sum: ["$$value", 1] },
+              } 
+            }
+          },
+          cashin_stats: {
+            total_amount: {
+              $reduce: {
+                  input: {
+                    $filter: {
+                      input: "$cashin",
+                      as: "ci",
+                      cond: { $eq: ["$$ci.status", 2] },
+                    }
+                  },
+                  initialValue: 0,
+                  in: { $sum: ["$$value", "$$this.amount"] },
+              } 
+            }, 
+            gcash_fee: {
+              $reduce: {
+                  input: {
+                    $filter: {
+                      input: "$cashin",
+                      as: "ci",
+                      cond: { $and : [ { $eq: ["$$ci.status", 2] }, { $eq: ["$$ci.fee_payment_is_gcash", true] } ] },
+                    }
+                  },
+                  initialValue: 0,
+                  in: { $sum: ["$$value", "$$this.fee"] },
+              } 
+            }, 
+            cash_fee: {
+              $reduce: {
+                  input: {
+                    $filter: {
+                      input: "$cashin",
+                      as: "ci",
+                      cond: { $and : [ { $eq: ["$$ci.status", 2] }, { $eq: ["$$ci.fee_payment_is_gcash", false] } ] },
+                    }
+                  },
+                  initialValue: 0,
+                  in: { $sum: ["$$value", "$$this.fee"] },
+              } 
+            }, 
+            pending: {
+                $reduce: {
+                  input: {
+                    $filter: {
+                      input: "$cashin",
+                      as: "ci",
+                      cond: { $eq: ["$$ci.status", 1] },
+                    }
+                  },
+                  initialValue: 0,
+                  in: { $sum: ["$$value", 1] },
+                } 
+            },
+            approved: {
+              $reduce: {
+                input: {
+                  $filter: {
+                    input: "$cashin",
+                    as: "ci",
+                    cond: { $eq: ["$$ci.status", 2] },
+                  }
+                },
+                initialValue: 0,
+                in: { $sum: ["$$value", 1] },
+              } 
+           },
+           failed: {
+              $reduce: {
+                input: {
+                  $filter: {
+                    input: "$cashin",
+                    as: "ci",
+                    cond: { $eq: ["$$ci.status", 3] },
+                  }
+                },
+                initialValue: 0,
+                in: { $sum: ["$$value", 1] },
+              } 
+            },
+            cancelled: {
+              $reduce: {
+                input: {
+                  $filter: {
+                    input: "$cashin",
+                    as: "ci",
+                    cond: { $eq: ["$$ci.status", 4] },
+                  }
+                },
+                initialValue: 0,
+                in: { $sum: ["$$value", 1] },
+              } 
+            }
+          },
+        }
+      }
     ]);
-
-    console.log(3534);
 
     response = transaction;
     return response;
@@ -384,7 +567,6 @@ module.exports.addTransaction = async (req, res, callback) => {
         : { $push: { cashout: body } },
       { new: true }
     );
-    console.log(3333, result);
     const cash =
       body.type === 1
         ? result.cashin[result.cashin.length - 1]
@@ -448,15 +630,15 @@ module.exports.updateTransactionStatus = async (req, res, callback) => {
   try {
     let response = {};
     const { status, cid, trans_id, screenshot, type } = req.fnParams;
-    console.log(33, type);
+
     const set =
-      type === 1
-        ? {
+      type === 1 
+        ?  status === 2 ? {
             $set: {
               "cashin.$[elem].status": status,
-              "cashin.$[elem].snapshot": screenshot ? screenshot : "",
+              "cashin.$[elem].snapshot": screenshot,
             },
-          }
+          } : { $set: { "cashin.$[elem].status": status } }
         : { $set: { "cashout.$[elem].status": status } };
 
     const result = await Transaction.updateOne(

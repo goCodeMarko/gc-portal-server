@@ -1,0 +1,178 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <style>
+        /* uncomment this in staging or production env. */ /* html { zoom: 0.55; }
+          */ 
+        body {
+          font-family: Arial, sans-serif;
+          font-size: 20px;
+        }
+        .header {
+          position: relative;
+        }
+        .header .document-title {
+          margin-top: 1em;
+        }
+        .header .logo-text b {
+          display: block;
+          width: 220px;
+        }
+        .header .document-title b {
+          font-size: 48px;
+        }
+        .header .linebreak {
+          margin-top: 1em;
+          border: 1px solid #000000;
+          border-radius: 10px;
+        }
+        .table {
+          text-align: center;
+          width: 100%;
+          font-family: Arial, sans-serif;
+          font-size: 20px;
+        }
+        .text-center {
+          text-align: center;
+        }
+        .d-block {
+          display: block;
+        }
+        .center-table {
+          margin-left: auto;
+          margin-right: auto;
+        }
+        .body th {
+          margin-bottom: 1em !important;
+        }
+    </style>
+</head>
+
+<body style="background-color: #F7F4E6;">
+   <div class="header">
+        <img src="https://res.cloudinary.com/dhmkfau4h/image/upload/v1715579842/logo/Colored_Paper_nirirh.png" width="812px" />
+
+        {{!-- <hr class="linebreak" /> --}}
+    </div>
+       <div style="display: flex; flex-direction: row;flex-wrap: nowrap;justify-content: space-around;align-items: flex-start;align-content: stretch;margin:1em 0em">
+          <div style=" display: block;flex-grow: 0;flex-shrink: 1;flex-basis: auto;align-self: auto;order: 0;">
+            Gcash:{{{currency gcash}}}<br>
+            Running Balance: {{{currency runbal_gcash}}}<br>
+            Account: {{{currency gcashNumber}}}
+          </div>
+          <div style=" display: block;flex-grow: 0;flex-shrink: 1;flex-basis: auto;align-self: auto;order: 0;">
+            
+            Cash on hand: {{{currency cash_on_hand}}}<br>
+            Running Balance: {{{currency runbal_cash_on_hand}}}
+          </div>
+      </div>
+
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%;margin:1em 0em 1em 0em;font-family: Arial, sans-serif;font-size: 20px;">
+        <tr class="text-center">
+            <td>
+                Cash Out
+            </td>
+        </tr>
+    </table>
+    <div style="display: grid;grid-template-rows: repeat(1, 1fr);grid-template-columns: 60% 40%;width: 100%;gap: 1em 1em;">
+        <div style="grid-area: 1/1/2/2;justify-self: stretch;align-self: start;">
+            <table cellpadding="0" cellspacing="5" class="table">
+                <thead>
+                    {{#each thCO}}
+                    <td>{{this}}</td>
+                    {{/each}}
+                </thead>
+                <tbody>
+                    {{#each tdCO}}
+                    <tr>
+                        <td>{{formatDate this.createdAt 'h:mm A'}}</td>
+                        <td>{{currency this.amount}}</td>
+                        <td style="display: inline-block;">
+                            {{#if this.fee_payment_is_gcash}}
+                            <img src="https://res.cloudinary.com/dhmkfau4h/image/upload/v1715233456/logo/gcash_e6tapv.png" width="25" /> {{else}}
+                            <img src="https://res.cloudinary.com/dhmkfau4h/image/upload/v1715233642/logo/cash_xypa6h.png" width="25" /> {{/if}} {{currency this.fee}}
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+        <div style="grid-area: 1/2/2/3;justify-self: stretch;">
+            <div style="display: grid;grid-gap: 10px;grid-template-columns: repeat(2, 1fr) ;grid-template-rows: repeat(4, 1fr);margin-top:1.8em; font-family: Arial, sans-serif;
+          font-size: 20px;">
+
+
+                <div style="border-radius: 5px;grid-area:1/1/1/2;text-align:center;">Gcash Fees</div>
+                <div style="border-radius: 5px;grid-area:1/2/1/3;">{{currency cashout_stats.gcash_fee}}</div>
+
+                <div style="border-radius: 5px;grid-area:2/1/2/2;text-align:center;">Cash Fees</div>
+                <div style="border-radius: 5px;grid-area:2/2/2/3;">{{currency cashout_stats.cash_fee}}</div>
+
+                <div style="border-radius: 5px;grid-area:3/1/3/2;text-align:center;">Total Fees</div>
+                <div style="border-radius: 5px;grid-area:3/2/3/3;">{{{ sum cashout_stats.cash_fee cashout_stats.gcash_fee}}}</div>
+
+                <div style="border-radius: 5px;grid-area:4/1/4/2;text-align:center;">Total Amount</div>
+                <div style="border-radius: 5px;grid-area:4/2/4/3;">{{{currency cashout_stats.total_amount}}}</div>
+            </div>
+        </div>
+
+      </div>
+
+      
+        <table cellpadding="0" cellspacing="0" border="0" style="width:100%;margin:2em 0em 0em 0em; font-family: Arial, sans-serif;font-size: 20px;">
+          <tr class="text-center">
+              <td>
+                  Cash In
+              </td>
+          </tr>
+        </table>
+      
+      <div style="display: grid;grid-template-rows: repeat(1, 1fr);grid-template-columns: 60% 40%;width: 100%;gap: 1em 1em;">
+        <div style="grid-area: 2 / 1 / 3 / 2;justify-self: stretch;align-self: start;">
+            <table cellpadding="0" cellspacing="5" class="table">
+                <thead>
+                    {{#each thCI}}
+                    <td>{{this}}</td>
+                    {{/each}}
+                </thead>
+                <tbody>
+                    {{#each tdCI}}
+                    <tr>
+                        <td>{{formatDate this.createdAt 'h:mm A'}}</td>
+                        <td>{{this.phone_number}}</td>
+                        <td>{{currency this.amount}}</td>
+                        <td style="display: inline-block;">
+                            {{#if this.fee_payment_is_gcash}}
+                            <img src="https://res.cloudinary.com/dhmkfau4h/image/upload/v1715233456/logo/gcash_e6tapv.png" width="25" /> {{else}}
+                            <img src="https://res.cloudinary.com/dhmkfau4h/image/upload/v1715233642/logo/cash_xypa6h.png" width="25" /> {{/if}} {{currency this.fee}}
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+        <div style="grid-area: 2/2/3/3;justify-self: stretch;">
+            <div style="display: grid;grid-gap: 10px;grid-template-columns: repeat(2, 1fr) ;grid-template-rows: repeat(4, 1fr);margin-top:1.8em; font-family: Arial, sans-serif;
+          font-size: 20px;">
+
+                <div style="border-radius: 5px;grid-area:1/1/1/2;text-align:center;">Gcash Fees</div>
+                <div style="border-radius: 5px;grid-area:1/2/1/3;">{{currency cashin_stats.gcash_fee}}</div>
+
+                <div style="border-radius: 5px;grid-area:2/1/2/2;text-align:center;">Cash Fees</div>
+                <div style="border-radius: 5px;grid-area:2/2/2/3;">{{currency cashin_stats.cash_fee}}</div>
+
+                <div style="border-radius: 5px;grid-area:3/1/3/2;text-align:center;">Total Fees</div>
+                <div style="border-radius: 5px;grid-area:3/2/3/3;">{{{ sum cashin_stats.cash_fee cashin_stats.gcash_fee}}}</div>
+
+                <div style="border-radius: 5px;grid-area:4/1/4/2;text-align:center;">Total Amount</div>
+                <div style="border-radius: 5px;grid-area:4/2/4/3;">{{{currency cashin_stats.total_amount}}}</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

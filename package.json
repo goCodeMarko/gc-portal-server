@@ -2,17 +2,16 @@
   "name": "sandbox-server",
   "version": "1.0.0",
   "engines": {
-    "node": "20.11.0",
-    "npm": "8.19.4"
+    "node": "20.11.0"
   },
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "@napi-rs/canvas": "^0.1.52",
     "@socket.io/pm2": "^5.3.0",
     "axios": "^1.6.1",
     "bcrypt": "^5.0.1",
     "body-parser": "^1.20.2",
-    "canvas": "^2.9.3",
     "cloudinary": "^1.31.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
@@ -38,8 +37,7 @@
     "passport": "^0.7.0",
     "passport-google-oauth20": "^2.0.0",
     "pm2": "^5.3.1",
-    "puppeteer": "^21.3.7",
-    "puppeteer-cluster": "^0.23.0",
+    "puppeteer": "^22.8.0",
     "qrcode": "^1.5.1",
     "socket.io": "^4.7.5"
   },
@@ -50,7 +48,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "NODE_ENV=development&&node server",
     "start:local": "set NODE_ENV=local&& nodemon server",
-    "start:dev": "NODE_ENV=development&&node server"
+    "start:dev": "NODE_ENV=development&&node server",
+    "start:prod": "NODE_ENV=production&&node server",
+    "start:pm2dev": "pm2 start ecosystem.config.js --env development",
+    "start:pm2prod": "pm2 start ecosystem.config.js --env production"
   },
   "author": "Patrick Marck D. Dulaca",
   "license": "ISC"

@@ -1,4 +1,4 @@
-const { createCanvas, loadImage } = require("canvas"),
+const { createCanvas, loadImage } = require("@napi-rs/canvas"),
   QRCode = require("qrcode"),
   moment = require("moment"),
   momentTz = require("moment-timezone"),
@@ -7,7 +7,7 @@ const { createCanvas, loadImage } = require("canvas"),
 
 module.exports.generate = async (user) => {
   const datetime = moment().locale("tl-ph").format("MDYYHHmmssSSS");
-  console.log(453, user);
+
   const user_creation_timestamp = _.toUpper(user._id.toString().slice(0, 8));
   const text_output = `Q${datetime}${user_creation_timestamp}`;
 

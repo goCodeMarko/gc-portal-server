@@ -1,4 +1,4 @@
-const { createCanvas, loadImage } = require("canvas"),
+const { createCanvas, loadImage } = require("@napi-rs/canvas"),
   moment = require("moment"),
   cloudinary = require("./../services/cloudinary").uploader,
   JsBarcode = require("jsbarcode"),
@@ -20,14 +20,13 @@ async function uploadBarcode(text_output) {
   //uploads the qr code image on the cloudinary
   const upload = await cloudinary.upload(barcodeBase64, {
     folder: "barcodes",
-    // type: "authenticated",
   });
 
   return upload;
 }
 
 async function createBarcodeImg(text_output) {
-  const canvas = createCanvas();
+  const canvas = createCanvas(500, 500);
   try {
     JsBarcode(canvas, text_output, {
       format: "CODE128",

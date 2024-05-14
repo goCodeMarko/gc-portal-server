@@ -68,4 +68,12 @@ router.get(
   })
 ); //---------done
 
+router.get(
+  `/api/${base}/generateReport`,
+  execute(controller.generateReport, {
+    secured: true,
+    role: ["admin"],
+  })
+); //---------done
+
 module.exports = router;

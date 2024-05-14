@@ -39,7 +39,7 @@ module.exports.deleteBook = async (req, res, callback) => {
       skip: req.body.limit - 1,
       limit: 1,
     };
-    console.log(3333, req.query);
+
     await model.getBooks(req, res, (result) => {
       response.data = result;
     });

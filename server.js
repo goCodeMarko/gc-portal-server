@@ -5,22 +5,20 @@
     morgan = require("morgan"),
     cors = require("cors"),
     { Init, requestLogger } = require("./services/padayon"),
-    path = require("path"),
     routes = require("./routes"),
     app = express(),
     config = require("./config"),
     server = require("http").createServer(app),
-    fs = require("fs"),
-    fsPromise = require("fs").promises,
     cookieParser = require("cookie-parser"),
     bodyParser = require("body-parser"),
-    socketIo = require("socket.io"),
+    hbs = require("handlebars"),
     passportSetup = require("./services/passport"),
-    // Redis = require("ioredis"),
-    // redis = new Redis({
-    //   port: 6379, // Redis port
-    //   host: "127.0.0.1", // Redis host,
-    // }),
+    moment = require('moment'),
+    Redis = require("ioredis"),
+    redis = new Redis({
+      port: 6379, // Redis port
+      host: "127.0.0.1", // Redis host,
+    }),
     title =  `
     ██████╗ ██████╗  ██████╗      ██╗███████╗ ██████╗████████╗    ███████╗██╗     ██╗      █████╗ 
     ██╔══██╗██╔══██╗██╔═══██╗     ██║██╔════╝██╔════╝╚══██╔══╝    ██╔════╝██║     ██║     ██╔══██╗
@@ -35,10 +33,10 @@
 
   Init.Mongoose();
 
-  // if(process.env.name === 'main-app'){
+  if(process.env.name === 'main-app' || process.env.CLUSTER_MODE === 'FALSE'){
     Init.CronJobs();
-  // }
-  
+    console.log('Process Environment: ', process.env)
+  }
   
   module.exports.io = require("socket.io")(server, {
     cors: {
@@ -60,12 +58,46 @@
       console.log("A client disconnected");
     });
   });
+  
+  //handlebars custom helpers
+  hbs.registerHelper('formatDate', (date, format) => {
+    return  moment(date).format(format); 
+    
+  });
+  hbs.registerHelper('sum', (...numbers) => {
+    numbers.pop();
+    const sum = numbers.reduce((a,b) => a + b, 0);
+    return sum.toLocaleString('en-PH', { style: 'currency', currency: 'PHP' });
+  }) 
+  hbs.registerHelper('currency', (cash) => {
+    const currency = cash.toLocaleString('en-PH', { style: 'currency', currency: 'PHP' });
+    return currency;
+  }) 
+  hbs.registerHelper('formatStatus', (status) => {
+    let result = '';
+    const css = "display: inline-block;padding: 4.2px 7.88px;border-radius: .375rem;font-size: 12px;"
+    switch (status) {
+      case 1:
+        result = `<span style="${css}background-color: #f8f9fa;color: #000000;">Pending</span>`
+      break;
+      case 2:
+        result = `<span style="${css}background-color: #0dcaf0;color: #000000;">Approved</span>`
+      break;
+      case 3:
+        result = `<span style="${css}background-color: #dc3545;color: #ffffff;">Failed</span>`
+      break;
+      case 4:
+        result = `<span style="${css}background-color: #6c757d;color: #ffffff;">Cancelled</span>`
+      break;
+    }
+
+    return  result; 
+  });
 
   app
     .use(requestLogger)
     .use(cors())
     // .use(express.static(path.join(__dirname, clientFolder)))
-
     .use(bodyParser.json({ limit: "1mb" }))
     .use(bodyParser.urlencoded({ limit: "1mb", extended: false }))
     .use(cookieParser())
@@ -77,7 +109,7 @@
           " :remote-addr - :remote-user [:date[clf]] - :response-time ms"
       )
     )
-
+  
     .use(routes)
     .get('/', (req,res) => {
       res.send(`<p style="font-style:verdana;">Welcome to GC Portal API!</p></br>
@@ -92,10 +124,9 @@
     });
 
   server.listen(config.server.port, () => {
-    console.log(
-      "\x1b[36m",
-      title
-    );
+    if(process.env.name === 'main-app' || process.env.CLUSTER_MODE === 'FALSE'){
+      console.log("\x1b[36m", title);
+    }
     console.log(
       "\x1b[36m",
       `You're now listening on port http://${config.server.hostname}:${config.server.port}/`
