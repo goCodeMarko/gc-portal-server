@@ -51,7 +51,8 @@
     "start:dev": "NODE_ENV=dev node server",
     "start:uat": "NODE_ENV=uat node server",
     "start:prod": "NODE_ENV=prod node server",
-    "start:pm2dev": "pm2 start ecosystem-uat.config.js --env dev",
+    "start:pm2local": "pm2 start ecosystem-local.config.js --env local",
+    "start:pm2dev": "pm2 start ecosystem-dev.config.js --env dev",
     "start:pm2uat": "pm2 start ecosystem-uat.config.js --env uat",
     "start:pm2prod": "pm2 start ecosystem-prod.config.js --env prod"
   },
