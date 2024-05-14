@@ -14,11 +14,11 @@
     hbs = require("handlebars"),
     passportSetup = require("./services/passport"),
     moment = require('moment'),
-    Redis = require("ioredis"),
-    redis = new Redis({
-      port: 6379, // Redis port
-      host: "127.0.0.1", // Redis host,
-    }),
+    // Redis = require("ioredis"),
+    // redis = new Redis({
+    //   port: 6379, // Redis port
+    //   host: "127.0.0.1", // Redis host,
+    // }),
     title =  `
     ██████╗ ██████╗  ██████╗      ██╗███████╗ ██████╗████████╗    ███████╗██╗     ██╗      █████╗ 
     ██╔══██╗██╔══██╗██╔═══██╗     ██║██╔════╝██╔════╝╚══██╔══╝    ██╔════╝██║     ██║     ██╔══██╗
