@@ -46,11 +46,14 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "set NODE_ENV=local&& nodemon server",
-    "start:uat": "NODE_ENV=uat&&node server",
-    "start:prod": "NODE_ENV=production&&node server",
+    "start:local-windows": "set NODE_ENV=local&& nodemon server",
+    "start:local-linux": "NODE_ENV=local nodemon server",
+    "start:dev": "NODE_ENV=dev node server",
+    "start:uat": "NODE_ENV=uat node server",
+    "start:prod": "NODE_ENV=prod node server",
+    "start:pm2dev": "pm2 start ecosystem-uat.config.js --env dev",
     "start:pm2uat": "pm2 start ecosystem-uat.config.js --env uat",
-    "start:pm2prod": "pm2 start ecosystem-prod.config.js --env production"
+    "start:pm2prod": "pm2 start ecosystem-prod.config.js --env prod"
   },
   "author": "Patrick Marck D. Dulaca",
   "license": "ISC"

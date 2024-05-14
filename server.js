@@ -32,8 +32,8 @@
   //   config.server.type == "local" ? "sandbox-client/client" : "public";
 
   Init.Mongoose();
-
-  if(process.env.name === 'main-app' || process.env.CLUSTER_MODE === 'FALSE'){
+  
+  if(process.env.name === 'main-app' || process.env.CLUSTER_MODE === 'NO'){
     Init.CronJobs();
     console.log('Process Environment: ', process.env)
   }
@@ -124,7 +124,7 @@
     });
 
   server.listen(config.server.port, () => {
-    if(process.env.name === 'main-app' || process.env.CLUSTER_MODE === 'FALSE'){
+    if(process.env.name === 'main-app' || process.env.CLUSTER_MODE === 'NO'){
       console.log("\x1b[36m", title);
     }
     console.log(

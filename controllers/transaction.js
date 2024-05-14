@@ -410,7 +410,7 @@ module.exports.generateReport = async (req, res) => {
     });
     const transDate = moment.utc(transactionDetails.data?.date).tz(req.timezone).format('MMM DD, YYYY');
     await email.notify( req.auth?.email, "send_report_template", {
-      header: `GCASH DAILY REPORT`,
+      header: `kuweba.software.solutions`,
       banner: "daily_report_banner",
       name: req.auth?.fullname,
       date: transDate,
