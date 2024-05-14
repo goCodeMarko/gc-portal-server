@@ -11,7 +11,7 @@ module.exports.generate = async (template, data) => {
   try {
     console.log('--------2.1')
       const browser = await puppeteer.launch({
-        headless: 'new',
+        headless: true,
         args: [
           "--disable-features=IsolateOrigins",
           "--disable-site-isolation-trials",
