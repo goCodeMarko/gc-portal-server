@@ -37,7 +37,7 @@
     "passport": "^0.7.0",
     "passport-google-oauth20": "^2.0.0",
     "pm2": "^5.3.1",
-    "puppeteer": "^22.8.0",
+    "puppeteer": "^21.3.7",
     "qrcode": "^1.5.1",
     "socket.io": "^4.7.5"
   },
