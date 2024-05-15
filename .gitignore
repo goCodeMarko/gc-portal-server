@@ -3,8 +3,9 @@ logbook
 logbook/*
 node_modules
 node_modules/*
-.puppeteerrc.cjs
 .env
 ecosystem-prod.config.js
 ecosystem-uat.config.js
+ecosystem-dev.config.js
+ecosystem-local.config.js
 package-lock.json
