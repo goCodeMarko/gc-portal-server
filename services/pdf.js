@@ -14,6 +14,7 @@ module.exports.generate = async (template, data) => {
 
     console.log(11111111111, join(__dirname, '.cache', 'puppeteer'))
       const browser = await puppeteer.launch({
+         executablePath: '/app/.cache/puppeteer',
         headless: true,
         args: [
           "--disable-features=IsolateOrigins",
