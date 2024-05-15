@@ -47,6 +47,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node node_modules/puppeteer/install.js && mkdir -p ./.cache && mv /app/.cache/puppeteer ./.cache",
      "heroku-postbuild": "mkdir ./.cache && mv /app/.cache/puppeteer ./.cache",
     "start:local-windows": "set NODE_ENV=local&& nodemon server",
     "start:local-linux": "NODE_ENV=local nodemon server",
