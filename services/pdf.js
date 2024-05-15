@@ -84,6 +84,7 @@ module.exports.generate = async (template, data) => {
 
     return pdfBuffer;
   } catch (error) {
+    console.log(345, error)
     padayon.ErrorHandler("Service::Pdf::generate", error, req, res);
   } 
 };
