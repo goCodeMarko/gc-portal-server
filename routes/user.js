@@ -112,7 +112,7 @@ router.get(
 router.get(
   `/api/${base}/downloadExcel`,
   execute(controller.downloadExcel, {
-    secured: false,
+    secured: true,
   })
 ); //---------done
 

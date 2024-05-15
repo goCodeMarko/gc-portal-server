@@ -9,10 +9,6 @@ const padayon = require("./padayon"),
 
 module.exports.generate = async (template, data) => {
   try {
-    console.log('--------2.1', )
-    const {join} = require('path');
-
-    console.log(11111111111, join(__dirname, '.cache', 'puppeteer'))
       const browser = await puppeteer.launch({
         headless: true,
         args: [
@@ -51,12 +47,11 @@ module.exports.generate = async (template, data) => {
           "--no-sandbox",
         ]
       });
-      console.log('--------2.2')
     
     const page = await browser.newPage();
-    console.log('--------2.3')
+
     const html = await compile(template, data);
-    console.log('--------2.4')
+
     await page.setContent(html);
 
     // await page.screenshot({
@@ -64,14 +59,14 @@ module.exports.generate = async (template, data) => {
     //   fullPage: true,
     //   quality: 100
     // });
-    console.log('--------2.5')
+
     const pdfBuffer = await page.pdf({
       format: "Legal",
       orientation: "portrait",
       printBackground: true,
       timeout: 0
     });
-    console.log('--------2.6')
+
     // const pdfStream = await page.createPDFStream({
     //   format: "Legal",
     //   orientation: "portrait",
@@ -87,7 +82,6 @@ module.exports.generate = async (template, data) => {
 
     return pdfBuffer;
   } catch (error) {
-    console.log(345, error)
     padayon.ErrorHandler("Service::Pdf::generate", error, req, res);
   } 
 };
