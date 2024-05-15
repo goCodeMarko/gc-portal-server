@@ -9,7 +9,10 @@ const padayon = require("./padayon"),
 
 module.exports.generate = async (template, data) => {
   try {
-    console.log('--------2.1')
+    console.log('--------2.1', )
+    const {join} = require('path');
+
+    console.log(11111111111, join(__dirname, '.cache', 'puppeteer'))
       const browser = await puppeteer.launch({
         headless: true,
         args: [
