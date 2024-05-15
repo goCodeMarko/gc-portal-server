@@ -387,7 +387,7 @@ module.exports.generateReport = async (req, res) => {
     const cashin =  transactionDetails.data.cashin.filter(c => c.status === 2);
     transactionDetails.data.cashout = cashout;
     transactionDetails.data.cashin = cashin;
-
+   console.log('--------1.5', transactionDetails)
     // const filename = moment.utc(transactionDetails.data?.date).tz(req.timezone).format('MMM_DD_YYYY');
 
     // res.writeHead(200, {
