@@ -89,6 +89,7 @@ module.exports.generate = async (template, data) => {
     return pdfBuffer;
   } catch (error) {
     await browser.close(); // always close the browser it consume alot of cpu
+    console.log(error)
     console.log('Browser has been closed...')
     padayon.ErrorHandler("Service::Pdf::generate", error, req, res);
   } 
