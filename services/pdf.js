@@ -49,7 +49,7 @@ module.exports.generate = async (template, data) => {
           "--no-sandbox",
         ],
       });
-      console.log('--------2')
+    console.log('--------2')
     const page = await browser.newPage();
 
     const html = await compile(template, data);
@@ -69,6 +69,10 @@ module.exports.generate = async (template, data) => {
       timeout: 0
     });
     console.log('--------4')
+
+    const close = await browser.close();
+
+    console.log('-------5', close)
     // const pdfStream = await page.createPDFStream({
     //   format: "Legal",
     //   orientation: "portrait",
