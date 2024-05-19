@@ -9,6 +9,7 @@ const padayon = require("./padayon"),
 
 module.exports.generate = async (template, data) => {
   try {
+      console.log('--------1')
       const browser = await puppeteer.launch({
         executablePath: '/usr/bin/chromium-browser',
         headless: true,
@@ -48,11 +49,11 @@ module.exports.generate = async (template, data) => {
           "--no-sandbox",
         ],
       });
-
+      console.log('--------2')
     const page = await browser.newPage();
 
     const html = await compile(template, data);
-
+    console.log('--------3')
     await page.setContent(html);
 
     // await page.screenshot({
@@ -67,7 +68,7 @@ module.exports.generate = async (template, data) => {
       printBackground: true,
       timeout: 0
     });
-
+    console.log('--------4')
     // const pdfStream = await page.createPDFStream({
     //   format: "Legal",
     //   orientation: "portrait",
