@@ -8,9 +8,9 @@ const padayon = require("./padayon"),
   hbs = require("handlebars");
 
 module.exports.generate = async (template, data) => {
+  let browser;
   try {
-      console.log('--------1')
-      const browser = await puppeteer.launch({
+      browser = await puppeteer.launch({
         executablePath: '/usr/bin/chromium-browser',
         headless: true,
         args: [
@@ -49,13 +49,13 @@ module.exports.generate = async (template, data) => {
           "--no-sandbox",
         ],
       });
-    console.log('--------2')
+    console.log('browser has been launched...')
     const page = await browser.newPage();
 
     const html = await compile(template, data);
-    console.log('--------3')
+    console.log('Writing the data to the template...')
     await page.setContent(html);
-
+    console.log('Data has been set to template') 
     // await page.screenshot({
     //   path: 'screenshot.jpg',
     //   fullPage: true,
@@ -68,11 +68,11 @@ module.exports.generate = async (template, data) => {
       printBackground: true,
       timeout: 0
     });
-    console.log('--------4')
+    console.log('Converted into PDF format...')
 
-    const close = await browser.close();
+    await browser.close(); // always close the browser it consume alot of cpu
+    console.log('Browser has been closed...')
 
-    console.log('-------5', close)
     // const pdfStream = await page.createPDFStream({
     //   format: "Legal",
     //   orientation: "portrait",
@@ -88,6 +88,8 @@ module.exports.generate = async (template, data) => {
 
     return pdfBuffer;
   } catch (error) {
+    await browser.close(); // always close the browser it consume alot of cpu
+    console.log('Browser has been closed...')
     padayon.ErrorHandler("Service::Pdf::generate", error, req, res);
   } 
 };
