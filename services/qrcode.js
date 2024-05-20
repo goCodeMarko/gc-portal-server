@@ -30,7 +30,7 @@ async function createQRCodeImg(text_output) {
   const w_qrcode = 800,
     h_qrcode = 800,
     logo_url =
-      "https://res.cloudinary.com/dhmkfau4h/image/upload/v1706758355/logo/icons8-user-male-300_1_uhqivq.png",
+      "https://res.cloudinary.com/dhmkfau4h/image/upload/v1706758355/logo/gcash.png",
     x_logo = 245,
     y_logo = 245,
     w_logo = 300,
