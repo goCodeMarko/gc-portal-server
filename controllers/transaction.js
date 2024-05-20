@@ -294,7 +294,7 @@ module.exports.updateTransactionStatus = async (req, res) => {
       await approveCashinDTO.validateAsync(joi);
 
       const upload = await cloudinary.uploader.upload(req.file.path, {
-        folder: "profile_pictures",
+        folder: "cashin",
         type: "authenticated",
         resource_type: "auto",
         // allowed_formats: ['pdf', 'jpg', 'jpeg', 'png', 'xls', 'xlsx']

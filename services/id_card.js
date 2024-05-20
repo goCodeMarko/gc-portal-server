@@ -36,7 +36,7 @@ async function createFrontCardImg(user) {
   const w_card_template = 1011,
     h_card_template = 639,
     template_url =
-      "https://res.cloudinary.com/dhmkfau4h/image/upload/v1706845102/logo/Schwaiger_e7nbad.png",
+      "https://res.cloudinary.com/dhmkfau4h/image/upload/v1706845102/logo/id_card_front.png",
     x_card_template = 0,
     y_card_template = 0;
 
@@ -83,7 +83,7 @@ async function createBackCardImg(user) {
   const w_card_template = 1011,
     h_card_template = 639,
     template_url =
-      "https://res.cloudinary.com/dhmkfau4h/image/upload/v1706846705/logo/Schwaiger_back_okjags.png",
+      "https://res.cloudinary.com/dhmkfau4h/image/upload/v1706846705/logo/id_card_back.png",
     x_card_template = 0,
     y_card_template = 0;
 
