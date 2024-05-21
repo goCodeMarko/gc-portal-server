@@ -641,12 +641,13 @@ module.exports.updateTransactionStatus = async (req, res, callback) => {
           } : { $set: { "cashin.$[elem].status": status } }
         : { $set: { "cashout.$[elem].status": status } };
 
-    const result = await Transaction.updateOne(
+    const result = await Transaction.findOneAndUpdate(
       { _id: ObjectId(trans_id) },
       set,
       {
         arrayFilters: [{ "elem._id": ObjectId(cid) }],
         multi: true,
+        new: true
       }
     );
     response = result;
