@@ -60,9 +60,8 @@
   });
   
   //handlebars custom helpers
-  hbs.registerHelper('formatDate', (date, format) => {
-    return  moment(date).format(format); 
-    
+  hbs.registerHelper('formatDate', (date, format, timezone) => {
+    return moment.utc(date).tz(timezone).format(format);
   });
   hbs.registerHelper('sum', (...numbers) => {
     numbers.pop();

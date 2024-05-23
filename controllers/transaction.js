@@ -382,8 +382,12 @@ module.exports.generateReport = async (req, res) => {
   try {
     let response = { success: true, code: 200 };
     const transactionDetails = await this.getTransaction(req, res);
-    const cashout =  transactionDetails.data.cashout.filter(c => c.status === 2);
-    const cashin =  transactionDetails.data.cashin.filter(c => c.status === 2);
+    const cashout =  transactionDetails.data.cashout.filter(c => c.status === 2).map(c => {
+      return {...c, timezone: req.timezone}
+    });
+    const cashin =  transactionDetails.data.cashin.filter(c => c.status === 2).map(c => {
+      return {...c, timezone: req.timezone}
+    });
     transactionDetails.data.cashout = cashout;
     transactionDetails.data.cashin = cashin;
 

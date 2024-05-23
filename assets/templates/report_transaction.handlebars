@@ -89,7 +89,7 @@
                 <tbody>
                     {{#each tdCO}}
                     <tr>
-                        <td>{{formatDate this.createdAt 'h:mm A'}}</td>
+                        <td>{{formatDate this.createdAt 'h:mm A' this.timezone}}</td>
                         <td>{{currency this.amount}}</td>
                         <td style="display: inline-block;">
                             {{#if this.fee_payment_is_gcash}}
@@ -142,7 +142,7 @@
                 <tbody>
                     {{#each tdCI}}
                     <tr>
-                        <td>{{formatDate this.createdAt 'h:mm A'}}</td>
+                        <td>{{formatDate this.createdAt 'h:mm A' this.timezone}}</td>
                         <td>{{this.phone_number}}</td>
                         <td>{{currency this.amount}}</td>
                         <td style="display: inline-block;">
