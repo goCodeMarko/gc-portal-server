@@ -34,7 +34,7 @@
   Init.Mongoose();
   
   if(process.env.name === 'main-app' || process.env.CLUSTER_MODE === 'NO'){
-    Init.CronJobs();
+    // Init.CronJobs();
     console.log('Process Environment: ', process.env)
   }
   
