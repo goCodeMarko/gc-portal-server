@@ -28,7 +28,7 @@ module.exports.notify = async (recipient, template, data = {}) => {
     hbs({
       viewEngine: {
         extname: ".handlebars", // handlebars extension
-        layoutsDir: "assets/templates", // location of handlebars templates
+        layoutsDir: path.resolve(__dirname, "assets/templates"), // location of handlebars templates
         defaultLayout: template, // name of main template
         cache: false
       },
