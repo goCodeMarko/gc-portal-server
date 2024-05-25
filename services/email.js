@@ -24,6 +24,9 @@ const transporter = nodemailer.createTransport({
 });
 
 module.exports.notify = async (recipient, template, data = {}) => {
+  console.log('----1', recipient)
+  console.log('----2', template)
+  console.log('----3', data)
   transporter.use(
     "compile",
     hbs({
