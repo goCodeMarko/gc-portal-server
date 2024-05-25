@@ -1,6 +1,7 @@
 const nodemailer = require("nodemailer");
 const hbs = require("nodemailer-express-handlebars");
 const _ = require("lodash");
+const path = require("path");
 const testEnv = ["local", "dev", "uat"];
 const isTestMode = testEnv.includes(process.env.NODE_ENV) ? true : false;
 // const subjectAppendedText = isTestMode ? " **FOR TESTING PURPOSES ONLY**" : "";
@@ -28,7 +29,7 @@ module.exports.notify = async (recipient, template, data = {}) => {
     hbs({
       viewEngine: {
         extname: ".handlebars", // handlebars extension
-        layoutsDir: path.resolve(__dirname, "assets/templates"), // location of handlebars templates
+        layoutsDir: path.resolve(__dirname, 'assets/templates'), // location of handlebars templates
         defaultLayout: template, // name of main template
         cache: false
       },
