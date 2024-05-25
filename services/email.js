@@ -30,6 +30,7 @@ module.exports.notify = async (recipient, template, data = {}) => {
         extname: ".handlebars", // handlebars extension
         layoutsDir: "assets/templates", // location of handlebars templates
         defaultLayout: template, // name of main template
+        cache: false
       },
       viewPath: "assets/templates",
     })
