@@ -156,7 +156,7 @@ module.exports.addTransaction = async (req, res) => {
 
       if (result && body.type === 2) {
         await email.notify("patrickmarckdulaca@gmail.com", "cashout_template", {
-          header: `CASH OUT`,
+          header: `Cash out`,
           banner: "cashout_banner",
           amount: result.amount,
           fee: result.fee,
@@ -165,7 +165,7 @@ module.exports.addTransaction = async (req, res) => {
         });
       } else if (result && body.type === 1) {
         await email.notify("patrickmarckdulaca@gmail.com", "cashin_template", {
-          header: `CASH IN`,
+          header: `Cash In`,
           banner: "cashin_banner",
           phone_number: result.phone_number,
           amount: result.amount,
@@ -414,7 +414,7 @@ module.exports.generateReport = async (req, res) => {
     });
     const transDate = moment.utc(transactionDetails.data?.date).tz(req.timezone).format('MMM DD, YYYY');
     await email.notify( req.auth?.email, "send_report_template", {
-      header: `kuweba.software.solutions`,
+      header: `Gcash Daily Report`,
       banner: "daily_report_banner",
       name: req.auth?.fullname,
       date: transDate,
