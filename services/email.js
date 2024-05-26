@@ -27,6 +27,7 @@ module.exports.notify = async (recipient, template, data = {}) => {
   console.log('----1', recipient)
   console.log('----2', template)
   console.log('----3', data)
+
   transporter.use(
     "compile",
     hbs({
@@ -36,15 +37,16 @@ module.exports.notify = async (recipient, template, data = {}) => {
         defaultLayout: template, // name of main template
         cache: false
       },
-      viewPath: "assets/templates",
+      viewPath: path.resolve(__dirname, '..', 'assets/templates'),
+      extName: '.handlebars'
     })
   );
 
   const mail = {
-    from: username,
+    from: `"Kuweba Software Solutions" <${username}>`,
     to: recipient,
     subject: data.header,
-    template: template,
+    template: template, 
     attachments: [
       {
         filename: "email_banner.png",
@@ -78,6 +80,6 @@ module.exports.notify = async (recipient, template, data = {}) => {
   }
   
   const result = await transporter.sendMail(mail);  
-
+  transporter.close();
   return result;
 };
