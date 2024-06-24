@@ -196,7 +196,7 @@ module.exports.updateCICO = async (req, res) => {
       fee: req?.body?.fee,
       fee_payment_is_gcash:
         req?.body?.fee_payment_is_gcash?.toLowerCase() === "true",
-      snapshot: req?.file.path,
+      snapshot: req.body.snapshot,
       note: req?.body?.note,
       trans_id: req.query?.trans_id,
       cid: req.query?.cid,
@@ -244,7 +244,7 @@ module.exports.updateCICO = async (req, res) => {
     };
     console.log('----', body.snapshot)
     if (!_.isEmpty(body.snapshot) && body.snapshot.slice(0,4) === 'data'){ //body.snapshot.slice(0,4) === 'data' the image is in base64 meaning this is a new image and not yet uploaded to cloudinary
-      cloudinaryImg = await cloudinary.uploader.upload(req., {
+      cloudinaryImg = await cloudinary.uploader.upload(req.file.path, {
         folder: "cashout",
       });
       req.fnParams.snapshot = cloudinaryImg?.secure_url
