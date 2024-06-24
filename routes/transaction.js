@@ -38,6 +38,7 @@ router.post(
 
 router.put(
   `/api/${base}/updateCICO`,
+  multer.single("snapshot"),
   execute(controller.updateCICO, {
     secured: true,
     role: ["frontliner", "admin"],

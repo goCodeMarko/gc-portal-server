@@ -196,7 +196,7 @@ module.exports.updateCICO = async (req, res) => {
       fee: req?.body?.fee,
       fee_payment_is_gcash:
         req?.body?.fee_payment_is_gcash?.toLowerCase() === "true",
-      snapshot: req?.body?.snapshot,
+      snapshot: req.file?.path,
       note: req?.body?.note,
       trans_id: req.query?.trans_id,
       cid: req.query?.cid,
