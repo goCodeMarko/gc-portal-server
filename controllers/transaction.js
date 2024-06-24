@@ -243,7 +243,7 @@ module.exports.updateCICO = async (req, res) => {
       date: req.body?.date,
     };
     console.log('----', body.snapshot)
-    if (!_.isEmpty(body.snapshot)){ //if empty meaning this is a new image and not yet uploaded to cloudinary
+    if (_.isEmpty(body.snapshot)){ //if empty meaning this is a new image and not yet uploaded to cloudinary
       cloudinaryImg = await cloudinary.uploader.upload(req.file.path, {
         folder: "cashout",
       });
