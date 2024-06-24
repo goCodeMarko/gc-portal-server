@@ -107,7 +107,7 @@ module.exports.addTransaction = async (req, res) => {
       note: req?.body?.note,
       trans_id: req.query?.trans_id,
     };
-
+    console.log('------', body)
     if (_.isNil(body.type))
       throw new padayon.BadRequestException("Missing transaction type");
 
