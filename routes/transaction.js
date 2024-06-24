@@ -28,6 +28,7 @@ router.get(
 
 router.post(
   `/api/${base}/addTransaction`,
+  multer.single("snapshot"),
   execute(controller.addTransaction, {
     secured: true,
     role: ["frontliner", "admin"],
