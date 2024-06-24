@@ -97,8 +97,8 @@
     .use(requestLogger)
     .use(cors())
     // .use(express.static(path.join(__dirname, clientFolder)))
-    .use(bodyParser.json({ limit: "1mb" }))
-    .use(bodyParser.urlencoded({ limit: "1mb", extended: false }))
+    .use(bodyParser.json({ limit: "10mb" }))
+    .use(bodyParser.urlencoded({ limit: "10mb", extended: false }))
     .use(cookieParser())
 
     .use(
