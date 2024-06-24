@@ -188,7 +188,7 @@ module.exports.addTransaction = async (req, res) => {
 module.exports.updateCICO = async (req, res) => {
   try {
     let response = { success: true, code: 201 };
-    console.log('---req' , req)
+
     let body = {
       type: req?.body?.type, // 0-cashin 1-cashout
       phone_number: req?.body?.phone_number,
@@ -243,7 +243,7 @@ module.exports.updateCICO = async (req, res) => {
       date: req.body?.date,
     };
     console.log('----', body.snapshot)
-    if (!_.isEmpty(body.snapshot) && body.snapshot.slice(0,4) === 'data'){ //body.snapshot.slice(0,4) === 'data' the image is in base64 meaning this is a new image and not yet uploaded to cloudinary
+    if (!_.isEmpty(body.snapshot)){ //if empty meaning this is a new image and not yet uploaded to cloudinary
       cloudinaryImg = await cloudinary.uploader.upload(req.file.path, {
         folder: "cashout",
       });
