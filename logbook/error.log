@@ -2203,3 +2203,4 @@
 {"success":false,"error":{"area":"Padayon::Utils::security","message":"No token found.","type":"UnauthorizedException","__route":"/api/user/getAuthUser","date":"05-18-2024 11:35 AM"}}
 {"success":false,"error":{"area":"Padayon::Utils::security","message":"No token found.","type":"UnauthorizedException","__route":"/api/user/getAuthUser","date":"05-18-2024 11:35 AM"}}
 {"success":false,"error":{"area":"Padayon::Utils::security","message":"You do not have privilege to perform this action.","type":"ForbiddenException","__route":"/api/user/getAuthUser","date":"05-18-2024 12:05 PM"}}
+{"success":false,"error":{"area":"Padayon::Utils::security","message":"jwt expired","type":"TokenExpiredError","__route":"/api/user/getAuthUser","date":"06-26-2024 11:22 AM"}}
