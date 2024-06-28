@@ -19,6 +19,8 @@ const CashSchema = new mongoose.Schema(
     status: { type: Number, required: true, lowercase: true, default: 1 }, // 1-pending, 2-approved 3-failed 4-cancelled
     note: { type: String, default: "" },
     isDeleted: { type: Boolean, default: false },
+    createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    updatedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     date: { type: Date },
   },
   { timestamps: true }
@@ -483,9 +485,47 @@ module.exports.getCashOuts = async (req, res) => {
           phone_number: "$cashout.phone_number",
           createdAt: "$cashout.createdAt",
           updatedAt: "$cashout.updatedAt",
+          createdBy: "$cashout.createdBy",
+          updatedBy: "$cashout.updatedBy",
         },
       },
       { $match: { isDeleted: false, type: 2 } },
+      { 
+        $lookup : {
+          from: 'users',            
+          localField: 'createdBy',       
+          foreignField: '_id',      
+          as: 'c'   
+       }
+      },
+      { $unwind: { path: "$c" } },
+      { 
+        $lookup : {
+          from: 'users',            
+          localField: 'updatedBy',       
+          foreignField: '_id',    
+          as: 'u'       
+        }
+      },
+      { $unwind: { path: "$u" } },
+      {
+        $project: {
+          amount: 1,
+          fee: 1,
+          fee_payment_is_gcash: 1,
+          snapshot: 1,
+          status: 1,
+          note: 1,
+          isDeleted: 1,
+          _id: 1,
+          type: 1,
+          phone_number: 1,
+          createdAt: 1,
+          updatedAt: 1,
+          createdBy: { $concat: ["$c.firstname", " ", "$c.lastname"] },
+          updatedBy:{ $concat: ["$c.firstname", " ", "$c.lastname"] },
+        },
+      },
     ];
 
     let searchCriteria = {};
@@ -555,34 +595,41 @@ module.exports.getCashOuts = async (req, res) => {
   }
 };
 
-module.exports.addTransaction = async (req, res, callback) => {
+module.exports.addTransaction = async (req, res) => {
   try {
-    let response = {};
-    const body = req.fnParams;
+    const body = req.fnParams; // Extract the request parameters
 
-    const result = await Transaction.findByIdAndUpdate(
-      { _id: ObjectId(body.trans_id) },
-      body.type === 1
-        ? { $push: { cashin: body } }
-        : { $push: { cashout: body } },
-      { new: true }
+    // Find the transaction by ID and update it by pushing the new cashin or cashout object
+    const query = await Transaction.findByIdAndUpdate(
+      { _id: ObjectId(body.trans_id) }, // Find the transaction by its ID
+      body.type == 1 // Determine the type of transaction
+        ? { $push: { cashin: body } } // If type is 1, push to the 'cashin' array
+        : { $push: { cashout: body } }, // If type is not 1, push to the 'cashout' array
+      { new: true } // Return the modified document
     );
-    const cash =
-      body.type === 1
-        ? result.cashin[result.cashin.length - 1]
-        : result.cashout[result.cashout.length - 1];
-  
-    if(cash.type === 2 && cash.fee_payment_is_gcash){
-      cash.amount = cash.amount + cash.fee
-    }else if(cash.type === 1 && cash.fee_payment_is_gcash) {
-      cash.amount = cash.amount - cash.fee
-    }
-    response = cash; 
-    callback(response);
+
+    // Get the last added cash object from the result based on the type
+    let cash = body.type === 1
+        ? query.cashin[query.cashin.length - 1] // Get the last element in the 'cashin' array
+        : query.cashout[query.cashout.length - 1]; // Get the last element in the 'cashout' array
+
+    let cashPlainObject = cash.toObject(); // Convert the Mongoose document to a plain JavaScript object
+
+    // Adjust the amount based on the type and fee payment method
+    if(cashPlainObject.type === 2 && cashPlainObject.fee_payment_is_gcash)
+      cashPlainObject.amount = cashPlainObject.amount + cashPlainObject.fee; // Add fee to the amount if it's type 2 and fee is paid via gcash
+    else if(cashPlainObject.type === 1 && cashPlainObject.fee_payment_is_gcash) 
+      cashPlainObject.amount = cashPlainObject.amount - cashPlainObject.fee; // Subtract fee from the amount if it's type 1 and fee is paid via gcash
+   
+    // Set the createdBy and updatedBy fields with the full name from the authenticated user
+    cashPlainObject.createdBy = req.auth.fullname;
+    cashPlainObject.updatedBy = req.auth.fullname;
+
+    return cashPlainObject;  // Return the modified cash object
   } catch (error) {
     padayon.ErrorHandler("Model::Transaction::addTransaction", error, req, res);
   }
-}; //---------done
+};
 
 module.exports.updateCICO = async (req, res, callback) => {
   try {
@@ -693,9 +740,47 @@ module.exports.getCashIns = async (req, res) => {
           phone_number: "$cashin.phone_number",
           createdAt: "$cashin.createdAt",
           updatedAt: "$cashin.updatedAt",
+          createdBy: "$cashin.createdBy",
+          updatedBy: "$cashin.updatedBy",
         },
       },
       { $match: { isDeleted: false, type: 1 } },
+      { 
+        $lookup : {
+          from: 'users',            
+          localField: 'createdBy',       
+          foreignField: '_id',      
+          as: 'c'   
+       }
+      },
+      { $unwind: { path: "$c" } },
+      { 
+        $lookup : {
+          from: 'users',            
+          localField: 'updatedBy',       
+          foreignField: '_id',    
+          as: 'u'       
+        }
+      },
+      { $unwind: { path: "$u" } },
+      {
+        $project: {
+          amount: 1,
+          fee: 1,
+          fee_payment_is_gcash: 1,
+          snapshot: 1,
+          status: 1,
+          note: 1,
+          isDeleted: 1,
+          _id: 1,
+          type: 1,
+          phone_number: 1,
+          createdAt: 1,
+          updatedAt: 1,
+          createdBy: { $concat: ["$c.firstname", " ", "$c.lastname"] },
+          updatedBy:{ $concat: ["$c.firstname", " ", "$c.lastname"] },
+        },
+      }
     ];
 
     let searchCriteria = {};
@@ -758,8 +843,9 @@ module.exports.getCashIns = async (req, res) => {
         },
       }
     );
-
+    
     const [cashins] = await Transaction.aggregate(MQLBuilder);
+    console.log(323432, cashins)
 
     return cashins;
   } catch (error) {

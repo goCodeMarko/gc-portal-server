@@ -95,7 +95,7 @@ module.exports.getTransaction = async (req, res) => {
 module.exports.addTransaction = async (req, res) => {
   try {
     let response = { success: true, code: 201 };
-
+  
     let body = {
       type: req?.body?.type, // 0-cashin 1-cashout
       phone_number: req?.body?.phone_number,
@@ -107,7 +107,7 @@ module.exports.addTransaction = async (req, res) => {
       note: req?.body?.note,
       trans_id: req.query?.trans_id,
     };
-    console.log('------', body)
+
     if (_.isNil(body.type))
       throw new padayon.BadRequestException("Missing transaction type");
 
@@ -120,7 +120,7 @@ module.exports.addTransaction = async (req, res) => {
         fee: body.fee,
         fee_payment_is_gcash: body.fee_payment_is_gcash,
         note: body.note,
-        trans_id: body.trans_id,
+        trans_id: body.trans_id
       };
       await cashinDTO.validateAsync(joi);
       body = joi;
@@ -133,7 +133,7 @@ module.exports.addTransaction = async (req, res) => {
         fee: body.fee,
         fee_payment_is_gcash: body.fee_payment_is_gcash,
         note: body.note,
-        trans_id: body.trans_id,
+        trans_id: body.trans_id
       };
 
       await cashoutDTO.validateAsync(joi);
@@ -150,9 +150,13 @@ module.exports.addTransaction = async (req, res) => {
       ...body,
       snapshot: cloudinaryImg?.secure_url,
       date: req.body?.date,
+      createdBy: req.auth._id,
+      updatedBy: req.auth._id,
     };
-    await model.addTransaction(req, res, async (result) => {
-      response.data = result;
+
+    const result = await model.addTransaction(req, res);
+
+    response.data = result;
 
       if (result && body.type === 2) {
         await email.notify("patrickmarckdulaca@gmail.com", "cashout_template", {
@@ -173,7 +177,7 @@ module.exports.addTransaction = async (req, res) => {
           note: result.note,
         });
       }
-    });
+
     return response;
   } catch (error) {
     padayon.ErrorHandler(
