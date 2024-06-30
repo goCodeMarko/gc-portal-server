@@ -104,7 +104,7 @@ module.exports.addTransaction = async (req, res) => {
       fee_payment_is_gcash:
         req?.body?.fee_payment_is_gcash?.toLowerCase() === "true",
       snapshot: req.file?.path,
-      note: req?.body?.note,
+      note: req?.body?.note?.trim(),
       trans_id: req.query?.trans_id,
     };
 
@@ -157,8 +157,7 @@ module.exports.addTransaction = async (req, res) => {
     const result = await model.addTransaction(req, res);
 
     response.data = result;
-
-      if (result && body.type === 2) {
+      if (result && body.type == 2) {
         await email.notify("patrickmarckdulaca@gmail.com", "cashout_template", {
           header: `Cash out`,
           banner: "cashout_banner",
@@ -167,7 +166,7 @@ module.exports.addTransaction = async (req, res) => {
           note: result.note,
           snapshot: result.snapshot,
         });
-      } else if (result && body.type === 1) {
+      } else if (result && body.type == 1) {
         await email.notify("patrickmarckdulaca@gmail.com", "cashin_template", {
           header: `Cash In`,
           banner: "cashin_banner",
@@ -201,7 +200,7 @@ module.exports.updateCICO = async (req, res) => {
       fee_payment_is_gcash:
         req?.body?.fee_payment_is_gcash?.toLowerCase() === "true",
       snapshot: req.body.snapshot,
-      note: req?.body?.note,
+      note: req?.body?.note?.trim(),
       trans_id: req.query?.trans_id,
       cid: req.query?.cid,
     };
@@ -239,15 +238,15 @@ module.exports.updateCICO = async (req, res) => {
       body = {...body, ...joi};
     } 
    
-    // // uploads the qr code image on the cloudinary
+    // uploads the qr code image on the cloudinary
     let cloudinaryImg;
 
     req.fnParams = {
       ...body,
       date: req.body?.date,
     };
-    console.log('----', body.snapshot)
-    if (_.isEmpty(body.snapshot)){ //if empty meaning this is a new image and not yet uploaded to cloudinary
+
+    if (_.isEmpty(body.snapshot) && body.type == 2){ //if empty meaning this is a new image and not yet uploaded to cloudinary
       cloudinaryImg = await cloudinary.uploader.upload(req.file.path, {
         folder: "cashout",
       });
