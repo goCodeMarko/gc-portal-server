@@ -259,6 +259,9 @@ module.exports.updateCICO = async (req, res) => {
       response.data = result;
     });
 
+    response.data = { ...response.data, snapshot: cloudinaryImg?.secure_url};
+
+    console.log('-------response.data', response.data)
     return response;
   } catch (error) {
     padayon.ErrorHandler(
