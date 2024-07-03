@@ -128,7 +128,7 @@ const VAPID_PRIVATE_KEY = 'JTeljBhHFTY9leAHY_M1YwQQY51bvnzRhQHi1MLBoAg';
         res.status(201).json({});
       })
   
-    .use(routes(subscriptions));
+    .use(routes)
     
   
     .get('/', (req,res) => {
