@@ -121,12 +121,6 @@ const VAPID_PRIVATE_KEY = 'JTeljBhHFTY9leAHY_M1YwQQY51bvnzRhQHi1MLBoAg';
           " :remote-addr - :remote-user [:date[clf]] - :response-time ms"
       )
     )
-    .post('/subscribe', (req, res) => {
-      console.log('----------req.body', req.body)
-        const subscription = req.body;
-        subscriptions.push(subscription);
-        res.status(201).json({});
-      })
   
     .use(routes)
     
