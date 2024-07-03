@@ -14,6 +14,7 @@
     hbs = require("handlebars"),
     passportSetup = require("./services/passport"),
     moment = require('moment'),
+    webpush = require('web-push'),
     // Redis = require("ioredis"),
     // redis = new Redis({
     //   port: 6379, // Redis port
@@ -30,6 +31,17 @@
   `;
   // clientFolder =
   //   config.server.type == "local" ? "sandbox-client/client" : "public";
+
+const VAPID_PUBLIC_KEY = 'BENFs5s5g4eYPr8DmBtmI7V46TAQhjv22N31JJVVNoicaefJcrM8ezT6XSvt4SUPqk2rt9JfzmuhzTCUr98DPNI';
+const VAPID_PRIVATE_KEY = 'JTeljBhHFTY9leAHY_M1YwQQY51bvnzRhQHi1MLBoAg';
+
+  webpush.setVapidDetails(
+    'mailto:patrickmarckdulaca@gmail.com',
+    VAPID_PUBLIC_KEY,
+    VAPID_PRIVATE_KEY
+  );
+
+
 
   Init.Mongoose();
   
@@ -92,7 +104,8 @@
 
     return  result; 
   });
-
+  const subscriptions = [];
+  
   app
     .use(requestLogger)
     .use(cors())
@@ -108,8 +121,16 @@
           " :remote-addr - :remote-user [:date[clf]] - :response-time ms"
       )
     )
+    .post('/subscribe', (req, res) => {
+      console.log('----------req.body', req.body)
+        const subscription = req.body;
+        subscriptions.push(subscription);
+        res.status(201).json({});
+      })
   
-    .use(routes)
+    .use(routes(subscriptions));
+    
+  
     .get('/', (req,res) => {
       res.send(`<p style="font-style:verdana;">Welcome to GC Portal API!</p></br>
         <pre>powered by \n ${title}</pre>
