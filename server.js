@@ -32,22 +32,22 @@
   // clientFolder =
   //   config.server.type == "local" ? "sandbox-client/client" : "public";
 
-const VAPID_PUBLIC_KEY = 'BENFs5s5g4eYPr8DmBtmI7V46TAQhjv22N31JJVVNoicaefJcrM8ezT6XSvt4SUPqk2rt9JfzmuhzTCUr98DPNI';
-const VAPID_PRIVATE_KEY = 'JTeljBhHFTY9leAHY_M1YwQQY51bvnzRhQHi1MLBoAg';
-
-  webpush.setVapidDetails(
-    'mailto:patrickmarckdulaca@gmail.com',
-    VAPID_PUBLIC_KEY,
-    VAPID_PRIVATE_KEY
-  );
-
-
-
   Init.Mongoose();
   
   if(process.env.name === 'main-app' || process.env.CLUSTER_MODE === 'NO'){
     // Init.CronJobs();
     console.log('Process Environment: ', process.env)
+
+    const VAPID_PUBLIC_KEY = 'BENFs5s5g4eYPr8DmBtmI7V46TAQhjv22N31JJVVNoicaefJcrM8ezT6XSvt4SUPqk2rt9JfzmuhzTCUr98DPNI';
+const VAPID_PRIVATE_KEY = 'JTeljBhHFTY9leAHY_M1YwQQY51bvnzRhQHi1MLBoAg';
+
+    webpush.setVapidDetails(
+      'mailto:patrickmarckdulaca@gmail.com',
+      VAPID_PUBLIC_KEY,
+      VAPID_PRIVATE_KEY
+    );
+  
+    console.log('--------------webpush', webpush)
   }
   
   module.exports.io = require("socket.io")(server, {
@@ -104,7 +104,6 @@ const VAPID_PRIVATE_KEY = 'JTeljBhHFTY9leAHY_M1YwQQY51bvnzRhQHi1MLBoAg';
 
     return  result; 
   });
-  const subscriptions = [];
   
   app
     .use(requestLogger)
