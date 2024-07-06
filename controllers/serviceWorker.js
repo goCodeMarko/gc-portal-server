@@ -29,11 +29,11 @@ module.exports.notify = async (req, res) => {
         VAPID_PRIVATE_KEY
       );
         const x= await webpush.sendNotification({
-            endpoint: 'https://web.push.apple.com/QEdgp5vrY6KGZ747x2FpxxWgcnf4JbVKXd6XAlbK1la4jP-K5D9Iu0OW2onMbV_1R8n9jufgHC1ta-X-E9lagwu8TIMJltVJEiqkVkZ5fQnhGrnOBoftKScBKPUV61_BhxtYYoQf--GA4BIQmu2pZjajGt3qDVPNl7TeeYcv6Dk',
+            endpoint: 'https://web.push.apple.com/QBvqYoEscZ8-Xf8PWnTu-CTekNYNi4CyMSuqTIQ2xKPxDHQkFbNtogZP_HlBn2YasvMQ-VFt_VgVXLjlJ0hYpM_U2fe3W9oJA5V5zbuYu92z1wFciq1CAntfSIoTlTeNZ03fZ3WZX1NSFdpZfdjJYHR5n4gPwXcghRUJEide6gc',
             expirationTime: null,
             keys: {
-                p256dh: 'BBQJbNN2HELyhEGcAWbD_JJu40nyjrGHaa70hDSHVfg7HuIWXkAMJZGXnHe3XZF42S3Mr6waT215XDtXlw8z7PA',
-                auth: 'lUzqJ3JF5cUYsIVhvEw90g'
+                p256dh: 'BBqmjFbCMZFPSO9YuuRqfzHoTOVELfhXNByvFG21bz1E-3yp5Ksjphk9uTISZVIpaYRDBx82Xms9V08QWnFZTto',
+                auth: 'k7H7aemEaxIwiBfEJLaErA'
             }
         }, JSON.stringify(notificationPayload));
 
