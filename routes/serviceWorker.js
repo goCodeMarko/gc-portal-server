@@ -23,6 +23,14 @@ router.post(
   })
 ); 
 
+router.post(
+  `/api/${base}/notify`,
+  execute(controller.notify, {
+    secured: false,
+    role: ["admin", "frontliner"]
+  })
+); 
+
 module.exports = router;
 
 
