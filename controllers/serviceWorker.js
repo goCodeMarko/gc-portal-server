@@ -29,11 +29,11 @@ module.exports.notify = async (req, res) => {
         VAPID_PRIVATE_KEY
       );
         const x= await webpush.sendNotification({
-            endpoint: 'https://fcm.googleapis.com/fcm/send/duxvw8T2Y10:APA91bHwGkh3l9FRzn5QYglEAbeUfwshdujK3_uYBXTE6RZw96BukJrOgTvkjFj9hlFWcSvy3e1Pz5SzQeAl_HZuXXlRt4fZVIlzkkQQaRnQupvLiJBajVYTJjvP8jZVRF8toNkgQYC0',
+            endpoint: 'https://updates.push.services.mozilla.com/wpush/v2/gAAAAABmiJ5nHm0eu58MCNmB55dLKymnERWaSrc60OdA66ybE4WPJ87VNHJbDtWVFy-1sgs0R2t22FITX7rV03z6tV7u3n7mD0F_oK2IW9pIuL9J6XSvTCOK-PPi3RI7DCpSBCES1jLNz3Njb2GmL6A0YbfYjXXpPIPXau42CuaUMOe1k6oQwYk',
             expirationTime: null,
             keys: {
-                p256dh: 'BIA39EHy4YMbv-MgsEgftxwmy7yWHPMhvzTBUlfN1mif8rHUKc_w-SsLhD_iylXszW1RHN35YoIviAGQmpRHL7M',
-                auth: 'yN3uUArFMBzL5_prlct5Ig'
+              auth: 'TsINXBfcvnoRwfQlLazigQ',
+              p256dh: 'BKZlkNg5U-syzxCXcMFqQiD32GffaJreMGyjGgTi0DH8secdHd6tnp5rWEK_hSbTP6STIw-ar3WITxtUsunWzQk'
             }
         }, JSON.stringify(notificationPayload));
 
