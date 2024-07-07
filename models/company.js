@@ -49,7 +49,7 @@ module.exports.subscribe = async (req, res) => {
     let response = {};
     const body = req.fnParams; // Extract the request parameters
 
-    const query = await Transaction.findByIdAndUpdate(
+    const query = await Company.findByIdAndUpdate(
       { _id: ObjectId(body.company) }, 
       { $push: { deviceSubscriptions: body } }, 
       { new: true } // Return the modified document
