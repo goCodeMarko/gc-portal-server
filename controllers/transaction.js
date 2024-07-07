@@ -13,6 +13,7 @@ const padayon = require("../services/padayon"),
   email = require("./../services/email"),
   moment = require("moment-timezone"),
   pdf = require("./../services/pdf"),
+  company = require("./company"),
   cloudinary = require("./../services/cloudinary");
 
 module.exports.createTransaction = async (req, res) => {
@@ -159,28 +160,22 @@ module.exports.addTransaction = async (req, res) => {
     response.data = result;
       if (result && body.type == 2) {
 
-        // const notificationPayload = {
-        //   notification: {
-        //     title: 'New Notification',
-        //     body: 'You have a new message.',
-        //   },
-        // };
-      
-        // Promise.all(subscriptions.map(sub => webpush.sendNotification(sub, JSON.stringify(notificationPayload))))
-        //   .then(() => res.status(200).json({ message: 'Notification sent successfully.' }))
-        //   .catch(err => {
-        //     console.error('Error sending notification', err);
-        //     res.sendStatus(500);
-        //   });
+        req.query = {
+          company: req.auth.company,
+          role: 'admin',
+        }
 
-         email.notify("patrickmarckdulaca@gmail.com", "cashout_template", {
-          header: `Cash out`,
-          banner: "cashout_banner",
-          amount: result.amount,
-          fee: result.fee,
-          note: result.note,
-          snapshot: result.snapshot,
-        });
+        const x = await company.notify(req, res);
+        console.log('-------------------x', x)
+
+        //  email.notify("patrickmarckdulaca@gmail.com", "cashout_template", {
+        //   header: `Cash out`,
+        //   banner: "cashout_banner",
+        //   amount: result.amount,
+        //   fee: result.fee,
+        //   note: result.note,
+        //   snapshot: result.snapshot,
+        // });
       } else if (result && body.type == 1) {
          email.notify("patrickmarckdulaca@gmail.com", "cashin_template", {
           header: `Cash In`,

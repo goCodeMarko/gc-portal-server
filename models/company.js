@@ -55,9 +55,6 @@ module.exports.subscribe = async (req, res) => {
       { new: true } // Return the modified document
     );
 
-    console.log('---------------query', query)
-    // const transaction = await Transaction.findOne({ _id: ObjectId(trans_id) });
-
     response = query;
     return response;
   } catch (error) {
@@ -69,5 +66,64 @@ module.exports.subscribe = async (req, res) => {
     );
   }
 }; 
+
+
+module.exports.notify = async (req, res) => {
+  try {
+    const company = req.query.company;
+    const branch = req.query.branch;
+    const uid = req.query.uid;
+    const role = req.query.role;
+
+    const MQLBuilder = [];
+    
+    if (company) {
+      MQLBuilder.push( {
+        '$match': {
+          '_id': ObjectId(company)
+        }
+      });
+    }
+    MQLBuilder.push( {
+      '$unwind': {
+        'path': '$deviceSubscriptions'
+      }
+    });
+    if (company) {
+      MQLBuilder.push( {
+        '$match': {
+          '_id': ObjectId(company)
+        }
+      });
+    }
+
+    if (uid) {
+      MQLBuilder.push( {
+        '$match': {
+          'deviceSubscriptions.uid': ObjectId(uid)
+        }
+      });
+    }
+    if (branch) {
+      MQLBuilder.push( {
+        '$match': {
+          'deviceSubscriptions.branch': ObjectId(branch)
+        }
+      });
+    }
+    if (role) {
+      MQLBuilder.push( {
+        '$match': {
+          'deviceSubscriptions.role': role
+        }
+      });
+    }
+    console.log('----------MQLBuilder', MQLBuilder)
+    const deviceSubscriptions = await Company.aggregate(MQLBuilder);
+    return deviceSubscriptions;
+  } catch (error) {
+    padayon.ErrorHandler("Model::Company::notify", error, req, res);
+  }
+};
 
 

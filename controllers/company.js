@@ -8,8 +8,7 @@ const webpush = require('web-push'),
 module.exports.subscribe = async (req, res) => {
     try {
         let response = { success: true, code: 201 };
-        console.log('------------req.body', req.body)
-        console.log('------------req.auth', req.auth)
+
         let body = {
             endpoint: req.body.endpoint,
             expirationTime: req.body.expirationTime,
@@ -27,7 +26,8 @@ module.exports.subscribe = async (req, res) => {
         ...body,
         };
        const result =  await model.subscribe(req, res);
-        console.log('-----------result', result)
+ 
+        response.data = result
         return response;
     } catch (error) {
         padayon.ErrorHandler(
@@ -41,31 +41,56 @@ module.exports.subscribe = async (req, res) => {
 
 module.exports.notify = async (req, res) => {
     try {
+        let response = { success: true, code: 201 };
+        let body = {
+            company: req.query?.company,
+            branch: req.query?.branch,
+            role: req.query?.role,
+            uid: req.query?.uid
+        };
+        console.log('-----------body', body)
+        req.fnParams = {
+        ...body,
+        };
+
+        const result =  await model.notify(req, res);
+        response.data = result;
+
         const VAPID_PUBLIC_KEY = 'BENFs5s5g4eYPr8DmBtmI7V46TAQhjv22N31JJVVNoicaefJcrM8ezT6XSvt4SUPqk2rt9JfzmuhzTCUr98DPNI';
         const VAPID_PRIVATE_KEY = 'JTeljBhHFTY9leAHY_M1YwQQY51bvnzRhQHi1MLBoAg';
         const notificationPayload = {
             notification: {
-              title: 'New Notification',
-              body: 'You have a new message.'
+              title: req.query?.title,
+              body: req.query?.body
             },
           };
-          
-     webpush.setVapidDetails(
-        'mailto:patrickmarckdulaca@gmail.com',
-        VAPID_PUBLIC_KEY,
-        VAPID_PRIVATE_KEY
-      );
-        const x= await webpush.sendNotification({
-            endpoint: 'https://web.push.apple.com/QBvqYoEscZ8-Xf8PWnTu-CTekNYNi4CyMSuqTIQ2xKPxDHQkFbNtogZP_HlBn2YasvMQ-VFt_VgVXLjlJ0hYpM_U2fe3W9oJA5V5zbuYu92z1wFciq1CAntfSIoTlTeNZ03fZ3WZX1NSFdpZfdjJYHR5n4gPwXcghRUJEide6gc',
-            expirationTime: null,
-            keys: {
-                p256dh: 'BBqmjFbCMZFPSO9YuuRqfzHoTOVELfhXNByvFG21bz1E-3yp5Ksjphk9uTISZVIpaYRDBx82Xms9V08QWnFZTto',
-                auth: 'k7H7aemEaxIwiBfEJLaErA'
-            }
-        }, JSON.stringify(notificationPayload));
+        webpush.setVapidDetails(
+            'mailto:patrickmarckdulaca@gmail.com',
+            VAPID_PUBLIC_KEY,
+            VAPID_PRIVATE_KEY
+        );
 
-        console.log('-----------------notify', x)
+        if(result) {
+            result.forEach(data => {
+                console.log('-------------data.deviceSubscriptions', data.deviceSubscriptions)
+                webpush.sendNotification({
+                    endpoint: data.deviceSubscriptions?.endpoint,
+                    expirationTime: data.deviceSubscriptions?.expirationTime,
+                    keys: {
+                        p256dh: data.deviceSubscriptions?.keys?.p256dh,
+                        auth: data.deviceSubscriptions?.keys?.auth
+                    }
+                }, JSON.stringify(notificationPayload));
+            });
+        }
+
+        return response;
     } catch (error) {
-        console.log('-------------------error', error)
+        padayon.ErrorHandler(
+            "Controller::Company::notify",
+            error,
+            req,
+            res
+          );
     }     
 }

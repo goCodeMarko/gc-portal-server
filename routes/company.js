@@ -25,7 +25,7 @@ router.post(
     })
   ); 
 
-router.post(
+router.get(
     `/api/${base}/notify`,
     execute(controller.notify, {
       secured: true,
