@@ -8,6 +8,8 @@ const webpush = require('web-push'),
 module.exports.subscribe = async (req, res) => {
     try {
         let response = { success: true, code: 201 };
+        console.log('------------req.body', req.body)
+        console.log('------------subscribe', subscribe)
         let body = {
             endpoint: req.body.endpoint,
             expirationTime: req.body.expirationTime,
@@ -20,12 +22,12 @@ module.exports.subscribe = async (req, res) => {
             role:  req.auth.role,
             uid:  req.auth._id,
         };
-        console.log('------------subscribe', subscribe)
+   
         req.fnParams = {
         ...body,
         };
         // await model.subscribe(req, res, async (result) => {
-            response.data = result;
+            // response.data = result;
 
         // });
         return response;
