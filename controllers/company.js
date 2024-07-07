@@ -9,7 +9,7 @@ module.exports.subscribe = async (req, res) => {
     try {
         let response = { success: true, code: 201 };
         console.log('------------req.body', req.body)
-        console.log('------------subscribe', subscribe)
+        console.log('------------req.auth', req.auth)
         let body = {
             endpoint: req.body.endpoint,
             expirationTime: req.body.expirationTime,
