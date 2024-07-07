@@ -20,7 +20,7 @@ module.exports.subscribe = async (req, res) => {
             role:  req.auth.role,
             uid:  req.auth._id,
         };
-
+        console.log('------------subscribe', subscribe)
         req.fnParams = {
         ...body,
         };
