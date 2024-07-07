@@ -26,10 +26,8 @@ module.exports.subscribe = async (req, res) => {
         req.fnParams = {
         ...body,
         };
-        // await model.subscribe(req, res, async (result) => {
-            // response.data = result;
-
-        // });
+       const result =  await model.subscribe(req, res);
+        console.log('-----------result', result)
         return response;
     } catch (error) {
         padayon.ErrorHandler(

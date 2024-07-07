@@ -47,11 +47,18 @@ const padayon = require("../services/padayon"),
 module.exports.subscribe = async (req, res) => {
   try {
     let response = {};
-    // const { trans_id } = req.fnParams;
+    const body = req.fnParams; // Extract the request parameters
 
+    const query = await Transaction.findByIdAndUpdate(
+      { _id: ObjectId(body.company) }, 
+      { $push: { deviceSubscriptions: body } }, 
+      { new: true } // Return the modified document
+    );
+
+    console.log('---------------query', query)
     // const transaction = await Transaction.findOne({ _id: ObjectId(trans_id) });
 
-    // response = transaction;
+    response = query;
     return response;
   } catch (error) {
     padayon.ErrorHandler(
