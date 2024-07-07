@@ -17,6 +17,8 @@ User = mongoose.model(
     firstname: { type: String, maxlength: 50 },
     middlename: { type: String, maxlength: 50 },
     lastname: { type: String, maxlength: 50 },
+    company: { type: mongoose.Schema.Types.ObjectId, ref: 'Company' },
+    branch: { type: mongoose.Schema.Types.ObjectId, ref: 'Branch' },
     qrcode: {
       publicId: { type: String, maxlength: 100 },
       format: { type: String, maxlength: 25 },
@@ -46,6 +48,8 @@ User = mongoose.model(
       format: { type: String, maxlength: 25 },
       url: { type: String, maxlength: 150 },
     },
+    company: { type: mongoose.Schema.Types.ObjectId, ref: 'Company' },
+    branch: { type: mongoose.Schema.Types.ObjectId },
     isallowedtodelete: { type: Boolean, default: true },
     isallowedtocreate: { type: Boolean, default: true },
     isallowedtoupdate: { type: Boolean, default: true },
@@ -81,6 +85,8 @@ module.exports.getUser = async (req, res, callback) => {
           barcode: 1,
           qrcode: 1,
           profile_picture: 1,
+          company: 1,
+          branch: 1,
         },
       },
     ]);
@@ -117,6 +123,8 @@ module.exports.getUsers = async (req, res, callback) => {
           barcode: 1,
           qrcode: 1,
           profile_picture: 1,
+          company: 1,
+          branch: 1,
         },
       },
     ]);
@@ -150,6 +158,8 @@ module.exports.authenticate = async (req, res, callback) => {
           password: 1,
           profile_picture: 1,
           isblock: 1,
+          company: 1,
+          branch: 1,
         },
       },
     ]);

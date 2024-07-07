@@ -1,19 +1,46 @@
-const padayon = require("../services/padayon");
-const fs = require("node:fs");
-const webpush = require('web-push');
+const webpush = require('web-push'),
+  padayon = require("../services/padayon"),
+  path = require("path"),
+  base = path.basename(__filename, ".js"),
+  model = require(`./../models/${base}`);
 
 
 module.exports.subscribe = async (req, res) => {
-    console.log('----------req.body', req.body)
-    const subscription = req.body;
-    // subscriptions.push(subscription);
-    res.status(201).json({});
-}; 
+    try {
+        let response = { success: true, code: 201 };
+        let body = {
+            endpoint: req.body.endpoint,
+            expirationTime: req.body.expirationTime,
+            keys: {
+                p256dh: req.body.p256dh,
+                auth: req.body.auth,
+            },
+            company: req.auth.company,
+            branch:  req.auth.branch,
+            role:  req.auth.role,
+            uid:  req.auth._id,
+        };
 
+        req.fnParams = {
+        ...body,
+        };
+        // await model.subscribe(req, res, async (result) => {
+            response.data = result;
+
+        // });
+        return response;
+    } catch (error) {
+        padayon.ErrorHandler(
+            "Controller::Company::subscribe",
+            error,
+            req,
+            res
+          );
+    }
+}; 
 
 module.exports.notify = async (req, res) => {
     try {
-        console.log('-----------------xxxxxxxxx');
         const VAPID_PUBLIC_KEY = 'BENFs5s5g4eYPr8DmBtmI7V46TAQhjv22N31JJVVNoicaefJcrM8ezT6XSvt4SUPqk2rt9JfzmuhzTCUr98DPNI';
         const VAPID_PRIVATE_KEY = 'JTeljBhHFTY9leAHY_M1YwQQY51bvnzRhQHi1MLBoAg';
         const notificationPayload = {
@@ -40,7 +67,5 @@ module.exports.notify = async (req, res) => {
         console.log('-----------------notify', x)
     } catch (error) {
         console.log('-------------------error', error)
-    }
-
-       
-    }
+    }     
+}

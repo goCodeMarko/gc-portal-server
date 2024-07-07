@@ -155,23 +155,23 @@ module.exports.addTransaction = async (req, res) => {
     };
 
     const result = await model.addTransaction(req, res);
-    console.log('------------subscriptions', subscriptions);
+
     response.data = result;
       if (result && body.type == 2) {
 
-        const notificationPayload = {
-          notification: {
-            title: 'New Notification',
-            body: 'You have a new message.',
-          },
-        };
+        // const notificationPayload = {
+        //   notification: {
+        //     title: 'New Notification',
+        //     body: 'You have a new message.',
+        //   },
+        // };
       
-        Promise.all(subscriptions.map(sub => webpush.sendNotification(sub, JSON.stringify(notificationPayload))))
-          .then(() => res.status(200).json({ message: 'Notification sent successfully.' }))
-          .catch(err => {
-            console.error('Error sending notification', err);
-            res.sendStatus(500);
-          });
+        // Promise.all(subscriptions.map(sub => webpush.sendNotification(sub, JSON.stringify(notificationPayload))))
+        //   .then(() => res.status(200).json({ message: 'Notification sent successfully.' }))
+        //   .catch(err => {
+        //     console.error('Error sending notification', err);
+        //     res.sendStatus(500);
+        //   });
 
          email.notify("patrickmarckdulaca@gmail.com", "cashout_template", {
           header: `Cash out`,
@@ -182,20 +182,6 @@ module.exports.addTransaction = async (req, res) => {
           snapshot: result.snapshot,
         });
       } else if (result && body.type == 1) {
-        const notificationPayload = {
-          notification: {
-            title: 'New Notification',
-            body: 'You have a new message.',
-          },
-        };
-      
-        Promise.all(subscriptions.map(sub => webpush.sendNotification(sub, JSON.stringify(notificationPayload))))
-          .then(() => res.status(200).json({ message: 'Notification sent successfully.' }))
-          .catch(err => {
-            console.error('Error sending notification', err);
-            res.sendStatus(500);
-          });
-
          email.notify("patrickmarckdulaca@gmail.com", "cashin_template", {
           header: `Cash In`,
           banner: "cashin_banner",
