@@ -14,8 +14,8 @@ module.exports.subscribe = async (req, res) => {
             endpoint: req.body.endpoint,
             expirationTime: req.body.expirationTime,
             keys: {
-                p256dh: req.body.p256dh,
-                auth: req.body.auth,
+                p256dh: req.body.keys.p256dh,
+                auth: req.body.keys.auth,
             },
             company: req.auth.company,
             branch:  req.auth.branch,
