@@ -25,7 +25,7 @@ module.exports.subscribe = async (req, res) => {
         req.fnParams = {
         ...body,
         };
-        const checkIfSubscriberExists =  await model.getSubsciber(req, res);
+       const checkIfSubscriberExists =  await model.getSubsciber(req, res);
        const result =  await model.subscribe(req, res);
  
         response.data = result

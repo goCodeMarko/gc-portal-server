@@ -52,13 +52,15 @@ module.exports.getSubsciber = async (req, res) => {
       const query = await Company.findOne({
         company: ObjectId(body.company),
         deviceSubscriptions: {
-          $elemMatch: { endpoint: body.endpoint },
+          $elemMatch: { 
+            endpoint: body.endpoint,
+            uid: ObjectId(body.uid)
+          },
         },
-        uid: ObjectId(body.uid)
       });
-      console.log('-------------query', query)
   
       response = query;
+      console.log('--------------response', response)
       return response;
     } catch (error) {
       padayon.ErrorHandler(
