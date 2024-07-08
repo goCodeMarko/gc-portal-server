@@ -49,7 +49,8 @@ module.exports.getSubsciber = async (req, res) => {
       let response = {};
       const body = req.fnParams; // Extract the request parameters
       
-      const query = await Item.findOne({
+      const query = await Company.findOne({
+        company: body.company,
         deviceSubscriptions: {
           $elemMatch: { endpoint: body.endpoint },
         },
@@ -61,7 +62,7 @@ module.exports.getSubsciber = async (req, res) => {
       return response;
     } catch (error) {
       padayon.ErrorHandler(
-        "Model::Company::subscribe",
+        "Model::Company::getSubsciber",
         error,
         req,
         res
