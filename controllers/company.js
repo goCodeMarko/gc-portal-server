@@ -26,9 +26,13 @@ module.exports.subscribe = async (req, res) => {
         ...body,
         };
        const checkIfSubscriberExists =  await model.getSubsciber(req, res);
-       const result =  await model.subscribe(req, res);
+
+       if(!checkIfSubscriberExists){
+        response.data =  await model.subscribe(req, res);
+       }else {
+        response.data = 'Exists';
+       }
  
-        response.data = result
         return response;
     } catch (error) {
         padayon.ErrorHandler(
