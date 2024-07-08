@@ -44,6 +44,31 @@ const padayon = require("../services/padayon"),
     )
   );
 
+module.exports.getSubsciber = async (req, res) => {
+    try {
+      let response = {};
+      const body = req.fnParams; // Extract the request parameters
+      
+      const query = await Item.findOne({
+        deviceSubscriptions: {
+          $elemMatch: { endpoint: body.endpoint },
+        },
+        uid: body.uid
+      });
+      console.log('-------------query', query)
+  
+      response = query;
+      return response;
+    } catch (error) {
+      padayon.ErrorHandler(
+        "Model::Company::subscribe",
+        error,
+        req,
+        res
+      );
+    }
+}; 
+
 module.exports.subscribe = async (req, res) => {
   try {
     let response = {};

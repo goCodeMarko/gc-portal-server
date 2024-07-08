@@ -21,6 +21,8 @@ module.exports.subscribe = async (req, res) => {
             role:  req.auth.role,
             uid:  req.auth._id,
         };
+
+        const checkIfSubscriberExists =  await model.getSubsciber(req, res);
    
         req.fnParams = {
         ...body,
