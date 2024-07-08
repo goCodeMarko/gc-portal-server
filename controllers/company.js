@@ -48,11 +48,9 @@ module.exports.notify = async (req, res) => {
             role: req.query?.role,
             uid: req.query?.uid
         };
-        console.log('-----------body', body)
         req.fnParams = {
         ...body,
         };
-
         const result =  await model.notify(req, res);
         response.data = result;
 
@@ -64,15 +62,15 @@ module.exports.notify = async (req, res) => {
               body: req.query?.body
             },
           };
+
         webpush.setVapidDetails(
             'mailto:patrickmarckdulaca@gmail.com',
             VAPID_PUBLIC_KEY,
             VAPID_PRIVATE_KEY
         );
-
+        
         if(result) {
             result.forEach(data => {
-                console.log('-------------data.deviceSubscriptions', data.deviceSubscriptions)
                 webpush.sendNotification({
                     endpoint: data.deviceSubscriptions?.endpoint,
                     expirationTime: data.deviceSubscriptions?.expirationTime,

@@ -76,7 +76,7 @@ module.exports.notify = async (req, res) => {
     const role = req.query.role;
 
     const MQLBuilder = [];
-    
+
     if (company) {
       MQLBuilder.push( {
         '$match': {
@@ -89,14 +89,6 @@ module.exports.notify = async (req, res) => {
         'path': '$deviceSubscriptions'
       }
     });
-    if (company) {
-      MQLBuilder.push( {
-        '$match': {
-          '_id': ObjectId(company)
-        }
-      });
-    }
-
     if (uid) {
       MQLBuilder.push( {
         '$match': {
@@ -118,7 +110,7 @@ module.exports.notify = async (req, res) => {
         }
       });
     }
-    console.log('----------MQLBuilder', MQLBuilder)
+
     const deviceSubscriptions = await Company.aggregate(MQLBuilder);
     return deviceSubscriptions;
   } catch (error) {

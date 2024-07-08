@@ -13,7 +13,9 @@ const padayon = require("../services/padayon"),
   email = require("./../services/email"),
   moment = require("moment-timezone"),
   pdf = require("./../services/pdf"),
-  company = require("./company"),
+  companyController = require("./company"),
+   { ObjectId } = require("mongodb");
+
   cloudinary = require("./../services/cloudinary");
 
 module.exports.createTransaction = async (req, res) => {
@@ -163,20 +165,29 @@ module.exports.addTransaction = async (req, res) => {
         req.query = {
           company: req.auth.company,
           role: 'admin',
+          title: 'You have a New Cashout',
+          body: `P${result.amount}`
         }
-
-        const x = await company.notify(req, res);
-        console.log('-------------------x', x)
-
-        //  email.notify("patrickmarckdulaca@gmail.com", "cashout_template", {
-        //   header: `Cash out`,
-        //   banner: "cashout_banner",
-        //   amount: result.amount,
-        //   fee: result.fee,
-        //   note: result.note,
-        //   snapshot: result.snapshot,
-        // });
+        const notification = await companyController.notify(req, res);
+        /*
+         email.notify("patrickmarckdulaca@gmail.com", "cashout_template", {
+          header: `Cash out`,
+          banner: "cashout_banner",
+          amount: result.amount,
+          fee: result.fee,
+          note: result.note,
+          snapshot: result.snapshot,
+        });
+        */
       } else if (result && body.type == 1) {
+        req.query = {
+          company: req.auth.company,
+          role: 'admin',
+          title: 'You have a New Cashin',
+          body: `P${result.amount}`
+        }
+        const notification = await companyController.notify(req, res);
+        /*
          email.notify("patrickmarckdulaca@gmail.com", "cashin_template", {
           header: `Cash In`,
           banner: "cashin_banner",
@@ -185,6 +196,7 @@ module.exports.addTransaction = async (req, res) => {
           fee: result.fee,
           note: result.note,
         });
+        */
       }
 
     return response;
@@ -338,6 +350,40 @@ module.exports.updateTransactionStatus = async (req, res) => {
     }
 
     await model.updateTransactionStatus(req, res, async (result) => {
+      if(result){
+        let transaction;
+        if(req.fnParams.type === 2){
+          [transaction] = result.cashout.filter((data) => new ObjectId(data._id).equals(new ObjectId(req.fnParams.cid)));
+        }else if(req.fnParams.type === 1){
+          [transaction] = result.cashin.filter((data) => new ObjectId(data._id).equals(new ObjectId(req.fnParams.cid)));
+        }
+
+        let body;
+        
+        switch (transaction.status) {
+          case 2:
+              body = `P${transaction.amount} has been Approved`
+            break;
+          case 3:
+              body = `P${transaction.amount} has been Failed`
+            break;
+          case 4:
+              body = `P${transaction.amount} has been  Cancelled`
+            break;
+        }
+
+        req.query = {
+          company: req.auth.company,
+          uid: transaction?.updatedBy,
+          title: 'Status Update',
+          body: body,
+        }
+  
+        const notification = await companyController.notify(req, res);
+
+        console.log('---------------notification.length', notification)
+      }
+   
       response.data = result;
     });
     return response;
