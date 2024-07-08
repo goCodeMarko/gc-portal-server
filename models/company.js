@@ -50,7 +50,7 @@ module.exports.getSubsciber = async (req, res) => {
       const body = req.fnParams; // Extract the request parameters
       console.log('-------------body', body)
       const query = await Company.findOne({
-        company: ObjectId(body.company),
+        _id: ObjectId(body.company),
         deviceSubscriptions: {
           $elemMatch: { 
             endpoint: body.endpoint,
