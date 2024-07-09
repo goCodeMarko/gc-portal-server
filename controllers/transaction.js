@@ -349,43 +349,40 @@ module.exports.updateTransactionStatus = async (req, res) => {
       throw new padayon.BadRequestException("No transaction found");
     }
 
-    await model.updateTransactionStatus(req, res, async (result) => {
-      if(result){
-        let transaction;
-        if(req.fnParams.type === 2){
-          [transaction] = result.cashout.filter((data) => new ObjectId(data._id).equals(new ObjectId(req.fnParams.cid)));
-        }else if(req.fnParams.type === 1){
-          [transaction] = result.cashin.filter((data) => new ObjectId(data._id).equals(new ObjectId(req.fnParams.cid)));
-        }
+     const result = await model.updateTransactionStatus(req, res);
 
-        let body;
-        
-        switch (transaction.status) {
-          case 2:
-              body = `P${transaction.amount} has been Approved`
-            break;
-          case 3:
-              body = `P${transaction.amount} has been Failed`
-            break;
-          case 4:
-              body = `P${transaction.amount} has been  Cancelled`
-            break;
-        }
-
-        req.query = {
-          company: req.auth.company,
-          uid: transaction?.updatedBy,
-          title: 'Status Update',
-          body: body,
-        }
-  
-        const notification = await companyController.notify(req, res);
-
-        console.log('---------------notification.length', notification)
+     if(result){
+      let transaction;
+      if(req.fnParams.type === 2){
+        [transaction] = result.cashout.filter((data) => new ObjectId(data._id).equals(new ObjectId(req.fnParams.cid)));
+      }else if(req.fnParams.type === 1){
+        [transaction] = result.cashin.filter((data) => new ObjectId(data._id).equals(new ObjectId(req.fnParams.cid)));
       }
-   
-      response.data = result;
-    });
+      let body;
+      
+      switch (transaction.status) {
+        case 2:
+            body = `P${transaction.amount} has been Approved`
+          break;
+        case 3:
+            body = `P${transaction.amount} has been Failed`
+          break;
+        case 4:
+            body = `P${transaction.amount} has been  Cancelled`
+          break;
+      }
+
+      req.query = {
+        company: req.auth.company,
+        uid: transaction?.updatedBy,
+        title: 'Status Update',
+        body: body,
+      }
+
+      const notification = await companyController.notify(req, res);
+      }
+
+      response = {...response, data: result};
     return response;
   } catch (error) {
     padayon.ErrorHandler(

@@ -673,11 +673,11 @@ module.exports.updateCICO = async (req, res, callback) => {
   }
 }; //---------done
 
-module.exports.updateTransactionStatus = async (req, res, callback) => {
+module.exports.updateTransactionStatus = async (req, res) => {
   try {
     let response = {};
     const { status, cid, trans_id, screenshot, type } = req.fnParams;
-
+    
     const set =
       type === 1 
         ?  status === 2 ? {
@@ -698,7 +698,7 @@ module.exports.updateTransactionStatus = async (req, res, callback) => {
       }
     );
     response = result;
-    callback(response);
+    return response;
   } catch (error) {
     padayon.ErrorHandler(
       "Model::User::updateTransactionStatus",
