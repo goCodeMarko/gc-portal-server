@@ -1,7 +1,4 @@
 "use_strict";
-
-const { ObjectId } = require("mongodb");
-
 const padayon = require("../services/padayon"),
   path = require("path"),
   base = path.basename(__filename).split(".").shift(),
@@ -107,7 +104,7 @@ module.exports.deleteBook = async (req, res, callback) => {
     const { bookId } = req.fnParams;
 
     const result = await Book.updateOne(
-      { _id: ObjectId(bookId) },
+      { _id: new mongoose.Types.ObjectId(bookId) },
       { $set: { isDeleted: true } }
     );
 

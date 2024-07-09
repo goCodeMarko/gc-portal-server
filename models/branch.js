@@ -1,7 +1,4 @@
 "use_strict";
-
-const { ObjectId } = require("mongodb");
-
 const padayon = require("../services/padayon"),
   path = require("path"),
   base = path.basename(__filename).split(".").shift(),
@@ -23,7 +20,7 @@ module.exports.findTransaction = async (req, res) => {
     let response = {};
     const { trans_id } = req.fnParams;
 
-    const transaction = await Transaction.findOne({ _id: ObjectId(trans_id) });
+    const transaction = await Transaction.findOne({ _id: new mongoose.Types.ObjectId(trans_id) });
 
     response = transaction;
     return response;

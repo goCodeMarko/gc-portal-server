@@ -1,7 +1,4 @@
 "use_strict";
-
-const { ObjectId } = require("mongodb");
-
 const padayon = require("../services/padayon"),
   path = require("path"),
   base = path.basename(__filename).split(".").shift(),
@@ -48,7 +45,7 @@ module.exports.findTransaction = async (req, res) => {
     let response = {};
     const { trans_id } = req.fnParams;
 
-    const transaction = await Transaction.findOne({ _id: ObjectId(trans_id) });
+    const transaction = await Transaction.findOne({ _id: new mongoose.Types.ObjectId(trans_id) });
 
     response = transaction;
     return response;
@@ -463,7 +460,7 @@ module.exports.getCashOuts = async (req, res) => {
     const sortType = req.query.sortType === "asc" ? 1 : -1;
 
     const MQLBuilder = [
-      { $match: { _id: ObjectId(req.query?.transaction_id) } },
+      { $match: { _id: new mongoose.Types.ObjectId(req.query?.transaction_id) } },
       { $unwind: { path: "$cashout" } },
       {
         $project: {
@@ -601,7 +598,7 @@ module.exports.addTransaction = async (req, res) => {
 
     // Find the transaction by ID and update it by pushing the new cashin or cashout object
     const query = await Transaction.findByIdAndUpdate(
-      { _id: ObjectId(body.trans_id) }, // Find the transaction by its ID
+      { _id: new mongoose.Types.ObjectId(body.trans_id) }, // Find the transaction by its ID
       body.type == 1 // Determine the type of transaction
         ? { $push: { cashin: body } } // If type is 1, push to the 'cashin' array
         : { $push: { cashout: body } }, // If type is not 1, push to the 'cashout' array
@@ -658,10 +655,10 @@ module.exports.updateCICO = async (req, res, callback) => {
         };
 
     const result = await Transaction.updateOne(
-      { _id: ObjectId(trans_id) },
+      { _id: new mongoose.Types.ObjectId(trans_id) },
       set,
       {
-        arrayFilters: [{ "elem._id": ObjectId(cid) }],
+        arrayFilters: [{ "elem._id": new mongoose.Types.ObjectId(cid) }],
         multi: true,
       }
     );
@@ -689,10 +686,10 @@ module.exports.updateTransactionStatus = async (req, res) => {
         : { $set: { "cashout.$[elem].status": status } };
 
     const result = await Transaction.findOneAndUpdate(
-      { _id: ObjectId(trans_id) },
+      { _id: new mongoose.Types.ObjectId(trans_id) },
       set,
       {
-        arrayFilters: [{ "elem._id": ObjectId(cid) }],
+        arrayFilters: [{ "elem._id": new mongoose.Types.ObjectId(cid) }],
         multi: true,
         new: true
       }
@@ -718,7 +715,7 @@ module.exports.getCashIns = async (req, res) => {
     const sortBy = req.query.sortBy ?? "createdAt";
     const sortType = req.query.sortType === "asc" ? 1 : -1;
     const MQLBuilder = [
-      { $match: { _id: ObjectId(req.query?.transaction_id) } },
+      { $match: { _id: new mongoose.Types.ObjectId(req.query?.transaction_id) } },
       { $unwind: { path: "$cashin" } },
       {
         $project: {

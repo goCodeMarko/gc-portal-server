@@ -1,6 +1,4 @@
 "use_strict";
-
-const { ObjectId } = require("mongodb");
 const padayon = require("../services/padayon"),
   path = require("path"),
   base = path.basename(__filename).split(".").shift(),
@@ -50,11 +48,11 @@ module.exports.getSubsciber = async (req, res) => {
       const body = req.fnParams; // Extract the request parameters
       console.log('-------------body', body)
       const query = await Company.findOne({
-        _id: ObjectId(body.company),
+        _id: new mongoose.Types.ObjectId(body.company),
         deviceSubscriptions: {
           $elemMatch: { 
             endpoint: body.endpoint,
-            uid: ObjectId(body.uid)
+            uid: new mongoose.Types.ObjectId(body.uid)
           },
         },
       });
@@ -78,7 +76,7 @@ module.exports.subscribe = async (req, res) => {
     const body = req.fnParams; // Extract the request parameters
 
     const query = await Company.findByIdAndUpdate(
-      { _id: ObjectId(body.company) }, 
+      { _id: new mongoose.Types.ObjectId(body.company) }, 
       { $push: { deviceSubscriptions: body } }, 
       { new: true } // Return the modified document
     );
@@ -108,7 +106,7 @@ module.exports.notify = async (req, res) => {
     if (company) {
       MQLBuilder.push( {
         '$match': {
-          '_id': ObjectId(company)
+          '_id': new mongoose.Types.ObjectId(company)
         }
       });
     }
@@ -120,14 +118,14 @@ module.exports.notify = async (req, res) => {
     if (uid) {
       MQLBuilder.push( {
         '$match': {
-          'deviceSubscriptions.uid': ObjectId(uid)
+          'deviceSubscriptions.uid': new mongoose.Types.ObjectId(uid)
         }
       });
     }
     if (branch) {
       MQLBuilder.push( {
         '$match': {
-          'deviceSubscriptions.branch': ObjectId(branch)
+          'deviceSubscriptions.branch': new mongoose.Types.ObjectId(branch)
         }
       });
     }

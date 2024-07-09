@@ -6,7 +6,6 @@ const path = require("path"),
   padayon = require("../services/padayon"),
   bcrypt = require("bcrypt"),
   _ = require('lodash'),
-  { ObjectId } = require("mongodb");
 
 User = mongoose.model(
   base,
@@ -65,7 +64,7 @@ module.exports.getUser = async (req, res, callback) => {
     const [result] = await User.aggregate([
       {
         $match: {
-          _id: ObjectId(userId),
+          _id: new mongoose.Types.ObjectId(userId),
         },
       },
       {
@@ -190,7 +189,7 @@ module.exports.updateUserAccess = async (req, res, callback) => {
       isblock,
     } = req.fnParams;
     const result = await User.updateOne(
-      { _id: ObjectId(userId) },
+      { _id: new mongoose.Types.ObjectId(userId) },
       {
         $set: {
           isallowedtodelete,
@@ -214,7 +213,7 @@ module.exports.generateQR = async (req, res, callback) => {
     const { secure_url, public_id, format, _id } = req.fnParams;
 
     const result = await User.updateOne(
-      { _id: ObjectId(_id) },
+      { _id: new mongoose.Types.ObjectId(_id) },
       {
         $set: {
           qrcode: {
@@ -239,7 +238,7 @@ module.exports.generateIdCard = async (req, res, callback) => {
     const { front_card, back_card, _id } = req.fnParams;
 
     const result = await User.updateOne(
-      { _id: ObjectId(_id) },
+      { _id: new mongoose.Types.ObjectId(_id) },
       {
         $set: {
           id_card: {
@@ -271,7 +270,7 @@ module.exports.generateBarcode = async (req, res, callback) => {
     const { secure_url, public_id, format, _id, text_output } = req.fnParams;
 
     const result = await User.updateOne(
-      { _id: ObjectId(_id) },
+      { _id: new mongoose.Types.ObjectId(_id) },
       {
         $set: {
           barcode: {
@@ -299,7 +298,7 @@ module.exports.verifyAccessControl = async (req, res, callback) => {
 
     const result = await User.findOne({
       ...accessControls,
-      _id: ObjectId(_id),
+      _id: new mongoose.Types.ObjectId(_id),
     });
 
     response = result;
