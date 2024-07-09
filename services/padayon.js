@@ -171,30 +171,23 @@ module.exports.uniqueId = (options = {}) => {
   return uniqueId;
 }; //---------done
 module.exports.Init = {
-  Mongoose: () => {
-    mongoose.connect(
-      config.database,
-      {
-        useUnifiedTopology: true,
-        useNewUrlParser: true,
-        useCreateIndex: true,
-        useFindAndModify: false,
-      },
-      () => {
-        switch (mongoose.connection.readyState) {
-          case 0:
-            console.log("\x1b[36m", `Unsuccessful Database Connection.`);
-            break;
-          case 1:
-            console.log(
-              "\x1b[36m",
-              `Successfully Connected to Database ${config.database}`
-            );
-            break;
-        }
-      }
-    );
-  }, //---------done
+  Mongoose: async () => {
+    try {
+      await mongoose.connect(
+        config.database,
+        {
+          useUnifiedTopology: true,
+          useNewUrlParser: true,
+        })
+      console.log(
+        "\x1b[36m",
+        `Successfully Connected to Database ${config.database}`
+      );
+    } catch (error) {
+      console.log("\x1b[36m", `Unsuccessful Database Connection.`, error);
+    }
+   
+  }, 
 
   CronJobs: () => {
     console.log("\x1b[36m", `Cronjob(s) Activated...`);
